@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireFloorEffectController : DamageZoomController
+public class FireFloorEffectController : DamageRrojectableZoomController
 {
     [SerializeField] protected Vector2 beginVelocity;
 

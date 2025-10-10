@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa1af099f98fea4aa65a110ff98d685, type: 3}
+  m_Name: Trail Effect
+  m_EditorClassIdentifier: 
+  description: 
+  selfDamageData:
+    shouldPlayAnim: 1
+    _physical: 0
+    _isCrit: 0
+    _magical: 100
+    _ignite: 1
+    _igniteDamageCooldown: Infinity
+    _igniteDuration: 0
+    _igniteDamage: 0
+    _chill: 1
+    _chillSlowPercentage: 0
+    _chillDuration: 0
+    _chillReduceArmor: 0
+    _shock: 1
+    _shockDuration: 0
+    _thunderStrikeRadius: 15
+    _thunderStrikeRate: 0
+    _thunderStrikerCounter: 0
+    _attackerShockReduceAccuracy: 0
+  isMagicEffectUseStatsValue: 1
+  buffDelay: 6
+  modifierData:
+    strength: 10
+    agility: 0
+    intelligence: 0
+    vitality: 0
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+    damage: 0
+    critChance: 20
+    critPower: 100
+    attackSpeed: 50
+    fireDamage: 10
+    iceDamage: 10
+    lightningDamage: 10
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+  buffDuration: 30

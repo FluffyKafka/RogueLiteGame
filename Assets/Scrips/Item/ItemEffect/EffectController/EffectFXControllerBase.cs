@@ -9,6 +9,12 @@ public class EffectFXControllerBase : MonoBehaviour
         Destroy(gameObject);
     }
 
+    protected IEnumerator SelfDestoryAfterDelayHelper(float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        SelfDestory();
+    }
+
     public virtual void PlayFX(EffectExcuteData _targetData)
     {
 

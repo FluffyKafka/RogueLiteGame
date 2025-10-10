@@ -403,6 +403,26 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public void StartCoroutineAfterDelay(float _delay, IEnumerator _coroutine)
+    {
+        StartCoroutine(StartCoroutineAfterDelay_Helper(_delay, _coroutine));
+    }
+    protected IEnumerator StartCoroutineAfterDelay_Helper(float _delay, IEnumerator _coroutine)
+    {
+        yield return new WaitForSeconds(_delay);
+        StartCoroutine(_coroutine);
+    }
+
+    public void HealAfterDelay(float _delay, float _amount)
+    {
+        StartCoroutine(HealAfterDelay_Helper(_delay, _amount));
+    }
+    protected IEnumerator HealAfterDelay_Helper(float _delay, float _amount)
+    {
+        yield return new WaitForSeconds(_delay);
+        Heal(_amount);
+    }
+
     public virtual float DoDamageTo_PrimaryAttack(Entity _target)
     {
         DamageData damageData = new DamageData();
@@ -533,7 +553,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public void CalculateDamageDataWithStats(ref DamageData _damageData, bool _isMagicEffectUseStatsValue, bool _isMagicBuff)
+    public void CalculateDamageDataWithStats(ref DamageData _damageData, bool _isMagicEffectUseStatsValue)
     {
         if (_damageData._physical < 0)
         {
@@ -560,11 +580,6 @@ public class CharacterStats : MonoBehaviour
                 float ice = _damageData._chill ? _damageData._magical : 0;
                 float shock = _damageData._shock ? _damageData._magical : 0;
                 CalculateAilment(_damageData, fire, ice, shock);
-            }
-
-            if (_isMagicBuff)
-            {
-                _damageData.SetMagicDamage(0);
             }
         }
     }

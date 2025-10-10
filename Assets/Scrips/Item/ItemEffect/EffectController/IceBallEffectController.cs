@@ -8,7 +8,6 @@ public class IceBallEffectController : ProjectileControllerBase
     [Header("Damage")]
     [SerializeField] private DamageDataSerializable damageSerializable;
     [SerializeField] private bool isMagicEffectUseStatsValue;
-    [SerializeField] private bool isMagicBuff;
 
     [Header("Burst")]
     [SerializeField] private float lifeTime;
@@ -27,7 +26,7 @@ public class IceBallEffectController : ProjectileControllerBase
         Debug.Log("Project");
 
         damage = damageSerializable.GetDamageData();
-        PlayerManager.instance.player.GetStats().CalculateDamageDataWithStats(ref damage, isMagicEffectUseStatsValue, isMagicBuff);
+        PlayerManager.instance.player.GetStats().CalculateDamageDataWithStats(ref damage, isMagicEffectUseStatsValue);
         baseScale = transform.localScale;
         maxScale = new Vector2(baseScale.x * maxSize, baseScale.y * maxSize);
     }

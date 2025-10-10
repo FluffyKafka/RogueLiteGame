@@ -8,7 +8,6 @@ public class DamageEffect : ItemEffect
     [Header("-1 表示使用角色属性值")]
     [SerializeField] protected DamageDataSerializable damageData;
     [SerializeField] protected bool isMagicEffectUseStatsValue = true;
-    [SerializeField] protected bool isMagicBuff = false;
 
     public override void ExcuteEffect(EffectExcuteData _targetData)
     {
@@ -21,7 +20,7 @@ public class DamageEffect : ItemEffect
         CharacterStats stats = PlayerManager.instance.player.GetStats();
 
         DamageData data = damageData.GetDamageData();
-        stats.CalculateDamageDataWithStats(ref data, isMagicEffectUseStatsValue, isMagicBuff);
+        stats.CalculateDamageDataWithStats(ref data, isMagicEffectUseStatsValue);
 
         return data;
     }

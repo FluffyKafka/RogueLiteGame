@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StunWndProjectile : DamageZoomController
+public class StunWndProjectile : DamageRrojectableZoomController
 {
     [SerializeField] private float speed;
-    [SerializeField] private bool isMagicEffectUseStatsValue = true;
 
     private bool isRight;
 
     public override void Project(EffectExcuteData _targetData)
     {
         base.Project(_targetData);
-        PlayerManager.instance.player.GetStats().CalculateDamageDataWithStats(ref damage, isMagicEffectUseStatsValue, false);
 
         isRight = PlayerManager.instance.player.transform.position.x < _targetData.target.transform.position.x;
     }
