@@ -33,3 +33,4 @@ MonoBehaviour:
     _thunderStrikerCounter: 0
     _attackerShockReduceAccuracy: 0
   isMagicEffectUseStatsValue: 1
+  psfxPrefab: {fileID: 5423254511015014094, guid: 60c6d3c254c79bf4e8d89a0558ceaa60, type: 3}

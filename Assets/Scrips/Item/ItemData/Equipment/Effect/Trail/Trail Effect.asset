@@ -63,3 +63,6 @@ MonoBehaviour:
     thunderStrikeCount: 0
     thunderStrikeRate: 0
   buffDuration: 30
+  selfDamagePSFXPrefab: {fileID: 224236222000774887, guid: 6d8ddcc919d69f34ca60ac55200283b5, type: 3}
+  healPSFXPrefab: {fileID: 4804349231861934583, guid: d6b7c11160068704f8474814d05f81f1, type: 3}
+  buffPSFXPrefab: {fileID: 2125963593550095584, guid: 87f1d1b7b3c57a94c8875672c87b4b55, type: 3}

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: "\u51FB\u4E2D\u65F6\u56DE\u590D30%\u6240\u9020\u6210\u4F24\u5BB3\u7684\u751F\u547D\u503C"
   healPercentage: 0.3
+  psfxPrefab: {fileID: 3024650382625585514, guid: 52c54b4cca2f20f4a927f6dfa208ce15, type: 3}

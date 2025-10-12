@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40617cc7a286ed4bb5029611e7ec1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageStorePSFXPrefab: {fileID: 4893385694722020560, guid: b0384b7698dcaa949873dbb855f65970, type: 3}
+  damageReleasePSFXPrefab: {fileID: 5548371616936228956, guid: 5663681f02aeccc409eb017e12b82220, type: 3}

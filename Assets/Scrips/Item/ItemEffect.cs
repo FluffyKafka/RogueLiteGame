@@ -20,6 +20,8 @@ public class EffectExcuteData
     public float damage { get; private set; }
     //对护甲为伤害来源；对护符和武器为伤害对象；药瓶与此无关
     public Entity target { get; private set; }
+    //对装备数据的引用
+    public ItemData_Equipment equipment;
 
     public EffectExcuteData(EffectExcuteTime _excuteTime, Entity _target = null, float _damage = 0)
     {

@@ -42,3 +42,4 @@ MonoBehaviour:
     thunderStrikeCount: 0
     thunderStrikeRate: 0
   buffDuration: 5
+  psfxPrefab: {fileID: 3948253510461437151, guid: 97b38aa0391f66543a72d48605be306e, type: 3}

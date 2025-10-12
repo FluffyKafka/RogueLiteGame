@@ -50,5 +50,6 @@ MonoBehaviour:
     thunderStrikeRate: 0
   effects:
   - {fileID: 11400000, guid: f5214c188643e8b4f81741cc40784a36, type: 2}
+  - {fileID: 11400000, guid: 0fc011f4a8482134597b401d09f08b5b, type: 2}
   cooldown: 3
   detail: "\u4F7F\u7528\u65F6\u5BF9\u81EA\u8EAB\u9020\u62101\u706B\u7130\u4F24\u5BB3\uFF0C\u6062\u590D10%\u8840\u91CF"

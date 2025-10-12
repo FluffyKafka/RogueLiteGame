@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: 8a2a8d14805146a4da79a024a690f154
   icon: {fileID: 21300000, guid: 156b6e3c7b3aa034ab221c0047f31634, type: 3}
-  itemName: "\u963F\u524C\u5409\u9152"
+  itemName: "\u963F\u62C9\u5409\u9152"
   itemType: 1
   craftingMaterials: []
   description: "\u70B9\u71C3\u4E86\u6574\u4E2A\u5589\u5499"

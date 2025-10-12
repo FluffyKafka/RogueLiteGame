@@ -10,6 +10,8 @@ public class PostDamageEffectData
 {
     //ÎüÑªÂÊ
     [Range(0, 1)][SerializeField] public float vampirEffect = 0;
+    //ÎüÑª¶¯»­
+    [SerializeField] public GameObject psfxPrefab;
 }
 
 public class PlayerStats : CharacterStats, ISaveManager
@@ -22,7 +24,7 @@ public class PlayerStats : CharacterStats, ISaveManager
     [Header("Stats UI")]
     [SerializeField] private Transform statsSlotParent;
     private UI_StatsSlot[] statSLot;
-
+    
     public override float TakeDamage(in DamageData _damageData, Transform _damageDirection)
     {
         if(player.isDashing)
@@ -160,7 +162,7 @@ public class PlayerStats : CharacterStats, ISaveManager
         {
             SceneAudioManager.instance.playerSFX.swordHit.Play(null);
             RecoverFlaskUsageTime(1);
-            DamageEffect(realDamage);
+            DamageEffect(new EffectExcuteData(EffectExcuteTime.PrimaryAttack, _target, realDamage));
         }
         return realDamage;
     }
@@ -185,7 +187,7 @@ public class PlayerStats : CharacterStats, ISaveManager
         }
 
         float realDamage = _target.GetStats().TakeDamage(damageData, _swordTransform);
-        DamageEffect(realDamage);
+        DamageEffect(new EffectExcuteData(EffectExcuteTime.Sword, _target, realDamage));
 
         return realDamage;
     }
@@ -207,7 +209,7 @@ public class PlayerStats : CharacterStats, ISaveManager
         }
 
         float realDamage = _target.GetStats().TakeDamage(damageData, PlayerManager.instance.player.transform);
-        DamageEffect(realDamage);
+        DamageEffect(new EffectExcuteData(EffectExcuteTime.CounterAttack, _target, realDamage));
 
         return realDamage;
     }
@@ -228,7 +230,7 @@ public class PlayerStats : CharacterStats, ISaveManager
         }
 
         float realDamage = _target.GetStats().TakeDamage(damageData, _crystalTransform);
-        DamageEffect(realDamage);
+        DamageEffect(new EffectExcuteData(EffectExcuteTime.Crystal, _target, realDamage));
         return realDamage;
     }
     public float DoDamageTo_Clone(Entity _target, float _cloneDamageRate, Transform _cloneTransform)
@@ -253,13 +255,22 @@ public class PlayerStats : CharacterStats, ISaveManager
         }
 
         float realDamage = _target.cs.TakeDamage(damageData, _cloneTransform);
-        DamageEffect(realDamage);
+        DamageEffect(new EffectExcuteData(EffectExcuteTime.Clone, _target, realDamage));
         return realDamage;
     }
 
-    protected void DamageEffect(float _damage)
+    protected void DamageEffect(EffectExcuteData _targetData)
     {
-        Heal(_damage * postDamageEffectData.vampirEffect);
+        if(postDamageEffectData.vampirEffect > 0)
+        {
+            Heal(_targetData.damage * postDamageEffectData.vampirEffect);
+            ParticleSystemFXEffectController psfxController =
+            Instantiate(postDamageEffectData.psfxPrefab, PlayerManager.instance.player.transform.position, Quaternion.identity)
+            .GetComponent<ParticleSystemFXEffectController>();
+            psfxController.transform.SetParent(PlayerManager.instance.player.transform);
+            psfxController.transform.localPosition = new Vector3(0, 0, 0);
+            psfxController.PlayFX(_targetData, -1, true);
+        }
     }
 
     public void ModifyPostDamageEffectDataInTime(PostDamageEffectData _data, float _duration)
@@ -269,6 +280,7 @@ public class PlayerStats : CharacterStats, ISaveManager
     private IEnumerator AddVampireEffectInTime_Helper(PostDamageEffectData _data, float _duration)
     {
         postDamageEffectData.vampirEffect += _data.vampirEffect;
+        postDamageEffectData.psfxPrefab = _data.psfxPrefab;
         yield return new WaitForSeconds(_duration);
         postDamageEffectData.vampirEffect -= _data.vampirEffect;
     }

@@ -15,7 +15,7 @@ public class EffectFXControllerBase : MonoBehaviour
         SelfDestory();
     }
 
-    public virtual void PlayFX(EffectExcuteData _targetData)
+    public virtual void PlayFX(EffectExcuteData _targetData, float _lifeTime, bool _isFaceToEnemy)
     {
 
     }

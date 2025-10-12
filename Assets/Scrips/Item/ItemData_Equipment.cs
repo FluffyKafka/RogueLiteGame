@@ -35,6 +35,7 @@ public class ItemData_Equipment : ItemData
         {
             foreach (var effect in effects)
             {
+                _target.equipment = this;
                 effect.ExcuteEffect(_target);
             }
             Inventory.instance.CooldownEquipment(equipmentType);

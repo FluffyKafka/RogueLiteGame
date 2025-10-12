@@ -15,4 +15,6 @@ MonoBehaviour:
   description: 
   postDamageEffectData:
     vampirEffect: 0.5
+    psfxPrefab: {fileID: 3024650382625585514, guid: 52c54b4cca2f20f4a927f6dfa208ce15, type: 3}
   duration: 12
+  activePSFXPrefab: {fileID: 1085365984877754666, guid: a5137337b1d61154ebf8716b50b03b1c, type: 3}
