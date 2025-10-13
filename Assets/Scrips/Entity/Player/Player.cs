@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -86,7 +87,8 @@ public class Player : Entity
     [SerializeField] private float enterCheckRadius = 2f;
     [SerializeField] private LayerMask whatIsDoor;
 
-
+    [Header("Craft BlackSmith Detect")]
+    [SerializeField] private float craftDetectRadius;
     override protected void Awake()
     {
         base.Awake();
@@ -265,6 +267,21 @@ public class Player : Entity
         base.OnDrawGizmos();
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, enemyCanBeStunnedCheckRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, craftDetectRadius);
+    }
+
+    public bool IsBlackSmithAround()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, craftDetectRadius);
+        foreach (var hit in colliders)
+        {
+            if (hit.GetComponent<BlackSmith>() != null)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool IsEnemyAroundCanBeStunned()

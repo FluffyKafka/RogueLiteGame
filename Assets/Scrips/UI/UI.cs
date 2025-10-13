@@ -44,7 +44,7 @@ public class UI : MonoBehaviour
     [HideInInspector] public bool isSwitching = false;
 
     [Header("CharacterUI")]
-    [SerializeField] private TextMeshProUGUI plaskUsageTime;
+    [SerializeField] private TextMeshProUGUI flaskUsageTime;
 
     private void Awake()
     {
@@ -108,7 +108,7 @@ public class UI : MonoBehaviour
 
     public void UpdatePlaskUsageTime(int _time)
     {
-        plaskUsageTime.text = _time.ToString();
+        flaskUsageTime.text = _time.ToString();
     }
 
     public UI_SkillToolTip GetSkillToolTip()

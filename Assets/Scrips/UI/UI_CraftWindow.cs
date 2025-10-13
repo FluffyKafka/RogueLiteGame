@@ -45,22 +45,24 @@ public class UI_CraftWindow : MonoBehaviour
     }
     public void Craft()
     {
-        SceneAudioManager.instance.uiSFX.craft.Play(null);
-
         if (equipment != null)
         {
             List<InventoryItem> lacks = Inventory.instance.TryGetMaterialsLackToCraft(equipment);
-            if (lacks.Count == 0)
+            if(PlayerManager.instance.player.IsBlackSmithAround())
             {
-                Inventory.instance.CraftEquipment_AfterCheck(equipment);
+                if (lacks.Count == 0)
+                {
+                    Inventory.instance.CraftEquipment_AfterCheck(equipment);
+                    SceneAudioManager.instance.uiSFX.craft.Play(null);
+                }
+                else
+                {
+                    UI.instance.warningToolTip.ShowWarning("缺少必要材料");
+                }
             }
             else
             {
-                Debug.Log("Lack Materials");
-                foreach (var lack in lacks)
-                {
-                    Debug.Log(lack.data.name + ": " + lack.stackSize);
-                }
+                UI.instance.warningToolTip.ShowWarning("只有在铁匠身边才有制作工具");
             }
         }
     }

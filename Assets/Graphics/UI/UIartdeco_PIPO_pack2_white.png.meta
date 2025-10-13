@@ -366,6 +366,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: UIartdeco_PIPO_pack2_white_11
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 605
+        width: 51
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 41, w: 27}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ee97cfc7d1bee49ab670c96c791867
+      internalID: 707148012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -380,6 +401,7 @@ TextureImporter:
       UIartdeco_PIPO_pack2_white_0: 1968567152
       UIartdeco_PIPO_pack2_white_1: 2145175254
       UIartdeco_PIPO_pack2_white_10: 2094791051
+      UIartdeco_PIPO_pack2_white_11: 707148012
       UIartdeco_PIPO_pack2_white_2: 1130148863
       UIartdeco_PIPO_pack2_white_3: -250524588
       UIartdeco_PIPO_pack2_white_4: 713001298

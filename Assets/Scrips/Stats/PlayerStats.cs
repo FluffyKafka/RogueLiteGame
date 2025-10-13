@@ -53,6 +53,7 @@ public class PlayerStats : CharacterStats, ISaveManager
             UpdateStatsUI();
         }
         currentFlaskUsageTime = GetStatByType(StatType.MaxFlaskUsageTime);
+        UI.instance.UpdatePlaskUsageTime(CheckFlaskUsageTimeInInt());
     }
 
     protected override void Update()
@@ -101,6 +102,10 @@ public class PlayerStats : CharacterStats, ISaveManager
     public int CheckFlaskUsageTimeInInt()
     {
         return (int)currentFlaskUsageTime;
+    }
+    public float CheckFlaskUsageTimeRecoverPercentage()
+    {
+        return currentFlaskUsageTime - (int)currentFlaskUsageTime;
     }
     private void UpdateFlaskUsageTimeInUI()
     {

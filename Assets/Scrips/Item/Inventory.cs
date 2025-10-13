@@ -40,12 +40,6 @@ public class Inventory : MonoBehaviour, ISaveManager
     [SerializeField] private Vector2 maxDropVelocity;
 
     [Header("Equipment Cooldown")]
-    private float armorCoolDownDuration;
-    private float armorCoolDownTimer;
-    private float amuletCoolDownDuration;
-    private float amuletCoolDownTimer;
-    private float weaponCoolDownDuration;
-    private float weaponCoolDownTimer;
     private float flaskCoolDownDuration;
     private float flaskCoolDownTimer;
 
@@ -90,10 +84,7 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     private void Update()
     {
-        flaskCoolDownTimer -= Time.deltaTime;
-        armorCoolDownTimer -= Time.deltaTime;
-        amuletCoolDownTimer -= Time.deltaTime;
-        weaponCoolDownTimer -= Time.deltaTime;
+
     }
 
     private void AddStartItems()
@@ -135,14 +126,12 @@ public class Inventory : MonoBehaviour, ISaveManager
 
     public float GetFlaskCooldownPercentage()
     {
-        if(flaskCoolDownTimer < 0)
+        ItemData_Equipment equipmentData = TryGetEquipedEquipmentByType(EquipmentType.Flask);
+        if(equipmentData == null)
         {
             return 0;
         }
-        else
-        {
-            return flaskCoolDownTimer / flaskCoolDownDuration;
-        }
+        return equipmentData.CheckCooldownPercentage();
     }
 
     public void EquipItem(ItemData _item)
@@ -159,7 +148,6 @@ public class Inventory : MonoBehaviour, ISaveManager
 
             RemoveItem(itemToEquip);
             AddEquipment(itemToEquip);
-            SetEquipmentCooldown(itemToEquip);
 
             UpdateEquipmentUI();
         }
@@ -206,40 +194,6 @@ public class Inventory : MonoBehaviour, ISaveManager
             }
         }
         return null;
-    }
-    private void SetEquipmentCooldown(ItemData_Equipment _equipment)
-    {
-        switch (_equipment.equipmentType)
-        {
-            case EquipmentType.Weapon: weaponCoolDownDuration = _equipment.cooldown; break;
-            case EquipmentType.Armor: armorCoolDownDuration = _equipment.cooldown; break;
-            case EquipmentType.Amulet: amuletCoolDownDuration = _equipment.cooldown; break;
-            case EquipmentType.Flask: flaskCoolDownDuration = _equipment.cooldown; break;
-            default: break;
-        }
-    }
-
-    public bool IsEquipmentCooldownFinish(EquipmentType _type)
-    {
-        switch(_type)
-        {
-            case EquipmentType.Weapon: return weaponCoolDownTimer < 0;
-            case EquipmentType.Flask:  return flaskCoolDownTimer < 0;
-            case EquipmentType.Amulet: return amuletCoolDownTimer < 0;
-            case EquipmentType.Armor:  return armorCoolDownTimer < 0;
-            default:                   return false;
-        }
-    }
-    public void CooldownEquipment(EquipmentType _type)
-    {
-        switch (_type)
-        {
-            case EquipmentType.Weapon: weaponCoolDownTimer = weaponCoolDownDuration; break;
-            case EquipmentType.Armor: armorCoolDownTimer = armorCoolDownDuration; break;
-            case EquipmentType.Amulet: amuletCoolDownTimer = amuletCoolDownDuration; break;
-            case EquipmentType.Flask: flaskCoolDownTimer = flaskCoolDownDuration; break;
-            default: break;
-        }
     }
 
     private void UpdateEquipmentUI()
@@ -536,13 +490,35 @@ public class Inventory : MonoBehaviour, ISaveManager
             }
         }
 
-        foreach (var item in _data.equipment)
+        foreach(var item in _data.equipment)
         {
             if (itemDatabase.TryGetValue(item.Key, out ItemData value))
             {
                 InventoryItem itemToLoad = new InventoryItem(value);
                 itemToLoad.stackSize = item.Value;
                 loadedItems_equipment.Add(itemToLoad);
+            }
+            else
+            {
+                Assert.IsTrue(false, "Missing Item:" + item.Key);
+            }
+        }
+
+        foreach(var item in itemDatabase)
+        {
+            ItemData_Equipment equipment = item.Value as ItemData_Equipment;
+            if(equipment != null)
+            {
+                equipment.LoadCooldownFinishTime(-1);
+            }
+        }
+
+        foreach(var item in _data.equipmentCooldown)
+        {
+            if (itemDatabase.TryGetValue(item.Key, out ItemData value))
+            {
+                ItemData_Equipment equipment = value as ItemData_Equipment;
+                equipment.LoadCooldownFinishTime(item.Value);
             }
             else
             {
@@ -568,6 +544,19 @@ public class Inventory : MonoBehaviour, ISaveManager
         foreach (var pair in equipmentDictionary)
         {
             _data.equipment.Add(pair.Key.itemId, pair.Value.stackSize);
+        }
+
+        foreach(var pair in itemDatabase)
+        {
+            ItemData_Equipment equipment = pair.Value as ItemData_Equipment;
+            if(equipment != null)
+            {
+                if (!equipment.IsCooldownFinish())
+                {
+                    float remainingTime = equipment.CheckCooldownRemainingTime();
+                    _data.equipmentCooldown.Add(pair.Key, remainingTime);
+                }
+            }
         }
     }
 

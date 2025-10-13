@@ -1,6 +1,9 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 
 [System.Serializable]
 public class GameData
@@ -12,6 +15,7 @@ public class GameData
 
     public SerializableDictionary<string, int> items;
     public SerializableDictionary<string, int> equipment;
+    public SerializableDictionary<string, float> equipmentCooldown;
 
     public SerializableDictionary<string, bool> skillTree;
 
@@ -34,6 +38,7 @@ public class GameData
         isNewGame = true;
         items = new SerializableDictionary<string, int>();
         equipment = new SerializableDictionary<string, int>();
+        equipmentCooldown = new SerializableDictionary<string, float>();
         skillTree = new SerializableDictionary<string, bool>();
 
         isPlayerRemainingExist = false;

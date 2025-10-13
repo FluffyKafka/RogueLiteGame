@@ -58,11 +58,6 @@ public class SaveManager : MonoBehaviour
             NewGame();
         }
 
-        if(gameData.isNewGame)
-        {
-            return;
-        }
-
         foreach (ISaveManager manager in saveManagers)
         {
             manager.LoadData(gameData);

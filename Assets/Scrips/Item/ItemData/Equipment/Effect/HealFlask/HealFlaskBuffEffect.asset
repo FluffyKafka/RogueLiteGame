@@ -22,10 +22,24 @@ MonoBehaviour:
     armor: 0
     evasion: 0
     magicResistance: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
     damage: 0
     critChance: 0
     critPower: 0
+    attackSpeed: 0
     fireDamage: 0
     iceDamage: 0
     lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
   buffDuration: 5
+  psfxPrefab: {fileID: 2915183516486618997, guid: 314df199a8c585340b859a4a3da96a85, type: 3}

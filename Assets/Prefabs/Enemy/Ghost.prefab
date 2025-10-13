@@ -15471,7 +15471,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   playerDetectRadius: 5
-  toAttackRadius: 1.2
+  toAttackRadius: 1.25
   minAttackCooldown: 0.5
   maxAttackCooldown: 1.5
   lastAttackTime: 0
@@ -15555,6 +15555,12 @@ MonoBehaviour:
   magicResistance:
     baseValue: 0
     modifiers: []
+  maxFlaskUsageTime:
+    baseValue: 0
+    modifiers: []
+  flaskUsageRecover:
+    baseValue: 0
+    modifiers: []
   damage:
     baseValue: 5
     modifiers: []
@@ -15562,6 +15568,9 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   critPower:
+    baseValue: 0
+    modifiers: []
+  attackSpeed:
     baseValue: 0
     modifiers: []
   fireDamage:
@@ -15573,6 +15582,36 @@ MonoBehaviour:
   lightningDamage:
     baseValue: 0
     modifiers: []
+  fireDuration:
+    baseValue: 0
+    modifiers: []
+  iceDuration:
+    baseValue: 0
+    modifiers: []
+  lightningDuration:
+    baseValue: 0
+    modifiers: []
+  fireDamageCooldown:
+    baseValue: 0
+    modifiers: []
+  fireDamageTransform:
+    baseValue: 0
+    modifiers: []
+  chillArmorReduce:
+    baseValue: 0
+    modifiers: []
+  chillSlowRate:
+    baseValue: 0
+    modifiers: []
+  shockAccuracyReduce:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeCount:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeRate:
+    baseValue: 0
+    modifiers: []
   defaultCritPower: 150
   strength_damage: 1
   strength_critPower: 1
@@ -15580,24 +15619,16 @@ MonoBehaviour:
   agility_critChance: 1
   intelligence_magicDamage: 1
   intelligence_magicResistance: 3
+  intelligence_magicDuration: 0.5
   vitality_maxHealth: 3
-  igniteDuration: 4
-  ignite_damageCooldown: 0.3
-  rateFireDamageTransformToIgniteDamage: 20
-  chillDuration: 4
-  chill_reduceArmorPer: 20
-  chillSlowPercentage: 20
-  shockDuration: 4
-  shock_reduceAccuracy: 20
   thunderAttackPrefab: {fileID: 0}
   thunderStrikeRadius: 25
-  thunderStrikeRate: 50
-  thunderStrikerCounter: 4
   currentHealth: 0
   igniteStateDamage: 0
   isIgnited: 0
   isChilled: 0
   isShock: 0
+  minFireDamageCooldown: 0.1
   level: 0
   percantageModifier: 0
   currencyDropAmount:

@@ -53,3 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 844bf87c47e2ba1459bc8b62b5934d56, type: 2}
   cooldown: 12
   detail: "\u4F7F\u7528\u540E\u589E\u52A030\u6700\u5927\u751F\u547D\u503C\uFF0C10\u706B\u7130\u4F24\u5BB310s\uFF0C\u6062\u590D25%\u8840\u91CF"
+  cooldownFinishTime: 39.34415

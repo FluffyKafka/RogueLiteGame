@@ -28,13 +28,15 @@ public class UI_InGame : MonoBehaviour
     [Space]
     [SerializeField] Image swordThrowIcon;
     [SerializeField] Image swordThrowCoolDown;
-    [Space]
-    [SerializeField] Image flaskIcon;
-    [SerializeField] Image flaskCoolDown;
-    [SerializeField] TextMeshProUGUI flaskUsageTime;
     [Space] 
     [SerializeField] Image swordClusterIcon;
     [SerializeField] Image swordClusterCooldown;
+
+    [Header("Equipment Cooldown Image")]
+    [SerializeField] EuipmentInGameUI flaskUI;
+    [SerializeField] EuipmentInGameUI weaponUI;
+    [SerializeField] EuipmentInGameUI armorUI;
+    [SerializeField] EuipmentInGameUI amuletUI;
 
 
     [Header("Currency")]
@@ -55,7 +57,6 @@ public class UI_InGame : MonoBehaviour
         crystalIcon.gameObject.SetActive(true);
         blackHoleIcon.gameObject.SetActive(skill.blackHole.isUnlocked_blackHole);
         swordThrowIcon.gameObject.SetActive(skill.swordThrow.isUnlocked_sword);
-        flaskIcon.gameObject.SetActive(Inventory.instance.TryGetEquipmentByType(EquipmentType.Flask) != null);
         swordClusterIcon.gameObject.SetActive(skill.swordThrow.isUnlocked_swordCluster);
     }
 
@@ -90,18 +91,16 @@ public class UI_InGame : MonoBehaviour
             swordThrowCoolDown.fillAmount = skill.swordThrow.GetCooldownPercentage();
         }
 
-        if (Inventory.instance.TryGetEquipmentByType(EquipmentType.Flask) != null)
-        {
-            flaskIcon.gameObject.SetActive(true);
-            flaskCoolDown.fillAmount = Inventory.instance.GetFlaskCooldownPercentage();
-            flaskUsageTime.text = (playerStats as PlayerStats).CheckFlaskUsageTimeInInt().ToString(); 
-        }
-
         if (skill.swordThrow.isUnlocked_swordCluster)
         {
             swordClusterIcon.gameObject.SetActive(true);
             swordClusterCooldown.fillAmount = skill.swordThrow.GetSwordClusterCoolDownPercentage();
         }
+
+        flaskUI.EquipmentCoolDownUpdate();
+        weaponUI.EquipmentCoolDownUpdate();
+        armorUI.EquipmentCoolDownUpdate();
+        amuletUI.EquipmentCoolDownUpdate();
     }
 
     private void UpdateCurrency(TextMeshProUGUI _text, ref float _currentCurrency, float _targetCurrency)

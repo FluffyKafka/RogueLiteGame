@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class ItemData_Equipment : ItemData
     [SerializeField] public float cooldown;
     [TextArea][SerializeField] public string detail;
 
+    [Header("TEST")]
+    [SerializeField] private float cooldownFinishTime = -1;
+
     public void AddModifiers()
     {
         PlayerManager.instance.player.cs.AddModifier(statsModifierData);
@@ -31,14 +35,14 @@ public class ItemData_Equipment : ItemData
 
     public bool TryExcuteItemEffect(EffectExcuteData _target)
     {
-        if(Inventory.instance.IsEquipmentCooldownFinish(equipmentType))
+        if(IsCooldownFinish())
         {
             foreach (var effect in effects)
             {
                 _target.equipment = this;
                 effect.ExcuteEffect(_target);
             }
-            Inventory.instance.CooldownEquipment(equipmentType);
+            SetCooldownFinishTime();
             return true;
         }
         return false;
@@ -57,5 +61,42 @@ public class ItemData_Equipment : ItemData
         }
         sb.Append(detail);
         return sb.ToString();
+    }
+
+    public bool IsCooldownFinish()
+    {
+        return cooldownFinishTime < Time.time;
+    }
+
+    public void SetCooldownFinishTime()
+    {
+        cooldownFinishTime = cooldown + Time.time;
+    }
+
+    public float CheckCooldownPercentage()
+    {
+        float cooldownTime = cooldownFinishTime - Time.time;
+        if(cooldownTime < 0)
+        {
+            return 0;
+        }
+        else if(cooldownTime > cooldown)
+        {
+            return 1;
+        }
+        else
+        {
+            return cooldownTime / cooldown;
+        }
+    }
+
+    public float CheckCooldownRemainingTime()
+    {
+        return cooldownFinishTime - Time.time;
+    }
+
+    public void LoadCooldownFinishTime(float _time)
+    {
+        cooldownFinishTime = Time.time + _time;
     }
 }

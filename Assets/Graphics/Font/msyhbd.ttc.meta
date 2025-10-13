@@ -4,13 +4,15 @@ TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
   - Microsoft YaHei
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: bd7debf49725eb143bee04348784f6ef, type: 3}
+  - {fileID: 12800000, guid: 31f898b767d7e9a479ae26acaadb2693, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
