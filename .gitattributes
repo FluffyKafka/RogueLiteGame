@@ -1,2 +1,4 @@
 Assets/Graphics/Font/msyhbd_SDF.asset filter=lfs diff=lfs merge=lfs -text
 D:/UnityWorks/RPGGame/Assets/Graphics/Font/msyhbd_SDF.asset filter=lfs diff=lfs merge=lfs -text
+BigFile filter=lfs diff=lfs merge=lfs -text
+msyhbd_SDF.asset filter=lfs diff=lfs merge=lfs -text
