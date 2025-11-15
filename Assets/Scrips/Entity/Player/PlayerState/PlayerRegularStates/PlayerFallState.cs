@@ -23,9 +23,11 @@ public class PlayerFallState : PlayerAirState
     public override void Update()
     {
         base.Update();
+        Debug.Log("Fall");
         if (player.IsGrounded() || player.IsPlatform())
         {
             stateMachine.ChangeState(player.idleState);
         }
+
     }
 }

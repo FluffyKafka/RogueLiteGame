@@ -29,6 +29,7 @@ public class PlayerDashState : PlayerState
     public override void Update()
     { 
         base.Update();
+        Debug.Log("Dash");
         player.SetVelocity(player.dashSpeed * player.dashDir, 0);
 
         afterImageGenerateTimer -= Time.deltaTime;

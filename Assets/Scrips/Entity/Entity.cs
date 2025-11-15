@@ -19,6 +19,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask whatIsPlatform;
     [SerializeField] public Transform attackValidCheck;
     [SerializeField] public float attackValidCheckRadius;
+    [SerializeField] public float groundCheckDistanceDivider = 3;//判定是否处于地面分为两种情况：离开地面用较长的射线，落到地面用较短的射线，此数值表示两个射线长度之比
     #endregion
 
     #region Components
@@ -146,17 +147,22 @@ public class Entity : MonoBehaviour
         isKnocked = false;
     }
 
-    public virtual RaycastHit2D IsGrounded()
+    public virtual bool IsGrounded()
     {
         return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 
-    public virtual RaycastHit2D IsPlatform()
+    public virtual RaycastHit2D CheckGrounded()
+    {
+        return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+    }
+
+    public virtual bool IsPlatform()
     {
         return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsPlatform);
     }
 
-    public virtual RaycastHit2D IsTouchWall()
+    public virtual bool IsTouchWall()
     {
         return Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
     }

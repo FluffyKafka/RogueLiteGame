@@ -22,6 +22,7 @@ public class PlayerWallJumpState : PlayerAirState
     public override void Update()
     {
         base.Update();
+        Debug.Log("WallJump");
         if (rg.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);

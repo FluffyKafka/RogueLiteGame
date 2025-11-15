@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocity(0, 0);
+        player.SetVelocity(0, rg.velocity.y);
     }
 
     public override void Exit()
@@ -22,7 +22,8 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Update()
     {
-        player.SetVelocity(0, 0);
+        Debug.Log("Idle");
+        player.SetVelocity(0, rg.velocity.y);
         base.Update();
         if (xInput != 0 && !(xInput == player.facingDir && player.IsTouchWall()) && !player.isBusy)
         {

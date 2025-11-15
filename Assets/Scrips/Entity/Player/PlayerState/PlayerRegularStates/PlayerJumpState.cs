@@ -23,6 +23,7 @@ public class PlayerJumpState : PlayerAirState
 
     public override void Update()
     {
+        Debug.Log("Jump");
         if (rg.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);

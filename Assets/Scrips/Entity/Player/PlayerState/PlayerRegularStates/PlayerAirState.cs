@@ -21,6 +21,7 @@ public class PlayerAirState : PlayerState
     public override void Update()
     {
         base.Update();
+        Debug.Log("Air");
         player.anim.SetFloat("yVelocity", rg.velocity.y);
         if(xInput != 0)
         {
@@ -29,6 +30,6 @@ public class PlayerAirState : PlayerState
         if(player.IsTouchWall())
         {
             stateMachine.ChangeState(player.wallSlideState);
-        }
+        } 
     }
 }

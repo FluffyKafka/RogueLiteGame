@@ -47,7 +47,8 @@ public class PlayerPrimaryAttackState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(timer < 0)
+        Debug.Log("PrimaryAttack");
+        if (timer < 0)
         {
             player.SetVelocity(0, 0);
         }

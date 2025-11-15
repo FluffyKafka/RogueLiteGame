@@ -41,11 +41,11 @@ public class Necromancer_MoveState : NecromancerStateBase
         }
         else
         {
-            if (enemy.IsGrounded().distance < enemy.flyingHeight)
+            if (enemy.CheckGrounded().distance < enemy.flyingHeight)
             {
                 enemy.SetVelocity(enemy.rg.velocity.x, enemy.verticalFlyingSpeed);
             }
-            else if (enemy.IsGrounded().distance > enemy.flyingHeight )
+            else if (enemy.CheckGrounded().distance > enemy.flyingHeight )
             {
                 enemy.SetVelocity(enemy.rg.velocity.x, -enemy.verticalFlyingSpeed);
             }

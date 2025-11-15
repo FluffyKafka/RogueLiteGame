@@ -89,6 +89,9 @@ public class Player : Entity
 
     [Header("Craft BlackSmith Detect")]
     [SerializeField] private float craftDetectRadius;
+
+    [Header("Player Collision Check")]
+    [SerializeField] private float groundCheckWidth; 
     override protected void Awake()
     {
         base.Awake();
@@ -148,6 +151,13 @@ public class Player : Entity
         FlaskUseCheck();
         EnterCheck();
         CommunicateCheck();
+    }
+
+    public override bool IsGrounded()
+    {
+        Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
+        Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
+        return Physics2D.OverlapArea(leftUp, rightDown, whatIsGround);
     }
 
     private void EnterCheck()
@@ -269,6 +279,10 @@ public class Player : Entity
         Gizmos.DrawWireSphere(transform.position, enemyCanBeStunnedCheckRadius);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, craftDetectRadius);
+        Gizmos.color = Color.red;
+        Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
+        Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
+        Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundCheckWidth, groundCheckDistance));
     }
 
     public bool IsBlackSmithAround()

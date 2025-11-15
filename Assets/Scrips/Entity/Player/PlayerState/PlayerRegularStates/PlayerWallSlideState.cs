@@ -21,7 +21,7 @@ public class PlayerWallSlideState : PlayerState
     public override void Update()
     {
         base.Update();
-        
+        Debug.Log("WallSlide");
         if (yInput > 0)
         {
             player.SetVelocity(rg.velocity.x, -player.wallSlideSpeed + yInput * player.wallSlideUpAdjustSpeed);

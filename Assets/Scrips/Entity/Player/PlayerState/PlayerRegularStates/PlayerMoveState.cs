@@ -25,7 +25,7 @@ public class PlayerMoveState : PlayerGroundedState
     public override void Update()
     {
         base.Update();
-
+        Debug.Log("Move");
         player.SetVelocity(xInput * player.moveSpeed, rg.velocity.y);
         if (xInput == 0 || player.IsTouchWall())
         {
