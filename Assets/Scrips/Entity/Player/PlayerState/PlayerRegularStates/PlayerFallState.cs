@@ -12,19 +12,23 @@ public class PlayerFallState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("EnterFall");
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.SetVelocity(0, 0);
     }
 
     public override void Update()
     {
         base.Update();
-        Debug.Log("Fall");
-        if (player.IsGrounded() || player.IsPlatform())
+        
+        if(player.IsTouchWall() && xInput == player.facingDir)
+        {
+            stateMachine.ChangeState(player.wallSlideState);
+        } 
+        else if (player.IsGrounded() || player.IsPlatform())
         {
             stateMachine.ChangeState(player.idleState);
         }

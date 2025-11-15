@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWallJumpState : PlayerAirState
+public class PlayerWallJumpState : PlayerState
 {
     public PlayerWallJumpState(PlayerStateMachine _stateMachine, Player _Player, string _animBoolName) : base(_stateMachine, _Player, _animBoolName)
     {
@@ -12,6 +12,7 @@ public class PlayerWallJumpState : PlayerAirState
     {
         base.Enter();
         player.SetVelocity(player.wallJumpHorizontalSpeed * -player.facingDir, player.jumpSpeed);
+        Debug.Log("EnterWallJump");
     }
 
     public override void Exit()
@@ -22,7 +23,7 @@ public class PlayerWallJumpState : PlayerAirState
     public override void Update()
     {
         base.Update();
-        Debug.Log("WallJump");
+        player.anim.SetFloat("yVelocity", rg.velocity.y);
         if (rg.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);

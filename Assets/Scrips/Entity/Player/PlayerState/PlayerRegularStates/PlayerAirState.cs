@@ -11,6 +11,7 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("EnterAir");
     }
 
     public override void Exit()
@@ -21,15 +22,14 @@ public class PlayerAirState : PlayerState
     public override void Update()
     {
         base.Update();
-        Debug.Log("Air");
         player.anim.SetFloat("yVelocity", rg.velocity.y);
         if(xInput != 0)
         {
             player.SetVelocity(xInput * player.moveInAirSpeed, rg.velocity.y);
         }
-        if(player.IsTouchWall())
-        {
-            stateMachine.ChangeState(player.wallSlideState);
-        } 
+        //if(player.IsTouchWall())
+        //{
+        //    stateMachine.ChangeState(player.wallSlideState);
+        //} 
     }
 }

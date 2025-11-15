@@ -11,6 +11,7 @@ public class PlayerWallSlideState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("EnterWallSlide");
     }
 
     public override void Exit()
@@ -21,27 +22,26 @@ public class PlayerWallSlideState : PlayerState
     public override void Update()
     {
         base.Update();
-        Debug.Log("WallSlide");
-        if (yInput > 0)
+        if (yInput > 0 || yInput == 0)
         {
-            player.SetVelocity(rg.velocity.x, -player.wallSlideSpeed + yInput * player.wallSlideUpAdjustSpeed);
+            player.SetVelocityWithoutFlip(rg.velocity.x, -player.wallSlideSpeed + player.wallSlideUpAdjustSpeed);
         }
         else
         {
-            player.SetVelocity(rg.velocity.x, -player.wallSlideSpeed + yInput * player.wallSlideDownAdjustSpeed);
+            player.SetVelocityWithoutFlip(rg.velocity.x, -player.wallSlideSpeed + yInput * player.wallSlideDownAdjustSpeed);
         }
 
-        if (player.IsGrounded() || !player.IsTouchWall())
+        if (player.CheckInput_KeyDown(KeyCode.Space))
+        {
+            stateMachine.ChangeState(player.wallJumpState);
+        }
+        else if(player.IsGrounded() || !player.IsTouchWall())
         {
             stateMachine.ChangeState(player.idleState);
         }
-        else if (xInput == -player.facingDir)
+        else if (xInput != player.facingDir)
         {
             stateMachine.ChangeState(player.fallState);
-        }
-        else if(player.CheckInput_KeyDown(KeyCode.Space))
-        {
-            stateMachine.ChangeState(player.wallJumpState);
         }
     }
 }

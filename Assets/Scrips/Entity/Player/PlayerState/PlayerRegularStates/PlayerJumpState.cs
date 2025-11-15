@@ -14,6 +14,7 @@ public class PlayerJumpState : PlayerAirState
         base.Enter();
         player.SetVelocity(rg.velocity.x, player.jumpSpeed);
         SceneAudioManager.instance.playerSFX.jump.Play(null);
+        Debug.Log("EnterJump");
     }
 
     public override void Exit()
@@ -23,7 +24,7 @@ public class PlayerJumpState : PlayerAirState
 
     public override void Update()
     {
-        Debug.Log("Jump");
+        
         if (rg.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);
