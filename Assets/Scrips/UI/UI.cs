@@ -46,6 +46,9 @@ public class UI : MonoBehaviour
     [Header("CharacterUI")]
     [SerializeField] private TextMeshProUGUI flaskUsageTime;
 
+    [Header("LoadingUI")]
+    public GameObject loadingUIGameObject;
+
     private void Awake()
     {
         if(instance == null)
@@ -80,6 +83,8 @@ public class UI : MonoBehaviour
                 skill.canbeUnlocked = true;
             }
         }
+
+        loadingUIGameObject.SetActive(true);
     }
 
     void Update()

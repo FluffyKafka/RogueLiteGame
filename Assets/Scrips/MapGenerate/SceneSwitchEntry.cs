@@ -21,16 +21,8 @@ public class SceneSwitchEntry : MonoBehaviour, IPlayerEnterable
             return;
         }
         UI.instance.isSwitching = true;
-        StartCoroutine(LoadSceenWithFadeEffect(UI.instance.darkScreen.fadeDuration));
+        SceneLoadManager.instance.LoadSceneNamed(sceneName);
     }
-    private IEnumerator LoadSceenWithFadeEffect(float _delay)
-    {
-        UI.instance.darkScreen.FadeOut();
-        yield return new WaitForSeconds(_delay);
-        SaveManager.instance.SaveGame();
-        SceneManager.LoadScene(sceneName);
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

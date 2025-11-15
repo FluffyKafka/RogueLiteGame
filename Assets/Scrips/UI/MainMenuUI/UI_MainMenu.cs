@@ -5,11 +5,25 @@ using UnityEngine.SceneManagement;
 
 public class UI_MainMenu : MonoBehaviour, ISaveManager
 {
+    public static UI_MainMenu instance;
     [SerializeField] private string defaultSeneName;
     private string sceneName;
     [SerializeField] private GameObject continueButton = null;
-    [SerializeField] private UI_DarkScreen fadeScreen;
+    public UI_DarkScreen fadeScreen;
     [SerializeField] private bool isHaveContinueButton = true;
+    public GameObject LoadingUIGameObject;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -28,7 +42,7 @@ public class UI_MainMenu : MonoBehaviour, ISaveManager
 
     public void ContinueGame()
     {
-        StartCoroutine(LoadSceenWithFadeEffect(fadeScreen.fadeDuration));
+        SceneLoadManager.instance.LoadSceneNamed(sceneName);
     }
 
     public void NewGame()
@@ -36,15 +50,7 @@ public class UI_MainMenu : MonoBehaviour, ISaveManager
         SaveManager.instance.DeleteSaveData();
         sceneName = defaultSeneName;
 
-        StartCoroutine(LoadSceenWithFadeEffect(fadeScreen.fadeDuration));
-    }
-
-    private IEnumerator LoadSceenWithFadeEffect(float _delay)
-    {
-        fadeScreen.FadeOut();
-        yield return new WaitForSeconds(_delay);
-        SaveManager.instance.SaveGame();
-        SceneManager.LoadScene(sceneName);
+        SceneLoadManager.instance.LoadSceneNamed(sceneName);
     }
 
     public void ExitGame()
