@@ -13,7 +13,7 @@ public class SaveManager : MonoBehaviour
     [SerializeField] bool isEncrptData;
     [SerializeField] string code;
 
-    private GameData gameData;
+    [SerializeField] private GameData gameData;
     private List<ISaveManager> saveManagers;
     private FileDataHandler fileDataHandler;
 
@@ -47,6 +47,7 @@ public class SaveManager : MonoBehaviour
     public void NewGame()
     {
         gameData = new GameData();
+        fileDataHandler.Save(gameData);
     }
 
     public void LoadGame()

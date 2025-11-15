@@ -47,7 +47,7 @@ public class UI_MainMenu : MonoBehaviour, ISaveManager
 
     public void NewGame()
     {
-        SaveManager.instance.DeleteSaveData();
+        SaveManager.instance.NewGame();
         sceneName = defaultSeneName;
 
         SceneLoadManager.instance.LoadSceneNamed(sceneName);

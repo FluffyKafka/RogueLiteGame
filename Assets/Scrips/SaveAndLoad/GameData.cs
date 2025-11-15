@@ -35,6 +35,7 @@ public class GameData
     {
         HP = -1;
         currency = 0;
+        coin = 0;
         isNewGame = true;
         items = new SerializableDictionary<string, int>();
         equipment = new SerializableDictionary<string, int>();
@@ -42,6 +43,8 @@ public class GameData
         skillTree = new SerializableDictionary<string, bool>();
 
         isPlayerRemainingExist = false;
+        playerRemainingPosition = Vector3.zero;
+        playerLeftCurrency = 0;
 
         bgmVolume = 0.3688f;
         sfxVolume = 0.3688f;
