@@ -89,11 +89,11 @@ public class UI : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.U)) 
+        if (Input.GetKeyDown(KeyCode.U))
         {
             SwitchWithKeyTo(charactorUI);
         }
-        else if(Input.GetKeyDown(KeyCode.I)) 
+        else if (Input.GetKeyDown(KeyCode.I))
         {
             SwitchWithKeyTo(skillTreeUI);
         }
@@ -105,9 +105,17 @@ public class UI : MonoBehaviour
         {
             SwitchWithKeyTo(optionUI);
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SwitchTo(inGame);
+            if (inGame.activeSelf)
+            {
+                SwitchWithKeyTo(charactorUI);
+            }
+            else
+            {
+                SwitchWithKeyTo(inGame);
+            }
         }
     }
 
@@ -191,13 +199,23 @@ public class UI : MonoBehaviour
 
     private void SwitchWithKeyTo(GameObject _menu)
     {
-        if (_menu != null && _menu.activeSelf)
+        if (GameManager.instance.CanPause())
         {
-            SwitchTo(inGame);
+            if (_menu != null && _menu.activeSelf)
+            {
+                SwitchTo(inGame);
+            }
+            else
+            {
+                SwitchTo(_menu);
+            }
         }
         else
         {
-            SwitchTo(_menu);
+            if (GameManager.instance.isBattle)
+            {
+                PlayerManager.instance.player.fx.CreatePopUpText("战斗中不能进行暂停");
+            }
         }
     }
 

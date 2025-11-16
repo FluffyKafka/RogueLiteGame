@@ -89,10 +89,12 @@ public class PlayerEnemyCheck : MonoBehaviour
     private void BattleState_Enter()
     {
         SceneAudioManager.instance.bgm.SetRandomBGMOfType(BGMType.Fight);
+        GameManager.instance.isBattle = true;
     }
     private void BattleState_Exit()
     {
         SceneAudioManager.instance.bgm.SetRandomBGMOfType(BGMType.Normal);
+        GameManager.instance.isBattle = false;
     }
 
     private void OnDrawGizmos()
