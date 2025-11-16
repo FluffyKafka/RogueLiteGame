@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour, ISaveManager
     [SerializeField] private GameObject playerRemainingPrefab;
 
     [SerializeField] private string preGameSceneName;
+    [SerializeField] public float pauseTimeSpeedDivider = 100f;//暂停时将游戏速度降低到极低
 
     private void Awake()
     {
@@ -89,7 +90,7 @@ public class GameManager : MonoBehaviour, ISaveManager
     {
         if(_isPause)
         {
-            Time.timeScale = 0f;
+            Time.timeScale = 1 / pauseTimeSpeedDivider;
         }
         else
         {

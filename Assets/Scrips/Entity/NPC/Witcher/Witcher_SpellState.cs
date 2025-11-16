@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Witcher_SpellState : WitcherStateBase
+public class Witcher_SpellState : Witcher_BusyState
 {
     private bool isSpell;
     public Witcher_SpellState(NPC _npcBase, NPCStateMachine _npcStateMachine, string _animBoolName, Witcher _npc) : base(_npcBase, _npcStateMachine, _animBoolName, _npc)

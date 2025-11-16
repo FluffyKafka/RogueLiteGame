@@ -1193,6 +1193,7 @@ MonoBehaviour:
   playerLeftCurrency: 0
   playerRemainingPrefab: {fileID: 7480426342246956646, guid: 0aec823454a1c764a878e12f56921f34, type: 3}
   preGameSceneName: PreGameRoomScene
+  pauseTimeSpeedDivider: 1000
 --- !u!1 &7526490974668189074
 GameObject:
   m_ObjectHideFlags: 0

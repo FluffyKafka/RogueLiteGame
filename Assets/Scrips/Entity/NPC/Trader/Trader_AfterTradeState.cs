@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trader_AfterTradeState : TraderStateBase
+public class Trader_AfterTradeState : Trader_BusyState
 {
     public Trader_AfterTradeState(NPC _npcBase, NPCStateMachine _npcStateMachine, string _animBoolName, Trader _npc) : base(_npcBase, _npcStateMachine, _animBoolName, _npc)
     {

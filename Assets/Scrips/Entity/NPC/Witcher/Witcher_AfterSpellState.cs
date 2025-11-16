@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Witcher_AfterSpellState : WitcherStateBase
+public class Witcher_AfterSpellState : Witcher_BusyState
 {
     public Witcher_AfterSpellState(NPC _npcBase, NPCStateMachine _npcStateMachine, string _animBoolName, Witcher _npc) : base(_npcBase, _npcStateMachine, _animBoolName, _npc)
     {

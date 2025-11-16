@@ -16,12 +16,20 @@ public class BlackSmith_TalkingState : BlackSmithStateBase
 
         UI.instance.Speak(npc.currentDialog[npc.sentenceIndex]);
         ++npc.sentenceIndex;
+
+        GameManager.instance.SetPauseGame(true);
+        npc.anim.speed *= GameManager.instance.pauseTimeSpeedDivider;
+        PlayerManager.instance.player.anim.speed *= GameManager.instance.pauseTimeSpeedDivider;
     }
 
     public override void Exit()
     {
         base.Exit();
         UI.instance.SpeakDone();
+
+        GameManager.instance.SetPauseGame(false);
+        npc.anim.speed /= GameManager.instance.pauseTimeSpeedDivider;
+        PlayerManager.instance.player.anim.speed /= GameManager.instance.pauseTimeSpeedDivider;
     }
 
     public override void Update()
