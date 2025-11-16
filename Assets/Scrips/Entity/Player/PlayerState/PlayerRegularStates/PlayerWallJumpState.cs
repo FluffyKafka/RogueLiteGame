@@ -28,5 +28,46 @@ public class PlayerWallJumpState : PlayerState
         {
             stateMachine.ChangeState(player.fallState);
         }
+        if (player.CheckInput_KeyDown(KeyCode.Space) && player.jumpCount < player.jumpCountMax)
+        {
+            stateMachine.ChangeState(player.jumpState);
+        }
+
+        if (player.CheckInput_KeyDown(KeyCode.Mouse0))
+        {
+            if (!player.IsSwordThrown())
+            {
+                stateMachine.ChangeState(player.primaryAttackState);
+            }
+            else
+            {
+                player.swordThrown.GetComponent<SwordSkillController>().ReturnSword();
+            }
+        }
+
+        if (player.CheckInput_KeyDown(KeyCode.E) && SkillManager.intance.counterAttack.isUnlocked_counterAttack && SkillManager.intance.counterAttack.TryUseSkill() && !player.isKnocked)
+        {
+            stateMachine.ChangeState(player.counterAttackState);
+        }
+
+        if (player.CheckInput_KeyDown(KeyCode.Mouse1) && SkillManager.intance.swordThrow.isUnlocked_sword)
+        {
+            if (!player.IsSwordThrown())
+            {
+                if (SkillManager.intance.swordThrow.IsOutCooldown())
+                {
+                    stateMachine.ChangeState(player.aimSwordState);
+                }
+            }
+            else
+            {
+                player.swordThrown.GetComponent<SwordSkillController>().ReturnSword();
+            }
+        }
+
+        if (player.CheckInput_KeyDown(KeyCode.Q) && SkillManager.intance.blackHole.isUnlocked_blackHole && SkillManager.intance.blackHole.TryUseSkill())
+        {
+            stateMachine.ChangeState(player.blackHoleState);
+        }
     }
 }

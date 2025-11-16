@@ -91,7 +91,12 @@ public class Player : Entity
     [SerializeField] private float craftDetectRadius;
 
     [Header("Player Collision Check")]
-    [SerializeField] private float groundCheckWidth; 
+    [SerializeField] private float groundCheckWidth;
+
+    [Header("Player Jump Info")]
+    public int jumpCount = 0;
+    public int jumpCountMax = 2;
+    public ParticleSystem secondJumpFX;
     override protected void Awake()
     {
         base.Awake();

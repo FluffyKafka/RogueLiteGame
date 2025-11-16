@@ -12,6 +12,11 @@ public class PlayerJumpState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        player.jumpCount++;
+        if(player.jumpCount > 1)
+        {
+            player.secondJumpFX.Play();
+        }
         player.SetVelocity(rg.velocity.x, player.jumpSpeed);
         SceneAudioManager.instance.playerSFX.jump.Play(null);
         Debug.Log("EnterJump");
