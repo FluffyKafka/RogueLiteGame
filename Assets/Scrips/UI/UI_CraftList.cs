@@ -8,7 +8,7 @@ public class UI_CraftList : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private Transform craftSlotParent;
     [SerializeField] private GameObject craftSlotPrefab;
 
-    [SerializeField] private List<ItemData_Equipment> craftEquipment;
+    [SerializeField] public List<ItemData_Equipment> craftEquipment;
     [SerializeField] private List<UI_CraftSlot> craftSlots;
 
     [SerializeField] private Color pressColor;

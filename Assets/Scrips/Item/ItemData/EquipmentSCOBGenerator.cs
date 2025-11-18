@@ -6,8 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New EquipmentSCOBGenerator", menuName = "ExcelData/Equipment")]
 public class EquipmentSCOBGenerator : ScriptableObject
 {
-    [Header("填写下方二者后右键上方标题导入数据")]
-    [SerializeField] private string targetFile;
+    [Header("填写下方三者后右键上方标题导入数据")]
+    [SerializeField] private string targetFile_Equipment;
+    [SerializeField] private string targetFile_Material;
     [SerializeField] private EquipmentData dataSet;
 
     [ContextMenu("导入数据")]
@@ -22,24 +23,47 @@ public class EquipmentSCOBGenerator : ScriptableObject
 
         foreach(ExcelEquipmentData data in dataSet.NewEquipment)
         {
-            ItemData_Equipment newEquipment = AssetDatabase.LoadAssetAtPath<ItemData_Equipment>(targetFile + "/" + data.ObjectName + ".asset");
-            if(newEquipment == null)
+            
+            if (data.EquipmentType == "Material")
             {
-                newEquipment = ScriptableObject.CreateInstance<ItemData_Equipment>();
-                LoadData(newEquipment, data);
-                UnityEditor.AssetDatabase.CreateAsset(newEquipment, targetFile + "/" + data.ObjectName + ".asset");
+                ItemData newItem;
+                newItem = AssetDatabase.LoadAssetAtPath<ItemData>(targetFile_Material + "/" + data.ObjectName + ".asset");
+                if (newItem == null)
+                {
+                    newItem = ScriptableObject.CreateInstance<ItemData>();
+                    LoadData_Material(newItem, data);
+                    UnityEditor.AssetDatabase.CreateAsset(newItem, targetFile_Material + "/" + data.ObjectName + ".asset");
+                }
+                else
+                {
+                    LoadData_Material(newItem, data);
+                }
             }
             else
             {
-                LoadData(newEquipment, data);
+                ItemData_Equipment newEquipment;
+                newEquipment = AssetDatabase.LoadAssetAtPath<ItemData_Equipment>(targetFile_Equipment + "/" + data.ObjectName + ".asset");
+                if (newEquipment == null)
+                {
+                    newEquipment = ScriptableObject.CreateInstance<ItemData_Equipment>();
+                    LoadData_Equipment(newEquipment, data);
+                    UnityEditor.AssetDatabase.CreateAsset(newEquipment, targetFile_Equipment + "/" + data.ObjectName + ".asset");
+                }
+                else
+                {
+                    LoadData_Equipment(newEquipment, data);
+                }
             }
+
+            
         }
         UnityEditor.AssetDatabase.SaveAssets();
 #endif
     }
 
-    private void LoadData(ItemData_Equipment _newEquipment, ExcelEquipmentData _data)
+    private void LoadData_Equipment(ItemData_Equipment _newEquipment, ExcelEquipmentData _data)
     {
+        _newEquipment.itemId = _data.Id;
         _newEquipment.itemName = _data.ItemName;
         _newEquipment.itemType = ItemType.Equipment;
         _newEquipment.equipmentType = TransTypeFromString(_data.EquipmentType);
@@ -81,6 +105,20 @@ public class EquipmentSCOBGenerator : ScriptableObject
         _newEquipment.statsModifierData.shockAccuracyReduce = _data.ShockAccuracyReduce;
         _newEquipment.statsModifierData.thunderStrikeCount = _data.ThunderStrikeCount;
         _newEquipment.statsModifierData.thunderStrikeRate = _data.ThunderStrikeRate;
+
+        _newEquipment.craftsId.Add(_data.Craft_0);
+        _newEquipment.craftsId.Add(_data.Craft_1);
+        _newEquipment.craftsId.Add(_data.Craft_2);
+        _newEquipment.craftsId.Add(_data.Craft_3);
+        _newEquipment.craftsId.Add(_data.Craft_4);
+    }
+    private void LoadData_Material(ItemData _newItem, ExcelEquipmentData _data)
+    {
+        _newItem.itemId = _data.Id;
+        _newItem.itemName = _data.ItemName;
+        _newItem.itemType = ItemType.Material;
+        _newItem.description = _data.Description;
+        _newItem.price = (int)_data.Price;
     }
 
     private EquipmentType TransTypeFromString(string _type)

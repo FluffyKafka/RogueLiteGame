@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EquipmentData
   m_EditorClassIdentifier: 
   NewEquipment:
-  - ObjectName: ArmorOfZeus
+  - Id: 0
+    ObjectName: ArmorOfZeus
     ItemName: "\u5B99\u65AF\u4E4B\u7532"
     EquipmentType: Armor
     Price: 600
@@ -47,7 +48,13 @@ MonoBehaviour:
     CoolDown: 2
     Description: "\u636E\u8BF4\u8FD9\u526F\u76D4\u7532\u662F\u67D0\u4E2A\u795E\u660E\u53D8\u6210\u52A8\u7269\u52FE\u5F15\u51E1\u4EBA\u65F6\u8131\u4E0B\u800C\u88AB\u5077\u8D70\u7684\u3002\u771F\u662F\u83AB\u540D\u5176\u5999\u7684\u4F20\u8BF4"
     Detail: "\u7A7F\u6234\u8005\u88AB\u51FB\u4E2D\u65F6\uFF0C\u5BF9\u653B\u51FB\u8005\u65BD\u52A0\u611F\u7535\u72B6\u6001"
-  - ObjectName: LightningInBottle
+    Craft_0: 19
+    Craft_1: 48
+    Craft_2: 66
+    Craft_3: 43
+    Craft_4: 48
+  - Id: 1
+    ObjectName: LightningInBottle
     ItemName: "\u74F6\u4E2D\u95EA\u7535"
     EquipmentType: Flask
     Price: 600
@@ -81,7 +88,13 @@ MonoBehaviour:
     CoolDown: 6
     Description: "\u8FD9\u4E1C\u897F\u771F\u7684\u80FD\u559D\uFF1F"
     Detail: "\u4F7F\u7528\u540E\u589E\u52A020\u653B\u901F\u300110\u96F7\u7535\u4F24\u5BB35s\n\u6062\u590D10%\u8840\u91CF\u3002"
-  - ObjectName: SweaterOfHestia
+    Craft_0: 52
+    Craft_1: 48
+    Craft_2: 64
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 2
+    ObjectName: SweaterOfHestia
     ItemName: "\u8D6B\u65AF\u63D0\u4E9A\u7684\u6BDB\u8863"
     EquipmentType: Armor
     Price: 600
@@ -115,7 +128,13 @@ MonoBehaviour:
     CoolDown: 5
     Description: "\u4E0D\uFF0C\u6211\u771F\u7684\u4E0D\u51B7\uFF01"
     Detail: "\u7A7F\u6234\u8005\u88AB\u51FB\u4E2D\u65F6\u5411\u5468\u56F4\u55B7\u51FA\u706B\u7ED2\uFF0C\u70B9\u71C3\u5468\u56F4\u654C\u4EBA\u5E76\u9020\u621010\u706B\u7130\u4F24\u5BB3"
-  - ObjectName: GreekFire
+    Craft_0: 40
+    Craft_1: 64
+    Craft_2: 46
+    Craft_3: 15
+    Craft_4: 46
+  - Id: 3
+    ObjectName: GreekFire
     ItemName: "\u5E0C\u814A\u706B"
     EquipmentType: Amulet
     Price: 600
@@ -149,7 +168,13 @@ MonoBehaviour:
     CoolDown: 5
     Description: "\u201C\u6BCF\u5F53\u654C\u4EBA\u7528\u5E0C\u814A\u706B\u653B\u51FB\u6211\u4EEC\uFF0C\u6240\u505A\u7684\u4E8B\u53EA\u6709\u5C48\u819D\u4E0B\u8DEA\uFF0C\u7948\u6C42\u4E0A\u5929\u7684\u62EF\u6551\u201D"
     Detail: "\u7A7F\u6234\u8005\u7684\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u540E\uFF0C\u7A7F\u6234\u8005\u8EAB\u540E\u7684\u5730\u9762\u5C06\u88AB\u70B9\u71C32s\u3002\u7AD9\u7ACB\u5176\u4E0A\u7684\u654C\u4EBA\u5C06\u88AB\u6309\u7167\u73A9\u5BB6\u706B\u7130\u4F24\u5BB3\u70B9\u71C3\uFF0C\u6301\u7EED3s"
-  - ObjectName: Surtr
+    Craft_0: 53
+    Craft_1: 44
+    Craft_2: 64
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 4
+    ObjectName: Surtr
     ItemName: "\u82CF\u5C14\u7279\u5C14"
     EquipmentType: Weapon
     Price: 600
@@ -183,7 +208,13 @@ MonoBehaviour:
     CoolDown: 2
     Description: "\u63E1\u7740\u5B83\u5C31\u50CF\u63E1\u7740\u4E00\u6839\u521A\u4ECE\u84B8\u9505\u91CC\u62FF\u51FA\u6765\u7684\u7389\u7C73"
     Detail: "\u5BF9\u654C\u4EBA\u9020\u6210\u4F24\u5BB3\u65F6\u4F1A\u5411\u524D\u65B9\u4E00\u5757\u533A\u57DF\u55B7\u6D12\u5CA9\u6D46\uFF0C\u70B9\u71C3\u55B7\u6D12\u533A\u57DF\u7684\u654C\u4EBA\u5E76\u9020\u62105\u706B\u7130\u4F24\u5BB3"
-  - ObjectName: Alagi
+    Craft_0: 20
+    Craft_1: 44
+    Craft_2: 58
+    Craft_3: 46
+    Craft_4: -1
+  - Id: 5
+    ObjectName: Alagi
     ItemName: "\u963F\u524C\u5409\u9152"
     EquipmentType: Flask
     Price: 600
@@ -217,7 +248,13 @@ MonoBehaviour:
     CoolDown: 12
     Description: "\u70B9\u71C3\u4E86\u6574\u4E2A\u5589\u5499"
     Detail: "\u4F7F\u7528\u540E\u589E\u52A030\u6700\u5927\u751F\u547D\u503C\uFF0C10\u706B\u7130\u4F24\u5BB310s\uFF0C\u6062\u590D25%\u8840\u91CF"
-  - ObjectName: Trials
+    Craft_0: 51
+    Craft_1: 64
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 6
+    ObjectName: Trials
     ItemName: "\u8BD5\u70BC"
     EquipmentType: Flask
     Price: 600
@@ -251,7 +288,13 @@ MonoBehaviour:
     CoolDown: 6
     Description: "\u201C\u8FD9\u662F\u4E00\u573A\u8BD5\u70BC\u201D"
     Detail: "\u559D\u4E0B\u6B64\u836F\u6C34\u5C06\u5BF9\u81EA\u8EAB\u9020\u6210100\u9B54\u6CD5\u4F24\u5BB3\uFF08\u53D6\u51B3\u4E8E\u73A9\u5BB6\u9B54\u6CD5\u4F24\u5BB3\uFF09\uFF0C\u5728\u51B7\u5374\u7ED3\u675F\u65F6\u5C06\u6062\u590D\u73A9\u5BB6\u6240\u6709\u751F\u547D\uFF0C\u5E76\u83B7\u5F9710\u529B\u91CF\u300150\u653B\u901F\u300110\u73A9\u5BB6\u6700\u9AD8\u9B54\u6CD5\u4F24\u5BB3\u300120\u66B4\u51FB\u7387\u3001100\u66B4\u51FB\u4F24\u5BB3\u3002\u5BF9\u6B64\u836F\u7684\u8010\u836F\u529B\u6052\u5B9A\u4E3A1"
-  - ObjectName: PomegranateSeedAndJuice
+    Craft_0: 52
+    Craft_1: 54
+    Craft_2: 62
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 7
+    ObjectName: PomegranateSeedAndJuice
     ItemName: "\u77F3\u69B4\u7C7D\u548C\u77F3\u69B4\u6C41"
     EquipmentType: Flask
     Price: 600
@@ -285,7 +328,13 @@ MonoBehaviour:
     CoolDown: 13
     Description: "\u5403\u4E86\u56DB\u4E2A\u77F3\u69B4\u7C7D\u5C31\u5FC5\u987B\u5F85\u56DB\u4E2A\u6708\uFF1F\u4E07\u4E00\u5979\u5403\u4E86\u5341\u4E09\u4E2A\u600E\u4E48\u529E\uFF1F"
     Detail: "\u4F7F\u7528\u540E8\u79D2\u5185\u53D7\u5230\u7684\u4F24\u5BB3\u5C06\u88AB\u50A8\u5B58\u8D77\u6765\uFF0C\u5728\u540E4\u79D2\u5185\u5747\u5300\u91CA\u653E\u3002\u589E\u52A010\u51B0\u51BB\u4F24\u5BB38s\uFF0C\u6062\u590D20%\u8840\u91CF"
-  - ObjectName: ProtectionOfDemeter
+    Craft_0: 56
+    Craft_1: 56
+    Craft_2: 53
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 8
+    ObjectName: ProtectionOfDemeter
     ItemName: "\u5F97\u58A8\u7279\u5C14\u7684\u5B88\u62A4"
     EquipmentType: Armor
     Price: 600
@@ -319,7 +368,13 @@ MonoBehaviour:
     CoolDown: 3
     Description: "\u201C\u5979\u7ED9\u4E88\uFF0C\u5979\u6536\u53D6\u201D"
     Detail: "\u7A7F\u6234\u8005\u88AB\u51FB\u4E2D\u65F6\u51BB\u4F4F\u653B\u51FB\u8005"
-  - ObjectName: Boreas
+    Craft_0: 47
+    Craft_1: 47
+    Craft_2: 32
+    Craft_3: 42
+    Craft_4: -1
+  - Id: 9
+    ObjectName: Boreas
     ItemName: "\u6CE2\u745E\u963F\u65AF"
     EquipmentType: Weapon
     Price: 600
@@ -353,7 +408,13 @@ MonoBehaviour:
     CoolDown: 5
     Description: "\u9664\u4E86\u6218\u6597\u8FD8\u80FD\u5F53\u4FBF\u643A\u5F0F\u98CE\u6247"
     Detail: "\u666E\u901A\u653B\u51FB\u5BF9\u654C\u4EBA\u9020\u6210\u4F24\u5BB3\u65F6\u4F1A\u5411\u524D\u522E\u51FA\u4E00\u9053\u65CB\u98CE\uFF0C\u88AB\u65CB\u98CE\u51FB\u4E2D\u7684\u654C\u4EBA\u5C06\u88AB\u51FB\u6655\u5E76\u53D7\u52305\u51B0\u51BB\u4F24\u5BB3"
-  - ObjectName: Supercooling
+    Craft_0: 20
+    Craft_1: 47
+    Craft_2: 47
+    Craft_3: 57
+    Craft_4: -1
+  - Id: 10
+    ObjectName: Supercooling
     ItemName: "\u8FC7\u51B7"
     EquipmentType: Amulet
     Price: 600
@@ -387,7 +448,13 @@ MonoBehaviour:
     CoolDown: 3
     Description: "\u8F7B\u5FAE\u7684\u6270\u52A8\u4FBF\u4F1A\u4F7F\u5176\u7ED3\u6676"
     Detail: "\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u65F6\uFF0C\u5728\u8EAB\u8FB9\u751F\u6210\u4E00\u4E2A\u51B0\u6676\uFF0C\u51B0\u6676\u5C06\u5728\u88AB\u654C\u4EBA\u63A5\u89E6\u5230\u6216\u4E00\u6BB5\u65F6\u95F4\u540E\u7206\u70B8\uFF0C\u5BF9\u8303\u56F4\u5185\u654C\u4EBA\u9020\u62107\u51B0\u51BB\u4F24\u5BB3\uFF0C\u4EA7\u751F\u53CC\u500D\u51B0\u51BB\u6548\u679C"
-  - ObjectName: HeartOfAres
+    Craft_0: 52
+    Craft_1: 63
+    Craft_2: 65
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 11
+    ObjectName: HeartOfAres
     ItemName: "\u963F\u745E\u65AF\u4E4B\u5FC3"
     EquipmentType: Amulet
     Price: 600
@@ -421,7 +488,13 @@ MonoBehaviour:
     CoolDown: 2
     Description: "\u6234\u4E0A\u540E\u773C\u524D\u4EFF\u4F5B\u6D8C\u73B0\u51FA\u5C38\u5C71\u8840\u6D77"
     Detail: "\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u65F6\uFF0C\u670910%\u51E0\u7387\u63D0\u9AD810\u653B\u901F10s\uFF0C\u6B64\u6548\u679C\u53EF\u4EE5\u53E0\u52A0"
-  - ObjectName: StoneMask
+    Craft_0: 58
+    Craft_1: 67
+    Craft_2: 59
+    Craft_3: 59
+    Craft_4: -1
+  - Id: 12
+    ObjectName: StoneMask
     ItemName: "\u77F3\u9B3C\u9762"
     EquipmentType: Flask
     Price: 600
@@ -455,7 +528,13 @@ MonoBehaviour:
     CoolDown: 12
     Description: "\u4EBA\u7C7B\u662F\u6709\u6781\u9650\u7684"
     Detail: "\u4F7F\u7528\u65F6\u5BF9\u81EA\u8EAB\u9020\u62105\u7269\u7406\u4F24\u5BB3\uFF0C\u5E76\u5728\u63A5\u4E0B\u676512\u79D2\u5185\uFF0C\u6240\u6709\u653B\u51FB\u53EF\u4EE5\u6062\u590D\u5176\u9020\u6210\u4F24\u5BB3\u768450%"
-  - ObjectName: Water
+    Craft_0: 65
+    Craft_1: 54
+    Craft_2: 67
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 13
+    ObjectName: Water
     ItemName: "\u51C9\u767D\u5F00"
     EquipmentType: Flask
     Price: 50
@@ -489,7 +568,13 @@ MonoBehaviour:
     CoolDown: 3
     Description: "\u7B80\u7B80\u5355\u5355\u7684\u51C9\u767D\u5F00"
     Detail: "\u6062\u590D5%\u8840\u91CF"
-  - ObjectName: HotWator
+    Craft_0: 63
+    Craft_1: 51
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 14
+    ObjectName: HotWator
     ItemName: "\u5F00\u6C34"
     EquipmentType: Flask
     Price: 100
@@ -523,7 +608,13 @@ MonoBehaviour:
     CoolDown: 3
     Description: "\u591A\u559D\u5F00\u6C34"
     Detail: "\u4F7F\u7528\u65F6\u5BF9\u81EA\u8EAB\u9020\u62101\u706B\u7130\u4F24\u5BB3\uFF0C\u6062\u590D10%\u8840\u91CF"
-  - ObjectName: WoodenArmor
+    Craft_0: 63
+    Craft_1: 51
+    Craft_2: 44
+    Craft_3: 45
+    Craft_4: -1
+  - Id: 15
+    ObjectName: WoodenArmor
     ItemName: "\u6728\u7532"
     EquipmentType: Armor
     Price: 50
@@ -557,7 +648,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u586B\u7EBF\u5B9D\u5B9D\u7684\u6700\u7231"
     Detail: 
-  - ObjectName: MarigoldPotion
+    Craft_0: 45
+    Craft_1: 45
+    Craft_2: 45
+    Craft_3: 45
+    Craft_4: -1
+  - Id: 16
+    ObjectName: MarigoldPotion
     ItemName: "\u91D1\u76CF\u82B1\u836F\u5242"
     EquipmentType: Flask
     Price: 100
@@ -591,7 +688,13 @@ MonoBehaviour:
     CoolDown: 4
     Description: "\u6C34\u3001\u4E24\u675F\u91D1\u76CF\u82B1\u8FD8\u6709\u4E00\u675F\u8368\u9EBB"
     Detail: "\u6062\u590D10%"
-  - ObjectName: Gladius
+    Craft_0: 63
+    Craft_1: 51
+    Craft_2: 50
+    Craft_3: 44
+    Craft_4: 45
+  - Id: 17
+    ObjectName: Gladius
     ItemName: "\u683C\u62C9\u8FEA\u5384\u65AF"
     EquipmentType: Weapon
     Price: 150
@@ -625,7 +728,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u5E1D\u56FD\u519B\u961F\u4E2D\u5E38\u89C1\u7684\u77ED\u5251\u88C5\u5907"
     Detail: 
-  - ObjectName: Spatha
+    Craft_0: 45
+    Craft_1: 55
+    Craft_2: 55
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 18
+    ObjectName: Spatha
     ItemName: "\u65AF\u5E15\u8FBE"
     EquipmentType: Weapon
     Price: 150
@@ -659,7 +768,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u5E1D\u56FD\u519B\u961F\u4E2D\u5E38\u89C1\u7684\u957F\u5251\u88C5\u5907"
     Detail: 
-  - ObjectName: LoricaSegmentata
+    Craft_0: 45
+    Craft_1: 55
+    Craft_2: 55
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 19
+    ObjectName: LoricaSegmentata
     ItemName: "\u73AF\u7247\u7532"
     EquipmentType: Armor
     Price: 200
@@ -693,7 +808,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u5E1D\u56FD\u519B\u961F\u4E3B\u8981\u88C5\u5907\u7684\u62A4\u7532"
     Detail: 
-  - ObjectName: RedAmberPendant
+    Craft_0: 38
+    Craft_1: 55
+    Craft_2: 55
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 20
+    ObjectName: RedAmberPendant
     ItemName: "\u7EA2\u7425\u73C0\u540A\u5760"
     EquipmentType: Amulet
     Price: 150
@@ -727,7 +848,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u50CF\u662F\u5728\u80F8\u53E3\u71C3\u70E7\u7684\u4E00\u56E2\u706B\u7130"
     Detail: 
-  - ObjectName: BlueCrystalPendant
+    Craft_0: 46
+    Craft_1: 40
+    Craft_2: 58
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 21
+    ObjectName: BlueCrystalPendant
     ItemName: "\u84DD\u6C34\u6676\u540A\u5760"
     EquipmentType: Amulet
     Price: 150
@@ -761,7 +888,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u6478\u4E0A\u53BB\u51B0\u51C9\u51C9\u7684"
     Detail: 
-  - ObjectName: LightningStonePendant
+    Craft_0: 47
+    Craft_1: 40
+    Craft_2: 58
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 22
+    ObjectName: LightningStonePendant
     ItemName: "\u96F7\u9E23\u77F3\u540A\u5760"
     EquipmentType: Amulet
     Price: 150
@@ -795,7 +928,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u6643\u52A8\u65F6\u4F1A\u9690\u7EA6\u542C\u89C1\u96F7\u9E23\u58F0"
     Detail: 
-  - ObjectName: BraveHeart
+    Craft_0: 48
+    Craft_1: 40
+    Craft_2: 58
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 23
+    ObjectName: BraveHeart
     ItemName: "\u52C7\u6562\u7684\u5FC3"
     EquipmentType: Amulet
     Price: 150
@@ -829,7 +968,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u6234\u4E0A\u540E\u603B\u611F\u89C9\u5145\u6EE1\u4E86\u52C7\u6C14"
     Detail: 
-  - ObjectName: ObsidianBracelet
+    Craft_0: 50
+    Craft_1: 40
+    Craft_2: 58
+    Craft_3: 67
+    Craft_4: -1
+  - Id: 24
+    ObjectName: ObsidianBracelet
     ItemName: "\u9ED1\u66DC\u77F3\u624B\u4E32"
     EquipmentType: Amulet
     Price: 150
@@ -863,7 +1008,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u51B0\u51C9\u7684\u89E6\u611F\u8BA9\u4EBA\u80FD\u591F\u66F4\u597D\u7684\u96C6\u4E2D\u7CBE\u795E"
     Detail: 
-  - ObjectName: WizardRobe
+    Craft_0: 49
+    Craft_1: 40
+    Craft_2: 58
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 25
+    ObjectName: WizardRobe
     ItemName: "\u5DEB\u5E08\u6CD5\u888D"
     EquipmentType: Armor
     Price: 200
@@ -897,7 +1048,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u5E1D\u56FD\u7684\u5DEB\u5E08\u5F80\u5F80\u7A7F\u7740\u8FD9\u4EF6\u6545\u5F04\u7384\u865A\u7684\u888D\u5B50"
     Detail: 
-  - ObjectName: IconArmor
+    Craft_0: 66
+    Craft_1: 43
+    Craft_2: 40
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 26
+    ObjectName: IconArmor
     ItemName: "\u94F8\u94C1\u76D4\u7532"
     EquipmentType: Armor
     Price: 100
@@ -931,7 +1088,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u867D\u7136\u9632\u5FA1\u529B\u4E0D\u9519\u4F46\u5B9E\u5728\u592A\u91CD\u4E86"
     Detail: 
-  - ObjectName: LeatherArmor
+    Craft_0: 39
+    Craft_1: 39
+    Craft_2: 39
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 27
+    ObjectName: LeatherArmor
     ItemName: "\u76AE\u7532"
     EquipmentType: Armor
     Price: 100
@@ -965,7 +1128,13 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u5F80\u5F80\u662F\u4E00\u4E2A\u6218\u58EB\u7684\u7B2C\u4E00\u5957\u76D4\u7532"
     Detail: 
-  - ObjectName: OldSword
+    Craft_0: 38
+    Craft_1: 38
+    Craft_2: 38
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 28
+    ObjectName: OldSword
     ItemName: "\u9648\u65E7\u7684\u5251"
     EquipmentType: Weapon
     Price: 75
@@ -999,3 +1168,1648 @@ MonoBehaviour:
     CoolDown: 0
     Description: "\u8FD9\u628A\u5251\u7684\u5E74\u9F84\u6050\u6015\u6BD4\u6211\u90FD\u5927"
     Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 29
+    ObjectName: HealFlask
+    ItemName: "\u6CBB\u6108\u836F\u74F6"
+    EquipmentType: Flask
+    Price: 300
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 3
+    FlaskUsageRecover: 0.1
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 8
+    Description: "\u559D\u8D77\u6765\u50CF\u897F\u74DC\u6C41"
+    Detail: "\u996E\u7528\u65F6\u589E\u52A0\u529B\u91CF10\u548C\u751F\u547D\u4E0A\u965010,\u6301\u7EED5\u79D2\n\u996E\u7528\u65F6\u56DE\u590D15%\u7684\u8840\u91CF"
+    Craft_0: 68
+    Craft_1: 50
+    Craft_2: 51
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 30
+    ObjectName: Hero's Plate
+    ItemName: "\u82F1\u96C4\u677F\u7532"
+    EquipmentType: Armor
+    Price: 600
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 10
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 60
+    Description: "\u633A\u6F02\u4EAE\u7684\u76D4\u7532"
+    Detail: "\u5F53\u8840\u91CF\u964D\u81F310%\u65F6\u505C\u6B62\u9644\u8FD1\u654C\u4EBA\u7684\u65F6\u95F43\u79D2\uFF08\u4EC5\u4ECE\u5927\u4E8E10%\u964D\u4F4E\u5230\u5C0F\u4E8E10%\u65F6\u89E6\u53D1\uFF09"
+    Craft_0: 57
+    Craft_1: 57
+    Craft_2: 58
+    Craft_3: 38
+    Craft_4: -1
+  - Id: 31
+    ObjectName: IceAndFire
+    ItemName: "\u51B0\u4E0E\u706B\u4E4B\u6B4C"
+    EquipmentType: Weapon
+    Price: 300
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 1
+    IceDamage: 5
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4E00\u628A\u5F88\u51B7\uFF0C\u4E00\u628A\u5F88\u70ED"
+    Detail: "\u51FB\u4E2D\u654C\u4EBA\u65F6\u5BF9\u654C\u4EBA\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310,\u65BD\u52A0\u70B9\u71C3\u548C\u51B0\u51BB\u72B6\u60011\u79D2"
+    Craft_0: 46
+    Craft_1: 47
+    Craft_2: 35
+    Craft_3: 35
+    Craft_4: -1
+  - Id: 32
+    ObjectName: PlateArmor
+    ItemName: "\u677F\u7532"
+    EquipmentType: Armor
+    Price: 100
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 10
+    Evasion: 0
+    MagicResistance: 1
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u53EF\u9760\u7684\u8001\u4F19\u8BA1"
+    Detail: 
+    Craft_0: 39
+    Craft_1: 55
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 33
+    ObjectName: StolenSword
+    ItemName: "\u7A83\u8D3C\u5315\u9996"
+    EquipmentType: Weapon
+    Price: 150
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 10
+    CritChance: 10
+    CritPower: 10
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u57CE\u5E02\u91CC\u7684\u5C0F\u5077\u4F1A\u7528\u5B83\u5212\u5F00\u4F60\u7684\u53E3\u888B"
+    Detail: 
+    Craft_0: 55
+    Craft_1: 55
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 34
+    ObjectName: VanpireSword
+    ItemName: "\u5438\u8840\u9B3C\u4E4B\u5251"
+    EquipmentType: Weapon
+    Price: 600
+    Strength: 0
+    Agility: 2
+    Intelligence: 2
+    Vitality: 2
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 5
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 10
+    CritChance: 10
+    CritPower: 5
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 10
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u5B83\u5230\u5E95\u662F\u600E\u4E48\u5438\u5230\u9AB7\u9AC5\u7684\u8840\u7684\uFF1F"
+    Detail: "\u51FB\u4E2D\u65F6\u56DE\u590D30%\u6240\u9020\u6210\u4F24\u5BB3\u7684\u751F\u547D\u503C"
+    Craft_0: 55
+    Craft_1: 69
+    Craft_2: 54
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 35
+    ObjectName: WoodenSword
+    ItemName: "\u6728\u5251"
+    EquipmentType: Weapon
+    Price: 50
+    Strength: 0
+    Agility: 5
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 5
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u5B87\u5B99\u4E07\u6CD5\u7684\u8D77\u6E90\uFF0C\u6211\u7684\u4E16\u754C\u7684\u5F00\u7AEF"
+    Detail: 
+    Craft_0: 45
+    Craft_1: 45
+    Craft_2: 45
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 36
+    ObjectName: AmuletOfGod
+    ItemName: "\u795E\u4E4B\u62A4"
+    EquipmentType: Amulet
+    Price: 600
+    Strength: 0
+    Agility: 2
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 5
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: -1
+    ThunderStrikeRate: -5
+    CoolDown: 0
+    Description: "\u5E26\u4E86\u8FD9\u4E2A\u9879\u94FE\u7684\u4EBA\u7279\u522B\u5BB9\u6613\u88AB\u9759\u7535\u7535\u5230"
+    Detail: "\u6280\u80FD\u9020\u6210\u7684\u4F24\u5BB3\u5C06\u89E6\u53D1\u96F7\u51FB,\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310\u5E76\u65BD\u52A0\u611F\u7535\u72B6\u60014\u79D2"
+    Craft_0: 58
+    Craft_1: 48
+    Craft_2: 40
+    Craft_3: 60
+    Craft_4: -1
+  - Id: 37
+    ObjectName: ThunderClaw
+    ItemName: "\u96F7\u722A"
+    EquipmentType: Weapon
+    Price: 600
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 5
+    CritChance: 10
+    CritPower: 0
+    AttackSpeed: 10
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 5
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0.5
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 10
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 5
+    CoolDown: 0
+    Description: "\u8FD9\u597D\u50CF\u662F\u4E2A\u907F\u96F7\u9488\uFF1F"
+    Detail: "\u51FB\u4E2D\u65F6\u53EC\u5524\u96F7\u51FB,\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310\u5E76\u65BD\u52A0\u611F\u7535\u72B6\u60014\u79D2"
+    Craft_0: 48
+    Craft_1: 48
+    Craft_2: 57
+    Craft_3: 61
+    Craft_4: -1
+  - Id: 38
+    ObjectName: AnimalSkin
+    ItemName: "\u517D\u76AE"
+    EquipmentType: Material
+    Price: 10
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4E0D\u77E5\u9053\u4ECE\u54EA\u91CC\u6252\u4E0B\u6765\u7684"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 39
+    ObjectName: Iron
+    ItemName: "\u94C1"
+    EquipmentType: Material
+    Price: 30
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u786C\u90A6\u90A6"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 40
+    ObjectName: yarn
+    ItemName: "\u7EBF"
+    EquipmentType: Material
+    Price: 10
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u6709\u4E00\u5B9A\u7684\u5F39\u6027\uFF0C\u4E5F\u7EC7\u6BDB\u8863\u7684\u597D\u6750\u6599"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 41
+    ObjectName: Bone
+    ItemName: "\u9AA8\u5934"
+    EquipmentType: Material
+    Price: 5
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u5E38\u89C1\u7684\u4E1C\u897F\uFF0C\u662F\u6B7B\u4EA1\u7684\u8C61\u5F81\u8FD8\u662F\u751F\u547D\u7684\u9690\u55BB\uFF1F"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 42
+    ObjectName: SlimeBall
+    ItemName: "\u7C98\u6DB2\u7403"
+    EquipmentType: Material
+    Price: 20
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u53F2\u83B1\u59C6\u7684\u7684\u4F53\u6DB2\u662F\u8FD9\u4E2A\u4E16\u754C\u4E0A\u6700\u597D\u7684\u80F6\u6C34\u4E4B\u4E00\uFF0C\u4E0D\u8FC7\u6211\u5B81\u613F\u7528\u53E3\u6C34\u7C98\u4E1C\u897F"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 43
+    ObjectName: FabricFragment
+    ItemName: "\u5E03\u6599\u788E\u7247"
+    EquipmentType: Material
+    Price: 15
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u8FD9\u4EF6\u8863\u670D\u5728\u6FC0\u70C8\u7684\u6218\u6597\u4E2D\u88AB\u6495\u6210\u4E86\u788E\u7247"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 44
+    ObjectName: GunPowder
+    ItemName: "\u706B\u836F"
+    EquipmentType: Material
+    Price: 40
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4E00\u70B9\u5C0F\u706B\u661F\u5C31\u80FD\u5F15\u53D1\u7206\u70B8"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 45
+    ObjectName: wood
+    ItemName: "\u6728\u5934"
+    EquipmentType: Material
+    Price: 5
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u5C0F\u6811\u6797\u91CC\u5230\u5904\u90FD\u662F"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 46
+    ObjectName: RedAmber
+    ItemName: "\u7EA2\u7425\u73C0"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u6F02\u4EAE\u7684\u7EA2\u8272\u77F3\u5934\uFF0C\u91CC\u9762\u56DE\u8361\u7740\u592A\u9633\u7684\u6CE2\u7EB9"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 47
+    ObjectName: BlueCrystal
+    ItemName: "\u84DD\u6C34\u6676"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u50CF\u4E00\u5757\u6DE1\u84DD\u8272\u7684\u51E0\u4E4E\u6CA1\u6709\u6742\u8D28\u7684\u51B0"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 48
+    ObjectName: LightningStone
+    ItemName: "\u96F7\u9E23\u77F3"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u628A\u8FD9\u77F3\u5934\u653E\u8EAB\u4E0A\u5BB9\u6613\u88AB\u9759\u7535\u7535\u5230"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 49
+    ObjectName: Obsidian
+    ItemName: "\u9ED1\u66DC\u77F3"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u795E\u5947\u7684\u77F3\u5934\uFF0C\u9ED1\u4E2D\u5E26\u7740\u7D2B\u8272\uFF0C\u636E\u8BF4\u7528\u5176\u5236\u4F5C\u7684\u95E8\u5728\u88AB\u70B9\u71C3\u540E\u80FD\u901A\u5411\u5730\u72F1"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 50
+    ObjectName: Marigold
+    ItemName: "\u91D1\u76CF\u82B1"
+    EquipmentType: Material
+    Price: 30
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u91CE\u5916\u7684\u91D1\u9EC4\u8272\u5C0F\u82B1"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 51
+    ObjectName: GlassBottle
+    ItemName: "\u73BB\u7483\u74F6"
+    EquipmentType: Material
+    Price: 20
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u666E\u901A\u7684\u74F6\u5B50\uFF0C\u5C0F\u5FC3\u522B\u6454\u5730\u4E0A\u4E86"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 52
+    ObjectName: MagicBottle
+    ItemName: "\u9644\u9B54\u74F6"
+    EquipmentType: Material
+    Price: 60
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4E0A\u9762\u9644\u52A0\u4E86\u4E00\u79CD\u7279\u6B8A\u7684\u9B54\u6CD5\uFF0C\u4F7F\u5F97\u5176\u51E0\u4E4E\u4E0D\u4F1A\u88AB\u8150\u8680\uFF0C\u6536\u5230\u51B2\u51FB\u4E5F\u4E0D\u4F1A\u788E\u88C2"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 53
+    ObjectName: Oil
+    ItemName: "\u6CB9"
+    EquipmentType: Material
+    Price: 50
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u8138\u4E0A\u7ECF\u5E38\u83AB\u540D\u5176\u5999\u5C31\u51FA\u73B0\u4E00\u5806"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 54
+    ObjectName: Blood
+    ItemName: "\u8840\u6DB2"
+    EquipmentType: Material
+    Price: 40
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u7EA2\u8272\u7684\u7C98\u7A20\u6DB2\u4F53"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 55
+    ObjectName: Steel
+    ItemName: "\u94A2"
+    EquipmentType: Material
+    Price: 60
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u6BD4\u94C1\u8FD8\u786C\uFF0C\u8DDF\u94A2\u4E00\u6837\u5F3A"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 56
+    ObjectName: MagicalPomegranate
+    ItemName: "\u9B54\u6CD5\u77F3\u69B4"
+    EquipmentType: Material
+    Price: 80
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u8FD9\u77F3\u69B4\u76AE\u8FD8\u771F\u662F\u91D1\u5B50\u505A\u7684"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 57
+    ObjectName: MagicalAlloy
+    ItemName: "\u9B54\u6CD5\u5408\u91D1"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u7528\u9B54\u6CD5\u628A\u4E24\u79CD\u7269\u8D28\u53D8\u4E3A\u4E86\u5408\u91D1"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 58
+    ObjectName: MagicalStone
+    ItemName: "\u9B54\u6CD5\u77F3\u5934"
+    EquipmentType: Material
+    Price: 60
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u636E\u8BF4\u5B75\u5F97\u591F\u4E45\u4F1A\u6709\u53EA\u7334\u5B50\u8DF3\u51FA\u6765"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 59
+    ObjectName: BloodStone
+    ItemName: "\u8840\u77F3"
+    EquipmentType: Material
+    Price: 120
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u7EA2\u7684\u8981\u6EF4\u8840\u4E00\u822C"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 60
+    ObjectName: BatteryNo5
+    ItemName: "5\u53F7\u7535\u6C60"
+    EquipmentType: Material
+    Price: 50
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u8FD9\u8FD9\u8FD9\uFF0C\u8FD9\u662F\u5565\uFF1F"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 61
+    ObjectName: BatteryNo1
+    ItemName: "1\u53F7\u7535\u6C60"
+    EquipmentType: Material
+    Price: 70
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u6BD45\u53F7\u5927"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 62
+    ObjectName: RedWine
+    ItemName: "\u7EA2\u9152"
+    EquipmentType: Material
+    Price: 40
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u6DE1\u6DE1\u7684\u8461\u8404\u5473"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 63
+    ObjectName: Water
+    ItemName: "\u6C34"
+    EquipmentType: Material
+    Price: 10
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u591A\u559D\u70ED\u6C34"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 64
+    ObjectName: Spirits
+    ItemName: "\u70C8\u9152"
+    EquipmentType: Material
+    Price: 30
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4E09\u7897\u4E0D\u8FC7\u5C97"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 65
+    ObjectName: MagicalIceCrystal
+    ItemName: "\u9B54\u6CD5\u51B0\u6676"
+    EquipmentType: Material
+    Price: 50
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u795E\u5947\u7684\u6676\u4F53\uFF0C\u4E0D\u4F1A\u878D\u5316\uFF0C\u6563\u53D1\u51FA\u51B0\u51C9\u7684\u6C14\u606F"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 66
+    ObjectName: RuneStone
+    ItemName: "\u7B26\u6587\u77F3"
+    EquipmentType: Material
+    Price: 80
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u67D0\u4E2A\u9B54\u6CD5\u5E08\u4E3A\u5176\u8FDB\u884C\u4E86\u9644\u9B54"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 67
+    ObjectName: Heart
+    ItemName: "\u5FC3\u810F"
+    EquipmentType: Material
+    Price: 90
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u7ADF\u7136\u8FD8\u5728\u8DF3\u52A8"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 68
+    ObjectName: Liver
+    ItemName: "\u809D\u810F"
+    EquipmentType: Material
+    Price: 60
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u52A0\u4E0A\u751F\u62BD\u767D\u7CD6\u9648\u918B\u7B49\uFF0C\u8FC7\u4E0A\u6DC0\u7C89\u714E\u4E00\u4E0B\uFF0C\u9999\u55B7\u55B7"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1
+  - Id: 69
+    ObjectName: EyeBall
+    ItemName: "\u773C\u7403"
+    EquipmentType: Material
+    Price: 30
+    Strength: 0
+    Agility: 0
+    Intelligence: 0
+    Vitality: 0
+    MaxHealth: 0
+    Armor: 0
+    Evasion: 0
+    MagicResistance: 0
+    MaxFlaskUsageTime: 0
+    FlaskUsageRecover: 0
+    Damage: 0
+    CritChance: 0
+    CritPower: 0
+    AttackSpeed: 0
+    FireDamage: 0
+    IceDamage: 0
+    LightningDamage: 0
+    FireDuration: 0
+    IceDuration: 0
+    LightningDuration: 0
+    FireDamageCooldown: 0
+    FireDamageTransform: 0
+    ChillArmorReduce: 0
+    ChillSlowRate: 0
+    ShockAccuracyReduce: 0
+    ThunderStrikeCount: 0
+    ThunderStrikeRate: 0
+    CoolDown: 0
+    Description: "\u4F60\u7785\u5565"
+    Detail: 
+    Craft_0: -1
+    Craft_1: -1
+    Craft_2: -1
+    Craft_3: -1
+    Craft_4: -1

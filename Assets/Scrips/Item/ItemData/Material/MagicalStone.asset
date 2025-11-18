@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d527a8d8538ac4e80e561b783588b8, type: 3}
+  m_Name: MagicalStone
+  m_EditorClassIdentifier: 
+  itemId: 58
+  icon: {fileID: 491315575, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  itemName: "\u9B54\u6CD5\u77F3\u5934"
+  itemType: 0
+  craftingMaterials: []
+  description: "\u636E\u8BF4\u5B75\u5F97\u591F\u4E45\u4F1A\u6709\u53EA\u7334\u5B50\u8DF3\u51FA\u6765"
+  price: 60

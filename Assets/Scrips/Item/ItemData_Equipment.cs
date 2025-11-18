@@ -22,6 +22,7 @@ public class ItemData_Equipment : ItemData
 
     [Header("TEST")]
     [SerializeField] private float cooldownFinishTime = -1;
+    public List<int> craftsId;
 
     public void AddModifiers()
     {

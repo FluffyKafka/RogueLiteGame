@@ -49,6 +49,12 @@ public class UI : MonoBehaviour
     [Header("LoadingUI")]
     public GameObject loadingUIGameObject;
 
+    [Header("Craft")]
+    public UI_CraftList weaponCraftList;
+    public UI_CraftList armorCraftList;
+    public UI_CraftList amuletCraftList;
+    public UI_CraftList flaskCraftList;
+
     private void Awake()
     {
         if(instance == null)
@@ -283,4 +289,40 @@ public class UI : MonoBehaviour
         tradeBlock.gameObject?.SetActive(false);
         PlayerManager.instance.player.SetCanInput(true);
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Set Craft Equipment")]
+    private void SetCraftEquipment()
+    {
+        weaponCraftList.craftEquipment.Clear();
+        armorCraftList.craftEquipment.Clear();
+        amuletCraftList.craftEquipment.Clear();
+        flaskCraftList.craftEquipment.Clear();
+        string[] assetNames = AssetDatabase.FindAssets("t:ItemData", new[] { "Assets/Scrips/Item/ItemData" });
+
+        foreach (string SOName in assetNames)
+        {
+            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
+            if (itemData is ItemData_Equipment)
+            {
+                var equipment = itemData as ItemData_Equipment;
+                if(equipment.craftingMaterials.Count != 0)
+                {
+                    switch(equipment.equipmentType)
+                    {
+                        case EquipmentType.Weapon:
+                            weaponCraftList.craftEquipment.Add(equipment); break;
+                        case EquipmentType.Amulet:
+                            amuletCraftList.craftEquipment.Add(equipment); break;
+                        case EquipmentType.Armor:
+                            armorCraftList.craftEquipment.Add(equipment); break;
+                        case EquipmentType.Flask:
+                            flaskCraftList.craftEquipment.Add(equipment); break;
+                    }
+                }
+            }
+        }
+    }
+#endif
 }

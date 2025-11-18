@@ -570,7 +570,26 @@ public class Inventory : MonoBehaviour, ISaveManager
         {
             var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
             var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
-            itemDatabase.Add(SOName, itemData);
+            itemDatabase.Add(itemData.itemId, itemData);
+        }
+
+        foreach (string SOName in assetNames)
+        {
+            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
+            if(itemData is ItemData_Equipment)
+            {
+                var equipment = itemData as ItemData_Equipment;
+                equipment.craftingMaterials.Clear();
+                foreach (int id in equipment.craftsId)
+                {
+                    ItemData craft;
+                    if(id >= 0 && itemDatabase.TryGetValue(id.ToString(), out craft))
+                    {
+                        equipment.craftingMaterials.Add(new InventoryItem(craft));
+                    }
+                }
+            }
         }
     }
 #endif

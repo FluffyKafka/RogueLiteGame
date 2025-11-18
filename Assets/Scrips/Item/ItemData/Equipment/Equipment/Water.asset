@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  itemId: 51bfc91e91cc29144bbfb8a30ac33f06
+  itemId: 13
   icon: {fileID: 21300000, guid: 053e53ef400f82045875052b081c7d82, type: 3}
   itemName: "\u51C9\u767D\u5F00"
   itemType: 1
-  craftingMaterials: []
+  craftingMaterials:
+  - data: {fileID: 11400000, guid: 2db2dd451dfbacc449e03d9e988ba571, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: 9e525dbc30cc04a4b89fd29db6726791, type: 2}
+    stackSize: 1
   description: "\u7B80\u7B80\u5355\u5355\u7684\u51C9\u767D\u5F00"
   price: 50
   equipmentType: 3
@@ -48,7 +52,8 @@ MonoBehaviour:
     shockAccuracyReduce: 0
     thunderStrikeCount: 0
     thunderStrikeRate: 0
-  effects:
-  - {fileID: 11400000, guid: ed52fba972892b74a8f5b2f1db441893, type: 2}
+  effects: []
   cooldown: 3
   detail: "\u6062\u590D5%\u8840\u91CF"
+  cooldownFinishTime: -1
+  craftsId: 3f00000033000000ffffffffffffffffffffffff

@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ExcelEquipmentData
 {
+    public string Id;
     public string ObjectName;
     public string ItemName;
     public string EquipmentType;
@@ -40,4 +41,10 @@ public class ExcelEquipmentData
     public float CoolDown;
     public string Description;
     public string Detail;
+
+    public int Craft_0;
+    public int Craft_1;
+    public int Craft_2;
+    public int Craft_3;
+    public int Craft_4;
 }

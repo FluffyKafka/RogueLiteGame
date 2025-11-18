@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e64b9dd84c5214689e244c4426e0c9, type: 3}
   m_Name: EquipmentSCOBGenerator
   m_EditorClassIdentifier: 
-  targetFile: Assets/Scrips/Item/ItemData/Equipment
+  targetFile_Equipment: Assets/Scrips/Item/ItemData/Equipment/Equipment
+  targetFile_Material: Assets/Scrips/Item/ItemData/Material
   dataSet: {fileID: 11400000, guid: 8815e8ab2271d5b4ea67c5fb22f06b0c, type: 2}

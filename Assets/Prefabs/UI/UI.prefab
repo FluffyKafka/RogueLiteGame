@@ -6554,7 +6554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 30.3, y: 717.7}
+  m_AnchoredPosition: {x: 30.3, y: 810}
   m_SizeDelta: {x: 497.09, y: 140.36}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &68416971588352719
@@ -12209,6 +12209,15 @@ MonoBehaviour:
   craftSlotPrefab: {fileID: 5293593823197380586, guid: 1c0c3486f921e4a4da0ea419a774cd94, type: 3}
   craftEquipment:
   - {fileID: 11400000, guid: d17d0ea0645c11d4f9bfe276a2506c68, type: 2}
+  - {fileID: 11400000, guid: 8a2a8d14805146a4da79a024a690f154, type: 2}
+  - {fileID: 11400000, guid: d17d0ea0645c11d4f9bfe276a2506c68, type: 2}
+  - {fileID: 11400000, guid: 60a48bc0997f40e41a186287b485e4e5, type: 2}
+  - {fileID: 11400000, guid: 95d17b0004dee7c43ba8301785bf8b8a, type: 2}
+  - {fileID: 11400000, guid: a456d85896fb82544ba3247956af129a, type: 2}
+  - {fileID: 11400000, guid: d69257990017cef4f8c52c7013c1b55f, type: 2}
+  - {fileID: 11400000, guid: 4c210458d901e784dab0ec406cb39bd7, type: 2}
+  - {fileID: 11400000, guid: 993a076bb159f84489daf9489d9ebee1, type: 2}
+  - {fileID: 11400000, guid: 51bfc91e91cc29144bbfb8a30ac33f06, type: 2}
   craftSlots: []
   pressColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
 --- !u!1 &1823874417731742403
@@ -20175,6 +20184,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4188f0b130153ad448d10174a9c4f131, type: 2}
   - {fileID: 11400000, guid: f3674c37c50bc66469be4d3420b58f3e, type: 2}
   - {fileID: 11400000, guid: 12ab6b390872dc744bbc21d7d61a6a56, type: 2}
+  - {fileID: 11400000, guid: cd638595ce136ea4b896aa0e49d84dd2, type: 2}
+  - {fileID: 11400000, guid: 4f71ab7eafcfeb740ac2d7c0b9874a18, type: 2}
+  - {fileID: 11400000, guid: cf7b72a694c6c2c4bb4c7f2e85e58a59, type: 2}
+  - {fileID: 11400000, guid: 36bed3b9a70d1c24fbb2658c3d2a13b7, type: 2}
+  - {fileID: 11400000, guid: eee7b1f0b635f434d92e41c40342c06e, type: 2}
   craftSlots: []
   pressColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
 --- !u!1 &3183024358195967262
@@ -26069,6 +26083,10 @@ MonoBehaviour:
   isSwitching: 0
   flaskUsageTime: {fileID: 1132401268307613036}
   loadingUIGameObject: {fileID: 8302288723604970067}
+  weaponCraftList: {fileID: 3237190266545220069}
+  armorCraftList: {fileID: 3909475042051797352}
+  amuletCraftList: {fileID: 2718507774504841611}
+  flaskCraftList: {fileID: 2185926878804790650}
   skillParentSlot: {fileID: 6695855095436691497}
   isSkillTesting: 1
 --- !u!1 &3998309242765909973
@@ -39369,6 +39387,15 @@ MonoBehaviour:
   craftSlotPrefab: {fileID: 5293593823197380586, guid: 1c0c3486f921e4a4da0ea419a774cd94, type: 3}
   craftEquipment:
   - {fileID: 11400000, guid: 81ab45b7c5e236f428ee14c4458bfda4, type: 2}
+  - {fileID: 11400000, guid: 81ab45b7c5e236f428ee14c4458bfda4, type: 2}
+  - {fileID: 11400000, guid: 6f0d4d7d1f95b304eaa09b9520d1c539, type: 2}
+  - {fileID: 11400000, guid: 55a9c325ee4be45449d734030feab80f, type: 2}
+  - {fileID: 11400000, guid: 7f56a5c14a244974b89566b414845712, type: 2}
+  - {fileID: 11400000, guid: 91c7056bc1d51a447834da4def4d88bd, type: 2}
+  - {fileID: 11400000, guid: 6c76e96082754024097b480e8d881463, type: 2}
+  - {fileID: 11400000, guid: 4130953740cc0564ea5691843ab94aae, type: 2}
+  - {fileID: 11400000, guid: 16015ad67a3892947a9c91985a5dcdbf, type: 2}
+  - {fileID: 11400000, guid: 2921b801d9409034e8c173725bdda8c1, type: 2}
   craftSlots: []
   pressColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
 --- !u!1 &5928326450480628341
@@ -52648,6 +52675,16 @@ MonoBehaviour:
   craftEquipment:
   - {fileID: 11400000, guid: 665e1730ded616641b255b1abcf17b56, type: 2}
   - {fileID: 11400000, guid: 35af717083d06c04486a7ca8b1696510, type: 2}
+  - {fileID: 11400000, guid: 176bc9aaf98d2a3409543f0d74361929, type: 2}
+  - {fileID: 11400000, guid: 665e1730ded616641b255b1abcf17b56, type: 2}
+  - {fileID: 11400000, guid: fec8622a098289841835530b9c0af5bd, type: 2}
+  - {fileID: 11400000, guid: 5448701042f510b44828f1014190d5e5, type: 2}
+  - {fileID: 11400000, guid: 79e79ef0631c7df4cb7dc8b45af51892, type: 2}
+  - {fileID: 11400000, guid: 35af717083d06c04486a7ca8b1696510, type: 2}
+  - {fileID: 11400000, guid: 2953b41f5f922804f8788d5312436494, type: 2}
+  - {fileID: 11400000, guid: 7daba7216afed834bb167524fe4fa260, type: 2}
+  - {fileID: 11400000, guid: d89a3f99bf6bceb4ea58506070d2a551, type: 2}
+  - {fileID: 11400000, guid: 093d9d6f2cb07a44dbc33e763df67c96, type: 2}
   craftSlots: []
   pressColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
 --- !u!1 &7713279289147601624
