@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class AdditionalReward
 {
-    public Transform rewardTransform;
+    public List<Transform> rewardTransform;
     public RewardSlot slot;
 }
 

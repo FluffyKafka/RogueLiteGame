@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RewardRoom : Room
 {
-    [SerializeField] private Transform rewardTransform;
+    [SerializeField] private List<Transform> rewardTransform;
 
     protected override void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {

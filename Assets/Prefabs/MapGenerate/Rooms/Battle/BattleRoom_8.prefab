@@ -48833,7 +48833,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 56
+      m_TileSpriteIndex: 57
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -48873,7 +48873,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 55
+      m_TileSpriteIndex: 56
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -48913,7 +48913,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 41
-      m_TileSpriteIndex: 44
+      m_TileSpriteIndex: 55
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -49113,7 +49113,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileSpriteIndex: 44
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -49338,12 +49338,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 4be2c34154b4b20429143bf5a0400d64, type: 3}
   - m_RefCount: 35
     m_Data: {fileID: 21300000, guid: a0f92ffd401f6ed44bd416e2e52add54, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 10cbcf6de1e5d944e9ec5c7eca828155, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 3068
     m_Data: {fileID: 21300000, guid: 7bae39282af46fa449bb7fd77041f40d, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 586cf872d1c8fb9488c2e1ff49527a7d, type: 3}
+    m_Data: {fileID: 21300000, guid: 10cbcf6de1e5d944e9ec5c7eca828155, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 012466a9e66c54641a0e88e0b5d4d33d, type: 3}
   - m_RefCount: 3
@@ -49365,11 +49365,11 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 485c561ad0eb6314ea0246a50cd4ef4b, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 586cf872d1c8fb9488c2e1ff49527a7d, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: dcaf597846903e54b91fde9ac0beef4c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: 33b6f47b14f904e48b546823a34a98ca, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: d7b76aea606fc8042b2a65c95575c7fb, type: 3}
   - m_RefCount: 92
@@ -55808,30 +55808,42 @@ MonoBehaviour:
   maxDecorationAmount: 30
   groundTilemap: {fileID: 4602174087848185743}
   additionalRewards:
-  - rewardTransform: {fileID: 6164982884674006007}
+  - rewardTransform:
+    - {fileID: 3760574669440500764}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 2
       advancedAmount: 1
       witcherRate: 5
       traderRate: 5
+      blackSmithRate: 0
       advancedRewardRate: 10
       mimicRate: 50
       mimicAdvancedRewardRate: 10
-  - rewardTransform: {fileID: 3760574669440500764}
+  - rewardTransform:
+    - {fileID: 6164982884674006007}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 5
       advancedAmount: 2
       witcherRate: 70
       traderRate: 5
+      blackSmithRate: 0
       advancedRewardRate: 20
       mimicRate: 5
       mimicAdvancedRewardRate: 80
-  - rewardTransform: {fileID: 5799889626378114612}
+  - rewardTransform:
+    - {fileID: 5799889626378114612}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 5
       advancedAmount: 1
       witcherRate: 0
       traderRate: 0
+      blackSmithRate: 0
       advancedRewardRate: 0
       mimicRate: 100
       mimicAdvancedRewardRate: 20

@@ -47450,7 +47450,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 10
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 31
       m_TileMatrixIndex: 0
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -57725,8 +57725,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 5cb467aafc67c8f4e9963f2054de8f6b, type: 3}
   - m_RefCount: 36
     m_Data: {fileID: 21300000, guid: 85be1dce0299c4648a5579365f7b7043, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: afdae31bc81d124438bb1f81eae6040c, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 48
     m_Data: {fileID: 21300000, guid: a0f92ffd401f6ed44bd416e2e52add54, type: 3}
   - m_RefCount: 6
@@ -57743,8 +57743,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: d596ca9ad1650574d94dfe28b7f56db2, type: 3}
   - m_RefCount: 44
     m_Data: {fileID: 21300000, guid: 90d10d4ec25a7e54f9becdea0c8dfef1, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: afdae31bc81d124438bb1f81eae6040c, type: 3}
   - m_RefCount: 15
     m_Data: {fileID: 21300000, guid: ca516cb029cd96f48b0141b2fabfd1bc, type: 3}
   - m_RefCount: 15
@@ -58859,30 +58859,42 @@ MonoBehaviour:
   maxDecorationAmount: 30
   groundTilemap: {fileID: 4602174087848185743}
   additionalRewards:
-  - rewardTransform: {fileID: 6164982884674006007}
+  - rewardTransform:
+    - {fileID: 3760574669440500764}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 2
       advancedAmount: 1
       witcherRate: 0
       traderRate: 0
+      blackSmithRate: 0
       advancedRewardRate: 5
       mimicRate: 50
       mimicAdvancedRewardRate: 10
-  - rewardTransform: {fileID: 3760574669440500764}
+  - rewardTransform:
+    - {fileID: 6164982884674006007}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 3
       advancedAmount: 1
       witcherRate: 70
       traderRate: 5
+      blackSmithRate: 0
       advancedRewardRate: 20
       mimicRate: 5
       mimicAdvancedRewardRate: 80
-  - rewardTransform: {fileID: 5799889626378114612}
+  - rewardTransform:
+    - {fileID: 5799889626378114612}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 1
       advancedAmount: 1
       witcherRate: 0
       traderRate: 0
+      blackSmithRate: 0
       advancedRewardRate: 0
       mimicRate: 100
       mimicAdvancedRewardRate: 0

@@ -43,6 +43,8 @@ public class BattleSlot
 [Serializable]
 public class RewardSlot
 {
+    [SerializeField] public int minRewardTime = 1;
+    [SerializeField] public int maxRewardTime = 3;//每个房间提供三个奖励生成位置
     [SerializeField] public int rewardAmount;
     [SerializeField] public int advancedAmount;
     [Range(0, 100)][SerializeField] public float witcherRate;
@@ -299,26 +301,35 @@ public class MapGenerateManager : MonoBehaviour
         return rewards;
     }
 
-    public void GenerateRewardBySlot(RewardSlot _slot, Transform _rewardTransform)
+    public void GenerateRewardBySlot(RewardSlot _slot, List<Transform> _rewardTransformList)
     {
-        float dice = UnityEngine.Random.Range(0, 100);
-        float rate = 0;
-        if (dice < (rate += _slot.witcherRate))
+        int rewardTime = UnityEngine.Random.Range(_slot.minRewardTime, _slot.maxRewardTime);
+        for(int i = 0; i < rewardTime; ++i)
         {
-            Instantiate(witcherPrefab, _rewardTransform.position, Quaternion.identity);
+            Transform _rewardTransform = _rewardTransformList[i];
+            float dice = UnityEngine.Random.Range(0, 100);
+            float rate = 0;
+            if (dice < (rate += _slot.witcherRate))
+            {
+                Instantiate(witcherPrefab, _rewardTransform.position, Quaternion.identity);
+                _slot.witcherRate = 0;
+            }
+            else if (dice < (rate += _slot.traderRate))
+            {
+                Instantiate(traderPrefab, _rewardTransform.position, Quaternion.identity);
+                _slot.traderRate = 0;
+            }
+            else if (dice < (rate += _slot.blackSmithRate))
+            {
+                Instantiate(blackSmithPrefab, _rewardTransform.position, Quaternion.identity);
+                _slot.blackSmithRate = 0;
+            }
+            else
+            {
+                GenerateRewardBox(_slot, _rewardTransform);
+            }
         }
-        else if (dice < (rate += _slot.traderRate))
-        {
-            Instantiate(traderPrefab, _rewardTransform.position, Quaternion.identity);
-        }
-        else if (dice < (rate += _slot.blackSmithRate))
-        {
-            Instantiate(blackSmithPrefab, _rewardTransform.position, Quaternion.identity);
-        }
-        else
-        {
-            GenerateRewardBox(_slot, _rewardTransform);
-        }
+        
     }
     private void GenerateRewardBox(RewardSlot _slot, Transform _rewardTransform)
     {

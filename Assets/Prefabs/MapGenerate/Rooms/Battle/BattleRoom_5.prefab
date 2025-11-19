@@ -76135,21 +76135,29 @@ MonoBehaviour:
   maxDecorationAmount: 30
   groundTilemap: {fileID: 4602174087848185743}
   additionalRewards:
-  - rewardTransform: {fileID: 7208872502377315049}
+  - rewardTransform:
+    - {fileID: 7208872502377315049}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 3
       advancedAmount: 1
       witcherRate: 10
       traderRate: 10
+      blackSmithRate: 0
       advancedRewardRate: 20
       mimicRate: 20
       mimicAdvancedRewardRate: 50
-  - rewardTransform: {fileID: 5853931346238801019}
+  - rewardTransform:
+    - {fileID: 5853931346238801019}
     slot:
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 3
       advancedAmount: 1
       witcherRate: 10
       traderRate: 10
+      blackSmithRate: 0
       advancedRewardRate: 20
       mimicRate: 20
       mimicAdvancedRewardRate: 50
