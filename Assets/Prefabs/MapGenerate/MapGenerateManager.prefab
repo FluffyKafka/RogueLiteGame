@@ -100,6 +100,11 @@ MonoBehaviour:
   - {fileID: 5519137933671674140, guid: e0df0cc4a1b31cc4f95d0160698755a9, type: 3}
   rewardRoomPrefabs:
   - {fileID: 8287352890654296562, guid: 25c51610c3b3a044aa1239b7bca17612, type: 3}
+  - {fileID: 8287352890654296562, guid: 8d20d1e69c24d7440a6358acbd7938ec, type: 3}
+  - {fileID: 8287352890654296562, guid: 9e23030acc72234479a3150eeea7a4c4, type: 3}
+  - {fileID: 8287352890654296562, guid: 07a4724de3835574dbc406d739400476, type: 3}
+  - {fileID: 8287352890654296562, guid: 19efaf14afd60c441a237cee55acc5be, type: 3}
+  - {fileID: 8287352890654296562, guid: 0bf6d06f3f6ffca4893244da99188577, type: 3}
   branchRoomPrefabs:
   - {fileID: 4416940893296855705, guid: a8c084bca0863ef479784722dfafcf6f, type: 3}
   - {fileID: 4416940893296855705, guid: 309b67c7d37a346479ebe4f0f4188f7c, type: 3}
@@ -137,7 +142,9 @@ MonoBehaviour:
     - difficulty: 300
     - difficulty: 400
     rewards:
-    - rewardAmount: 3
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
       advancedAmount: 1
       witcherRate: 5
       traderRate: 10
@@ -145,7 +152,9 @@ MonoBehaviour:
       advancedRewardRate: 10
       mimicRate: 10
       mimicAdvancedRewardRate: 50
-    - rewardAmount: 3
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
       advancedAmount: 1
       witcherRate: 5
       traderRate: 10
@@ -154,6 +163,8 @@ MonoBehaviour:
       mimicRate: 20
       mimicAdvancedRewardRate: 50
     lineEndReward:
+      minRewardTime: 1
+      maxRewardTime: 3
       rewardAmount: 1
       advancedAmount: 1
       witcherRate: 0
@@ -172,6 +183,8 @@ MonoBehaviour:
         battles: []
         rewards: []
         lineEndReward:
+          minRewardTime: 1
+          maxRewardTime: 3
           rewardAmount: 0
           advancedAmount: 0
           witcherRate: 0
@@ -190,6 +203,8 @@ MonoBehaviour:
         battles: []
         rewards: []
         lineEndReward:
+          minRewardTime: 1
+          maxRewardTime: 3
           rewardAmount: 0
           advancedAmount: 0
           witcherRate: 0
@@ -217,6 +232,8 @@ MonoBehaviour:
     - difficulty: 200
     rewards: []
     lineEndReward:
+      minRewardTime: 1
+      maxRewardTime: 3
       rewardAmount: 5
       advancedAmount: 1
       witcherRate: 100
@@ -243,6 +260,8 @@ MonoBehaviour:
     - difficulty: 200
     rewards: []
     lineEndReward:
+      minRewardTime: 1
+      maxRewardTime: 3
       rewardAmount: 5
       advancedAmount: 1
       witcherRate: 80
