@@ -82,15 +82,37 @@ MonoBehaviour:
   - {fileID: 6620305606442209809, guid: 0398310c6d294cf49bdeec7269c11319, type: 3}
   battleRoomPrefabs:
   - {fileID: 9122924721718098285, guid: 34d27281ef8dd754783d72f7255788e2, type: 3}
+  - {fileID: 9122924721718098285, guid: 6656f63593c474648b6ef75098a97c45, type: 3}
+  - {fileID: 9122924721718098285, guid: 62ba07624ed2e5a4fa0b0d4ee983578e, type: 3}
+  - {fileID: 9122924721718098285, guid: 66261d78b9f17c147a433cf2e42a58f8, type: 3}
+  - {fileID: 9122924721718098285, guid: 53fd1369574eed143a9227bb1e114002, type: 3}
+  - {fileID: 9122924721718098285, guid: 593f1e526c9b4774abfb1cc08d695e80, type: 3}
+  - {fileID: 9122924721718098285, guid: 48b6dbe8750922b4bac7b8fb6e0e21bc, type: 3}
+  - {fileID: 9122924721718098285, guid: 270a8eaf42db2f349af79c4e3ced7310, type: 3}
+  - {fileID: 9122924721718098285, guid: 1a65a9764c480424187aff8f27c106fe, type: 3}
+  - {fileID: 9122924721718098285, guid: 62e1de4223ba2ad4d8e1224ea697775d, type: 3}
   passageRoomPrefabs:
   - {fileID: 5519137933671674140, guid: 79363c42ae395f544a27a461d5eed25c, type: 3}
+  - {fileID: 5519137933671674140, guid: 5c465e5e81d6a8b40a91e184c71fc061, type: 3}
+  - {fileID: 5519137933671674140, guid: f68a26d8207ad464abc78382f321603d, type: 3}
+  - {fileID: 5519137933671674140, guid: 6dbf946087827564b9f48c80789e6298, type: 3}
+  - {fileID: 5519137933671674140, guid: c0d676bef0c5fc54a8b130daf5a9b2e7, type: 3}
+  - {fileID: 5519137933671674140, guid: e0df0cc4a1b31cc4f95d0160698755a9, type: 3}
   rewardRoomPrefabs:
   - {fileID: 8287352890654296562, guid: 25c51610c3b3a044aa1239b7bca17612, type: 3}
   branchRoomPrefabs:
   - {fileID: 4416940893296855705, guid: a8c084bca0863ef479784722dfafcf6f, type: 3}
+  - {fileID: 4416940893296855705, guid: 309b67c7d37a346479ebe4f0f4188f7c, type: 3}
+  - {fileID: 4416940893296855705, guid: 8a7932581a3acef41bdb6ac587d34674, type: 3}
+  - {fileID: 4416940893296855705, guid: e43e2aef04a02c745a627ab9163b918e, type: 3}
+  - {fileID: 4416940893296855705, guid: 017560c61ec75d94f808e6af9d491a61, type: 3}
+  - {fileID: 4416940893296855705, guid: 1b52752104d733a40a6bb76c6d7b75f6, type: 3}
+  branchExitRoomPrefabs:
+  - {fileID: 6217563819945910790, guid: 007a083367703c245b8e8895e3bf1596, type: 3}
   mainLine:
     lineEndRoomType: 1
     isEndRoom: 0
+    lineStartDoor: {fileID: 0}
     lineRooms:
     - battleRoomRate: 26.5
       rewardRoomRate: 10
@@ -98,42 +120,45 @@ MonoBehaviour:
     - battleRoomRate: 65.4
       rewardRoomRate: 10
       branchRoomRate: 0
-    - battleRoomRate: 65.6
+    - battleRoomRate: 33.2
       rewardRoomRate: 10
-      branchRoomRate: 0
+      branchRoomRate: 28.4
     - battleRoomRate: 26.8
       rewardRoomRate: 10
-      branchRoomRate: 0
-    - battleRoomRate: 67.9
+      branchRoomRate: 16.1
+    - battleRoomRate: 28.4
       rewardRoomRate: 10
-      branchRoomRate: 0
-    - battleRoomRate: 39.4
+      branchRoomRate: 25.5
+    - battleRoomRate: 24.1
       rewardRoomRate: 10
-      branchRoomRate: 0
+      branchRoomRate: 25.5
     battles:
-    - difficulty: 10
-    - difficulty: 10
-    - difficulty: 100
+    - difficulty: 200
+    - difficulty: 300
+    - difficulty: 400
     rewards:
     - rewardAmount: 3
       advancedAmount: 1
-      witcherRate: 100
-      traderRate: 0
+      witcherRate: 5
+      traderRate: 10
+      blackSmithRate: 10
       advancedRewardRate: 10
-      mimicRate: 30
+      mimicRate: 10
       mimicAdvancedRewardRate: 50
     - rewardAmount: 3
       advancedAmount: 1
-      witcherRate: 0
-      traderRate: 100
+      witcherRate: 5
+      traderRate: 10
+      blackSmithRate: 10
       advancedRewardRate: 20
-      mimicRate: 50
+      mimicRate: 20
       mimicAdvancedRewardRate: 50
     lineEndReward:
       rewardAmount: 1
       advancedAmount: 1
       witcherRate: 0
       traderRate: 0
+      blackSmithRate: 0
       advancedRewardRate: 100
       mimicRate: 0
       mimicAdvancedRewardRate: 0
@@ -142,6 +167,7 @@ MonoBehaviour:
       branchLine:
         lineEndRoomType: 0
         isEndRoom: 0
+        lineStartDoor: {fileID: 0}
         lineRooms: []
         battles: []
         rewards: []
@@ -150,6 +176,7 @@ MonoBehaviour:
           advancedAmount: 0
           witcherRate: 0
           traderRate: 0
+          blackSmithRate: 0
           advancedRewardRate: 0
           mimicRate: 0
           mimicAdvancedRewardRate: 0
@@ -158,6 +185,7 @@ MonoBehaviour:
       branchLine:
         lineEndRoomType: 0
         isEndRoom: 0
+        lineStartDoor: {fileID: 0}
         lineRooms: []
         battles: []
         rewards: []
@@ -166,6 +194,7 @@ MonoBehaviour:
           advancedAmount: 0
           witcherRate: 0
           traderRate: 0
+          blackSmithRate: 0
           advancedRewardRate: 0
           mimicRate: 0
           mimicAdvancedRewardRate: 0
@@ -173,6 +202,7 @@ MonoBehaviour:
   branchLines:
   - lineEndRoomType: 4
     isEndRoom: 0
+    lineStartDoor: {fileID: 0}
     lineRooms:
     - battleRoomRate: 44.8
       rewardRoomRate: 0
@@ -184,16 +214,42 @@ MonoBehaviour:
       rewardRoomRate: 0
       branchRoomRate: 0
     battles:
-    - difficulty: 30
-    - difficulty: 40
+    - difficulty: 200
     rewards: []
     lineEndReward:
       rewardAmount: 5
       advancedAmount: 1
-      witcherRate: 0
+      witcherRate: 100
       traderRate: 0
-      advancedRewardRate: 20
-      mimicRate: 50
+      blackSmithRate: 0
+      advancedRewardRate: 0
+      mimicRate: 0
+      mimicAdvancedRewardRate: 60
+    branches: []
+  - lineEndRoomType: 4
+    isEndRoom: 0
+    lineStartDoor: {fileID: 0}
+    lineRooms:
+    - battleRoomRate: 44.8
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    - battleRoomRate: 44.5
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    - battleRoomRate: 41.7
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    battles:
+    - difficulty: 200
+    rewards: []
+    lineEndReward:
+      rewardAmount: 5
+      advancedAmount: 1
+      witcherRate: 80
+      traderRate: 20
+      blackSmithRate: 0
+      advancedRewardRate: 0
+      mimicRate: 0
       mimicAdvancedRewardRate: 60
     branches: []
   startTransform: {fileID: 888917348166926060}
@@ -224,6 +280,7 @@ MonoBehaviour:
   advancedRewardChestPrefab: {fileID: 6913548843195122753, guid: 507091d119ba8904aafdaf75e9fa1ca7, type: 3}
   mimicChestPrefab: {fileID: 6953725531051475293, guid: 9f6efcec2964bde438ab2ecf9f47ea86, type: 3}
   traderPrefab: {fileID: 234054331011517859, guid: 12c11c641b9b6c4479d1e962c523f152, type: 3}
+  blackSmithPrefab: {fileID: 5044842183316314030, guid: 70605c63ec6556b44ad87a513ade14d6, type: 3}
   witcherPrefab: {fileID: 1567148331700328297, guid: fb104c8186e5fe04faf28e443b4a368c, type: 3}
   decorationPrefab: {fileID: 153967504809312598, guid: 7eba192808eb38544bde108dbef1c545, type: 3}
   decorations:
@@ -246,6 +303,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 71630e1e5bc9f4647994ca1c2427fbbe, type: 3}
   - {fileID: 21300000, guid: bdd66e2978529184588fee9c6ddf0519, type: 3}
   - {fileID: 21300000, guid: ba4c1f8304ae62f42ad0fdc9f69cf023, type: 3}
-  minDecorationAmount: 3
-  maxDecorationAmount: 6
-  branchYOffset: 100
+  branchYOffset: 200

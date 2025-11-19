@@ -47,6 +47,7 @@ public class RewardSlot
     [SerializeField] public int advancedAmount;
     [Range(0, 100)][SerializeField] public float witcherRate;
     [Range(0, 100)][SerializeField] public float traderRate;
+    [Range(0, 100)][SerializeField] public float blackSmithRate;
     [Range(0, 100)][SerializeField] public float advancedRewardRate;
     [Range(0, 100)][SerializeField] public float mimicRate;
     [Range(0, 100)][SerializeField] public float mimicAdvancedRewardRate;
@@ -217,6 +218,7 @@ public class MapGenerateManager : MonoBehaviour
     [SerializeField] public GameObject advancedRewardChestPrefab;
     [SerializeField] public GameObject mimicChestPrefab;
     [SerializeField] public GameObject traderPrefab;
+    [SerializeField] public GameObject blackSmithPrefab;
     [SerializeField] public GameObject witcherPrefab;
 
     [Header("Room Decoration Info")]
@@ -308,6 +310,10 @@ public class MapGenerateManager : MonoBehaviour
         else if (dice < (rate += _slot.traderRate))
         {
             Instantiate(traderPrefab, _rewardTransform.position, Quaternion.identity);
+        }
+        else if (dice < (rate += _slot.blackSmithRate))
+        {
+            Instantiate(blackSmithPrefab, _rewardTransform.position, Quaternion.identity);
         }
         else
         {
