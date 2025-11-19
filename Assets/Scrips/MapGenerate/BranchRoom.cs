@@ -24,7 +24,7 @@ public class BranchRoom : Room
         return door.transform;
     }
 
-    protected override void GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
         if(!isBranch)
         {
@@ -50,13 +50,14 @@ public class BranchRoom : Room
             }
             newBranchLine.lineStartDoor = door;
 
-            newBranchRoom.GenerateRoom(_manager, newBranchLine, 0);
+            return new RoomGenerateStruct(0, newBranchRoom, newBranchLine);
         }
+        return new RoomGenerateStruct(-1, null, null);
     }
 
-    protected override void GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
-        base.GenerateNextRoom(_manager, _currentLine, _index);
+        return base.GenerateNextRoom(_manager, _currentLine, _index);
     }
 
     protected override void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)

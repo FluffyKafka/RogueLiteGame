@@ -175,6 +175,20 @@ public class Line
     }
 }
 
+
+public struct RoomGenerateStruct
+{
+    public int index;
+    public Room room;
+    public Line line;
+    public RoomGenerateStruct(int _index, Room _room, Line _line)
+    {
+        index = _index;
+        room = _room;
+        line = _line;
+    }
+}
+
 //每个场景考虑使用自己的地图生成器
 public class MapGenerateManager : MonoBehaviour
 {
@@ -212,6 +226,8 @@ public class MapGenerateManager : MonoBehaviour
     [Header("Branch Info")]
     [SerializeField] public float branchYOffset;
 
+    private List<RoomGenerateStruct> roomsToGenerate;
+
     private void Start()
     {
         int startRoomIndex = UnityEngine.Random.Range(0, entryRoomPrefabs.Count);
@@ -219,8 +235,22 @@ public class MapGenerateManager : MonoBehaviour
         Room startRoomTemp = entryRoomPrefabs[startRoomIndex].GetComponent<Room>();
         Vector3 startRoomLoc = startTransform.position - startRoomTemp.leftAccess.transform.position;
 
-        Room startRoom = Instantiate(entryRoomPrefabs[startRoomIndex], startRoomLoc, Quaternion.identity).GetComponent<Room>();
-        startRoom.GenerateRoom(this, mainLine, 0);
+        Room currentRoom = Instantiate(entryRoomPrefabs[startRoomIndex], startRoomLoc, Quaternion.identity).GetComponent<Room>();
+        RoomGenerateStruct roomGenerateStruct = new RoomGenerateStruct(0, currentRoom, mainLine);
+        roomsToGenerate = new List<RoomGenerateStruct>();
+        roomsToGenerate.Add(roomGenerateStruct);
+        while (roomsToGenerate.Count != 0)
+        {
+            RoomGenerateStruct newRoomStruct = roomsToGenerate[roomsToGenerate.Count - 1];
+            roomsToGenerate.RemoveAt(roomsToGenerate.Count - 1);
+
+            List<RoomGenerateStruct> rooms = newRoomStruct.room.GenerateRoom(this, newRoomStruct.line, newRoomStruct.index);
+            foreach(RoomGenerateStruct roomStruct in rooms)
+            {
+                roomsToGenerate.Add(roomStruct);
+            }
+        }
+        
 
         GameManager.instance.CheckPointLoad();
     }

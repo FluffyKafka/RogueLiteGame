@@ -11,8 +11,9 @@ public class PassageRoom : Room
         base.PreGenerateRoom(_manager, _currentLine, _index);
     }
 
-    protected override void GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
         base.GenerateCurrentRoom(_manager, _currentLine, _index);
+        return new RoomGenerateStruct(-1, null, null);
     }
 }

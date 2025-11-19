@@ -21,7 +21,7 @@ public class BattleRoom : Room
         base.PreGenerateRoom(_manager, _currentLine, _index);
     }
 
-    protected override void GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
         base.GenerateCurrentRoom(_manager, _currentLine, _index);
 
@@ -35,6 +35,8 @@ public class BattleRoom : Room
         {
             _manager.GenerateRewardBySlot(reward.slot, reward.rewardTransform);
         }
+
+        return new RoomGenerateStruct(-1, null, null);
     }
 
     protected void GenerateEnemy(float _enemyDifficultyAmount, List<GameObject> _enemyList, float _enemyGenerateYOffset)

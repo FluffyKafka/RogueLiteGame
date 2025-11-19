@@ -10,14 +10,15 @@ public class BranchExitRoom : Room
         door = GetComponentInChildren<Door>();
     }
 
-    protected override void GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
         door.otherDoor = _currentLine.lineStartDoor.transform;
+        return new RoomGenerateStruct(-1, null, null);
     }
 
-    protected override void GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
-        
+        return new RoomGenerateStruct(-1, null, null);
     }
 
     protected override void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)

@@ -23,11 +23,21 @@ public class Room : MonoBehaviour
     protected List<Vector2> flatPositions = null;
     protected int usedFlatPositionIndexEnd = 0;
 
-    public void GenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    public List<RoomGenerateStruct> GenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
+        List<RoomGenerateStruct> nextRooms = new List<RoomGenerateStruct>();
         PreGenerateRoom(_manager, _currentLine, _index);
-        GenerateCurrentRoom(_manager, _currentLine, _index);
-        GenerateNextRoom(_manager, _currentLine, _index);
+        RoomGenerateStruct branchRoom = GenerateCurrentRoom(_manager, _currentLine, _index);
+        RoomGenerateStruct nextRoom = GenerateNextRoom(_manager, _currentLine, _index);
+        if(branchRoom.index != -1)
+        {
+            nextRooms.Add(branchRoom);
+        }
+        if(nextRoom.index != -1)
+        {
+            nextRooms.Add(nextRoom);
+        }
+        return nextRooms;
     }
     protected virtual void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
@@ -35,9 +45,10 @@ public class Room : MonoBehaviour
         usedFlatPositionIndexEnd = 0;
     }
 
-    protected virtual void GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected virtual RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
         GenerateDecorations(_manager);
+        return new RoomGenerateStruct(-1, null, null);
     }
     protected void GenerateDecorations(MapGenerateManager _manager)
     {
@@ -98,7 +109,7 @@ public class Room : MonoBehaviour
         return randomPosition;
     }
 
-    protected virtual void GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected virtual RoomGenerateStruct GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
     {
 
         Room newRoom = null;
@@ -128,7 +139,7 @@ public class Room : MonoBehaviour
             default:
                 Assert.IsTrue(false, "未定义的房间类型： " + roomType); break;
         }
-        newRoom.GenerateRoom(_manager, _currentLine, _index + 1);
+        return new RoomGenerateStruct(_index + 1, newRoom, _currentLine);
     }
 
     protected Room GetNewRoomByPrefabList(List<GameObject> _list)
