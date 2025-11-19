@@ -10533,7 +10533,7 @@ MonoBehaviour:
   maxDropVelocity: {x: 5, y: 5}
   minDropVelocity: {x: 10, y: 10}
   coinPrefab: {fileID: 5019315592733889720, guid: e0c152ab99e0277439a4dcb82448ced0, type: 3}
-  coinAmount: 30
+  coinAmount: 10
 --- !u!1 &6544564568083607964
 GameObject:
   m_ObjectHideFlags: 0

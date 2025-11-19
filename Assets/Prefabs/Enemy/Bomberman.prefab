@@ -5264,16 +5264,23 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  whatIsPlatform:
+    serializedVersion: 2
+    m_Bits: 0
   attackValidCheck: {fileID: 7701631841978571041}
   attackValidCheckRadius: 1.23
+  groundCheckDistanceDivider: 3
   isFacingLeft: 0
   facingDir: 1
   entityName: "\u4E0D\u5B89\u7684\u7075\u9B42"
+  entityIcon: {fileID: 0}
   knockBackDir: {x: 10, y: 10}
   knockBackDirMapK: 0.5
   knockBackDuration: 0.07
   isKnocked: 0
   selfDestroyAfterDead: 10
+  canBeDamage_current: 0
+  canBeDamage: 0
   difficulty: 12
   moveSpeed: 5
   maxIdleDuration: 2
@@ -5375,6 +5382,12 @@ MonoBehaviour:
   magicResistance:
     baseValue: 0
     modifiers: []
+  maxFlaskUsageTime:
+    baseValue: 0
+    modifiers: []
+  flaskUsageRecover:
+    baseValue: 0
+    modifiers: []
   damage:
     baseValue: 5
     modifiers: []
@@ -5382,6 +5395,9 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   critPower:
+    baseValue: 0
+    modifiers: []
+  attackSpeed:
     baseValue: 0
     modifiers: []
   fireDamage:
@@ -5393,6 +5409,36 @@ MonoBehaviour:
   lightningDamage:
     baseValue: 0
     modifiers: []
+  fireDuration:
+    baseValue: 0
+    modifiers: []
+  iceDuration:
+    baseValue: 0
+    modifiers: []
+  lightningDuration:
+    baseValue: 0
+    modifiers: []
+  fireDamageCooldown:
+    baseValue: 0
+    modifiers: []
+  fireDamageTransform:
+    baseValue: 0
+    modifiers: []
+  chillArmorReduce:
+    baseValue: 0
+    modifiers: []
+  chillSlowRate:
+    baseValue: 0
+    modifiers: []
+  shockAccuracyReduce:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeCount:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeRate:
+    baseValue: 0
+    modifiers: []
   defaultCritPower: 150
   strength_damage: 1
   strength_critPower: 1
@@ -5400,24 +5446,16 @@ MonoBehaviour:
   agility_critChance: 1
   intelligence_magicDamage: 1
   intelligence_magicResistance: 3
+  intelligence_magicDuration: 0.5
   vitality_maxHealth: 3
-  igniteDuration: 4
-  ignite_damageCooldown: 0.3
-  rateFireDamageTransformToIgniteDamage: 20
-  chillDuration: 4
-  chill_reduceArmorPer: 20
-  chillSlowPercentage: 20
-  shockDuration: 4
-  shock_reduceAccuracy: 20
   thunderAttackPrefab: {fileID: 0}
   thunderStrikeRadius: 25
-  thunderStrikeRate: 50
-  thunderStrikerCounter: 4
   currentHealth: 0
   igniteStateDamage: 0
   isIgnited: 0
   isChilled: 0
   isShock: 0
+  minFireDamageCooldown: 0.1
   level: 0
   percantageModifier: 0
   currencyDropAmount:
@@ -5479,10 +5517,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8239f5e7f35807448aefdc6f544862c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - item: {fileID: 11400000, guid: 60a48bc0997f40e41a186287b485e4e5, type: 2}
+    dropChance: 20
+  - item: {fileID: 11400000, guid: 36bed3b9a70d1c24fbb2658c3d2a13b7, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: 12ab6b390872dc744bbc21d7d61a6a56, type: 2}
+    dropChance: 15
+  - item: {fileID: 11400000, guid: d057f00ceb1f0714d9d76a0a4a3d62fa, type: 2}
+    dropChance: 20
+  - item: {fileID: 11400000, guid: 61617ae58528c0444af197c7a5deedda, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 0ab358cda1c80b34baf6b1f9aaa239de, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: e2e1c775d04f34843af74f1910cc6a01, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 81225a14b77d1614098fb0e1dd1fdbbf, type: 2}
+    dropChance: 2
+  - item: {fileID: 11400000, guid: e02ff965ac3ff4d4badbe742f8e37647, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 76d1d23c8da53ca4bbb79d8d5be52d33, type: 2}
+    dropChance: 30
   itemObjectPrefab: {fileID: 5769596048613520503, guid: b263c4ad0fdbdca4d82234882200d407, type: 3}
   maxDropVelocity: {x: 5, y: 5}
   minDropVelocity: {x: 10, y: 10}
+  coinPrefab: {fileID: 5019315592733889720, guid: e0c152ab99e0277439a4dcb82448ced0, type: 3}
+  coinAmount: 6
 --- !u!1 &4810036370170461630
 GameObject:
   m_ObjectHideFlags: 0
@@ -5693,7 +5753,7 @@ RectTransform:
   m_Father: {fileID: 645052436166053187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.0000076293945, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -5635,6 +5635,12 @@ MonoBehaviour:
   magicResistance:
     baseValue: 0
     modifiers: []
+  maxFlaskUsageTime:
+    baseValue: 0
+    modifiers: []
+  flaskUsageRecover:
+    baseValue: 0
+    modifiers: []
   damage:
     baseValue: 15
     modifiers: []
@@ -5642,6 +5648,9 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   critPower:
+    baseValue: 0
+    modifiers: []
+  attackSpeed:
     baseValue: 0
     modifiers: []
   fireDamage:
@@ -5653,6 +5662,36 @@ MonoBehaviour:
   lightningDamage:
     baseValue: 0
     modifiers: []
+  fireDuration:
+    baseValue: 0
+    modifiers: []
+  iceDuration:
+    baseValue: 0
+    modifiers: []
+  lightningDuration:
+    baseValue: 0
+    modifiers: []
+  fireDamageCooldown:
+    baseValue: 0
+    modifiers: []
+  fireDamageTransform:
+    baseValue: 0
+    modifiers: []
+  chillArmorReduce:
+    baseValue: 0
+    modifiers: []
+  chillSlowRate:
+    baseValue: 0
+    modifiers: []
+  shockAccuracyReduce:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeCount:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeRate:
+    baseValue: 0
+    modifiers: []
   defaultCritPower: 150
   strength_damage: 1
   strength_critPower: 1
@@ -5660,24 +5699,16 @@ MonoBehaviour:
   agility_critChance: 1
   intelligence_magicDamage: 1
   intelligence_magicResistance: 3
+  intelligence_magicDuration: 0.5
   vitality_maxHealth: 3
-  igniteDuration: 4
-  ignite_damageCooldown: 0.3
-  rateFireDamageTransformToIgniteDamage: 20
-  chillDuration: 4
-  chill_reduceArmorPer: 20
-  chillSlowPercentage: 20
-  shockDuration: 4
-  shock_reduceAccuracy: 20
   thunderAttackPrefab: {fileID: 0}
   thunderStrikeRadius: 25
-  thunderStrikeRate: 50
-  thunderStrikerCounter: 4
   currentHealth: 0
   igniteStateDamage: 0
   isIgnited: 0
   isChilled: 0
   isShock: 0
+  minFireDamageCooldown: 0.1
   level: 0
   percantageModifier: 0
   currencyDropAmount:
@@ -5739,15 +5770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8239f5e7f35807448aefdc6f544862c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops:
-  - item: {fileID: 11400000, guid: 81ab45b7c5e236f428ee14c4458bfda4, type: 2}
-    dropChance: 100
-  - item: {fileID: 11400000, guid: 4188f0b130153ad448d10174a9c4f131, type: 2}
-    dropChance: 100
+  drops: []
   itemObjectPrefab: {fileID: 5769596048613520503, guid: b263c4ad0fdbdca4d82234882200d407, type: 3}
   maxDropVelocity: {x: 5, y: 5}
   minDropVelocity: {x: 10, y: 10}
-  coinPrefab: {fileID: 0}
+  coinPrefab: {fileID: 5019315592733889720, guid: e0c152ab99e0277439a4dcb82448ced0, type: 3}
   coinAmount: 0
 --- !u!114 &1228537577647206286
 MonoBehaviour:
@@ -5773,6 +5800,7 @@ MonoBehaviour:
     m_Bits: 0
   attackValidCheck: {fileID: 4061799906821579344}
   attackValidCheckRadius: 1.16
+  groundCheckDistanceDivider: 3
   isFacingLeft: 0
   facingDir: 1
   entityName: "\u62DF\u5F62\u602A"
@@ -5782,6 +5810,8 @@ MonoBehaviour:
   knockBackDuration: 0.07
   isKnocked: 0
   selfDestroyAfterDead: 10
+  canBeDamage_current: 0
+  canBeDamage: 0
   difficulty: 15
   moveSpeed: 2
   maxIdleDuration: 2

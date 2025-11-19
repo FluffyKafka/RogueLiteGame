@@ -15450,6 +15450,7 @@ MonoBehaviour:
     m_Bits: 2048
   attackValidCheck: {fileID: 6785812909385943645}
   attackValidCheckRadius: 0.63
+  groundCheckDistanceDivider: 3
   isFacingLeft: 1
   facingDir: -1
   entityName: "\u5E7D\u9B42"
@@ -15690,9 +15691,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8239f5e7f35807448aefdc6f544862c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - item: {fileID: 11400000, guid: c1c08142e79924040a7512e539a5ba4f, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: 59ec7421763734441a6a84dfd408b1fc, type: 2}
+    dropChance: 3
+  - item: {fileID: 11400000, guid: 7d7bf685a2638f54f87edfd4fa3b4c44, type: 2}
+    dropChance: 3
+  - item: {fileID: 11400000, guid: 857d1a4e96bb0d140a25bc374e940706, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 91412023af794d343ad72da52ec6a419, type: 2}
+    dropChance: 5
   itemObjectPrefab: {fileID: 0}
   maxDropVelocity: {x: 0, y: 0}
   minDropVelocity: {x: 0, y: 0}
-  coinPrefab: {fileID: 0}
-  coinAmount: 0
+  coinPrefab: {fileID: 5019315592733889720, guid: e0c152ab99e0277439a4dcb82448ced0, type: 3}
+  coinAmount: 3
