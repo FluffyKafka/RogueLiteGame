@@ -12,7 +12,7 @@ public class PlayerEnemyCheck : MonoBehaviour
 
     [Header("Test")]
     public bool isInBossFight = false;
-    [SerializeField] private bool isBattle = false;
+    [SerializeField] public bool isBattle = false;
     [SerializeField] private float bgmVolume = 1;
 
     public void SetIsBattle(bool _isBattle)

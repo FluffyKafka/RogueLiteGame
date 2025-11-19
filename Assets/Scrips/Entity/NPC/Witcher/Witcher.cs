@@ -24,6 +24,12 @@ public class Witcher : NPC, IPlayerCommunicable
 
     public void Talk(Player _player)
     {
+        if(PlayerManager.instance.player.enemyCheck.isBattle)
+        {
+            PlayerManager.instance.player.fx.CreatePopUpText("战斗时无法对话");
+            return;
+        }
+
         if(stateMachine.currentState == idleState)
         {
             stateMachine.ChangeState(beforeSpellState);

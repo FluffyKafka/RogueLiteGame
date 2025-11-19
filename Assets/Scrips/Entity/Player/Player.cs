@@ -97,6 +97,7 @@ public class Player : Entity
     public int jumpCount = 0;
     public int jumpCountMax = 2;
     public ParticleSystem secondJumpFX;
+
     override protected void Awake()
     {
         base.Awake();
