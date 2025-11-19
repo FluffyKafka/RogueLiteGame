@@ -18,3 +18,4 @@ MonoBehaviour:
   itemType: 0
   craftingMaterials: []
   description: "\u4E0D\u77E5\u9053\u4ECE\u54EA\u91CC\u6252\u4E0B\u6765\u7684"
+  price: 15

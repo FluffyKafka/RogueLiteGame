@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d527a8d8538ac4e80e561b783588b8, type: 3}
   m_Name: Iron
   m_EditorClassIdentifier: 
+  itemId: 
   icon: {fileID: -104826009, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u94C1"
   itemType: 0
   craftingMaterials: []
+  description: 
+  price: 30

@@ -15152,6 +15152,7 @@ MonoBehaviour:
     m_Bits: 0
   attackValidCheck: {fileID: 7335400897994170589}
   attackValidCheckRadius: 1.18
+  groundCheckDistanceDivider: 3
   isFacingLeft: 0
   facingDir: 1
   entityName: "\u9AB7\u9AC5"
@@ -15161,6 +15162,8 @@ MonoBehaviour:
   knockBackDuration: 0.07
   isKnocked: 0
   selfDestroyAfterDead: 10
+  canBeDamage_current: 0
+  canBeDamage: 0
   difficulty: 10
   moveSpeed: 2
   maxIdleDuration: 5
@@ -15252,7 +15255,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   maxHealth:
-    baseValue: 100
+    baseValue: 10000
     modifiers: []
   armor:
     baseValue: 0
@@ -15261,6 +15264,12 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   magicResistance:
+    baseValue: 0
+    modifiers: []
+  maxFlaskUsageTime:
+    baseValue: 0
+    modifiers: []
+  flaskUsageRecover:
     baseValue: 0
     modifiers: []
   damage:
@@ -15272,6 +15281,9 @@ MonoBehaviour:
   critPower:
     baseValue: 0
     modifiers: []
+  attackSpeed:
+    baseValue: 0
+    modifiers: []
   fireDamage:
     baseValue: 0
     modifiers: []
@@ -15281,6 +15293,36 @@ MonoBehaviour:
   lightningDamage:
     baseValue: 0
     modifiers: []
+  fireDuration:
+    baseValue: 0
+    modifiers: []
+  iceDuration:
+    baseValue: 0
+    modifiers: []
+  lightningDuration:
+    baseValue: 0
+    modifiers: []
+  fireDamageCooldown:
+    baseValue: 0
+    modifiers: []
+  fireDamageTransform:
+    baseValue: 0
+    modifiers: []
+  chillArmorReduce:
+    baseValue: 0
+    modifiers: []
+  chillSlowRate:
+    baseValue: 0
+    modifiers: []
+  shockAccuracyReduce:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeCount:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeRate:
+    baseValue: 0
+    modifiers: []
   defaultCritPower: 150
   strength_damage: 1
   strength_critPower: 1
@@ -15288,24 +15330,16 @@ MonoBehaviour:
   agility_critChance: 1
   intelligence_magicDamage: 1
   intelligence_magicResistance: 3
+  intelligence_magicDuration: 0.5
   vitality_maxHealth: 3
-  igniteDuration: 4
-  ignite_damageCooldown: 0.3
-  rateFireDamageTransformToIgniteDamage: 0.2
-  chillDuration: 4
-  chill_reduceArmorPer: 0.2
-  chillSlowPercentage: 0.2
-  shockDuration: 4
-  shock_reduceAccuracy: 20
   thunderAttackPrefab: {fileID: 5212529744642923041, guid: 0aea55587a3c39843aa5c3bf00b08222, type: 3}
   thunderStrikeRadius: 25
-  thunderStrikeRate: 50
-  thunderStrikerCounter: 4
   currentHealth: 0
   igniteStateDamage: 0
   isIgnited: 0
   isChilled: 0
   isShock: 0
+  minFireDamageCooldown: 0.1
   level: 0
   percantageModifier: 0
   currencyDropAmount:
@@ -15323,12 +15357,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8239f5e7f35807448aefdc6f544862c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - item: {fileID: 11400000, guid: 4f71ab7eafcfeb740ac2d7c0b9874a18, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: ce89439d6e4612945be9de8df12aa7f1, type: 2}
+    dropChance: 30
+  - item: {fileID: 11400000, guid: 35af717083d06c04486a7ca8b1696510, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: ec94af8f0d001be4da4cdc0ea60ec185, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 5114693ff97a2b74ea5f8d57d2552076, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 9e525dbc30cc04a4b89fd29db6726791, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: 91412023af794d343ad72da52ec6a419, type: 2}
+    dropChance: 5
+  - item: {fileID: 11400000, guid: e44239a3a6e262b47bbde16965aceaaf, type: 2}
+    dropChance: 10
+  - item: {fileID: 11400000, guid: e419b9a9ca54e1d41a7e0dc26db59d03, type: 2}
+    dropChance: 25
+  - item: {fileID: 11400000, guid: 61617ae58528c0444af197c7a5deedda, type: 2}
+    dropChance: 5
   itemObjectPrefab: {fileID: 5769596048613520503, guid: b263c4ad0fdbdca4d82234882200d407, type: 3}
   maxDropVelocity: {x: 5, y: 5}
   minDropVelocity: {x: 10, y: 10}
-  coinPrefab: {fileID: 0}
-  coinAmount: 0
+  coinPrefab: {fileID: 5019315592733889720, guid: e0c152ab99e0277439a4dcb82448ced0, type: 3}
+  coinAmount: 5
 --- !u!1 &7179523335780064708
 GameObject:
   m_ObjectHideFlags: 0
