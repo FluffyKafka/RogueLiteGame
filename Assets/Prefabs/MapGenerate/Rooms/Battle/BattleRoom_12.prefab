@@ -12537,8 +12537,8 @@ MonoBehaviour:
   - rewardTransform:
     - {fileID: 4107043670842171417}
     slot:
-      minRewardTime: 2
-      maxRewardTime: 2
+      minRewardTime: 1
+      maxRewardTime: 1
       rewardAmount: 3
       advancedAmount: 1
       witcherRate: 15
