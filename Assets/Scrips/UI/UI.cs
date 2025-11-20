@@ -23,8 +23,10 @@ public class UI : MonoBehaviour
     [SerializeField] public GameObject charactorUI;
     [SerializeField] public GameObject skillTreeUI;
     [SerializeField] public GameObject craftUI;
+    [SerializeField] public GameObject mapUI;
     [SerializeField] public GameObject optionUI;
     [SerializeField] public GameObject inGame;
+    [SerializeField] public GameObject camera;
 
     [Header("FadeScreen")]
     [SerializeField] public UI_DarkScreen darkScreen;
@@ -54,6 +56,10 @@ public class UI : MonoBehaviour
     public UI_CraftList armorCraftList;
     public UI_CraftList amuletCraftList;
     public UI_CraftList flaskCraftList;
+
+    [Header("Camera")]
+    public Camera minmapCamera;
+    public Camera mapCamera;
 
     private void Awake()
     {
@@ -95,6 +101,11 @@ public class UI : MonoBehaviour
 
     void Update()
     {
+        if(!darkScreen.isAnimFinish)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.U))
         {
             SwitchWithKeyTo(charactorUI);
@@ -110,6 +121,10 @@ public class UI : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.P))
         {
             SwitchWithKeyTo(optionUI);
+        }
+        else if (Input.GetKeyDown(KeyCode.M))
+        {
+            SwitchWithKeyTo(mapUI);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -173,19 +188,34 @@ public class UI : MonoBehaviour
 
     public void SwitchTo(GameObject _menu)
     {
-        for(int i = 0; i < transform.childCount; ++i)
+        mapCamera.gameObject.SetActive(true);
+        minmapCamera.gameObject.SetActive(true);
+        for (int i = 0; i < transform.childCount; ++i)
         {
-            bool isFadeScreen = transform.GetChild(i).GetComponent<UI_DarkScreen>() != null;
-            if (!isFadeScreen)
+            bool isFadeScreenOrCamera = 
+                transform.GetChild(i).GetComponent<UI_DarkScreen>() != null 
+                || transform.GetChild(i).GetComponentInChildren<Camera>() != null;
+            if (!isFadeScreenOrCamera)
             {
                 transform.GetChild(i).gameObject.SetActive(false);
             }
-            
         }
+        mapCamera.gameObject.SetActive(false);
+        minmapCamera.gameObject.SetActive(false);
 
-        if(_menu != null)
+        if (_menu != null)
         {
             _menu.SetActive(true);
+        }
+
+        if(_menu == mapUI)
+        {
+            mapCamera.gameObject.SetActive(true);
+        }
+
+        if(_menu == inGame)
+        {
+            minmapCamera.gameObject.SetActive(true);
         }
 
         if(GameManager.instance != null)
