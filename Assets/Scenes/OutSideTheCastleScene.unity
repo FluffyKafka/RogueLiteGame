@@ -1210,6 +1210,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerateManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4678375902910632755, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+      propertyPath: battleRoomPrefabs.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678375902910632755, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+      propertyPath: battleRoomPrefabs.Array.data[10]
+      value: 
+      objectReference: {fileID: 9122924721718098285, guid: 2da35f0e303610746a4bcbf6f0a4553d, type: 3}
+    - target: {fileID: 4678375902910632755, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+      propertyPath: battleRoomPrefabs.Array.data[11]
+      value: 
+      objectReference: {fileID: 9122924721718098285, guid: a71c71c3f1d81a7418a622e37c6c2abb, type: 3}
     - target: {fileID: 8554910269420605361, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.64
