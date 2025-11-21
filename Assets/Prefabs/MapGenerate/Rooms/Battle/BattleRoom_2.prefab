@@ -57658,6 +57658,8 @@ GameObject:
   - component: {fileID: 3907338423414277344}
   - component: {fileID: 4609138430096317945}
   - component: {fileID: 5375703291438582814}
+  - component: {fileID: 6432030736806128592}
+  - component: {fileID: 4465628166155704653}
   m_Layer: 0
   m_Name: BattleRoom_2
   m_TagString: Untagged
@@ -57751,6 +57753,64 @@ MonoBehaviour:
       advancedRewardRate: 10
       mimicRate: 50
       mimicAdvancedRewardRate: 20
+--- !u!61 &6432030736806128592
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122924721718098285}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 145.91629, y: 54.366825}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 98.76904, y: 123.00547}
+  m_EdgeRadius: 0
+--- !u!114 &4465628166155704653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122924721718098285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff15e3eadde63b4591872ea7236c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogLayerId: 0
 --- !u!1001 &2671209246006313448
 PrefabInstance:
   m_ObjectHideFlags: 0

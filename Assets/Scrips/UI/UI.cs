@@ -64,6 +64,8 @@ public class UI : MonoBehaviour
     [Header("MapUI")]
     public float mapFogDensityRate;
     public Vector2Int mapFogBeEliminatedShapeSize = new Vector2Int(2, 3);
+    public Color fogColor;
+    public int fogLayerId;
 
     private void Awake()
     {

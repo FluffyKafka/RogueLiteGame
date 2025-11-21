@@ -21,10 +21,17 @@ public class RoomFog : MonoBehaviour
     private Vector2 planeOriginPoint;
     private Vector2 worldSize;
 
+    private Color fogColor;
+    public int fogLayerId;
+
     // Start is called before the first frame update
     private void Start()
     {
+        fogColor = UI.instance.fogColor;
+        fogLayerId = UI.instance.fogLayerId;
+
         roomBox = GetComponent<BoxCollider2D>();
+        roomBox.isTrigger = true;
         playerTransform = PlayerManager.instance.player.transform;
 
         beEliminatedShapeSize = UI.instance.mapFogBeEliminatedShapeSize;
@@ -38,6 +45,8 @@ public class RoomFog : MonoBehaviour
         fogSpriteRender = fog.AddComponent<SpriteRenderer>();
         fogSpriteRender.sortingLayerName = "UI";
         fog.transform.localPosition = (Vector3)roomBox.offset;
+        fog.layer = fogLayerId;
+        
 
         fogDensity = new Vector2Int(Mathf.RoundToInt(roomBox.bounds.size.x * fogDensityRate), Mathf.RoundToInt(roomBox.bounds.size.y * fogDensityRate));
 
@@ -92,7 +101,7 @@ public class RoomFog : MonoBehaviour
         Color[] blackColors = new Color[pixelCount];
         for (int i = 0; i < pixelCount; i++)
         {
-            blackColors[i] = Color.black;
+            blackColors[i] = fogColor;
         }
         fogTexture.SetPixels(blackColors);
 

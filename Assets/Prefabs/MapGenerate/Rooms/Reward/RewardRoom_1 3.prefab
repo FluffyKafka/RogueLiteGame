@@ -1156,7 +1156,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 18
-      m_TileSpriteIndex: 18
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1301,16 +1301,16 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: dcaf597846903e54b91fde9ac0beef4c, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 636d43db49409984bb6c26af74278d31, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: 2f207e3ad6ac13c49aa6ff7e5969f89e, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300000, guid: 0f491d38c2652ec4d9a5b12d04ce685e, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: dcaf597846903e54b91fde9ac0beef4c, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300000, guid: b1df19b84f06d0247bc6554cab5a722a, type: 3}
   - m_RefCount: 1
@@ -6640,6 +6640,8 @@ GameObject:
   - component: {fileID: 1682425348893156144}
   - component: {fileID: 484926721709005172}
   - component: {fileID: 632805197242400930}
+  - component: {fileID: 2378700520618864561}
+  - component: {fileID: 3595318504904898111}
   m_Layer: 0
   m_Name: RewardRoom_1 3
   m_TagString: Untagged
@@ -6715,6 +6717,64 @@ MonoBehaviour:
   - {fileID: 4137420884495202959}
   - {fileID: 1084967780225788503}
   - {fileID: 7450858091456434715}
+--- !u!61 &2378700520618864561
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287352890654296562}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.7403145, y: 0.76975536}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 45.043335, y: 31.589373}
+  m_EdgeRadius: 0
+--- !u!114 &3595318504904898111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8287352890654296562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff15e3eadde63b4591872ea7236c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogLayerId: 0
 --- !u!1 &8965697045918517067
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,7 +69,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 11
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -319,7 +319,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 1
-      m_TileSpriteIndex: 1
+      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -329,7 +329,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1182,14 +1182,14 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: 5f63243b766321d49a1712958eeb6832, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: a3036aee198b81844b0cd72f1d750767, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 21300000, guid: afdae31bc81d124438bb1f81eae6040c, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 25
     m_Data: {fileID: 21300000, guid: e5db2e6269cab6942b3c1a074c187b31, type: 3}
   - m_RefCount: 3
@@ -1200,12 +1200,12 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 26075e6099ebb844aaf0a6405ebb02f6, type: 3}
   - m_RefCount: 34
     m_Data: {fileID: 21300000, guid: 4be2c34154b4b20429143bf5a0400d64, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: 5f63243b766321d49a1712958eeb6832, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: a3036aee198b81844b0cd72f1d750767, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300000, guid: afdae31bc81d124438bb1f81eae6040c, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 111
     m_Data:
@@ -1505,6 +1505,8 @@ GameObject:
   - component: {fileID: 2024570730257880279}
   - component: {fileID: 5520590525375492491}
   - component: {fileID: -7446967429913251985}
+  - component: {fileID: 7053253796414348310}
+  - component: {fileID: 6233966177646850860}
   m_Layer: 0
   m_Name: Passage_verticalDown
   m_TagString: Untagged
@@ -1580,6 +1582,64 @@ MonoBehaviour:
   minDecorationAmount: 0
   maxDecorationAmount: 0
   groundTilemap: {fileID: 4438462839777258000}
+--- !u!61 &7053253796414348310
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5519137933671674140}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -6.474451, y: -2.0927505}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 51.35684, y: 69.014435}
+  m_EdgeRadius: 0
+--- !u!114 &6233966177646850860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5519137933671674140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff15e3eadde63b4591872ea7236c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fogLayerId: 0
 --- !u!1 &5616348507619446011
 GameObject:
   m_ObjectHideFlags: 0
