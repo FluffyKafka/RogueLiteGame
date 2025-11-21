@@ -2,15 +2,17 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
+//需要设置一个BoxCollider2D用于标记迷雾生成范围
+[RequireComponent(typeof(BoxCollider2D))]
 public class RoomFog : MonoBehaviour
 {
-    public SpriteRenderer fogSpriteRender;//房间的迷雾图片
+    private SpriteRenderer fogSpriteRender;//房间的迷雾图片
     private BoxCollider2D roomBox;
     private Transform playerTransform;//玩家位置
 
-    public float fogDensityRate;
-    public Vector2Int fogDensity;
-    public Vector2Int beEliminatedShapeSize = new Vector2Int(3, 6);
+    private float fogDensityRate;
+    private Vector2Int fogDensity;
+    private Vector2Int beEliminatedShapeSize;
 
     private Texture2D fogTexture;
 
@@ -19,18 +21,23 @@ public class RoomFog : MonoBehaviour
     private Vector2 planeOriginPoint;
     private Vector2 worldSize;
 
-    [Header("Debug")]
-    public Transform origin;
-    public Transform playerT;
-
     // Start is called before the first frame update
     private void Start()
     {
+        roomBox = GetComponent<BoxCollider2D>();
+        playerTransform = PlayerManager.instance.player.transform;
+
+        beEliminatedShapeSize = UI.instance.mapFogBeEliminatedShapeSize;
+        fogDensityRate = UI.instance.mapFogDensityRate;
+
         beEliminatedShapeSize = 
             new Vector2Int(Mathf.RoundToInt(beEliminatedShapeSize.x * fogDensityRate), Mathf.RoundToInt(beEliminatedShapeSize.y * fogDensityRate));
 
-        roomBox = GetComponent<BoxCollider2D>();
-        playerTransform = PlayerManager.instance.player.transform;
+        GameObject fog = new GameObject("Fog");
+        fog.transform.SetParent(transform);
+        fogSpriteRender = fog.AddComponent<SpriteRenderer>();
+        fogSpriteRender.sortingLayerName = "UI";
+        fog.transform.localPosition = (Vector3)roomBox.offset;
 
         fogDensity = new Vector2Int(Mathf.RoundToInt(roomBox.bounds.size.x * fogDensityRate), Mathf.RoundToInt(roomBox.bounds.size.y * fogDensityRate));
 
@@ -43,7 +50,6 @@ public class RoomFog : MonoBehaviour
         worldSize = roomBox.bounds.size;
         //将plane的坐标减去它尺寸的一半,即可得到它的左下角的坐标
         planeOriginPoint = roomBox.bounds.min;
-        origin.position = planeOriginPoint;
 
         InitializeTheShape();
         InitializeTheFog();
@@ -99,13 +105,13 @@ public class RoomFog : MonoBehaviour
         //相对假定原点的距离比例,因为是世界坐标,两个点相减有可能是负数,texture中不存在负数的坐标,所以转化为正数.
         Vector2 originDistanceRatio = (playerPos - planeOriginPoint) / worldSize;
         originDistanceRatio.Set(Mathf.Abs(originDistanceRatio.x), Mathf.Abs(originDistanceRatio.y));
-        //距离比例乘以密度,即可知道cube相当在texture中的点即可计算出来
+        //距离比例乘以密度,玩家在texture中的点即可计算出来
         Vector2Int fogCenter = new Vector2Int(Mathf.RoundToInt(originDistanceRatio.x * fogDensity.x), Mathf.RoundToInt(originDistanceRatio.y * fogDensity.y));
         for (int i = 0; i < shapeLocalPosition.Length; i++)
         {
             int x = shapeLocalPosition[i].x + fogCenter.x;
             int y = shapeLocalPosition[i].y + fogCenter.y;
-            //因为消除迷雾的形状是比cube的位置还要大的,在最边缘的时候,消除的像素点的坐标会超出texture范围,所以超出部分忽略.
+            //因为消除迷雾的形状是比玩家的位置还要大的,在最边缘的时候,消除的像素点的坐标会超出texture范围,所以超出部分忽略.
             if (x < 0 || x >= fogDensity.x || y < 0 || y >= fogDensity.y)
                 continue;
 

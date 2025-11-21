@@ -27450,7 +27450,7 @@ MonoBehaviour:
   mapUI: {fileID: 4574298828267113930}
   optionUI: {fileID: 303191845190377493}
   inGame: {fileID: 7202875027904286577}
-  camera: {fileID: 0}
+  camera: {fileID: 3771684771093307590}
   darkScreen: {fileID: 2713860477480808267}
   deadMessage: {fileID: 5541026972245748441}
   deadMessageDelay: 0.5
@@ -27466,8 +27466,10 @@ MonoBehaviour:
   armorCraftList: {fileID: 3909475042051797352}
   amuletCraftList: {fileID: 2718507774504841611}
   flaskCraftList: {fileID: 2185926878804790650}
-  minmapCamera: {fileID: 0}
-  mapCamera: {fileID: 0}
+  minmapCamera: {fileID: 2626864339851482276}
+  mapCamera: {fileID: 1089850346262560714}
+  mapFogDensityRate: 10
+  mapFogBeEliminatedShapeSize: {x: 2, y: 3}
   skillParentSlot: {fileID: 6695855095436691497}
   isSkillTesting: 1
 --- !u!1 &3998309242765909973
@@ -51216,7 +51218,7 @@ Transform:
   m_GameObject: {fileID: 7033209648328887106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.74721, y: 13.807135, z: -9.995027}
+  m_LocalPosition: {x: -8.933913, y: 9.798538, z: -6.911692}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

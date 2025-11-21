@@ -26,7 +26,7 @@ public class UI : MonoBehaviour
     [SerializeField] public GameObject mapUI;
     [SerializeField] public GameObject optionUI;
     [SerializeField] public GameObject inGame;
-    [SerializeField] public GameObject camera;
+    [SerializeField] public GameObject cameraUI;
 
     [Header("FadeScreen")]
     [SerializeField] public UI_DarkScreen darkScreen;
@@ -60,6 +60,10 @@ public class UI : MonoBehaviour
     [Header("Camera")]
     public Camera minmapCamera;
     public Camera mapCamera;
+
+    [Header("MapUI")]
+    public float mapFogDensityRate;
+    public Vector2Int mapFogBeEliminatedShapeSize = new Vector2Int(2, 3);
 
     private void Awake()
     {

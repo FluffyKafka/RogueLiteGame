@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
-
+[RequireComponent(typeof(RoomFog))]
 public class Room : MonoBehaviour
 {
     protected RoomType type;
