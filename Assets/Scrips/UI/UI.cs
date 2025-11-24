@@ -26,6 +26,7 @@ public class UI : MonoBehaviour
     [SerializeField] public GameObject mapUI;
     [SerializeField] public GameObject optionUI;
     [SerializeField] public GameObject inGame;
+    [SerializeField] public GameObject pauseMenuUI;
     [SerializeField] public GameObject cameraUI;
 
     [Header("FadeScreen")]
@@ -137,7 +138,7 @@ public class UI : MonoBehaviour
         {
             if (inGame.activeSelf)
             {
-                SwitchWithKeyTo(charactorUI);
+                SwitchWithKeyTo(pauseMenuUI);
             }
             else
             {
@@ -226,13 +227,17 @@ public class UI : MonoBehaviour
 
         if(GameManager.instance != null)
         {
-            if(_menu != inGame)
+            if(_menu == pauseMenuUI)
+            {
+                GameManager.instance.SetPauseGameForce(true);
+            }
+            else if(_menu != inGame)
             {
                 GameManager.instance.SetPauseGame(true);
             }
             else
             {
-                GameManager.instance.SetPauseGame(false);
+                GameManager.instance.SetPauseGameForce(false);
             }
         }
 
@@ -241,7 +246,11 @@ public class UI : MonoBehaviour
 
     private void SwitchWithKeyTo(GameObject _menu)
     {
-        if (GameManager.instance.CanPause())
+        if(_menu == pauseMenuUI || _menu == inGame)
+        {
+            SwitchTo(_menu);
+        }
+        else if (GameManager.instance.CanPause())
         {
             if (_menu != null && _menu.activeSelf)
             {

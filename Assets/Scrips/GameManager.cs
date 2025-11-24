@@ -105,6 +105,17 @@ public class GameManager : MonoBehaviour, ISaveManager
             Time.timeScale = 1f;
         }
     }
+    public void SetPauseGameForce(bool _isPause)
+    {
+        if (_isPause)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
 
     public bool CanPause()
     {
