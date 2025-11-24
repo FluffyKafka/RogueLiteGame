@@ -22,7 +22,7 @@ public class RoomFog : MonoBehaviour
     private Vector2 worldSize;
 
     private Color fogColor;
-    public int fogLayerId;
+    private int fogLayerId;
 
     // Start is called before the first frame update
     private void Start()
