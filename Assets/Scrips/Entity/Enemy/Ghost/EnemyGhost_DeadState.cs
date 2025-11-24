@@ -14,7 +14,6 @@ public class EnemyGhost_DeadState : EnemyGhost_StateBase
         base.Enter();
 
         enemy.SetVelocity(0, 0);
-        enemy.Stop();
 
         enemy.anim.SetBool(enemy.lastAnimBoolName, true);
         enemy.anim.speed = 0;

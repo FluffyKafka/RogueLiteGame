@@ -1019,9 +1019,10 @@ MonoBehaviour:
   checkPointArray: []
   lastCheckPoint: {fileID: 0}
   isPlayerRemainingExist: 0
-  playerRemainingPosition: {x: 0, y: 0, z: 0}
+  playerRemainingSceneName: 
   playerLeftCurrency: 0
   playerRemainingPrefab: {fileID: 7480426342246956646, guid: 0aec823454a1c764a878e12f56921f34, type: 3}
+  playerRemainingTransform: {fileID: 0}
   preGameSceneName: PreGameRoomScene
   pauseTimeSpeedDivider: 1000
   isBattle: 0
@@ -1053,7 +1054,7 @@ Transform:
   m_GameObject: {fileID: 7526490974668189074}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.727173, y: -2.0428162, z: -9.995028}
+  m_LocalPosition: {x: -20.03717, y: 11.157166, z: -9.995028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1164,7 +1165,7 @@ Transform:
   m_GameObject: {fileID: 8761928616420182613}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.847168, y: 3.2671814, z: -9.995028}
+  m_LocalPosition: {x: -20.03717, y: 11.157166, z: -9.995028}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1321,11 +1322,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3790336066899341413, guid: bcff18127d2dd104f928e9b3807258d5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -635.8
+      value: -630.11
       objectReference: {fileID: 0}
     - target: {fileID: 3790336066899341413, guid: bcff18127d2dd104f928e9b3807258d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -376.3
+      value: -363.1
       objectReference: {fileID: 0}
     - target: {fileID: 3790336066899341413, guid: bcff18127d2dd104f928e9b3807258d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1574,11 +1575,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005626515760757635, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.533903
+      value: -16.708681
       objectReference: {fileID: 0}
     - target: {fileID: 2005626515760757635, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.8327394
+      value: 18.02659
       objectReference: {fileID: 0}
     - target: {fileID: 2005626515760757635, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1948,6 +1949,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6502979192824782315, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame_PlayerRemaining
+      objectReference: {fileID: 0}
     - target: {fileID: 6579133488367131904, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: mainCamera
       value: 
@@ -2002,11 +2007,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7032929013875049017, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.115862
+      value: -16.708681
       objectReference: {fileID: 0}
     - target: {fileID: 7032929013875049017, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.335728
+      value: 18.02659
       objectReference: {fileID: 0}
     - target: {fileID: 7032929013875049017, guid: cb5d3dc709b3f474fa80b0df348dc00b, type: 3}
       propertyPath: m_LocalPosition.z

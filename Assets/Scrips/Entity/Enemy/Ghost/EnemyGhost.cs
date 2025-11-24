@@ -115,6 +115,7 @@ public class EnemyGhost : Enemy
     {
         if (!isDead)
         {
+            navMeshAgent.enabled = false;
             stateMachine.ChangeState(deadState);
             base.Die();
             rg.isKinematic = false;

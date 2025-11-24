@@ -50,7 +50,7 @@ public class Entity : MonoBehaviour
 
     [SerializeField] float selfDestroyAfterDead = 10f;
 
-    public bool isDead { get; protected set; }
+    public bool isDead;
 
     private float defaultGravity;
 

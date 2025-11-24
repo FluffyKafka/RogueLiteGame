@@ -50,6 +50,15 @@ public class SaveManager : MonoBehaviour
         fileDataHandler.Save(gameData);
     }
 
+    public void NewGameWithPlayerRemaining(string _sceneName, int _currency)
+    {
+        gameData = new GameData();
+        gameData.isPlayerRemainingExist = true;
+        gameData.playerRemainingSceneName = _sceneName;
+        gameData.playerLeftCurrency = _currency;
+        fileDataHandler.Save(gameData);
+    }
+
     public void LoadGame()
     {
         gameData = fileDataHandler.Load();

@@ -98,6 +98,10 @@ public class Player : Entity
     public int jumpCountMax = 2;
     public ParticleSystem secondJumpFX;
 
+    [Header("PlayerRemaining Info")]
+    [Range(0, 1)] public float maxPlayerCurrencyRemainRate = 0.1f;
+    [Range(0, 1)] public float minPlayerCurrencyRemainRate = 0.05f;
+
     override protected void Awake()
     {
         base.Awake();

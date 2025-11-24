@@ -276,6 +276,12 @@ public class UI : MonoBehaviour
         GameManager.instance.Invoke("RestartGame", deadMessage.fadeDuration);
     }
 
+    public void RestartGame_PlayerRemaining()
+    {
+        deadMessage.FadeOut();
+        GameManager.instance.Invoke("RestartGame_PlayerRemaining", deadMessage.fadeDuration);
+    }
+
     public void Speak(Sentence _sentence)
     {
         if(!communicationBlock.gameObject.activeSelf)

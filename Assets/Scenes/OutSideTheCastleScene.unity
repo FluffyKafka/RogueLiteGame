@@ -899,6 +899,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8832721177689779337, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
+      propertyPath: playerRemainingTransform
+      value: 
+      objectReference: {fileID: 1452455282}
     - target: {fileID: 8872040301643469762, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2500,6 +2504,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fc0e2d93bdc1648a5573281a35c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1452455282 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8574192472112455044, guid: 291915a24160b72429e1205dcacd34f7, type: 3}
+  m_PrefabInstance: {fileID: 1452455280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755032874
 GameObject:
   m_ObjectHideFlags: 0

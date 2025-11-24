@@ -12,6 +12,9 @@ public class PlayerRemaining : MonoBehaviour
         {
             PlayerManager.instance.AddCurrencyAmount(currencyAmount);
             GameManager.instance.isPlayerRemainingExist = false;
+            GameManager.instance.playerLeftCurrency = 0;
+            GameManager.instance.playerRemainingSceneName = "";
+            SaveManager.instance.SaveGame();
             Destroy(gameObject);
         }
     }

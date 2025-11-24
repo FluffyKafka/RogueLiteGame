@@ -10,9 +10,10 @@ public class GameManager : MonoBehaviour, ISaveManager
     public CheckPoint lastCheckPoint = null;
 
     public bool isPlayerRemainingExist;
-    public Vector3 playerRemainingPosition;
+    public string playerRemainingSceneName;
     public int playerLeftCurrency;
     [SerializeField] private GameObject playerRemainingPrefab;
+    [SerializeField] private Transform playerRemainingTransform;
 
     [SerializeField] private string preGameSceneName;
     [SerializeField] public float pauseTimeSpeedDivider = 100f;//暂停时将游戏速度降低到极低
@@ -49,16 +50,23 @@ public class GameManager : MonoBehaviour, ISaveManager
         SceneManager.LoadScene(preGameSceneName);
     }
 
+    public void RestartGame_PlayerRemaining()
+    {
+        SaveManager.instance.NewGameWithPlayerRemaining(playerRemainingSceneName, playerLeftCurrency);
+        SceneManager.LoadScene(preGameSceneName);
+    }
+
     public void LoadData(GameData _data)
     {
         isPlayerRemainingExist = _data.isPlayerRemainingExist;
         playerLeftCurrency = _data.playerLeftCurrency;
-        playerRemainingPosition = _data.playerRemainingPosition;
+        playerRemainingSceneName = _data.playerRemainingSceneName;
 
-        if(isPlayerRemainingExist)
+        if(isPlayerRemainingExist && playerRemainingSceneName == SceneManager.GetActiveScene().name)
         {
-            PlayerRemaining playerRemaining = Instantiate(playerRemainingPrefab, playerRemainingPosition, Quaternion.identity).
-                GetComponent<PlayerRemaining>();
+            PlayerRemaining playerRemaining = 
+                Instantiate(playerRemainingPrefab, playerRemainingTransform.position, Quaternion.identity)
+                .GetComponentInChildren<PlayerRemaining>();
             playerRemaining.Setup(playerLeftCurrency);
         }
     }
@@ -67,7 +75,7 @@ public class GameManager : MonoBehaviour, ISaveManager
     {
         _data.isPlayerRemainingExist = isPlayerRemainingExist;
         _data.playerLeftCurrency = playerLeftCurrency;
-        _data.playerRemainingPosition = playerRemainingPosition;
+        _data.playerRemainingSceneName = playerRemainingSceneName;
     }
 
     public CheckPoint TryGetClosestCheckPointToPlayer()

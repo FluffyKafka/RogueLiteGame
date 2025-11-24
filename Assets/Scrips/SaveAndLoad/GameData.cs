@@ -20,7 +20,7 @@ public class GameData
     public SerializableDictionary<string, bool> skillTree;
 
     public bool isPlayerRemainingExist;
-    public Vector3 playerRemainingPosition;
+    public string playerRemainingSceneName;
     public int playerLeftCurrency;
 
     public bool isPlayerHealthBarActive;
@@ -43,7 +43,7 @@ public class GameData
         skillTree = new SerializableDictionary<string, bool>();
 
         isPlayerRemainingExist = false;
-        playerRemainingPosition = Vector3.zero;
+        playerRemainingSceneName = "";
         playerLeftCurrency = 0;
 
         bgmVolume = 0.3688f;

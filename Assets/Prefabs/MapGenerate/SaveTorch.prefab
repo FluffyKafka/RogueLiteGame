@@ -154,8 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fc0e2d93bdc1648a5573281a35c041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backAnim: {fileID: 1052156961556571383}
   anim: {fileID: 3005291104793892169}
+  id: 
+  isCheck: 0
+  backAnim: {fileID: 1052156961556571383}
   loadSceneName: 
 --- !u!61 &2606624744496497945
 BoxCollider2D:
