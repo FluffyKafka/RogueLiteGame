@@ -195,6 +195,7 @@ MonoBehaviour:
   pickUpCooldown: 0.5
   pickUpVelocity: 7
   pickUpDuration: 0.1
+  CannotPickUpWarning: "\u80CC\u5305\u5DF2\u6EE1"
 --- !u!50 &2314006418117897373
 Rigidbody2D:
   serializedVersion: 4
@@ -208,7 +209,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1.5
   m_AngularDrag: 0.05
   m_GravityScale: 4
   m_Material: {fileID: 0}

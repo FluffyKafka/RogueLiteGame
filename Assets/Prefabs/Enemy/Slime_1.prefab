@@ -9983,7 +9983,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 10
   m_Material: {fileID: 0}
@@ -10056,6 +10056,7 @@ MonoBehaviour:
     m_Bits: 0
   attackValidCheck: {fileID: 3424978705003409059}
   attackValidCheckRadius: 1.5
+  groundCheckDistanceDivider: 3
   isFacingLeft: 1
   facingDir: -1
   entityName: "\u5C0F\u53F2\u83B1\u59C6"
@@ -10065,6 +10066,8 @@ MonoBehaviour:
   knockBackDuration: 0.07
   isKnocked: 0
   selfDestroyAfterDead: 10
+  canBeDamage_current: 0
+  canBeDamage: 0
   difficulty: 10
   moveSpeed: 2
   maxIdleDuration: 4
@@ -10172,6 +10175,12 @@ MonoBehaviour:
   magicResistance:
     baseValue: 0
     modifiers: []
+  maxFlaskUsageTime:
+    baseValue: 0
+    modifiers: []
+  flaskUsageRecover:
+    baseValue: 0
+    modifiers: []
   damage:
     baseValue: 10
     modifiers: []
@@ -10179,6 +10188,9 @@ MonoBehaviour:
     baseValue: 10
     modifiers: []
   critPower:
+    baseValue: 0
+    modifiers: []
+  attackSpeed:
     baseValue: 0
     modifiers: []
   fireDamage:
@@ -10190,6 +10202,36 @@ MonoBehaviour:
   lightningDamage:
     baseValue: 0
     modifiers: []
+  fireDuration:
+    baseValue: 0
+    modifiers: []
+  iceDuration:
+    baseValue: 0
+    modifiers: []
+  lightningDuration:
+    baseValue: 0
+    modifiers: []
+  fireDamageCooldown:
+    baseValue: 0
+    modifiers: []
+  fireDamageTransform:
+    baseValue: 0
+    modifiers: []
+  chillArmorReduce:
+    baseValue: 0
+    modifiers: []
+  chillSlowRate:
+    baseValue: 0
+    modifiers: []
+  shockAccuracyReduce:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeCount:
+    baseValue: 0
+    modifiers: []
+  thunderStrikeRate:
+    baseValue: 0
+    modifiers: []
   defaultCritPower: 150
   strength_damage: 1
   strength_critPower: 1
@@ -10197,24 +10239,16 @@ MonoBehaviour:
   agility_critChance: 1
   intelligence_magicDamage: 1
   intelligence_magicResistance: 3
+  intelligence_magicDuration: 0.5
   vitality_maxHealth: 3
-  igniteDuration: 4
-  ignite_damageCooldown: 0.3
-  rateFireDamageTransformToIgniteDamage: 20
-  chillDuration: 4
-  chill_reduceArmorPer: 20
-  chillSlowPercentage: 20
-  shockDuration: 4
-  shock_reduceAccuracy: 20
   thunderAttackPrefab: {fileID: 5212529744642923041, guid: 0aea55587a3c39843aa5c3bf00b08222, type: 3}
   thunderStrikeRadius: 25
-  thunderStrikeRate: 50
-  thunderStrikerCounter: 4
   currentHealth: 0
   igniteStateDamage: 0
   isIgnited: 0
   isChilled: 0
   isShock: 0
+  minFireDamageCooldown: 0.1
   level: 0
   percantageModifier: 0
   currencyDropAmount:
