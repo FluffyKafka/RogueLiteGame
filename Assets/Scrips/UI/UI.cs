@@ -230,21 +230,24 @@ public class UI : MonoBehaviour
             if(_menu == pauseMenuUI)
             {
                 GameManager.instance.SetPauseGameForce(true);
+                PlayerManager.instance.player.SetCanInput(false);
             }
             else if(_menu != inGame)
             {
                 GameManager.instance.SetPauseGame(true);
+                PlayerManager.instance.player.SetCanInput(false);
             }
             else
             {
                 GameManager.instance.SetPauseGameForce(false);
+                PlayerManager.instance.player.SetCanInput(true);
             }
         }
 
         SceneAudioManager.instance.uiSFX?.buttonClick.Play(null);
     }
 
-    private void SwitchWithKeyTo(GameObject _menu)
+    public void SwitchWithKeyTo(GameObject _menu)
     {
         if(_menu == pauseMenuUI || _menu == inGame)
         {
