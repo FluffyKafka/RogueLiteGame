@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    private Animator anim;
+    [SerializeField] protected Animator anim;
     public string id;
     public bool isCheck = false;
 

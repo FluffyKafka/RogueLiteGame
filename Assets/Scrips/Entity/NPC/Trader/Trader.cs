@@ -23,6 +23,8 @@ public class Trader : NPC, IPlayerCommunicable
 
     [HideInInspector] public List<Sentence> currentDialog;
     [HideInInspector] public int sentenceIndex = 0;
+    [Header("此选项决定商人的商品库来自于inventory的统一库还是此商人具有独立商品库")]
+    [SerializeField] public bool isGetGoodsFromInventory = true;
 
     public void Talk(Player _player)
     {

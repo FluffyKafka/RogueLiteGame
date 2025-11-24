@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class SaveTorch : CheckPoint, ISaveManager
 {
     [SerializeField] private Animator backAnim;
-    [SerializeField] private Animator anim;
     [SerializeField] private string loadSceneName = string.Empty;
     private bool isLighting = false;
 

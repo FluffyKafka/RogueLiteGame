@@ -50,6 +50,9 @@ public class Inventory : MonoBehaviour, ISaveManager
     [SerializeField] private bool isNewGame = true;
     [SerializeField] private SerializableDictionary<string, ItemData> itemDatabase;
 
+    [Header("TradeGoods")]
+    public List<ItemData> tradeGoods;
+
     private void Awake()
     {
         if(instance != null)
@@ -561,34 +564,40 @@ public class Inventory : MonoBehaviour, ISaveManager
     }
 
 #if UNITY_EDITOR
-    [ContextMenu("Fill Up Item Database")]
+    [ContextMenu("Fill Up Item Database And Craft And TradeGoods")]
     private void GetItemDatabase()
     {
         string[] assetNames = AssetDatabase.FindAssets("t:ItemData", new[] {"Assets/Scrips/Item/ItemData"});
 
-        foreach(string SOName in assetNames)
-        {
-            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
-            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
-            itemDatabase.Add(itemData.itemId, itemData);
-        }
-
+        itemDatabase.Clear();
+        tradeGoods.Clear();
         foreach (string SOName in assetNames)
         {
             var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
             var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
-            if(itemData is ItemData_Equipment)
+
+            //数据库           
+            itemDatabase.Add(itemData.itemId, itemData);
+
+            //制作页面
+            if (itemData is ItemData_Equipment)
             {
                 var equipment = itemData as ItemData_Equipment;
                 equipment.craftingMaterials.Clear();
                 foreach (int id in equipment.craftsId)
                 {
                     ItemData craft;
-                    if(id >= 0 && itemDatabase.TryGetValue(id.ToString(), out craft))
+                    if (id >= 0 && itemDatabase.TryGetValue(id.ToString(), out craft))
                     {
                         equipment.craftingMaterials.Add(new InventoryItem(craft));
                     }
                 }
+            }
+
+            //商人商品
+            if(itemData.price > 0)
+            {
+                tradeGoods.Add(itemData);
             }
         }
     }

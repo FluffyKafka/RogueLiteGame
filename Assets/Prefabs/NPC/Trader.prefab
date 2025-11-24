@@ -141,10 +141,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81ab45b7c5e236f428ee14c4458bfda4, type: 2}
   - {fileID: 11400000, guid: d17d0ea0645c11d4f9bfe276a2506c68, type: 2}
   - {fileID: 11400000, guid: 12ab6b390872dc744bbc21d7d61a6a56, type: 2}
-  productAmount: 3
+  productAmount: 5
   products: []
   currentDialog: []
   sentenceIndex: 0
+  isGetGoodsFromInventory: 1
 --- !u!1 &1219894126208469344
 GameObject:
   m_ObjectHideFlags: 0

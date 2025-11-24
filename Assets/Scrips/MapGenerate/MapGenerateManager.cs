@@ -178,7 +178,6 @@ public class Line
     }
 }
 
-
 public struct RoomGenerateStruct
 {
     public int index;
@@ -229,6 +228,7 @@ public class MapGenerateManager : MonoBehaviour
 
     [Header("Branch Info")]
     [SerializeField] public float branchYOffset;
+
 
     private List<RoomGenerateStruct> roomsToGenerate;
 

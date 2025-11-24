@@ -17,13 +17,28 @@ public class Trader_TradeState : Trader_BusyState
         {
             List<ItemData> productList = new List<ItemData>();
 
-            foreach (var item in npc.possibleItems)
+            if(npc.isGetGoodsFromInventory)
             {
-                productList.Add(item);
+                foreach (var item in Inventory.instance.tradeGoods)
+                {
+                    productList.Add(item);
+                }
             }
+            else
+            {
+                foreach (var item in npc.possibleItems)
+                {
+                    productList.Add(item);
+                }
+            }   
 
             while (npc.products.Count < npc.productAmount && productList.Count > 0)
             {
+                if(productList.Count == 0)
+                {
+                    break;
+                }
+
                 int randomIndex = Random.Range(0, productList.Count);
                 ItemData randomProduct = productList[randomIndex];
 
