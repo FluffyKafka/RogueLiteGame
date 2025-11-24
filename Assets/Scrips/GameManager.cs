@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour, ISaveManager
 {
     public static GameManager instance;
     [SerializeField] private CheckPoint[] checkPointArray;
+    public CheckPoint lastCheckPoint = null;
 
     public bool isPlayerRemainingExist;
     public Vector3 playerRemainingPosition;

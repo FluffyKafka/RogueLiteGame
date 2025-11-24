@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SaveTorch : MonoBehaviour, ISaveManager
+public class SaveTorch : CheckPoint, ISaveManager
 {
     [SerializeField] private Animator backAnim;
     [SerializeField] private Animator anim;
@@ -12,6 +12,10 @@ public class SaveTorch : MonoBehaviour, ISaveManager
 
     private bool isSaving = false;
 
+    protected override void Start()
+    {
+        
+    }
     public void LoadData(GameData _data)
     {
         
@@ -32,8 +36,10 @@ public class SaveTorch : MonoBehaviour, ISaveManager
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D _collision)
+    protected override void OnTriggerEnter2D(Collider2D _collision)
     {
+        base.OnTriggerEnter2D(_collision);
+
         if(isLighting)
         {
             return;

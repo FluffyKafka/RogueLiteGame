@@ -285,15 +285,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.317653
+      value: -11.37465
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.498835
+      value: 11.691882
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.876336
+      value: -8.475229
       objectReference: {fileID: 0}
     - target: {fileID: 4067415788836736471, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.y
@@ -385,15 +385,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.317653
+      value: -11.37465
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.498835
+      value: 11.691882
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.876336
+      value: -8.475229
       objectReference: {fileID: 0}
     - target: {fileID: 7047496709398620276, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2025,6 +2025,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 291915a24160b72429e1205dcacd34f7, type: 3}
+--- !u!114 &1452455281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7944244566448664220, guid: 291915a24160b72429e1205dcacd34f7, type: 3}
+  m_PrefabInstance: {fileID: 1452455280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fc0e2d93bdc1648a5573281a35c041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1755032874
 GameObject:
   m_ObjectHideFlags: 0
@@ -6624,6 +6635,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3348774064148390699, guid: 96e94e61ab7afe44687a2cdde53ef31f, type: 3}
+      propertyPath: checkPoint
+      value: 
+      objectReference: {fileID: 1452455281}
     - target: {fileID: 5423799503689756269, guid: 96e94e61ab7afe44687a2cdde53ef31f, type: 3}
       propertyPath: m_Name
       value: DeadZone

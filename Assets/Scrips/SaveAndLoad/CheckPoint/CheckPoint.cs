@@ -8,22 +8,23 @@ public class CheckPoint : MonoBehaviour
     public string id;
     public bool isCheck = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         anim = GetComponent<Animator>();
     }
 
     [ContextMenu("Generate checkpoint id")]
-    private void GenerateId()
+    protected void GenerateId()
     {
         id = System.Guid.NewGuid().ToString();
     }
 
-    private void OnTriggerEnter2D(Collider2D _collision)
+    protected virtual void OnTriggerEnter2D(Collider2D _collision)
     {
         if(_collision.GetComponent<Player>() != null)
         {
             Check();
+            GameManager.instance.lastCheckPoint = this;
         }
     }
 

@@ -946,6 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointArray: []
+  lastCheckPoint: {fileID: 0}
   isPlayerRemainingExist: 0
   playerRemainingPosition: {x: 0, y: 0, z: 0}
   playerLeftCurrency: 0
