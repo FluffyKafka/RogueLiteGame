@@ -121,4 +121,14 @@ public class GameManager : MonoBehaviour, ISaveManager
     {
         return !isBattle;
     }
+
+    public void SaveAndExit()
+    {
+        SaveManager.instance.SaveGame();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
+    }
 }
