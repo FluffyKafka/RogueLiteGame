@@ -301,4 +301,10 @@ public class Enemy : Entity
         Vector2 enemyPos = transform.position;
         return Vector2.Distance(playerPos, enemyPos);
     }
+
+    public override bool IsTouchWall()
+    {
+        return base.IsTouchWall() 
+            || Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsPlatform); ;
+    }
 }
