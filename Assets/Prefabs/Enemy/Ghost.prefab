@@ -15463,7 +15463,7 @@ MonoBehaviour:
   canBeDamage_current: 0
   canBeDamage: 0
   difficulty: 10
-  moveSpeed: 5
+  moveSpeed: 4
   maxIdleDuration: 2
   minIdleDuration: 1
   playerCheck: {fileID: 1311767288004307673}
@@ -15477,7 +15477,7 @@ MonoBehaviour:
   maxAttackCooldown: 1.5
   lastAttackTime: 0
   battleDuration: 10
-  battleMoveSpeed: 10
+  battleMoveSpeed: 6
   stunDuration: 0.7
   stunDir: {x: 10, y: 12}
   counterImage: {fileID: 1806841536432341759}
