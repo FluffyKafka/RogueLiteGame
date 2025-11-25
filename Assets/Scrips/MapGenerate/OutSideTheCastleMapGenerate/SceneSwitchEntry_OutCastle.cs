@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitchEntry : MonoBehaviour, IPlayerEnterable
+public class SceneSwitchEntry_OutCastle : MonoBehaviour, IPlayerEnterable
 {
     [SerializeField] private string sceneName;
 

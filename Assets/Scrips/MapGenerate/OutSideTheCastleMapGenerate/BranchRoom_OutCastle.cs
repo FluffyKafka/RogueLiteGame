@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BranchRoom : Room
+public class BranchRoom_OutCastle : Room_OutCastle
 {
     [SerializeField] private Door door;
     private bool isBranch = false;
@@ -24,7 +24,7 @@ public class BranchRoom : Room
         return door.transform;
     }
 
-    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct_OutCastle GenerateCurrentRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
         if(!isBranch)
         {
@@ -33,13 +33,13 @@ public class BranchRoom : Room
             Vector3 newBranchPosition = 
                 transform.position + new Vector3(0, _manager.branchYOffset * (_currentLine.branchIndex + 1));
 
-            BranchRoom newBranchRoom =
-                Instantiate(randomBranchRoomPrefab, newBranchPosition, Quaternion.identity).GetComponent<BranchRoom>();
+            BranchRoom_OutCastle newBranchRoom =
+                Instantiate(randomBranchRoomPrefab, newBranchPosition, Quaternion.identity).GetComponent<BranchRoom_OutCastle>();
 
             newBranchRoom.SetupBranch(door);
             door.otherDoor = newBranchRoom.GetBranchDoorTransform();
 
-            Line newBranchLine = null;
+            Line_OutCastle newBranchLine = null;
             if (_currentLine.branches[_currentLine.branchIndex].isRandom)
             {
                 newBranchLine = _manager.branchLines[Random.Range(0, _manager.branchLines.Count)].GetClone();
@@ -50,19 +50,19 @@ public class BranchRoom : Room
             }
             newBranchLine.lineStartDoor = door;
 
-            return new RoomGenerateStruct(0, newBranchRoom, newBranchLine);
+            return new RoomGenerateStruct_OutCastle(0, newBranchRoom, newBranchLine);
         }
-        return new RoomGenerateStruct(-1, null, null);
+        return new RoomGenerateStruct_OutCastle(-1, null, null);
     }
 
-    protected override RoomGenerateStruct GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct_OutCastle GenerateNextRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
         return base.GenerateNextRoom(_manager, _currentLine, _index);
     }
 
-    protected override void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override void PreGenerateRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
-        type = RoomType.Branch;
+        type = RoomType_OutCastle.Branch;
 
         base.PreGenerateRoom(_manager, _currentLine, _index);
     }

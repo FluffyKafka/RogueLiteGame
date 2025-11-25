@@ -7,21 +7,21 @@ using UnityEngine;
 public class AdditionalReward
 {
     public List<Transform> rewardTransform;
-    public RewardSlot slot;
+    public RewardSlot_OutCastle slot;
 }
 
-public class BattleRoom : Room
+public class BattleRoom_OutCastle : Room_OutCastle
 {
     [SerializeField] private List<AdditionalReward> additionalRewards;
 
-    protected override void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override void PreGenerateRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
-        type = RoomType.Battle;
+        type = RoomType_OutCastle.Battle;
 
         base.PreGenerateRoom(_manager, _currentLine, _index);
     }
 
-    protected override RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected override RoomGenerateStruct_OutCastle GenerateCurrentRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
         base.GenerateCurrentRoom(_manager, _currentLine, _index);
 
@@ -36,7 +36,7 @@ public class BattleRoom : Room
             _manager.GenerateRewardBySlot(reward.slot, reward.rewardTransform);
         }
 
-        return new RoomGenerateStruct(-1, null, null);
+        return new RoomGenerateStruct_OutCastle(-1, null, null);
     }
 
     protected void GenerateEnemy(float _enemyDifficultyAmount, List<GameObject> _enemyList, float _enemyGenerateYOffset)

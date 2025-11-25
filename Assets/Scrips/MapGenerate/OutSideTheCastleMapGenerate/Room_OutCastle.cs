@@ -5,15 +5,15 @@ using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
 [RequireComponent(typeof(RoomFog))]
-public class Room : MonoBehaviour
+public class Room_OutCastle : MonoBehaviour
 {
-    protected RoomType type;
+    protected RoomType_OutCastle type;
 
     [Header("Room Info")]
-    [SerializeField] public Access upperAccess;
-    [SerializeField] public Access lowerAccess;
-    [SerializeField] public Access leftAccess;
-    [SerializeField] public Access rightAccess;
+    [SerializeField] public Access_OutCastle upperAccess;
+    [SerializeField] public Access_OutCastle lowerAccess;
+    [SerializeField] public Access_OutCastle leftAccess;
+    [SerializeField] public Access_OutCastle rightAccess;
     [SerializeField] public int minDecorationAmount;
     [SerializeField] public int maxDecorationAmount;
 
@@ -23,12 +23,12 @@ public class Room : MonoBehaviour
     protected List<Vector2> flatPositions = null;
     protected int usedFlatPositionIndexEnd = 0;
 
-    public List<RoomGenerateStruct> GenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    public List<RoomGenerateStruct_OutCastle> GenerateRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
-        List<RoomGenerateStruct> nextRooms = new List<RoomGenerateStruct>();
+        List<RoomGenerateStruct_OutCastle> nextRooms = new List<RoomGenerateStruct_OutCastle>();
         PreGenerateRoom(_manager, _currentLine, _index);
-        RoomGenerateStruct branchRoom = GenerateCurrentRoom(_manager, _currentLine, _index);
-        RoomGenerateStruct nextRoom = GenerateNextRoom(_manager, _currentLine, _index);
+        RoomGenerateStruct_OutCastle branchRoom = GenerateCurrentRoom(_manager, _currentLine, _index);
+        RoomGenerateStruct_OutCastle nextRoom = GenerateNextRoom(_manager, _currentLine, _index);
         if(branchRoom.index != -1)
         {
             nextRooms.Add(branchRoom);
@@ -39,18 +39,18 @@ public class Room : MonoBehaviour
         }
         return nextRooms;
     }
-    protected virtual void PreGenerateRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected virtual void PreGenerateRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
         flatPositions = GetFlatPositionsInRoomByRadius(2);
         usedFlatPositionIndexEnd = 0;
     }
 
-    protected virtual RoomGenerateStruct GenerateCurrentRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected virtual RoomGenerateStruct_OutCastle GenerateCurrentRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
         GenerateDecorations(_manager);
-        return new RoomGenerateStruct(-1, null, null);
+        return new RoomGenerateStruct_OutCastle(-1, null, null);
     }
-    protected void GenerateDecorations(MapGenerateManager _manager)
+    protected void GenerateDecorations(MapGenerateManager_OutCastle _manager)
     {
         int randomDecorationAmount = Random.Range(minDecorationAmount, maxDecorationAmount);
         int currentDecorationAmount = 0;
@@ -109,55 +109,55 @@ public class Room : MonoBehaviour
         return randomPosition;
     }
 
-    protected virtual RoomGenerateStruct GenerateNextRoom(MapGenerateManager _manager, Line _currentLine, int _index)
+    protected virtual RoomGenerateStruct_OutCastle GenerateNextRoom(MapGenerateManager_OutCastle _manager, Line_OutCastle _currentLine, int _index)
     {
 
-        Room newRoom = null;
+        Room_OutCastle newRoom = null;
         //判断下一个房间类型
-        RoomType roomType = _currentLine.GetNextRoomType(_index, type);
+        RoomType_OutCastle roomType = _currentLine.GetNextRoomType(_index, type);
 
         switch (roomType)
         {
-            case RoomType.Battle:
+            case RoomType_OutCastle.Battle:
                 newRoom = GetNewRoomByPrefabList(_manager.battleRoomPrefabs);
                 break;
-            case RoomType.Passage:
+            case RoomType_OutCastle.Passage:
                 newRoom = GetNewRoomByPrefabList(_manager.passageRoomPrefabs);
                 break;
-            case RoomType.Exit:
+            case RoomType_OutCastle.Exit:
                 newRoom = GetNewRoomByPrefabList(_manager.exitRoomPrefabs);
                 break;
-            case RoomType.Reward:
+            case RoomType_OutCastle.Reward:
                 newRoom = GetNewRoomByPrefabList(_manager.rewardRoomPrefabs);
                 break;
-            case RoomType.Branch:
+            case RoomType_OutCastle.Branch:
                 newRoom = GetNewRoomByPrefabList(_manager.branchRoomPrefabs);
                 break;
-            case RoomType.BranchExit:
+            case RoomType_OutCastle.BranchExit:
                 newRoom = GetNewRoomByPrefabList(_manager.branchExitRoomPrefabs);
                 break;
             default:
                 Assert.IsTrue(false, "未定义的房间类型： " + roomType); break;
         }
-        return new RoomGenerateStruct(_index + 1, newRoom, _currentLine);
+        return new RoomGenerateStruct_OutCastle(_index + 1, newRoom, _currentLine);
     }
 
-    protected Room GetNewRoomByPrefabList(List<GameObject> _list)
+    protected Room_OutCastle GetNewRoomByPrefabList(List<GameObject> _list)
     {
         //选一个房间
         int battleRoomIndex = Random.Range(0, _list.Count);
 
         //计算房间位置
-        Room nextBattleRoom = _list[battleRoomIndex].GetComponent<Room>();
+        Room_OutCastle nextBattleRoom = _list[battleRoomIndex].GetComponent<Room_OutCastle>();
         Vector3 nextBattleRoomPosition = GetNextRoomPosition(rightAccess, nextBattleRoom);
 
         //生成房间
-        Room newBattleRoom =
-            Instantiate(_list[battleRoomIndex], nextBattleRoomPosition, Quaternion.identity).GetComponent<Room>();
+        Room_OutCastle newBattleRoom =
+            Instantiate(_list[battleRoomIndex], nextBattleRoomPosition, Quaternion.identity).GetComponent<Room_OutCastle>();
         return newBattleRoom;
     }
 
-    protected Vector3 GetNextRoomPosition(Access _exitAccess, Room _nextRoom)
+    protected Vector3 GetNextRoomPosition(Access_OutCastle _exitAccess, Room_OutCastle _nextRoom)
     {
         Transform nextRoomEnterTransform;
         if (_exitAccess == upperAccess)

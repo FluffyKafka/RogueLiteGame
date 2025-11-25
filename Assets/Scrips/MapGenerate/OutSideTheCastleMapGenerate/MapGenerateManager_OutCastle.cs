@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum RoomType
+public enum RoomType_OutCastle
 {
     Entry,
     Exit,
@@ -19,7 +19,7 @@ public enum RoomType
 }
 
 [Serializable]
-public class Access
+public class Access_OutCastle
 {
     public Transform transform;
     public bool canEnter = false;
@@ -27,7 +27,7 @@ public class Access
 }
 
 [Serializable]
-public class LineSlot
+public class LineSlot_OutCastle
 {
     [Range(0, 100)][SerializeField] public float battleRoomRate;
     [Range(0, 100)][SerializeField] public float rewardRoomRate;
@@ -35,13 +35,13 @@ public class LineSlot
 }
 
 [Serializable]
-public class BattleSlot
+public class BattleSlot_OutCastle
 {
     [SerializeField] public float difficulty; 
 }
 
 [Serializable]
-public class RewardSlot
+public class RewardSlot_OutCastle
 {
     [SerializeField] public int minRewardTime = 1;
     [SerializeField] public int maxRewardTime = 3;//每个房间提供三个奖励生成位置
@@ -56,16 +56,16 @@ public class RewardSlot
 }
 
 [Serializable]
-public class BranchSlot
+public class BranchSlot_OutCastle
 {
     [SerializeField] public bool isRandom;
-    [SerializeField] public Line branchLine = null;
+    [SerializeField] public Line_OutCastle branchLine = null;
 }
 
 [Serializable]
-public class Line
+public class Line_OutCastle
 {
-    public RoomType lineEndRoomType;
+    public RoomType_OutCastle lineEndRoomType;
     [HideInInspector] public bool isEndRoom = false;
     [HideInInspector] public Door lineStartDoor = null;
 
@@ -74,26 +74,26 @@ public class Line
     public int branchIndex { get; private set; }
 
     [Header("Room Info")]
-    public List<LineSlot> lineRooms;
+    public List<LineSlot_OutCastle> lineRooms;
 
     [Header("Battle Info")]
-    public List<BattleSlot> battles;
+    public List<BattleSlot_OutCastle> battles;
 
     [Header("Reward Info")]
-    public List<RewardSlot> rewards;
-    public RewardSlot lineEndReward;
+    public List<RewardSlot_OutCastle> rewards;
+    public RewardSlot_OutCastle lineEndReward;
 
     [Header("Branch Info")]
-    public List<BranchSlot> branches;
+    public List<BranchSlot_OutCastle> branches;
 
-    public Line()
+    public Line_OutCastle()
     {
         
     }
 
-    public Line GetClone()
+    public Line_OutCastle GetClone()
     {
-        Line newLine = new Line();
+        Line_OutCastle newLine = new Line_OutCastle();
 
         newLine.lineEndRoomType = lineEndRoomType;
         newLine.lineRooms = lineRooms;
@@ -105,22 +105,22 @@ public class Line
         return newLine;
     }
 
-    public RoomType GetNextRoomType(int _currentRoomIndex, RoomType _currentRoomType)
+    public RoomType_OutCastle GetNextRoomType(int _currentRoomIndex, RoomType_OutCastle _currentRoomType)
     {
         if(isEndRoom)
         {
-            return RoomType.BranchExit;
+            return RoomType_OutCastle.BranchExit;
         }
 
-        if(_currentRoomType == RoomType.Battle)
+        if(_currentRoomType == RoomType_OutCastle.Battle)
         {
             ++battleIndex;
         }
-        if (_currentRoomType == RoomType.Reward)
+        if (_currentRoomType == RoomType_OutCastle.Reward)
         {
             ++rewardIndex;
         }
-        if(_currentRoomType == RoomType.Branch)
+        if(_currentRoomType == RoomType_OutCastle.Branch)
         {
             ++branchIndex;
         }
@@ -129,15 +129,15 @@ public class Line
         {
             if (branchIndex < branches.Count)
             {
-                return RoomType.Branch;
+                return RoomType_OutCastle.Branch;
             }
             if (battleIndex < battles.Count)
             {
-                return RoomType.Battle;
+                return RoomType_OutCastle.Battle;
             }
             if (rewardIndex < rewards.Count)
             {
-                return RoomType.Reward;
+                return RoomType_OutCastle.Reward;
             }
             isEndRoom = true;
             return lineEndRoomType;
@@ -161,29 +161,29 @@ public class Line
 
         if (dice < rate)
         {
-            return RoomType.Battle;
+            return RoomType_OutCastle.Battle;
         }
         else if(dice < (rate += lineRooms[_currentRoomIndex].rewardRoomRate))
         {
-            return RoomType.Reward;
+            return RoomType_OutCastle.Reward;
         }
         else if(dice < (rate += lineRooms[_currentRoomIndex].branchRoomRate))
         {
-            return RoomType.Branch;
+            return RoomType_OutCastle.Branch;
         }
         else
         {
-            return RoomType.Passage;
+            return RoomType_OutCastle.Passage;
         }
     }
 }
 
-public struct RoomGenerateStruct
+public struct RoomGenerateStruct_OutCastle
 {
     public int index;
-    public Room room;
-    public Line line;
-    public RoomGenerateStruct(int _index, Room _room, Line _line)
+    public Room_OutCastle room;
+    public Line_OutCastle line;
+    public RoomGenerateStruct_OutCastle(int _index, Room_OutCastle _room, Line_OutCastle _line)
     {
         index = _index;
         room = _room;
@@ -192,7 +192,7 @@ public struct RoomGenerateStruct
 }
 
 //每个场景考虑使用自己的地图生成器
-public class MapGenerateManager : MonoBehaviour
+public class MapGenerateManager_OutCastle : MonoBehaviour
 {
     [Header("Room Prefabs")]
     [SerializeField] public List<GameObject> entryRoomPrefabs;
@@ -204,8 +204,8 @@ public class MapGenerateManager : MonoBehaviour
     [SerializeField] public List<GameObject> branchExitRoomPrefabs;
 
     [Header("Line info")]
-    [SerializeField] public Line mainLine = new Line();
-    [SerializeField] public List<Line> branchLines = new List<Line>();
+    [SerializeField] public Line_OutCastle mainLine = new Line_OutCastle();
+    [SerializeField] public List<Line_OutCastle> branchLines = new List<Line_OutCastle>();
 
     [Header("Map Info")]
     [SerializeField] private Transform startTransform;
@@ -230,26 +230,26 @@ public class MapGenerateManager : MonoBehaviour
     [SerializeField] public float branchYOffset;
 
 
-    private List<RoomGenerateStruct> roomsToGenerate;
+    private List<RoomGenerateStruct_OutCastle> roomsToGenerate;
 
     private void Start()
     {
         int startRoomIndex = UnityEngine.Random.Range(0, entryRoomPrefabs.Count);
 
-        Room startRoomTemp = entryRoomPrefabs[startRoomIndex].GetComponent<Room>();
+        Room_OutCastle startRoomTemp = entryRoomPrefabs[startRoomIndex].GetComponent<Room_OutCastle>();
         Vector3 startRoomLoc = startTransform.position - startRoomTemp.leftAccess.transform.position;
 
-        Room currentRoom = Instantiate(entryRoomPrefabs[startRoomIndex], startRoomLoc, Quaternion.identity).GetComponent<Room>();
-        RoomGenerateStruct roomGenerateStruct = new RoomGenerateStruct(0, currentRoom, mainLine);
-        roomsToGenerate = new List<RoomGenerateStruct>();
+        Room_OutCastle currentRoom = Instantiate(entryRoomPrefabs[startRoomIndex], startRoomLoc, Quaternion.identity).GetComponent<Room_OutCastle>();
+        RoomGenerateStruct_OutCastle roomGenerateStruct = new RoomGenerateStruct_OutCastle(0, currentRoom, mainLine);
+        roomsToGenerate = new List<RoomGenerateStruct_OutCastle>();
         roomsToGenerate.Add(roomGenerateStruct);
         while (roomsToGenerate.Count != 0)
         {
-            RoomGenerateStruct newRoomStruct = roomsToGenerate[roomsToGenerate.Count - 1];
+            RoomGenerateStruct_OutCastle newRoomStruct = roomsToGenerate[roomsToGenerate.Count - 1];
             roomsToGenerate.RemoveAt(roomsToGenerate.Count - 1);
 
-            List<RoomGenerateStruct> rooms = newRoomStruct.room.GenerateRoom(this, newRoomStruct.line, newRoomStruct.index);
-            foreach(RoomGenerateStruct roomStruct in rooms)
+            List<RoomGenerateStruct_OutCastle> rooms = newRoomStruct.room.GenerateRoom(this, newRoomStruct.line, newRoomStruct.index);
+            foreach(RoomGenerateStruct_OutCastle roomStruct in rooms)
             {
                 roomsToGenerate.Add(roomStruct);
             }
@@ -301,7 +301,7 @@ public class MapGenerateManager : MonoBehaviour
         return rewards;
     }
 
-    public void GenerateRewardBySlot(RewardSlot _slot, List<Transform> _rewardTransformList)
+    public void GenerateRewardBySlot(RewardSlot_OutCastle _slot, List<Transform> _rewardTransformList)
     {
         int rewardTime = UnityEngine.Random.Range(_slot.minRewardTime, _slot.maxRewardTime);
         for(int i = 0; i < rewardTime; ++i)
@@ -331,7 +331,7 @@ public class MapGenerateManager : MonoBehaviour
         }
         
     }
-    private void GenerateRewardBox(RewardSlot _slot, Transform _rewardTransform)
+    private void GenerateRewardBox(RewardSlot_OutCastle _slot, Transform _rewardTransform)
     {
         List<Drop> drops = new List<Drop>();
         if (UnityEngine.Random.Range(0f, 100f) < _slot.mimicRate)
@@ -360,7 +360,7 @@ public class MapGenerateManager : MonoBehaviour
             }
         }
     }
-    private void GenerateMimic(RewardSlot _slot, List<Drop> _drops, Transform _rewardTransform)
+    private void GenerateMimic(RewardSlot_OutCastle _slot, List<Drop> _drops, Transform _rewardTransform)
     {
         _drops.AddRange(GetPrimaryRewards(_slot.rewardAmount));
         if (UnityEngine.Random.Range(0f, 100f) < _slot.mimicAdvancedRewardRate)
