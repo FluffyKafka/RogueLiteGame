@@ -46,12 +46,14 @@ public class MapGenerater_Castle : MonoBehaviour
     [Header("Map Info")]
     public int width;
     public int height;
-    public int rewardCount;
     public int difficulty;
     public int flatRadius;
     [Range(0, 100)] public int upRate = 20;
     public float roomWidth;
     public float roomHeight;
+    public int randomGenerateTime = 5;
+    public int maxTryRandomGenerateTime = 10;
+    public int rewardTime = 5;
 
     class RoomHelper
     {
@@ -61,6 +63,11 @@ public class MapGenerater_Castle : MonoBehaviour
         public bool isRight = false;
         public bool isUp = false;
         public bool isDown = false;
+
+        public bool IsCross()
+        {
+            return isUp && isDown && isLeft && isRight;
+        }
     }
 
     private List<List<RoomHelper>> map;
@@ -83,18 +90,161 @@ public class MapGenerater_Castle : MonoBehaviour
     {
         InitMap();
         InitMainPath();
+        InitSubPath();
+
+        List<RoomHelper> randomRooms = new List<RoomHelper>();
+        for(int x = 0; x < width; ++x)
+        {
+            for(int y = 0; y < height; ++y)
+            {
+                RoomHelper room = map[x][y];
+                if (room.type == RoomType_Castle.Passgae && !room.isUp)
+                {
+                    randomRooms.Add(room);
+                }
+            }
+        }
+        while(randomRooms.Count > 0 && rewardTime > 0)
+        {
+            --rewardTime;
+            int index = Random.Range(0, randomRooms.Count);
+            randomRooms[index].type = RoomType_Castle.Reward;
+            randomRooms.RemoveAt(index);
+        }
 
         GenerateEntryRoom();
         GenerateMapRoom();
         GenerateExitRoom();
+
         GenerateEntryEdge();
         GenerateExitEdge();
+        GenerateMapEdge();
 
+        PlayerManager.instance.player.transform.position
+            = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
+    }
+
+    private void InitSubPath()
+    {
+        List<Vector2Int> baseRooms = new List<Vector2Int>();
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                if (map[x][y].type == RoomType_Castle.Passgae)
+                {
+                    if (map[x][y].isUp)
+                    {
+                        baseRooms.Add(new Vector2Int(x, y));
+                    }
+                    if (map[x][y].isDown)
+                    {
+                        baseRooms.Add(new Vector2Int(x, y));
+                    }
+                    if (map[x][y].isLeft)
+                    {
+                        baseRooms.Add(new Vector2Int(x, y));
+                    }
+                    if (map[x][y].isRight)
+                    {
+                        baseRooms.Add(new Vector2Int(x, y));
+                    }
+                }
+            }
+        }
+        List<int> randomDirs = new List<int>();
+        Vector2Int curCell = new Vector2Int(-1, -1);
+        while (maxTryRandomGenerateTime > 0 && randomGenerateTime > 0)
+        {
+            --maxTryRandomGenerateTime;
+            Vector2Int roomCell;
+            if (curCell.x >= 0)
+            {
+                roomCell = curCell;
+            }
+            else
+            {
+                roomCell = baseRooms[Random.Range(0, baseRooms.Count)];
+            }
+            curCell.x = -1;
+
+            RoomHelper room = map[roomCell.x][roomCell.y];
+            randomDirs.Clear();
+            if (roomCell.y + 1 <= height - 1 && map[roomCell.x][roomCell.y + 1].type == RoomType_Castle.Dead)
+            {
+                randomDirs.Add(0);
+            }
+            if (roomCell.y - 1 >= 0 && map[roomCell.x][roomCell.y - 1].type == RoomType_Castle.Dead)
+            {
+                randomDirs.Add(1);
+            }
+            if (roomCell.x + 1 <= width - 1 && map[roomCell.x + 1][roomCell.y].type == RoomType_Castle.Dead)
+            {
+                randomDirs.Add(2);
+            }
+            if (roomCell.x - 1 >= 0 && map[roomCell.x - 1][roomCell.y].type == RoomType_Castle.Dead)
+            {
+                randomDirs.Add(3);
+            }
+            if (randomDirs.Count == 0)
+            {
+                baseRooms.Remove(roomCell);
+                continue;
+            }
+
+            Vector2Int targetCell = roomCell;
+            int dirRandom = randomDirs[Random.Range(0, randomDirs.Count)];
+            switch (dirRandom)
+            {
+                case 0:
+                    {
+                        targetCell.y += 1;
+                        map[roomCell.x][roomCell.y].isUp = true;
+                        map[targetCell.x][targetCell.y].isDown = true;
+                        map[targetCell.x][targetCell.y].type = RoomType_Castle.Passgae;
+                        --randomGenerateTime;
+                        break;
+                    }
+                case 1:
+                    {
+                        targetCell.y -= 1;
+                        map[roomCell.x][roomCell.y].isDown = true;
+                        map[targetCell.x][targetCell.y].isUp = true;
+                        map[targetCell.x][targetCell.y].type = RoomType_Castle.Passgae;
+                        --randomGenerateTime;
+                        break;
+                    }
+                case 2:
+                    {
+                        targetCell.x += 1;
+                        map[roomCell.x][roomCell.y].isRight = true;
+                        map[targetCell.x][targetCell.y].isLeft = true;
+                        map[targetCell.x][targetCell.y].type = RoomType_Castle.Passgae;
+                        --randomGenerateTime;
+                        break;
+                    }
+                case 3:
+                    {
+                        targetCell.x -= 1;
+                        map[roomCell.x][roomCell.y].isLeft = true;
+                        map[targetCell.x][targetCell.y].isRight = true;
+                        map[targetCell.x][targetCell.y].type = RoomType_Castle.Passgae;
+                        --randomGenerateTime;
+                        break;
+                    }
+            }
+
+            curCell = targetCell;
+        }
+    }
+
+    private void GenerateMapEdge()
+    {
         float botY = transform.position.y - roomHeight;
         float topY = transform.position.y + height * roomHeight;
         Vector3 generatePosition = transform.position;
         for (int x = -1; x <= width; ++x)
-        {           
+        {
             generatePosition.x = transform.position.x + x * roomWidth;
 
             generatePosition.y = topY;
@@ -105,27 +255,23 @@ public class MapGenerater_Castle : MonoBehaviour
 
         float leftX = transform.position.x - roomWidth;
         float rightX = transform.position.x + width * roomWidth;
-        for(int y = 0; y < height; ++y)
+        for (int y = 0; y < height; ++y)
         {
             generatePosition.y = transform.position.y + y * roomHeight;
 
-            if(y != 0)
+            if (y != 0)
             {
                 generatePosition.x = leftX;
                 Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
             }
-            
-            if(y != height - 1)
+
+            if (y != height - 1)
             {
                 generatePosition.x = rightX;
                 Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
             }
         }
-
-        PlayerManager.instance.player.transform.position
-            = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
     }
-
     private void GenerateExitEdge()
     {
         Vector3 generatePosition = transform.position;
@@ -144,7 +290,6 @@ public class MapGenerater_Castle : MonoBehaviour
         generatePosition.y = endRoomPosition.y - roomHeight;
         Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
     }
-
     private void GenerateEntryEdge()
     {
         Vector3 generatePosition = transform.position;
@@ -233,6 +378,8 @@ public class MapGenerater_Castle : MonoBehaviour
                 }
             case RoomType_Castle.Dead:
                 return Instantiate(GetRandomPrefab(deadRoomPrefabs), _position, Quaternion.identity);
+            case RoomType_Castle.Reward:
+                return Instantiate(GetRandomPrefab(rewardRoomPrefabs), _position, Quaternion.identity);
         }
         return null;
     }

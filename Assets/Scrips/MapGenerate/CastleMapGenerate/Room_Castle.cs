@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+[RequireComponent(typeof(RoomFog))]
 public class Room_Castle : MonoBehaviour
 {
     protected MapGenerater_Castle generater;

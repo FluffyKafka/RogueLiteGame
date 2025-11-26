@@ -419,14 +419,18 @@ MonoBehaviour:
   - {fileID: 2847921351174808645, guid: 4fd04672c58cd9e4ca28eb98f2327c18, type: 3}
   passageRoomPrefabs_Cross:
   - {fileID: 2847921351174808645, guid: 90610bb6eb455264bbec3de7db455802, type: 3}
-  width: 3
-  height: 5
+  deadRoomPrefabs:
+  - {fileID: 2847921351174808645, guid: 150fa3208a359824194dfa37e39a97c6, type: 3}
+  width: 5
+  height: 8
   rewardCount: 0
   difficulty: 0
   flatRadius: 0
-  upRate: 20
+  upRate: 50
   roomWidth: 30
   roomHeight: 20
+  randomGenerateTime: 10
+  maxTryRandomGenerateTime: 50
 --- !u!4 &1188265069
 Transform:
   m_ObjectHideFlags: 0
@@ -721,15 +725,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.708681
+      value: -19.060236
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.02659
+      value: 20.262949
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.475229
+      value: -9.548982
       objectReference: {fileID: 0}
     - target: {fileID: 4067415788836736471, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.y
@@ -881,15 +885,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.708681
+      value: -19.060236
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.02659
+      value: 20.262949
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.475229
+      value: -9.548982
       objectReference: {fileID: 0}
     - target: {fileID: 6388465244593030359, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.y
