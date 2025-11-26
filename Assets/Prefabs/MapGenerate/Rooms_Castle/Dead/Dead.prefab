@@ -6840,6 +6840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background_wall: {fileID: 8309816005125236895}
+  groundTilemap: {fileID: 6568791411316376439}
+  minDecoAmount: 5
+  maxDecoAmount: 10
   playerEnterTransform: {fileID: 2361662591155061128}
 --- !u!114 &763005945747721241
 MonoBehaviour:

@@ -149,7 +149,8 @@ public class Entity : MonoBehaviour
 
     public virtual bool IsGrounded()
     {
-        return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround)
+            || Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsPlatform);
     }
 
     public virtual RaycastHit2D CheckGrounded()

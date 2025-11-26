@@ -421,16 +421,50 @@ MonoBehaviour:
   - {fileID: 2847921351174808645, guid: 90610bb6eb455264bbec3de7db455802, type: 3}
   deadRoomPrefabs:
   - {fileID: 2847921351174808645, guid: 150fa3208a359824194dfa37e39a97c6, type: 3}
+  decorations:
+  - {fileID: 492922539, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: 1485720303, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: -51014154, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: -699858933, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: -419164939, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: 1862485617, guid: aefc7cec404143545b5fa1616f3ce8e0, type: 3}
+  - {fileID: -1098866843, guid: aefc7cec404143545b5fa1616f3ce8e0, type: 3}
+  - {fileID: 1399066125, guid: aefc7cec404143545b5fa1616f3ce8e0, type: 3}
+  - {fileID: -1576170453, guid: aefc7cec404143545b5fa1616f3ce8e0, type: 3}
+  - {fileID: 1033322371, guid: aefc7cec404143545b5fa1616f3ce8e0, type: 3}
+  - {fileID: -1289932435, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: -1454638055, guid: 77338e09a1852494b97203ae7963f01f, type: 3}
+  - {fileID: 21300000, guid: 460556444a4e4a2498b0818c9a7dbb94, type: 3}
+  - {fileID: 21300000, guid: 6dafea31fe94dd149a8ce1a0ef196bab, type: 3}
+  - {fileID: 21300000, guid: 550795fa2a3ca1145933d021eccf3a03, type: 3}
+  - {fileID: 21300000, guid: 1e978af5c6e774446add94e8d0cf72bf, type: 3}
+  - {fileID: 21300000, guid: f33a2a1156e68494e98db1f223bfebdd, type: 3}
+  - {fileID: 21300000, guid: b61ebe29b3b0db44bbbbfccc4dcc3be8, type: 3}
+  - {fileID: 21300000, guid: accff7572841ae643a6ec222d6856407, type: 3}
+  - {fileID: 21300000, guid: 75c47b8b553cd8f45927b73d1fdd0f78, type: 3}
+  - {fileID: 21300000, guid: 71630e1e5bc9f4647994ca1c2427fbbe, type: 3}
+  - {fileID: 21300000, guid: a4858fd0287087249bbd13755b620710, type: 3}
+  - {fileID: 21300000, guid: ba4c1f8304ae62f42ad0fdc9f69cf023, type: 3}
+  decorationPrefab: {fileID: 153967504809312598, guid: 7eba192808eb38544bde108dbef1c545, type: 3}
+  decoYOffset: -0.3
+  enemyPrefabList:
+  - {fileID: 5637944703504468775, guid: 7f169eb32812e984aba3b9fae1d72151, type: 3}
+  - {fileID: 4262958126211719847, guid: fc9d793840956564fb65a825b8550a90, type: 3}
+  - {fileID: 8928872454373980311, guid: e75685b8777999e4a92851b20a2da959, type: 3}
+  - {fileID: 6948483205627279620, guid: 46bc7acc8e4b30d43a333499a7fe8f79, type: 3}
+  - {fileID: 3776551239192708493, guid: 16948f0ffb70b104aa796eba03de0263, type: 3}
+  enemyYOffeset: 1
   width: 5
   height: 8
-  rewardCount: 0
   difficulty: 0
-  flatRadius: 0
-  upRate: 50
+  difficultyRandomDivider: 3
+  flatRadius: 2
+  upRate: 30
   roomWidth: 30
   roomHeight: 20
-  randomGenerateTime: 10
+  randomGenerateTime: 5
   maxTryRandomGenerateTime: 50
+  rewardTime: 5
 --- !u!4 &1188265069
 Transform:
   m_ObjectHideFlags: 0
@@ -721,6 +755,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2152354706160012961, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2746787494656289217, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
+      propertyPath: fogColor.a
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}

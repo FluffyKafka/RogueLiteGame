@@ -43,10 +43,18 @@ public class MapGenerater_Castle : MonoBehaviour
     public List<GameObject> passageRoomPrefabs_Cross;
     public List<GameObject> deadRoomPrefabs;
 
+    [Header("Room Info")]
+    public List<Sprite> decorations;
+    public GameObject decorationPrefab;
+    public float decoYOffset = -0.5f;
+    public List<GameObject> enemyPrefabList;
+    public float enemyYOffeset = 1f;
+
     [Header("Map Info")]
     public int width;
     public int height;
     public int difficulty;
+    public int difficultyRandomDivider = 3;
     public int flatRadius;
     [Range(0, 100)] public int upRate = 20;
     public float roomWidth;
@@ -63,6 +71,7 @@ public class MapGenerater_Castle : MonoBehaviour
         public bool isRight = false;
         public bool isUp = false;
         public bool isDown = false;
+        public int difficulty = 0;
 
         public bool IsCross()
         {
@@ -91,26 +100,8 @@ public class MapGenerater_Castle : MonoBehaviour
         InitMap();
         InitMainPath();
         InitSubPath();
-
-        List<RoomHelper> randomRooms = new List<RoomHelper>();
-        for(int x = 0; x < width; ++x)
-        {
-            for(int y = 0; y < height; ++y)
-            {
-                RoomHelper room = map[x][y];
-                if (room.type == RoomType_Castle.Passgae && !room.isUp)
-                {
-                    randomRooms.Add(room);
-                }
-            }
-        }
-        while(randomRooms.Count > 0 && rewardTime > 0)
-        {
-            --rewardTime;
-            int index = Random.Range(0, randomRooms.Count);
-            randomRooms[index].type = RoomType_Castle.Reward;
-            randomRooms.RemoveAt(index);
-        }
+        InitRewardRoom();
+        InitPassageRoomDifficulty();
 
         GenerateEntryRoom();
         GenerateMapRoom();
@@ -120,10 +111,61 @@ public class MapGenerater_Castle : MonoBehaviour
         GenerateExitEdge();
         GenerateMapEdge();
 
+
         PlayerManager.instance.player.transform.position
             = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
     }
 
+    private void InitPassageRoomDifficulty()
+    {
+        int passageRoomCount = 0;
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                if (map[x][y].type == RoomType_Castle.Passgae)
+                {
+                    ++passageRoomCount;
+                }
+            }
+        }
+        int roomDifficulty = difficulty / passageRoomCount;
+        int randomDifficulty = roomDifficulty / difficultyRandomDivider;
+        int minDiff = roomDifficulty - randomDifficulty;
+        int maxDiff = roomDifficulty + randomDifficulty;
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                if (map[x][y].type == RoomType_Castle.Passgae)
+                {
+                    map[x][y].difficulty = Random.Range(minDiff, maxDiff);
+                }
+            }
+        }
+    }
+    private void InitRewardRoom()
+    {
+        List<RoomHelper> randomRooms = new List<RoomHelper>();
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                RoomHelper room = map[x][y];
+                if (room.type == RoomType_Castle.Passgae && !room.isUp)
+                {
+                    randomRooms.Add(room);
+                }
+            }
+        }
+        while (randomRooms.Count > 0 && rewardTime > 0)
+        {
+            --rewardTime;
+            int index = Random.Range(0, randomRooms.Count);
+            randomRooms[index].type = RoomType_Castle.Reward;
+            randomRooms.RemoveAt(index);
+        }
+    }
     private void InitSubPath()
     {
         List<Vector2Int> baseRooms = new List<Vector2Int>();
@@ -237,7 +279,6 @@ public class MapGenerater_Castle : MonoBehaviour
             curCell = targetCell;
         }
     }
-
     private void GenerateMapEdge()
     {
         float botY = transform.position.y - roomHeight;
@@ -334,6 +375,10 @@ public class MapGenerater_Castle : MonoBehaviour
                 if(roomGameObject != null)
                 {
                     map[x][y].room = roomGameObject.GetComponent<Room_Castle>();
+                    if (map[x][y].type == RoomType_Castle.Passgae)
+                    {
+                        (map[x][y].room as PassageRoom_Castle).difficulty = map[x][y].difficulty;
+                    }
                     map[x][y].room.GenerateRoom(this);
                 }
             }

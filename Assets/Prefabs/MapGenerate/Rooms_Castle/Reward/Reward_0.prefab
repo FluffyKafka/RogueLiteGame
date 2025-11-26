@@ -2861,6 +2861,7 @@ GameObject:
   - component: {fileID: 8760490137007700536}
   - component: {fileID: 501946318047410690}
   - component: {fileID: 524701041444681750}
+  - component: {fileID: 763005945747721241}
   m_Layer: 0
   m_Name: Reward_0
   m_TagString: Untagged
@@ -2988,6 +2989,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background_wall: {fileID: 8309816005125236895}
+  groundTilemap: {fileID: 6568791411316376439}
+  minDecoAmount: 5
+  maxDecoAmount: 10
+--- !u!114 &763005945747721241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847921351174808645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff15e3eadde63b4591872ea7236c4f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3870422976325784828
 GameObject:
   m_ObjectHideFlags: 0
