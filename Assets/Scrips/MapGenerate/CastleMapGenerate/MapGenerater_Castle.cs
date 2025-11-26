@@ -23,9 +23,10 @@ public enum Direction
 }
 
 //生成逻辑：将地图整体视为一个二维矩阵，每个格子表示一个房间，
-//预设一组不同贯通情况的房间，
-//先设置出口（只通左边）入口（只通右边），再设置奖励房（全部为左右连通），最后剩下的区域生成通道
-//通道房兼具战斗房的功能，三种类型：左右、左右上、十字路口
+//预设一组不同贯通情况的房间（左右、左右下、十字路口、奖励房（左右贯通）、出入口），
+//先计算出一条主路经（向上或向左右）
+//再计算支线路径
+//通道房兼具战斗房的功能
 public class MapGenerater_Castle : MonoBehaviour
 {
     public static MapGenerater_Castle instance;
@@ -40,6 +41,7 @@ public class MapGenerater_Castle : MonoBehaviour
     public List<GameObject> passageRoomPrefabs_LR;
     public List<GameObject> passageRoomPrefabs_LRD;
     public List<GameObject> passageRoomPrefabs_Cross;
+    public List<GameObject> deadRoomPrefabs;
 
     [Header("Map Info")]
     public int width;
@@ -54,6 +56,7 @@ public class MapGenerater_Castle : MonoBehaviour
     class RoomHelper
     {
         public RoomType_Castle type = RoomType_Castle.Dead;
+        public Room_Castle room = null;
         public bool isLeft = false;
         public bool isRight = false;
         public bool isUp = false;
@@ -61,6 +64,8 @@ public class MapGenerater_Castle : MonoBehaviour
     }
 
     private List<List<RoomHelper>> map;
+    private RoomHelper entry = null;
+    private RoomHelper exit = null;
 
     private void Awake()
     {
@@ -79,58 +84,94 @@ public class MapGenerater_Castle : MonoBehaviour
         InitMap();
         InitMainPath();
 
+        GenerateEntryRoom();
+        GenerateMapRoom();
+        GenerateExitRoom();
+
+        PlayerManager.instance.player.transform.position
+            = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
+    }
+
+    private void GenerateExitRoom()
+    {
         Vector3 generatePosition = transform.position;
-        generatePosition.x = transform.position.x - roomWidth;
-        generatePosition.y = transform.position.y;
-        Instantiate(GetRandomPrefab(entryRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = transform.position.x + width * roomWidth;
+        generatePosition.y = transform.position.y + (height - 1) * roomHeight;
+        Room_Castle room =
+            Instantiate(GetRandomPrefab(exitRoomPrefabs), generatePosition, Quaternion.identity)
+            .GetComponent<Room_Castle>();
+        room.GenerateRoom(this);
+        exit = new RoomHelper();
+        exit.isLeft = true;
+        exit.type = RoomType_Castle.Exit;
+        exit.room = room;
+    }
+    private void GenerateMapRoom()
+    {
+        Vector3 generatePosition = transform.position;
         for (int x = 0; x < width; ++x)
         {
-            for(int y = 0; y < height; ++y)
+            for (int y = 0; y < height; ++y)
             {
                 generatePosition.x = transform.position.x + roomWidth * x;
                 generatePosition.y = transform.position.y + roomHeight * y;
-                GenerateRoomByType(map[x][y], ref generatePosition);
+                GameObject roomGameObject = GenerateRoomByType(map[x][y], ref generatePosition);
+                if(roomGameObject != null)
+                {
+                    map[x][y].room = roomGameObject.GetComponent<Room_Castle>();
+                    map[x][y].room.GenerateRoom(this);
+                }
             }
         }
-        generatePosition.x = transform.position.x + width * roomWidth;
-        generatePosition.y = transform.position.y + (height - 1) * roomHeight;
-        Instantiate(GetRandomPrefab(exitRoomPrefabs), generatePosition, Quaternion.identity);
-        PlayerManager.instance.player.transform.position = transform.position;
     }
-    private void GenerateRoomByType(RoomHelper _room, ref Vector3 _position)
+    private void GenerateEntryRoom()
+    {
+        Vector3 generatePosition = transform.position;
+        generatePosition.x = transform.position.x - roomWidth;
+        generatePosition.y = transform.position.y;
+        Room_Castle room =
+            Instantiate(GetRandomPrefab(entryRoomPrefabs), generatePosition, Quaternion.identity)
+            .GetComponent<Room_Castle>();
+        room.GenerateRoom(this);
+        entry = new RoomHelper();
+        entry.type = RoomType_Castle.Entry;
+        entry.room = room;
+        entry.isRight = true;
+    }
+    private GameObject GenerateRoomByType(RoomHelper _room, ref Vector3 _position)
     {
         switch(_room.type)
         {
             case RoomType_Castle.Entry:
-                Instantiate(GetRandomPrefab(entryRoomPrefabs), _position, Quaternion.identity);
-                break;
+                return Instantiate(GetRandomPrefab(entryRoomPrefabs), _position, Quaternion.identity);
             case RoomType_Castle.Exit:
-                Instantiate(GetRandomPrefab(exitRoomPrefabs), _position, Quaternion.identity);
-                break;
+                return Instantiate(GetRandomPrefab(exitRoomPrefabs), _position, Quaternion.identity);
             case RoomType_Castle.Passgae:
                 {
                     if(_room.isUp)
                     {
-                        Instantiate(GetRandomPrefab(passageRoomPrefabs_Cross), _position, Quaternion.identity);
+                        return Instantiate(GetRandomPrefab(passageRoomPrefabs_Cross), _position, Quaternion.identity);
                     }
                     else if(_room.isDown)
                     {
-                        Instantiate(GetRandomPrefab(passageRoomPrefabs_LRD), _position, Quaternion.identity);
+                        return Instantiate(GetRandomPrefab(passageRoomPrefabs_LRD), _position, Quaternion.identity);
                     }
                     else
                     {
-                        Instantiate(GetRandomPrefab(passageRoomPrefabs_LR), _position, Quaternion.identity);
+                        return Instantiate(GetRandomPrefab(passageRoomPrefabs_LR), _position, Quaternion.identity);
                     }
-                    break;
                 }
+            case RoomType_Castle.Dead:
+                return Instantiate(GetRandomPrefab(deadRoomPrefabs), _position, Quaternion.identity);
         }
+        return null;
     }
     private GameObject GetRandomPrefab(List<GameObject> _list)
     {
         return _list[Random.Range(0, _list.Count)];
     }
 
-    private void InitMainPath()
+    private void InitMainPath()//生成一条由Passage型房构成的主路经
     {
         Vector2Int curLoc = new Vector2Int(0, 0);
         Vector2Int endLoc = new Vector2Int(width - 1, height - 1);
@@ -149,6 +190,8 @@ public class MapGenerater_Castle : MonoBehaviour
                 MoveTo(ref curLoc, Direction.Right);
             }
         }
+        map[0][0].isLeft = true;
+        map[width - 1][height - 1].isRight = true;
     }
     private void MoveTo(ref Vector2Int _curLoc, Direction _dir)
     {
@@ -253,6 +296,7 @@ public class MapGenerater_Castle : MonoBehaviour
         _left.type = RoomType_Castle.Passgae;
         _right.type = RoomType_Castle.Passgae;
     }
+
     private void InitMap()
     {
         map = new List<List<RoomHelper>>();
