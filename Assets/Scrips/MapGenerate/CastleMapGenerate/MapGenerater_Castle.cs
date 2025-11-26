@@ -87,9 +87,79 @@ public class MapGenerater_Castle : MonoBehaviour
         GenerateEntryRoom();
         GenerateMapRoom();
         GenerateExitRoom();
+        GenerateEntryEdge();
+        GenerateExitEdge();
+
+        float botY = transform.position.y - roomHeight;
+        float topY = transform.position.y + height * roomHeight;
+        Vector3 generatePosition = transform.position;
+        for (int x = -1; x <= width; ++x)
+        {           
+            generatePosition.x = transform.position.x + x * roomWidth;
+
+            generatePosition.y = topY;
+            Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+            generatePosition.y = botY;
+            Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        }
+
+        float leftX = transform.position.x - roomWidth;
+        float rightX = transform.position.x + width * roomWidth;
+        for(int y = 0; y < height; ++y)
+        {
+            generatePosition.y = transform.position.y + y * roomHeight;
+
+            if(y != 0)
+            {
+                generatePosition.x = leftX;
+                Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+            }
+            
+            if(y != height - 1)
+            {
+                generatePosition.x = rightX;
+                Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+            }
+        }
 
         PlayerManager.instance.player.transform.position
             = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
+    }
+
+    private void GenerateExitEdge()
+    {
+        Vector3 generatePosition = transform.position;
+        Vector3 endRoomPosition =
+            new Vector3(transform.position.x + width * roomWidth, transform.position.y + (height - 1) * roomHeight);
+        generatePosition.x = endRoomPosition.x + roomWidth;
+        generatePosition.y = endRoomPosition.y;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = endRoomPosition.x;
+        generatePosition.y = endRoomPosition.y + roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = endRoomPosition.x + roomWidth;
+        generatePosition.y = endRoomPosition.y + roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = endRoomPosition.x + roomWidth;
+        generatePosition.y = endRoomPosition.y - roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+    }
+
+    private void GenerateEntryEdge()
+    {
+        Vector3 generatePosition = transform.position;
+        generatePosition.x = transform.position.x - 2 * roomWidth;
+        generatePosition.y = transform.position.y;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = transform.position.x - roomWidth;
+        generatePosition.y = transform.position.y - roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = transform.position.x - 2 * roomWidth;
+        generatePosition.y = transform.position.y - roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
+        generatePosition.x = transform.position.x - 2 * roomWidth;
+        generatePosition.y = transform.position.y + roomHeight;
+        Instantiate(GetRandomPrefab(deadRoomPrefabs), generatePosition, Quaternion.identity);
     }
 
     private void GenerateExitRoom()
