@@ -7,6 +7,12 @@ public class Drop
 {
     public ItemData item;
     [Range(0f, 100f)] public float dropChance;
+
+    public Drop(ItemData _item, float _chance)
+    {
+        item = _item;
+        dropChance = _chance;
+    }
 }
 
 [RequireComponent(typeof(Rigidbody2D))]

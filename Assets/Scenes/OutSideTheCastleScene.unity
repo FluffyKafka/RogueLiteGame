@@ -453,15 +453,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.115862
+      value: -34.165047
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.335728
+      value: 12.724896
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.475229
+      value: -9.548982
       objectReference: {fileID: 0}
     - target: {fileID: 3592184860009003912, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -669,15 +669,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -30.115862
+      value: -34.165047
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.335728
+      value: 12.724896
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.475229
+      value: -9.548982
       objectReference: {fileID: 0}
     - target: {fileID: 6316847320217188792, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -1599,11 +1599,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4678375902910632755, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4674128292013885369, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1212456897}
   m_SourcePrefab: {fileID: 100100000, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+--- !u!1 &1212456896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4674128292013885369, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+  m_PrefabInstance: {fileID: 1212456895}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1212456897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1212456896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20bcf0ad66193a943ada89b46ac36b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryRoomPrefabs: []
+  exitRoomPrefabs: []
+  battleRoomPrefabs: []
+  passageRoomPrefabs: []
+  rewardRoomPrefabs: []
+  branchRoomPrefabs: []
+  branchExitRoomPrefabs: []
+  mainLine:
+    lineEndRoomType: 0
+    isEndRoom: 0
+    lineStartDoor: {fileID: 0}
+    lineRooms: []
+    battles: []
+    rewards: []
+    lineEndReward:
+      minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 0
+      advancedAmount: 0
+      witcherRate: 0
+      traderRate: 0
+      blackSmithRate: 0
+      advancedRewardRate: 0
+      mimicRate: 0
+      mimicAdvancedRewardRate: 0
+    branches: []
+  branchLines: []
+  startTransform: {fileID: 0}
+  enemyList: []
+  enemyGenerateYOffset: 1
+  primaryRewards: []
+  advancedRewards: []
+  primaryRewardChestPrefab: {fileID: 0}
+  advancedRewardChestPrefab: {fileID: 0}
+  mimicChestPrefab: {fileID: 0}
+  traderPrefab: {fileID: 0}
+  blackSmithPrefab: {fileID: 0}
+  witcherPrefab: {fileID: 0}
+  decorationPrefab: {fileID: 0}
+  decorations: []
+  branchYOffset: 0
 --- !u!1 &1309449675
 GameObject:
   m_ObjectHideFlags: 0

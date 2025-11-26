@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -20,6 +22,21 @@ public enum Direction
     Down,
     Left,
     Right
+}
+
+[Serializable]
+public class RewardSlot_Castle
+{
+    [SerializeField] public int minRewardTime = 1;
+    [SerializeField] public int maxRewardTime = 3;//每个房间提供三个奖励生成位置
+    [SerializeField] public int rewardAmount;
+    [SerializeField] public int advancedAmount;
+    [Range(0, 100)][SerializeField] public float witcherRate;
+    [Range(0, 100)][SerializeField] public float traderRate;
+    [Range(0, 100)][SerializeField] public float blackSmithRate;
+    [Range(0, 100)][SerializeField] public float advancedRewardRate;
+    [Range(0, 100)][SerializeField] public float mimicRate;
+    [Range(0, 100)][SerializeField] public float mimicAdvancedRewardRate;
 }
 
 //生成逻辑：将地图整体视为一个二维矩阵，每个格子表示一个房间，
@@ -43,6 +60,17 @@ public class MapGenerater_Castle : MonoBehaviour
     public List<GameObject> passageRoomPrefabs_Cross;
     public List<GameObject> deadRoomPrefabs;
 
+    [Header("Reward Prefabs")]
+    public GameObject witcherPrefab;
+    public GameObject traderPrefab;
+    public GameObject blackSmithPrefab;
+    public GameObject advancedRewardChestPrefab;
+    public GameObject primaryRewardChestPrefab;
+    public GameObject mimicChestPrefab;
+    public List<Drop> primaryRewards;
+    public List<Drop> advancedRewards;
+    public float advancedRewardPrice = 150f;
+
     [Header("Room Info")]
     public List<Sprite> decorations;
     public GameObject decorationPrefab;
@@ -61,7 +89,7 @@ public class MapGenerater_Castle : MonoBehaviour
     public float roomHeight;
     public int randomGenerateTime = 5;
     public int maxTryRandomGenerateTime = 10;
-    public int rewardTime = 5;
+    public List<RewardSlot_Castle> rewards;
 
     class RoomHelper
     {
@@ -139,13 +167,14 @@ public class MapGenerater_Castle : MonoBehaviour
             {
                 if (map[x][y].type == RoomType_Castle.Passgae)
                 {
-                    map[x][y].difficulty = Random.Range(minDiff, maxDiff);
+                    map[x][y].difficulty = UnityEngine.Random.Range(minDiff, maxDiff);
                 }
             }
         }
     }
     private void InitRewardRoom()
     {
+        int rewardTime = rewards.Count;
         List<RoomHelper> randomRooms = new List<RoomHelper>();
         for (int x = 0; x < width; ++x)
         {
@@ -161,7 +190,7 @@ public class MapGenerater_Castle : MonoBehaviour
         while (randomRooms.Count > 0 && rewardTime > 0)
         {
             --rewardTime;
-            int index = Random.Range(0, randomRooms.Count);
+            int index = UnityEngine.Random.Range(0, randomRooms.Count);
             randomRooms[index].type = RoomType_Castle.Reward;
             randomRooms.RemoveAt(index);
         }
@@ -206,7 +235,7 @@ public class MapGenerater_Castle : MonoBehaviour
             }
             else
             {
-                roomCell = baseRooms[Random.Range(0, baseRooms.Count)];
+                roomCell = baseRooms[UnityEngine.Random.Range(0, baseRooms.Count)];
             }
             curCell.x = -1;
 
@@ -235,7 +264,7 @@ public class MapGenerater_Castle : MonoBehaviour
             }
 
             Vector2Int targetCell = roomCell;
-            int dirRandom = randomDirs[Random.Range(0, randomDirs.Count)];
+            int dirRandom = randomDirs[UnityEngine.Random.Range(0, randomDirs.Count)];
             switch (dirRandom)
             {
                 case 0:
@@ -430,7 +459,7 @@ public class MapGenerater_Castle : MonoBehaviour
     }
     private GameObject GetRandomPrefab(List<GameObject> _list)
     {
-        return _list[Random.Range(0, _list.Count)];
+        return _list[UnityEngine.Random.Range(0, _list.Count)];
     }
 
     private void InitMainPath()//生成一条由Passage型房构成的主路经
@@ -439,11 +468,11 @@ public class MapGenerater_Castle : MonoBehaviour
         Vector2Int endLoc = new Vector2Int(width - 1, height - 1);
         while (curLoc != endLoc)
         {
-            if(Random.Range(0, 100) < upRate)
+            if(UnityEngine.Random.Range(0, 100) < upRate)
             {
                 MoveTo(ref curLoc, Direction.Up);
             }
-            else if(Random.Range(0, 2) == 0)
+            else if(UnityEngine.Random.Range(0, 2) == 0)
             {
                 MoveTo(ref curLoc, Direction.Left);
             }
@@ -571,4 +600,27 @@ public class MapGenerater_Castle : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Fill Up Rewards")]
+    private void GetItemDatabase()
+    {
+        string[] assetNames = AssetDatabase.FindAssets("t:ItemData", new[] { "Assets/Scrips/Item/ItemData" });
+
+        foreach (string SOName in assetNames)
+        {
+            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
+
+            if(itemData.price < advancedRewardPrice)
+            {
+                primaryRewards.Add(new Drop(itemData, 100 * (itemData.price / ((advancedRewardPrice/2) + itemData.price))));
+            }
+            else
+            {
+                advancedRewards.Add(new Drop(itemData, 100 * (itemData.price / (advancedRewardPrice + itemData.price))));
+            }
+        }
+    }
+#endif
 }
