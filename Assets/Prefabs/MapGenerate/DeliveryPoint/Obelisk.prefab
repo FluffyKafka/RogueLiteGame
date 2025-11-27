@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5166458222477054048}
   - component: {fileID: 1846386648303801300}
   - component: {fileID: 1359471405707814177}
-  - component: {fileID: 7330579591562687035}
+  - component: {fileID: 4497348822727579457}
   m_Layer: 13
   m_Name: Animator
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7330579591562687035
+--- !u!114 &4497348822727579457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,6 +169,7 @@ MonoBehaviour:
   isChosen: 0
   playerTargetTransform: {fileID: 4662954546628061164}
   isHolding: 0
+  isActive: 0
 --- !u!61 &7372308987576977992
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -603,15 +603,16 @@ MonoBehaviour:
   - {fileID: 6948483205627279620, guid: 46bc7acc8e4b30d43a333499a7fe8f79, type: 3}
   - {fileID: 3776551239192708493, guid: 16948f0ffb70b104aa796eba03de0263, type: 3}
   enemyYOffeset: 1
+  deliverPrefab: {fileID: 3165755309521018428, guid: 3362c24f82766ce4a8fe3cc4a4917f18, type: 3}
   width: 5
-  height: 8
-  difficulty: 180
+  height: 12
+  difficulty: 350
   difficultyRandomDivider: 3
   flatRadius: 2
-  upRate: 30
+  upRate: 50
   roomWidth: 30
   roomHeight: 20
-  randomGenerateTime: 5
+  randomGenerateTime: 10
   maxTryRandomGenerateTime: 50
   rewards:
   - minRewardTime: 1
@@ -664,6 +665,9 @@ MonoBehaviour:
     advancedRewardRate: 20
     mimicRate: 10
     mimicAdvancedRewardRate: 60
+  LR_Room_Count: 0
+  LRD_Room_Count: 0
+  Cross_Room_Count: 0
 --- !u!4 &1188265069
 Transform:
   m_ObjectHideFlags: 0
@@ -958,19 +962,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2746787494656289217, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: fogColor.a
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.060236
+      value: 185.62285
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.262949
+      value: 129.07635
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.548982
+      value: -7.600981
       objectReference: {fileID: 0}
     - target: {fileID: 4067415788836736471, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1122,15 +1126,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.060236
+      value: 185.62285
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.262949
+      value: 129.07635
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.548982
+      value: -7.600981
       objectReference: {fileID: 0}
     - target: {fileID: 6388465244593030359, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_AnchorMax.y

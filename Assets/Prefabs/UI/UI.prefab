@@ -21265,7 +21265,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147646718
+    m_Bits: 2147646686
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 26c0a7d5090854840b889318a8316d53, type: 2}
   m_TargetDisplay: 0
@@ -21340,7 +21340,7 @@ MonoBehaviour:
   maxZoomSpeed: 50
   minZoom: 5
   maxZoom: 100
-  branchYOffset: 50
+  branchYOffset: 10000
 --- !u!1 &2938075741810439675
 GameObject:
   m_ObjectHideFlags: 0
@@ -54583,7 +54583,7 @@ Transform:
   m_GameObject: {fileID: 7033209648328887106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.708681, y: 18.0266, z: -8.475229}
+  m_LocalPosition: {x: -18.084394, y: 19.421152, z: -9.103393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54628,7 +54628,7 @@ Camera:
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2147646718
+    m_Bits: 2147646686
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: b8aef60eaa1a817439b1d7a51ddc0816, type: 2}
   m_TargetDisplay: 0

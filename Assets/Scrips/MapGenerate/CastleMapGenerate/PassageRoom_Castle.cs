@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PassageRoom_Castle : Room_Castle
 {
-    public float difficulty;
+    [HideInInspector] public float difficulty;
+    public Transform deliverTransform;
+    [HideInInspector] public bool isDeliver = false;
     public override void GenerateRoom(MapGenerater_Castle _generater)
     {
         base.GenerateRoom(_generater);
@@ -20,5 +22,13 @@ public class PassageRoom_Castle : Room_Castle
                 Instantiate(randomEnemy, randomPosition, Quaternion.identity).GetComponent<Enemy>();
             currentEnemyDifficulty += newEnemy.difficulty;
         }
+        if(isDeliver)
+        {
+            GenerateDeliver();
+        }
+    }
+    protected void GenerateDeliver()
+    {
+        Instantiate(generater.deliverPrefab, deliverTransform.position, Quaternion.identity);
     }
 }

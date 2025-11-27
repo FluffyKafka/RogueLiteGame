@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static Unity.Collections.AllocatorManager;
+using static UnityEditor.Recorder.OutputPath;
 
 public enum RoomType_Castle
 {
@@ -77,6 +78,7 @@ public class MapGenerater_Castle : MonoBehaviour
     public float decoYOffset = -0.5f;
     public List<GameObject> enemyPrefabList;
     public float enemyYOffeset = 1f;
+    public GameObject deliverPrefab;
 
     [Header("Map Info")]
     public int width;
@@ -91,6 +93,11 @@ public class MapGenerater_Castle : MonoBehaviour
     public int maxTryRandomGenerateTime = 10;
     public List<RewardSlot_Castle> rewards;
 
+    [Header("Debug")]
+    public int LR_Room_Count = 0;
+    public int LRD_Room_Count = 0;
+    public int Cross_Room_Count = 0;
+
     class RoomHelper
     {
         public RoomType_Castle type = RoomType_Castle.Dead;
@@ -100,6 +107,7 @@ public class MapGenerater_Castle : MonoBehaviour
         public bool isUp = false;
         public bool isDown = false;
         public int difficulty = 0;
+        public bool isDeliver = false;
 
         public bool IsCross()
         {
@@ -130,6 +138,7 @@ public class MapGenerater_Castle : MonoBehaviour
         InitSubPath();
         InitRewardRoom();
         InitPassageRoomDifficulty();
+        InitDeliver();
 
         GenerateEntryRoom();
         GenerateMapRoom();
@@ -144,6 +153,39 @@ public class MapGenerater_Castle : MonoBehaviour
             = (entry.room as EntryRoom_Castle).playerEnterTransform.position;
     }
 
+    private void InitDeliver()
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                if (map[x][y].type == RoomType_Castle.Passgae)
+                {
+                    int count = 0;
+                    if (map[x][y].isUp)
+                    {
+                        count++;
+                    }
+                    if (map[x][y].isDown)
+                    {
+                        count++;
+                    }
+                    if (map[x][y].isLeft)
+                    {
+                        count++;
+                    }
+                    if (map[x][y].isRight)
+                    {
+                        count++;
+                    }
+                    if (count == 1)
+                    {
+                        map[x][y].isDeliver = true;
+                    }
+                }
+            }
+        }
+    }
     private void InitPassageRoomDifficulty()
     {
         int passageRoomCount = 0;
@@ -176,6 +218,46 @@ public class MapGenerater_Castle : MonoBehaviour
     {
         int rewardTime = rewards.Count;
         List<RoomHelper> randomRooms = new List<RoomHelper>();
+
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < height; ++y)
+            {
+                RoomHelper room = map[x][y];
+                int count = 0;
+                if (room.isUp)
+                {
+                    count++;
+                }
+                if (room.isDown)
+                {
+                    count++;
+                }
+                if (room.isLeft)
+                {
+                    count++;
+                }
+                if (room.isRight)
+                {
+                    count++;
+                }
+                if(count == 1)
+                {
+                    randomRooms.Add(room);
+                }
+            }
+        }
+
+        while (randomRooms.Count > 0 && rewardTime > 0)
+        {
+            --rewardTime;
+            int index = UnityEngine.Random.Range(0, randomRooms.Count);
+            randomRooms[index].type = RoomType_Castle.Reward;
+            randomRooms.RemoveAt(index);
+        }
+
+        if (rewardTime <= 0) return;
+
         for (int x = 0; x < width; ++x)
         {
             for (int y = 0; y < height; ++y)
@@ -225,7 +307,7 @@ public class MapGenerater_Castle : MonoBehaviour
         }
         List<int> randomDirs = new List<int>();
         Vector2Int curCell = new Vector2Int(-1, -1);
-        while (maxTryRandomGenerateTime > 0 && randomGenerateTime > 0)
+        while (maxTryRandomGenerateTime > 0 && randomGenerateTime > 0 && baseRooms.Count > 0)
         {
             --maxTryRandomGenerateTime;
             Vector2Int roomCell;
@@ -407,6 +489,7 @@ public class MapGenerater_Castle : MonoBehaviour
                     if (map[x][y].type == RoomType_Castle.Passgae)
                     {
                         (map[x][y].room as PassageRoom_Castle).difficulty = map[x][y].difficulty;
+                        (map[x][y].room as PassageRoom_Castle).isDeliver = map[x][y].isDeliver;
                     }
                     map[x][y].room.GenerateRoom(this);
                 }
@@ -439,14 +522,17 @@ public class MapGenerater_Castle : MonoBehaviour
                 {
                     if(_room.isUp)
                     {
+                        Cross_Room_Count++;
                         return Instantiate(GetRandomPrefab(passageRoomPrefabs_Cross), _position, Quaternion.identity);
                     }
                     else if(_room.isDown)
                     {
+                        LRD_Room_Count++;
                         return Instantiate(GetRandomPrefab(passageRoomPrefabs_LRD), _position, Quaternion.identity);
                     }
                     else
                     {
+                        LR_Room_Count++;
                         return Instantiate(GetRandomPrefab(passageRoomPrefabs_LR), _position, Quaternion.identity);
                     }
                 }
