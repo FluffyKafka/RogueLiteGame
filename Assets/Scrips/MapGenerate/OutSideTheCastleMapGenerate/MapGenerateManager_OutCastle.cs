@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public enum RoomType_OutCastle
@@ -83,8 +84,8 @@ public class Line_OutCastle
     public List<RewardSlot_OutCastle> rewards;
     public RewardSlot_OutCastle lineEndReward;
 
-    [Header("Branch Info")]
     public List<BranchSlot_OutCastle> branches;
+
 
     public Line_OutCastle()
     {
@@ -140,6 +141,7 @@ public class Line_OutCastle
                 return RoomType_OutCastle.Reward;
             }
             isEndRoom = true;
+            Debug.Log(_currentRoomType.ToString() + " " + lineEndRoomType.ToString());
             return lineEndRoomType;
         }
 
@@ -221,6 +223,7 @@ public class MapGenerateManager_OutCastle : MonoBehaviour
     [SerializeField] public GameObject traderPrefab;
     [SerializeField] public GameObject blackSmithPrefab;
     [SerializeField] public GameObject witcherPrefab;
+    public float advancedRewardPrice;
 
     [Header("Room Decoration Info")]
     [SerializeField] public GameObject decorationPrefab;
@@ -374,4 +377,27 @@ public class MapGenerateManager_OutCastle : MonoBehaviour
             ).GetComponent<Enemy_Mimic>();
         newMimic.SetDrops(_drops);
     }
+
+#if UNITY_EDITOR
+    [ContextMenu("Fill Up Rewards")]
+    private void GetItemDatabase()
+    {
+        string[] assetNames = AssetDatabase.FindAssets("t:ItemData", new[] { "Assets/Scrips/Item/ItemData" });
+
+        foreach (string SOName in assetNames)
+        {
+            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
+
+            if (itemData.price < advancedRewardPrice)
+            {
+                primaryRewards.Add(new Drop(itemData, 100 * (itemData.price / ((advancedRewardPrice / 2) + itemData.price))));
+            }
+            else
+            {
+                advancedRewards.Add(new Drop(itemData, 100 * (itemData.price / (advancedRewardPrice + itemData.price))));
+            }
+        }
+    }
+#endif
 }

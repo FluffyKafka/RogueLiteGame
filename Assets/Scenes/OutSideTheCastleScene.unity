@@ -453,15 +453,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.165047
+      value: -32.484726
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.724896
+      value: 12.234653
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.548982
+      value: -9.103393
       objectReference: {fileID: 0}
     - target: {fileID: 3592184860009003912, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -669,15 +669,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.165047
+      value: -32.484726
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.724896
+      value: 12.234653
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.548982
+      value: -9.103393
       objectReference: {fileID: 0}
     - target: {fileID: 6316847320217188792, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -924,6 +924,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
+--- !u!4 &209043648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 888917348166926060, guid: 2ecd30b1204b4cb469e69c7a07346512, type: 3}
+  m_PrefabInstance: {fileID: 1212456895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283593682
 GameObject:
   m_ObjectHideFlags: 0
@@ -1625,23 +1630,213 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20bcf0ad66193a943ada89b46ac36b1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryRoomPrefabs: []
-  exitRoomPrefabs: []
-  battleRoomPrefabs: []
-  passageRoomPrefabs: []
-  rewardRoomPrefabs: []
-  branchRoomPrefabs: []
-  branchExitRoomPrefabs: []
+  entryRoomPrefabs:
+  - {fileID: 9186818707541959046, guid: 43185b88af7d03945849640b755d8549, type: 3}
+  exitRoomPrefabs:
+  - {fileID: 6620305606442209809, guid: 0398310c6d294cf49bdeec7269c11319, type: 3}
+  battleRoomPrefabs:
+  - {fileID: 9122924721718098285, guid: 34d27281ef8dd754783d72f7255788e2, type: 3}
+  - {fileID: 9122924721718098285, guid: 6656f63593c474648b6ef75098a97c45, type: 3}
+  - {fileID: 9122924721718098285, guid: 62ba07624ed2e5a4fa0b0d4ee983578e, type: 3}
+  - {fileID: 9122924721718098285, guid: 66261d78b9f17c147a433cf2e42a58f8, type: 3}
+  - {fileID: 9122924721718098285, guid: 53fd1369574eed143a9227bb1e114002, type: 3}
+  - {fileID: 9122924721718098285, guid: 593f1e526c9b4774abfb1cc08d695e80, type: 3}
+  - {fileID: 9122924721718098285, guid: 48b6dbe8750922b4bac7b8fb6e0e21bc, type: 3}
+  - {fileID: 9122924721718098285, guid: 270a8eaf42db2f349af79c4e3ced7310, type: 3}
+  - {fileID: 9122924721718098285, guid: 1a65a9764c480424187aff8f27c106fe, type: 3}
+  - {fileID: 9122924721718098285, guid: 62e1de4223ba2ad4d8e1224ea697775d, type: 3}
+  - {fileID: 9122924721718098285, guid: 2da35f0e303610746a4bcbf6f0a4553d, type: 3}
+  - {fileID: 9122924721718098285, guid: a71c71c3f1d81a7418a622e37c6c2abb, type: 3}
+  passageRoomPrefabs:
+  - {fileID: 5519137933671674140, guid: 5c465e5e81d6a8b40a91e184c71fc061, type: 3}
+  - {fileID: 5519137933671674140, guid: 79363c42ae395f544a27a461d5eed25c, type: 3}
+  - {fileID: 5519137933671674140, guid: e0df0cc4a1b31cc4f95d0160698755a9, type: 3}
+  - {fileID: 5519137933671674140, guid: 6dbf946087827564b9f48c80789e6298, type: 3}
+  - {fileID: 5519137933671674140, guid: c0d676bef0c5fc54a8b130daf5a9b2e7, type: 3}
+  - {fileID: 5519137933671674140, guid: f68a26d8207ad464abc78382f321603d, type: 3}
+  rewardRoomPrefabs:
+  - {fileID: 8287352890654296562, guid: 25c51610c3b3a044aa1239b7bca17612, type: 3}
+  - {fileID: 8287352890654296562, guid: 8d20d1e69c24d7440a6358acbd7938ec, type: 3}
+  - {fileID: 8287352890654296562, guid: 9e23030acc72234479a3150eeea7a4c4, type: 3}
+  - {fileID: 8287352890654296562, guid: 07a4724de3835574dbc406d739400476, type: 3}
+  - {fileID: 8287352890654296562, guid: 19efaf14afd60c441a237cee55acc5be, type: 3}
+  - {fileID: 8287352890654296562, guid: 0bf6d06f3f6ffca4893244da99188577, type: 3}
+  branchRoomPrefabs:
+  - {fileID: 4416940893296855705, guid: 309b67c7d37a346479ebe4f0f4188f7c, type: 3}
+  - {fileID: 4416940893296855705, guid: a8c084bca0863ef479784722dfafcf6f, type: 3}
+  - {fileID: 4416940893296855705, guid: 8a7932581a3acef41bdb6ac587d34674, type: 3}
+  - {fileID: 4416940893296855705, guid: 017560c61ec75d94f808e6af9d491a61, type: 3}
+  - {fileID: 4416940893296855705, guid: e43e2aef04a02c745a627ab9163b918e, type: 3}
+  - {fileID: 4416940893296855705, guid: 1b52752104d733a40a6bb76c6d7b75f6, type: 3}
+  branchExitRoomPrefabs:
+  - {fileID: 6217563819945910790, guid: 007a083367703c245b8e8895e3bf1596, type: 3}
   mainLine:
-    lineEndRoomType: 0
+    lineEndRoomType: 1
     isEndRoom: 0
     lineStartDoor: {fileID: 0}
-    lineRooms: []
-    battles: []
-    rewards: []
+    lineRooms:
+    - battleRoomRate: 50
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    - battleRoomRate: 30
+      rewardRoomRate: 10
+      branchRoomRate: 40
+    - battleRoomRate: 20
+      rewardRoomRate: 10
+      branchRoomRate: 30
+    - battleRoomRate: 10
+      rewardRoomRate: 10
+      branchRoomRate: 50
+    - battleRoomRate: 20
+      rewardRoomRate: 20
+      branchRoomRate: 30
+    battles:
+    - difficulty: 120
+    - difficulty: 180
+    - difficulty: 200
+    rewards:
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
+      advancedAmount: 1
+      witcherRate: 30
+      traderRate: 10
+      blackSmithRate: 5
+      advancedRewardRate: 20
+      mimicRate: 10
+      mimicAdvancedRewardRate: 60
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
+      advancedAmount: 1
+      witcherRate: 30
+      traderRate: 10
+      blackSmithRate: 5
+      advancedRewardRate: 20
+      mimicRate: 10
+      mimicAdvancedRewardRate: 60
     lineEndReward:
       minRewardTime: 1
       maxRewardTime: 3
+      rewardAmount: 0
+      advancedAmount: 0
+      witcherRate: 50
+      traderRate: 0
+      blackSmithRate: 0
+      advancedRewardRate: 50
+      mimicRate: 0
+      mimicAdvancedRewardRate: 0
+    branches:
+    - isRandom: 1
+      branchLine:
+        lineEndRoomType: 0
+        isEndRoom: 0
+        lineStartDoor: {fileID: 0}
+        lineRooms:
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        battles:
+        - difficulty: 180
+        rewards:
+        - minRewardTime: 1
+          maxRewardTime: 3
+          rewardAmount: 3
+          advancedAmount: 1
+          witcherRate: 50
+          traderRate: 10
+          blackSmithRate: 5
+          advancedRewardRate: 10
+          mimicRate: 5
+          mimicAdvancedRewardRate: 70
+        lineEndReward:
+          minRewardTime: 0
+          maxRewardTime: 0
+          rewardAmount: 0
+          advancedAmount: 0
+          witcherRate: 0
+          traderRate: 0
+          blackSmithRate: 0
+          advancedRewardRate: 0
+          mimicRate: 0
+          mimicAdvancedRewardRate: 0
+        branches: []
+    - isRandom: 1
+      branchLine:
+        lineEndRoomType: 0
+        isEndRoom: 0
+        lineStartDoor: {fileID: 0}
+        lineRooms:
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        - battleRoomRate: 50
+          rewardRoomRate: 0
+          branchRoomRate: 0
+        battles:
+        - difficulty: 180
+        rewards:
+        - minRewardTime: 1
+          maxRewardTime: 3
+          rewardAmount: 3
+          advancedAmount: 1
+          witcherRate: 50
+          traderRate: 10
+          blackSmithRate: 5
+          advancedRewardRate: 10
+          mimicRate: 5
+          mimicAdvancedRewardRate: 70
+        lineEndReward:
+          minRewardTime: 0
+          maxRewardTime: 0
+          rewardAmount: 0
+          advancedAmount: 0
+          witcherRate: 0
+          traderRate: 0
+          blackSmithRate: 0
+          advancedRewardRate: 0
+          mimicRate: 0
+          mimicAdvancedRewardRate: 0
+        branches: []
+  branchLines:
+  - lineEndRoomType: 4
+    isEndRoom: 0
+    lineStartDoor: {fileID: 0}
+    lineRooms:
+    - battleRoomRate: 50
+      rewardRoomRate: 50
+      branchRoomRate: 50
+    - battleRoomRate: 0
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    - battleRoomRate: 0
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    battles:
+    - difficulty: 180
+    rewards:
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
+      advancedAmount: 1
+      witcherRate: 35
+      traderRate: 10
+      blackSmithRate: 5
+      advancedRewardRate: 25
+      mimicRate: 5
+      mimicAdvancedRewardRate: 70
+    lineEndReward:
+      minRewardTime: 0
+      maxRewardTime: 0
       rewardAmount: 0
       advancedAmount: 0
       witcherRate: 0
@@ -1651,21 +1846,230 @@ MonoBehaviour:
       mimicRate: 0
       mimicAdvancedRewardRate: 0
     branches: []
-  branchLines: []
-  startTransform: {fileID: 0}
-  enemyList: []
-  enemyGenerateYOffset: 1
-  primaryRewards: []
-  advancedRewards: []
-  primaryRewardChestPrefab: {fileID: 0}
-  advancedRewardChestPrefab: {fileID: 0}
-  mimicChestPrefab: {fileID: 0}
-  traderPrefab: {fileID: 0}
-  blackSmithPrefab: {fileID: 0}
-  witcherPrefab: {fileID: 0}
-  decorationPrefab: {fileID: 0}
-  decorations: []
-  branchYOffset: 0
+  - lineEndRoomType: 4
+    isEndRoom: 0
+    lineStartDoor: {fileID: 0}
+    lineRooms:
+    - battleRoomRate: 50
+      rewardRoomRate: 50
+      branchRoomRate: 50
+    - battleRoomRate: 0
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    - battleRoomRate: 0
+      rewardRoomRate: 0
+      branchRoomRate: 0
+    battles:
+    - difficulty: 180
+    rewards:
+    - minRewardTime: 1
+      maxRewardTime: 3
+      rewardAmount: 3
+      advancedAmount: 1
+      witcherRate: 35
+      traderRate: 10
+      blackSmithRate: 5
+      advancedRewardRate: 25
+      mimicRate: 5
+      mimicAdvancedRewardRate: 70
+    lineEndReward:
+      minRewardTime: 0
+      maxRewardTime: 0
+      rewardAmount: 0
+      advancedAmount: 0
+      witcherRate: 0
+      traderRate: 0
+      blackSmithRate: 0
+      advancedRewardRate: 0
+      mimicRate: 0
+      mimicAdvancedRewardRate: 0
+    branches: []
+  startTransform: {fileID: 209043648}
+  enemyList:
+  - {fileID: 5637944703504468775, guid: 7f169eb32812e984aba3b9fae1d72151, type: 3}
+  - {fileID: 4262958126211719847, guid: fc9d793840956564fb65a825b8550a90, type: 3}
+  - {fileID: 8928872454373980311, guid: e75685b8777999e4a92851b20a2da959, type: 3}
+  - {fileID: 6948483205627279620, guid: 46bc7acc8e4b30d43a333499a7fe8f79, type: 3}
+  - {fileID: 3776551239192708493, guid: 16948f0ffb70b104aa796eba03de0263, type: 3}
+  enemyGenerateYOffset: 2
+  primaryRewards:
+  - item: {fileID: 11400000, guid: ce89439d6e4612945be9de8df12aa7f1, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 51bfc91e91cc29144bbfb8a30ac33f06, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 093d9d6f2cb07a44dbc33e763df67c96, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 12ab6b390872dc744bbc21d7d61a6a56, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: d057f00ceb1f0714d9d76a0a4a3d62fa, type: 2}
+    dropChance: 16.666666
+  - item: {fileID: 11400000, guid: 61617ae58528c0444af197c7a5deedda, type: 2}
+    dropChance: 58.333332
+  - item: {fileID: 11400000, guid: 0ab358cda1c80b34baf6b1f9aaa239de, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: a9cc844ea71d7444fb47ebe880fe4516, type: 2}
+    dropChance: 44.444443
+  - item: {fileID: 11400000, guid: ec94af8f0d001be4da4cdc0ea60ec185, type: 2}
+    dropChance: 9.090909
+  - item: {fileID: 11400000, guid: e2e1c775d04f34843af74f1910cc6a01, type: 2}
+    dropChance: 37.5
+  - item: {fileID: 11400000, guid: 5114693ff97a2b74ea5f8d57d2552076, type: 2}
+    dropChance: 23.076923
+  - item: {fileID: 11400000, guid: 9e525dbc30cc04a4b89fd29db6726791, type: 2}
+    dropChance: 28.571428
+  - item: {fileID: 11400000, guid: 76d1d23c8da53ca4bbb79d8d5be52d33, type: 2}
+    dropChance: 44.444443
+  - item: {fileID: 11400000, guid: 90dc4f0ee7879974ead4e0d165d46b8b, type: 2}
+    dropChance: 64.28571
+  - item: {fileID: 11400000, guid: e419b9a9ca54e1d41a7e0dc26db59d03, type: 2}
+    dropChance: 37.5
+  - item: {fileID: 11400000, guid: 65af6cb0a78d6c64b8ef6e129eadec40, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 8322c699b0881524f95920f3e11cad1b, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 59ec7421763734441a6a84dfd408b1fc, type: 2}
+    dropChance: 61.53846
+  - item: {fileID: 11400000, guid: c1c08142e79924040a7512e539a5ba4f, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 15963c643e6a9dd42b18e500aea9661f, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 857d1a4e96bb0d140a25bc374e940706, type: 2}
+    dropChance: 37.5
+  - item: {fileID: 11400000, guid: 7d7bf685a2638f54f87edfd4fa3b4c44, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: bae2fc0ca879f424bbe1f6691a41b135, type: 2}
+    dropChance: 44.444443
+  - item: {fileID: 11400000, guid: 91412023af794d343ad72da52ec6a419, type: 2}
+    dropChance: 61.53846
+  - item: {fileID: 11400000, guid: b1fec73ade4caf9438f0df1ec9f7b57a, type: 2}
+    dropChance: 28.571428
+  - item: {fileID: 11400000, guid: e02ff965ac3ff4d4badbe742f8e37647, type: 2}
+    dropChance: 37.5
+  - item: {fileID: 11400000, guid: e44239a3a6e262b47bbde16965aceaaf, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 2db2dd451dfbacc449e03d9e988ba571, type: 2}
+    dropChance: 16.666666
+  - item: {fileID: 11400000, guid: 24c668e96475a1642938c0016a9cad00, type: 2}
+    dropChance: 9.090909
+  - item: {fileID: 11400000, guid: c5958d8ef07be144089c249e4f4b2dfc, type: 2}
+    dropChance: 16.666666
+  advancedRewards:
+  - item: {fileID: 11400000, guid: 8a2a8d14805146a4da79a024a690f154, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 81ab45b7c5e236f428ee14c4458bfda4, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 176bc9aaf98d2a3409543f0d74361929, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 6f0d4d7d1f95b304eaa09b9520d1c539, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: cd638595ce136ea4b896aa0e49d84dd2, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 55a9c325ee4be45449d734030feab80f, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 4f71ab7eafcfeb740ac2d7c0b9874a18, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 7f56a5c14a244974b89566b414845712, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: d17d0ea0645c11d4f9bfe276a2506c68, type: 2}
+    dropChance: 75
+  - item: {fileID: 11400000, guid: 91c7056bc1d51a447834da4def4d88bd, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 665e1730ded616641b255b1abcf17b56, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 60a48bc0997f40e41a186287b485e4e5, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: cf7b72a694c6c2c4bb4c7f2e85e58a59, type: 2}
+    dropChance: 75
+  - item: {fileID: 11400000, guid: fec8622a098289841835530b9c0af5bd, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 5448701042f510b44828f1014190d5e5, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 95d17b0004dee7c43ba8301785bf8b8a, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 6c76e96082754024097b480e8d881463, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 79e79ef0631c7df4cb7dc8b45af51892, type: 2}
+    dropChance: 66.666664
+  - item: {fileID: 11400000, guid: a456d85896fb82544ba3247956af129a, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: 4130953740cc0564ea5691843ab94aae, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 35af717083d06c04486a7ca8b1696510, type: 2}
+    dropChance: 50
+  - item: {fileID: 11400000, guid: d69257990017cef4f8c52c7013c1b55f, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 2953b41f5f922804f8788d5312436494, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 16015ad67a3892947a9c91985a5dcdbf, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 36bed3b9a70d1c24fbb2658c3d2a13b7, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: eee7b1f0b635f434d92e41c40342c06e, type: 2}
+    dropChance: 60
+  - item: {fileID: 11400000, guid: 4c210458d901e784dab0ec406cb39bd7, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 2921b801d9409034e8c173725bdda8c1, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: ef01c0b8dbc24bf42b3a72a41ac8352a, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 7daba7216afed834bb167524fe4fa260, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 4188f0b130153ad448d10174a9c4f131, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: 993a076bb159f84489daf9489d9ebee1, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: f3674c37c50bc66469be4d3420b58f3e, type: 2}
+    dropChance: 85.71429
+  - item: {fileID: 11400000, guid: d89a3f99bf6bceb4ea58506070d2a551, type: 2}
+    dropChance: 66.666664
+  - item: {fileID: 11400000, guid: 08eada0737febbb46aff9ec530a205f4, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: e0f8f7886be23b1428cb5c8c60f0a3de, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 45ce4a4a4e1182b488020fc124bb9e89, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 611943b3905d641489d8ac11f10beb01, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: a27410029f094964e81623f499ae5727, type: 2}
+    dropChance: 54.545456
+  - item: {fileID: 11400000, guid: 81225a14b77d1614098fb0e1dd1fdbbf, type: 2}
+    dropChance: 54.545456
+  primaryRewardChestPrefab: {fileID: 6913548843195122753, guid: 163721ae8dcceca488db042b2dc7d79b, type: 3}
+  advancedRewardChestPrefab: {fileID: 6913548843195122753, guid: 507091d119ba8904aafdaf75e9fa1ca7, type: 3}
+  mimicChestPrefab: {fileID: 6953725531051475293, guid: 9f6efcec2964bde438ab2ecf9f47ea86, type: 3}
+  traderPrefab: {fileID: 234054331011517859, guid: 12c11c641b9b6c4479d1e962c523f152, type: 3}
+  blackSmithPrefab: {fileID: 5044842183316314030, guid: 70605c63ec6556b44ad87a513ade14d6, type: 3}
+  witcherPrefab: {fileID: 1567148331700328297, guid: fb104c8186e5fe04faf28e443b4a368c, type: 3}
+  advancedRewardPrice: 100
+  decorationPrefab: {fileID: 153967504809312598, guid: 7eba192808eb38544bde108dbef1c545, type: 3}
+  decorations:
+  - {fileID: 21300000, guid: b61ebe29b3b0db44bbbbfccc4dcc3be8, type: 3}
+  - {fileID: 21300000, guid: 9204943f0eacdb74baf3cba4d4bb8f4a, type: 3}
+  - {fileID: 21300000, guid: d9067e57fb155cb40a3d0f85e9f51544, type: 3}
+  - {fileID: 21300000, guid: 1e978af5c6e774446add94e8d0cf72bf, type: 3}
+  - {fileID: 21300000, guid: f33a2a1156e68494e98db1f223bfebdd, type: 3}
+  - {fileID: 21300000, guid: 6dafea31fe94dd149a8ce1a0ef196bab, type: 3}
+  - {fileID: 21300000, guid: 460556444a4e4a2498b0818c9a7dbb94, type: 3}
+  - {fileID: 21300000, guid: 550795fa2a3ca1145933d021eccf3a03, type: 3}
+  - {fileID: 21300000, guid: accff7572841ae643a6ec222d6856407, type: 3}
+  - {fileID: 21300000, guid: 75c47b8b553cd8f45927b73d1fdd0f78, type: 3}
+  - {fileID: 21300000, guid: aa92f6bbee238934181c8550e97b1beb, type: 3}
+  - {fileID: 21300000, guid: aa12eeb1e0526dc4181cbfd349eed568, type: 3}
+  - {fileID: 21300000, guid: 61529b5e56ddbe94e9ab642de5dd827a, type: 3}
+  - {fileID: 21300000, guid: 3a74581a34e06c44aab7a1b26f2ea5e3, type: 3}
+  - {fileID: 21300000, guid: 42c70be15deaaac4c87c36616632ed1c, type: 3}
+  - {fileID: 21300000, guid: 7c969826663c474488da130737a73252, type: 3}
+  - {fileID: 21300000, guid: ee0e2cc6160ad904a871d54db2ef0b38, type: 3}
+  - {fileID: 21300000, guid: 3e950528dbee1e849ac88cd6d61cae22, type: 3}
+  - {fileID: 21300000, guid: 7ddff0286ba57f146a4c1b0b603d6f06, type: 3}
+  - {fileID: 21300000, guid: 5db2f95dc9b3b734c887fcb3ee8e80bf, type: 3}
+  - {fileID: 21300000, guid: 4b4b02c4847c1ff46a4c5f6b4364e1b4, type: 3}
+  - {fileID: 21300000, guid: 98b7ea68eca09804d8620ebfab6e9b01, type: 3}
+  - {fileID: 21300000, guid: a4858fd0287087249bbd13755b620710, type: 3}
+  - {fileID: 21300000, guid: 71630e1e5bc9f4647994ca1c2427fbbe, type: 3}
+  - {fileID: 21300000, guid: 8566d9190335a554cab835250b170b80, type: 3}
+  - {fileID: 21300000, guid: bdd66e2978529184588fee9c6ddf0519, type: 3}
+  branchYOffset: 200
 --- !u!1 &1309449675
 GameObject:
   m_ObjectHideFlags: 0
