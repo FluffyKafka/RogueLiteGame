@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Supercooling
   m_EditorClassIdentifier: 
-  itemId: 2921b801d9409034e8c173725bdda8c1
+  itemId: 10
   icon: {fileID: 21300000, guid: 6f61d234df6c92a4dbd4be0eb4462a92, type: 3}
   itemName: "\u8FC7\u51B7"
   itemType: 1
@@ -51,4 +51,5 @@ MonoBehaviour:
   effects:
   - {fileID: 11400000, guid: 04bddd6cc30ca234eb82ba622eaed3c0, type: 2}
   cooldown: 3
-  detail: "\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u65F6\uFF0C\u5728\u8EAB\u8FB9\u751F\u6210\u4E00\u4E2A\u51B0\u6676\uFF0C\u51B0\u6676\u5C06\u5728\u88AB\u654C\u4EBA\u63A5\u89E6\u5230\u62163s\u540E\u7206\u70B8\uFF0C\u5BF9\u8303\u56F4\u5185\u654C\u4EBA\u9020\u62107\u51B0\u51BB\u4F24\u5BB3"
+  detail: "\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u65F6\uFF0C\u5728\u8EAB\u8FB9\u751F\u6210\u4E00\u4E2A\u51B0\u6676\uFF0C\u51B0\u6676\u5C06\u5728\u88AB\u654C\u4EBA\u63A5\u89E6\u5230\u6216\u4E00\u6BB5\u65F6\u95F4\u540E\u7206\u70B8\uFF0C\u5BF9\u8303\u56F4\u5185\u654C\u4EBA\u9020\u62107\u51B0\u51BB\u4F24\u5BB3\uFF0C\u4EA7\u751F\u53CC\u500D\u51B0\u51BB\u6548\u679C"
+  craftsId: 340000003f00000041000000ffffffffffffffff

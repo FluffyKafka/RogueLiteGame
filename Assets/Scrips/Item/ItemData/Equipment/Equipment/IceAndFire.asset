@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: IceAndFire
   m_EditorClassIdentifier: 
-  itemId: cf7b72a694c6c2c4bb4c7f2e85e58a59
+  itemId: 31
   icon: {fileID: -1943397117, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u51B0\u4E0E\u706B\u4E4B\u6B4C"
   itemType: 1
@@ -52,4 +52,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00a17a7fc2c991f4984de0f5d8bf701e, type: 2}
   - {fileID: 11400000, guid: c13a2739bc4d6104196be30283559347, type: 2}
   cooldown: 0
-  detail: "\u51FB\u4E2D\u654C\u4EBA\u65F6\u5BF9\u654C\u4EBA\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310,\u65BD\u52A0\u70B9\u71C3\u548C\u51B0\u51BB\u72B6\u60011\u79D2\n\u51FB\u4E2D\u65F6\u5728\u6781\u77ED\u65F6\u95F4\u5185\u589E\u52A0\u706B\u7130\u4F24\u5BB35"
+  detail: "\u51FB\u4E2D\u654C\u4EBA\u65F6\u5BF9\u654C\u4EBA\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310,\u65BD\u52A0\u70B9\u71C3\u548C\u51B0\u51BB\u72B6\u60011\u79D2"
+  craftsId: 2e0000002f0000002300000023000000ffffffff

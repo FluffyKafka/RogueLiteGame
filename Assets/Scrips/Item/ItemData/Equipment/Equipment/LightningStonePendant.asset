@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: LightningStonePendant
   m_EditorClassIdentifier: 
-  itemId: 6c76e96082754024097b480e8d881463
+  itemId: 22
   icon: {fileID: 21300000, guid: e876028b0facd9347a0038b131203650, type: 3}
   itemName: "\u96F7\u9E23\u77F3\u540A\u5760"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 30000000280000003a000000ffffffffffffffff

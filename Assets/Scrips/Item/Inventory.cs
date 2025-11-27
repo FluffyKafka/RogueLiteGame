@@ -26,7 +26,6 @@ public class Inventory : MonoBehaviour, ISaveManager
     public List<InventoryItem> stash;
     public Dictionary<ItemData, InventoryItem> stashDictionary;
 
-
     [Header("Inventory UI")]
     [SerializeField] private Transform inventorySlotParent;
     [SerializeField] private Transform stashSlotParent;
@@ -49,6 +48,7 @@ public class Inventory : MonoBehaviour, ISaveManager
     [SerializeField] private List<InventoryItem> loadedItems_equipment = new List<InventoryItem>();
     [SerializeField] private bool isNewGame = true;
     [SerializeField] private SerializableDictionary<string, ItemData> itemDatabase;
+    [HideInInspector] public Dictionary<string, float> cooldownFinishTimeTable;
 
     [Header("TradeGoods")]
     public List<ItemData> tradeGoods;
@@ -72,6 +72,11 @@ public class Inventory : MonoBehaviour, ISaveManager
 
         stash = new List<InventoryItem>();
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
+
+        foreach (var item in itemDatabase)
+        {
+            cooldownFinishTimeTable.Add(item.Key, 0f);
+        }
     }
 
     private void Start()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: WoodenArmor
   m_EditorClassIdentifier: 
-  itemId: 093d9d6f2cb07a44dbc33e763df67c96
+  itemId: 15
   icon: {fileID: 21300000, guid: 925d7fbd6e4f19f4daf18134298af1f5, type: 3}
   itemName: "\u6728\u7532"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 2d0000002d0000002d0000002d000000ffffffff

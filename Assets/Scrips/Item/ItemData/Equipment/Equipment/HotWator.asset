@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: HotWator
   m_EditorClassIdentifier: 
-  itemId: 60a48bc0997f40e41a186287b485e4e5
+  itemId: 14
   icon: {fileID: 21300000, guid: d126af396a1395f41a065bb74e5d7c66, type: 3}
   itemName: "\u5F00\u6C34"
   itemType: 1
@@ -53,3 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fc011f4a8482134597b401d09f08b5b, type: 2}
   cooldown: 3
   detail: "\u4F7F\u7528\u65F6\u5BF9\u81EA\u8EAB\u9020\u62101\u706B\u7130\u4F24\u5BB3\uFF0C\u6062\u590D10%\u8840\u91CF"
+  craftsId: 3f000000330000002c0000002d000000ffffffff

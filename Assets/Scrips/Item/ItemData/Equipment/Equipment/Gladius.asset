@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Gladius
   m_EditorClassIdentifier: 
-  itemId: 4f71ab7eafcfeb740ac2d7c0b9874a18
+  itemId: 17
   icon: {fileID: 21300000, guid: c313cdfe192493746b9ba1357e754ed7, type: 3}
   itemName: "\u683C\u62C9\u8FEA\u5384\u65AF"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 2d0000003700000037000000ffffffffffffffff

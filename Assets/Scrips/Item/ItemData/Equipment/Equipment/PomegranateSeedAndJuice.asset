@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: PomegranateSeedAndJuice
   m_EditorClassIdentifier: 
-  itemId: d69257990017cef4f8c52c7013c1b55f
+  itemId: 7
   icon: {fileID: 21300000, guid: 3b537912beba0aa479d1af918b718c45, type: 3}
   itemName: "\u77F3\u69B4\u7C7D\u548C\u77F3\u69B4\u6C41"
   itemType: 1
@@ -53,4 +53,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 219d2a8aead5b7b49b7886789854b152, type: 2}
   - {fileID: 11400000, guid: e7a365fa9e18e6f459fdeaa450a3003d, type: 2}
   cooldown: 13
-  detail: "\u4F7F\u7528\u540E8\u79D2\u5185\u53D7\u5230\u7684\u4F24\u5BB3\u5C06\u88AB\u6CBB\u7597\u5E76\u50A8\u5B58\u8D77\u6765\uFF0C\u5728\u540E4\u79D2\u5185\u5747\u5300\u91CA\u653E\u4E3A\u7269\u7406\u4F24\u5BB3\u3002\u589E\u52A010\u51B0\u51BB\u4F24\u5BB38s\uFF0C\u6062\u590D20%\u8840\u91CF"
+  detail: "\u4F7F\u7528\u540E8\u79D2\u5185\u53D7\u5230\u7684\u4F24\u5BB3\u5C06\u88AB\u50A8\u5B58\u8D77\u6765\uFF0C\u5728\u540E4\u79D2\u5185\u5747\u5300\u91CA\u653E\u3002\u589E\u52A010\u51B0\u51BB\u4F24\u5BB38s\uFF0C\u6062\u590D20%\u8840\u91CF"
+  craftsId: 380000003800000035000000ffffffffffffffff

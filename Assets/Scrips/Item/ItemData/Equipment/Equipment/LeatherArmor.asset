@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: LeatherArmor
   m_EditorClassIdentifier: 
-  itemId: 5448701042f510b44828f1014190d5e5
+  itemId: 27
   icon: {fileID: 21300000, guid: c283fc53bb6aa56469ce84c871a306cd, type: 3}
   itemName: "\u76AE\u7532"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 260000002600000026000000ffffffffffffffff

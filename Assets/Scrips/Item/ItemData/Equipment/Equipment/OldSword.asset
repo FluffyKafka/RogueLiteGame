@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: OldSword
   m_EditorClassIdentifier: 
-  itemId: ce89439d6e4612945be9de8df12aa7f1
+  itemId: 28
   icon: {fileID: 21300000, guid: 09d1228a01b1fa24bbb5fb27de9be378, type: 3}
   itemName: "\u9648\u65E7\u7684\u5251"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: ffffffffffffffffffffffffffffffffffffffff

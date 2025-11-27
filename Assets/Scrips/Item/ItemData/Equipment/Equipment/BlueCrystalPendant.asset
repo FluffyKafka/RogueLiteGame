@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: BlueCrystalPendant
   m_EditorClassIdentifier: 
-  itemId: 6f0d4d7d1f95b304eaa09b9520d1c539
+  itemId: 21
   icon: {fileID: 21300000, guid: 2de337f8e894a4546920cbc9efa4756d, type: 3}
   itemName: "\u84DD\u6C34\u6676\u540A\u5760"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 2f000000280000003a000000ffffffffffffffff

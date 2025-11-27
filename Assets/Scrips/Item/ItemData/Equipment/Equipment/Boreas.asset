@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Boreas
   m_EditorClassIdentifier: 
-  itemId: cd638595ce136ea4b896aa0e49d84dd2
+  itemId: 9
   icon: {fileID: 21300000, guid: ba17c539046edb84e89909b69287a573, type: 3}
   itemName: "\u6CE2\u745E\u963F\u65AF"
   itemType: 1
@@ -52,3 +52,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7398c57691c501c4587694cf0beaeb13, type: 2}
   cooldown: 5
   detail: "\u666E\u901A\u653B\u51FB\u5BF9\u654C\u4EBA\u9020\u6210\u4F24\u5BB3\u65F6\u4F1A\u5411\u524D\u522E\u51FA\u4E00\u9053\u65CB\u98CE\uFF0C\u88AB\u65CB\u98CE\u51FB\u4E2D\u7684\u654C\u4EBA\u5C06\u88AB\u51FB\u6655\u5E76\u53D7\u52305\u51B0\u51BB\u4F24\u5BB3"
+  craftsId: 140000002f0000002f00000039000000ffffffff

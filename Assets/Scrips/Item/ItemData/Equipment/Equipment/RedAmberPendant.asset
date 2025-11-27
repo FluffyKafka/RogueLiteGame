@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: RedAmberPendant
   m_EditorClassIdentifier: 
-  itemId: 16015ad67a3892947a9c91985a5dcdbf
+  itemId: 20
   icon: {fileID: 21300000, guid: 66bd9c8bad6311d49976b776729fd1ea, type: 3}
   itemName: "\u7EA2\u7425\u73C0\u540A\u5760"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 2e000000280000003a000000ffffffffffffffff

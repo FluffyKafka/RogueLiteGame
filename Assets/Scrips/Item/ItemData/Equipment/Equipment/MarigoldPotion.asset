@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: MarigoldPotion
   m_EditorClassIdentifier: 
-  itemId: a456d85896fb82544ba3247956af129a
+  itemId: 16
   icon: {fileID: 21300000, guid: 3e36fd30709c5454e9ec3ed00c7e23b5, type: 3}
   itemName: "\u91D1\u76CF\u82B1\u836F\u5242"
   itemType: 1
@@ -52,3 +52,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba0d9e1110636ef408ef2cfd25905fc2, type: 2}
   cooldown: 4
   detail: "\u6062\u590D10%"
+  craftsId: 3f00000033000000320000002c0000002d000000

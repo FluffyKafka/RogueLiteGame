@@ -4351,6 +4351,7 @@ Transform:
   - {fileID: 2132284395903155579}
   - {fileID: 2361662591155061128}
   - {fileID: 1832136389016606533}
+  - {fileID: 1415363041182231073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &8760490137007700536
@@ -12075,4 +12076,75 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2407205443686910485, guid: 3362c24f82766ce4a8fe3cc4a4917f18, type: 3}
   m_PrefabInstance: {fileID: 4036653318779346256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6459889568444418224
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3080647314835698292}
+    m_Modifications:
+    - target: {fileID: 4140854735672176612, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: message
+      value: "\u6309\u201CW\u201D\u952E\u79BB\u5F00\u5854\u697C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4140854735672176612, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: sceneName
+      value: InTheCastle_EndRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799268556668766436, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+      propertyPath: m_Name
+      value: SceneSwitchEntry_EnterGame
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6219372270570095269, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+--- !u!4 &1415363041182231073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5332897999549080209, guid: 948388a4acf9247408db7ddef1d1e7a0, type: 3}
+  m_PrefabInstance: {fileID: 6459889568444418224}
   m_PrefabAsset: {fileID: 0}

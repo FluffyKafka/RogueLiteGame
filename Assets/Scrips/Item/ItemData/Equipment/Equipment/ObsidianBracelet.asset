@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: ObsidianBracelet
   m_EditorClassIdentifier: 
-  itemId: 4130953740cc0564ea5691843ab94aae
+  itemId: 24
   icon: {fileID: 21300000, guid: 70caac3a7c5b2d749982af2122e45105, type: 3}
   itemName: "\u9ED1\u66DC\u77F3\u624B\u4E32"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 31000000280000003a000000ffffffffffffffff

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New EquipmentSCOBGenerator", menuName = "ExcelData/Equipment")]
@@ -37,6 +38,7 @@ public class EquipmentSCOBGenerator : ScriptableObject
                 else
                 {
                     LoadData_Material(newItem, data);
+                    EditorUtility.SetDirty(newItem);
                 }
             }
             else
@@ -52,10 +54,9 @@ public class EquipmentSCOBGenerator : ScriptableObject
                 else
                 {
                     LoadData_Equipment(newEquipment, data);
+                    EditorUtility.SetDirty(newEquipment);
                 }
-            }
-
-            
+            } 
         }
         UnityEditor.AssetDatabase.SaveAssets();
 #endif

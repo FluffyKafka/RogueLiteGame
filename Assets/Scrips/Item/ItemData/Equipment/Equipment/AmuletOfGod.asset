@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: AmuletOfGod
   m_EditorClassIdentifier: 
-  itemId: 81ab45b7c5e236f428ee14c4458bfda4
+  itemId: 36
   icon: {fileID: 1501868837, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u795E\u4E4B\u62A4"
   itemType: 1
@@ -46,9 +46,10 @@ MonoBehaviour:
     chillArmorReduce: 0
     chillSlowRate: 0
     shockAccuracyReduce: 0
-    thunderStrikeCount: 0
-    thunderStrikeRate: 0
+    thunderStrikeCount: -1
+    thunderStrikeRate: -5
   effects:
   - {fileID: 11400000, guid: c4c09122feb9af445a0fdc2a0ec50ee7, type: 2}
   cooldown: 0
   detail: "\u6280\u80FD\u9020\u6210\u7684\u4F24\u5BB3\u5C06\u89E6\u53D1\u96F7\u51FB,\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310\u5E76\u65BD\u52A0\u611F\u7535\u72B6\u60014\u79D2"
+  craftsId: 3a00000030000000280000003c000000ffffffff

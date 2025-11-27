@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: PlateArmor
   m_EditorClassIdentifier: 
-  itemId: 35af717083d06c04486a7ca8b1696510
+  itemId: 32
   icon: {fileID: -460786257, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u677F\u7532"
   itemType: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
     fireDuration: 0
     iceDuration: 0
     lightningDuration: 0
-    fireDamageSpeed: 0
+    fireDamageCooldown: 0
     fireDamageTransform: 0
     chillArmorReduce: 0
     chillSlowRate: 0
@@ -50,3 +50,5 @@ MonoBehaviour:
     thunderStrikeRate: 0
   effects: []
   cooldown: 0
+  detail: 
+  craftsId: 2700000037000000ffffffffffffffffffffffff

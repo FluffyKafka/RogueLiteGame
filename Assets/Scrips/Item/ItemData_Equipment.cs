@@ -21,7 +21,6 @@ public class ItemData_Equipment : ItemData
     [TextArea][SerializeField] public string detail;
 
     [Header("TEST")]
-    [SerializeField] private float cooldownFinishTime = -1;
     public List<int> craftsId;
 
     public void AddModifiers()
@@ -66,17 +65,17 @@ public class ItemData_Equipment : ItemData
 
     public bool IsCooldownFinish()
     {
-        return cooldownFinishTime < Time.time;
+        return Inventory.instance.cooldownFinishTimeTable[itemId] < Time.time;
     }
 
     public void SetCooldownFinishTime()
     {
-        cooldownFinishTime = cooldown + Time.time;
+        Inventory.instance.cooldownFinishTimeTable[itemId] = cooldown + Time.time;
     }
 
     public float CheckCooldownPercentage()
     {
-        float cooldownTime = cooldownFinishTime - Time.time;
+        float cooldownTime = Inventory.instance.cooldownFinishTimeTable[itemId] - Time.time;
         if(cooldownTime < 0)
         {
             return 0;
@@ -93,11 +92,11 @@ public class ItemData_Equipment : ItemData
 
     public float CheckCooldownRemainingTime()
     {
-        return cooldownFinishTime - Time.time;
+        return Inventory.instance.cooldownFinishTimeTable[itemId] - Time.time;
     }
 
     public void LoadCooldownFinishTime(float _time)
     {
-        cooldownFinishTime = Time.time + _time;
+        Inventory.instance.cooldownFinishTimeTable[itemId] = Time.time + _time;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: BraveHeart
   m_EditorClassIdentifier: 
-  itemId: 55a9c325ee4be45449d734030feab80f
+  itemId: 23
   icon: {fileID: 21300000, guid: ec36ccaa57c90d347b03c50749f492c4, type: 3}
   itemName: "\u52C7\u6562\u7684\u5FC3"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 32000000280000003a00000043000000ffffffff

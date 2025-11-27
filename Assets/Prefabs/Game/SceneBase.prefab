@@ -1025,6 +1025,7 @@ MonoBehaviour:
   playerRemainingTransform: {fileID: 0}
   preGameSceneName: PreGameRoomScene
   pauseTimeSpeedDivider: 1000
+  playerInitTransform: {fileID: 0}
   isBattle: 0
 --- !u!1 &7526490974668189074
 GameObject:

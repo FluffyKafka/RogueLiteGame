@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: WizardRobe
   m_EditorClassIdentifier: 
-  itemId: d89a3f99bf6bceb4ea58506070d2a551
+  itemId: 25
   icon: {fileID: 21300000, guid: 118b1b9ad81b29d45ace8dd106326245, type: 3}
   itemName: "\u5DEB\u5E08\u6CD5\u888D"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 420000002b00000028000000ffffffffffffffff

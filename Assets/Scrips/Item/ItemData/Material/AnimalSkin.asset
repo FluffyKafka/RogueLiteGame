@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d527a8d8538ac4e80e561b783588b8, type: 3}
   m_Name: AnimalSkin
   m_EditorClassIdentifier: 
-  itemId: d057f00ceb1f0714d9d76a0a4a3d62fa
+  itemId: 38
   icon: {fileID: -30923116, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u517D\u76AE"
   itemType: 0
   craftingMaterials: []
   description: "\u4E0D\u77E5\u9053\u4ECE\u54EA\u91CC\u6252\u4E0B\u6765\u7684"
-  price: 15
+  price: 10

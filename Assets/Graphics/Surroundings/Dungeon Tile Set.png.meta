@@ -2932,7 +2932,7 @@ TextureImporter:
         width: 19
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -2940,6 +2940,27 @@ TextureImporter:
       bones: []
       spriteID: 7d4cfcbd2d734f343ab5c08179b7919a
       internalID: -1454638055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dungeon Tile Set_135
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 49
+        width: 64
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b80f4a347cb371342992ba0973072960
+      internalID: 662041541
       vertices: []
       indices: 
       edges: []
@@ -2996,6 +3017,7 @@ TextureImporter:
       Dungeon Tile Set_132: -1740623874
       Dungeon Tile Set_133: -1289932435
       Dungeon Tile Set_134: -1454638055
+      Dungeon Tile Set_135: 662041541
       Dungeon Tile Set_14: 2004322518
       Dungeon Tile Set_15: 1420880111
       Dungeon Tile Set_16: -83218397

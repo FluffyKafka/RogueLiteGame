@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: IconArmor
   m_EditorClassIdentifier: 
-  itemId: fec8622a098289841835530b9c0af5bd
+  itemId: 26
   icon: {fileID: 21300000, guid: 95ae3749d837a6a47a7c0d90b0c283e7, type: 3}
   itemName: "\u94F8\u94C1\u76D4\u7532"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 270000002700000027000000ffffffffffffffff

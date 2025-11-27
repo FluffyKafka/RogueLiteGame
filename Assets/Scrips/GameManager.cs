@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour, ISaveManager
     [SerializeField] private string preGameSceneName;
     [SerializeField] public float pauseTimeSpeedDivider = 100f;//暂停时将游戏速度降低到极低
 
+    public Transform playerInitTransform = null;
+
     public bool isBattle = false;
 
     private void Awake()
@@ -36,7 +38,10 @@ public class GameManager : MonoBehaviour, ISaveManager
 
     private void Start()
     {
-        
+        if(playerInitTransform != null)
+        {
+            PlayerManager.instance.player.transform.position = playerInitTransform.position;
+        }
     }
 
     public void CheckPointLoad()

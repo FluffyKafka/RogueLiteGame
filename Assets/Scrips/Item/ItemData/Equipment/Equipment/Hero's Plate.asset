@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Hero's Plate
   m_EditorClassIdentifier: 
-  itemId: 665e1730ded616641b255b1abcf17b56
+  itemId: 30
   icon: {fileID: -1294465547, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u82F1\u96C4\u677F\u7532"
   itemType: 1
@@ -52,3 +52,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 415a361d10e9fd04a97d00f015a7f320, type: 2}
   cooldown: 60
   detail: "\u5F53\u8840\u91CF\u964D\u81F310%\u65F6\u505C\u6B62\u9644\u8FD1\u654C\u4EBA\u7684\u65F6\u95F43\u79D2\uFF08\u4EC5\u4ECE\u5927\u4E8E10%\u964D\u4F4E\u5230\u5C0F\u4E8E10%\u65F6\u89E6\u53D1\uFF09"
+  craftsId: 39000000390000003a00000026000000ffffffff

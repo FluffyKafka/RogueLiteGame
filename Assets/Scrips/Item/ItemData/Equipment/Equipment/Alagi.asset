@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: Alagi
   m_EditorClassIdentifier: 
-  itemId: 8a2a8d14805146a4da79a024a690f154
+  itemId: 5
   icon: {fileID: 21300000, guid: 156b6e3c7b3aa034ab221c0047f31634, type: 3}
-  itemName: "\u963F\u62C9\u5409\u9152"
+  itemName: "\u963F\u524C\u5409\u9152"
   itemType: 1
   craftingMaterials: []
   description: "\u70B9\u71C3\u4E86\u6574\u4E2A\u5589\u5499"
@@ -53,4 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 844bf87c47e2ba1459bc8b62b5934d56, type: 2}
   cooldown: 12
   detail: "\u4F7F\u7528\u540E\u589E\u52A030\u6700\u5927\u751F\u547D\u503C\uFF0C10\u706B\u7130\u4F24\u5BB310s\uFF0C\u6062\u590D25%\u8840\u91CF"
-  cooldownFinishTime: 39.34415
+  craftsId: 3300000040000000ffffffffffffffffffffffff

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: HealFlask
   m_EditorClassIdentifier: 
-  itemId: d17d0ea0645c11d4f9bfe276a2506c68
+  itemId: 29
   icon: {fileID: 938343867, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u6CBB\u6108\u836F\u74F6"
   itemType: 1
@@ -53,3 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed332bef489b8c842bb7828d7e164fa9, type: 2}
   cooldown: 8
   detail: "\u996E\u7528\u65F6\u589E\u52A0\u529B\u91CF10\u548C\u751F\u547D\u4E0A\u965010,\u6301\u7EED5\u79D2\n\u996E\u7528\u65F6\u56DE\u590D15%\u7684\u8840\u91CF"
+  craftsId: 440000003200000033000000ffffffffffffffff

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: LoricaSegmentata
   m_EditorClassIdentifier: 
-  itemId: 79e79ef0631c7df4cb7dc8b45af51892
+  itemId: 19
   icon: {fileID: 21300000, guid: 359b08806dc362f40beef0a7c406f1aa, type: 3}
   itemName: "\u73AF\u7247\u7532"
   itemType: 1
@@ -51,3 +51,4 @@ MonoBehaviour:
   effects: []
   cooldown: 0
   detail: 
+  craftsId: 260000003700000037000000ffffffffffffffff

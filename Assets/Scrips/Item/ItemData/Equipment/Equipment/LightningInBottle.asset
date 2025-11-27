@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0030604f8c71c7c43bb2ebb1e8f46e63, type: 3}
   m_Name: LightningInBottle
   m_EditorClassIdentifier: 
-  itemId: 95d17b0004dee7c43ba8301785bf8b8a
+  itemId: 1
   icon: {fileID: 21300000, guid: 1ef6de7c8b15b2244bcf17b393390412, type: 3}
   itemName: "\u74F6\u4E2D\u95EA\u7535"
   itemType: 1
@@ -53,3 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad3cdc94f9dec9b4b8cbc0d0e4788b72, type: 2}
   cooldown: 6
   detail: "\u4F7F\u7528\u540E\u589E\u52A020\u653B\u901F\u300110\u96F7\u7535\u4F24\u5BB35s\n\u6062\u590D10%\u8840\u91CF\u3002"
+  craftsId: 340000003000000040000000ffffffffffffffff
