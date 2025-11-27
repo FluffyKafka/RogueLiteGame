@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerAirState
 {
+    public bool isFinishJump = false;
     public PlayerJumpState(PlayerStateMachine _stateMachine, Player _Player, string _animBoolName) : base(_stateMachine, _Player, _animBoolName)
     {
 
@@ -12,6 +13,7 @@ public class PlayerJumpState : PlayerAirState
     public override void Enter()
     {
         base.Enter();
+        isFinishJump = false;
         player.jumpCount++;
         if(player.jumpCount > 1)
         {
@@ -29,10 +31,13 @@ public class PlayerJumpState : PlayerAirState
 
     public override void Update()
     {
-        
         if (rg.velocity.y < 0)
         {
             stateMachine.ChangeState(player.fallState);
+        }
+        if(!isFinishJump && !player.IsGrounded())
+        {
+            isFinishJump = true;
         }
         base.Update();
     }

@@ -11,7 +11,6 @@ public class PlayerAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("EnterAir");
     }
 
     public override void Exit()
@@ -23,7 +22,25 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
         player.anim.SetFloat("yVelocity", rg.velocity.y);
-        if(xInput != 0)
+
+        if (player.IsGrounded())
+        {
+            if(this is PlayerJumpState)
+            {
+                if((this as PlayerJumpState).isFinishJump)
+                {
+                    stateMachine.ChangeState(player.idleState);
+                    return;
+                }
+            }
+            else
+            {
+                stateMachine.ChangeState(player.idleState);
+                return;
+            }
+        }
+
+        if (xInput != 0)
         {
             player.SetVelocity(xInput * player.moveInAirSpeed, rg.velocity.y);
         }

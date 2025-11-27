@@ -73,6 +73,7 @@ public class Inventory : MonoBehaviour, ISaveManager
         stash = new List<InventoryItem>();
         stashDictionary = new Dictionary<ItemData, InventoryItem>();
 
+        cooldownFinishTimeTable = new Dictionary<string, float>();
         foreach (var item in itemDatabase)
         {
             cooldownFinishTimeTable.Add(item.Key, 0f);

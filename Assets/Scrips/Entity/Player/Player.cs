@@ -97,6 +97,7 @@ public class Player : Entity
     public int jumpCount = 0;
     public int jumpCountMax = 2;
     public ParticleSystem secondJumpFX;
+    public float jumpGroundCheckDistance = 0.5f;
 
     [Header("PlayerRemaining Info")]
     [Range(0, 1)] public float maxPlayerCurrencyRemainRate = 0.1f;
@@ -167,7 +168,7 @@ public class Player : Entity
     {
         Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
         Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
-        return Physics2D.OverlapArea(leftUp, rightDown, whatIsGround);
+        return Physics2D.OverlapArea(leftUp, rightDown, whatIsGround | whatIsPlatform);
     }
 
     private void EnterCheck()
@@ -183,6 +184,11 @@ public class Player : Entity
                 }
             }
         }
+    }
+
+    public bool IsGrounded_Jump()
+    {
+        return Physics2D.Raycast(groundCheck.position, Vector2.down, jumpGroundCheckDistance, whatIsGround | whatIsPlatform);
     }
 
     private void CommunicateCheck()
@@ -293,6 +299,7 @@ public class Player : Entity
         Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
         Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
         Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundCheckWidth, groundCheckDistance));
+        Gizmos.DrawLine(groundCheck.position, groundCheck.position + new Vector3(0, -jumpGroundCheckDistance, 0));
     }
 
     public bool IsBlackSmithAround()

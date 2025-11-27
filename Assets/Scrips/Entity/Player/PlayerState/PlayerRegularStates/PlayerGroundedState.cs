@@ -12,7 +12,6 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.jumpCount = 0;
     }
 
     public override void Exit()
@@ -23,7 +22,13 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
-        if(player.CheckInput_KeyDown(KeyCode.Space))
+
+        if(player.jumpCount > 0 && player.IsGrounded_Jump())
+        {
+            player.jumpCount = 0;
+        }
+
+        if(player.CheckInput_KeyDown(KeyCode.Space) && player.jumpCount == 0)
         {
             stateMachine.ChangeState(player.jumpState);
         }

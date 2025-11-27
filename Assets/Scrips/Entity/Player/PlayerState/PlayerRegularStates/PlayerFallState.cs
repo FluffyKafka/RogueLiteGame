@@ -28,10 +28,6 @@ public class PlayerFallState : PlayerAirState
         {
             stateMachine.ChangeState(player.wallSlideState);
         } 
-        else if (player.IsGrounded() || player.IsPlatform())
-        {
-            stateMachine.ChangeState(player.idleState);
-        }
 
     }
 }
