@@ -7,6 +7,7 @@ public class UI_DarkScreen : MonoBehaviour
     private Animator anim;
     [SerializeField] public float fadeDuration;
     public bool isAnimFinish;
+    public GameObject sceneName;
 
     private void Start()
     {
@@ -29,5 +30,6 @@ public class UI_DarkScreen : MonoBehaviour
     public void AnimFinishTrigger()
     {
         isAnimFinish = true;
+        sceneName.SetActive(false);
     }
 }

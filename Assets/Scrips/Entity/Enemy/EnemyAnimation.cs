@@ -32,6 +32,7 @@ public class EnemyAnimation : MonoBehaviour
     protected virtual void OpenCounterAttackWindowTrigger()
     {
         enemy.OpenCounterAttackWindow();
+        Debug.Log("Open");
     }
 
     protected virtual void CloseCounterAttackWindowTrigger()

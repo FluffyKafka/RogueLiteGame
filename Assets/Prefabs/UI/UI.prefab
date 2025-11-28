@@ -54717,7 +54717,7 @@ Transform:
   m_GameObject: {fileID: 7033209648328887106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.882206, y: 7.4199214, z: -9.485257}
+  m_LocalPosition: {x: -13.74721, y: 13.807135, z: -9.995027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76739,6 +76739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkScreen 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8906762996590730727, guid: 2ba1fc4deb64afc4eb63c71bec8ed1f9, type: 3}
+      propertyPath: sceneName
+      value: 
+      objectReference: {fileID: 3788892043838547873}
     - target: {fileID: 8906762996590730727, guid: 2ba1fc4deb64afc4eb63c71bec8ed1f9, type: 3}
       propertyPath: fadeDuration
       value: 1.5
