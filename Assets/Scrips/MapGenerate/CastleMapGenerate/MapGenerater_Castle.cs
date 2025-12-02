@@ -6,8 +6,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using static Unity.Collections.AllocatorManager;
+#if UNITY_EDITOR
 using static UnityEditor.Recorder.OutputPath;
-
+#endif
 public enum RoomType_Castle
 {
     Entry,

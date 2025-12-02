@@ -15162,6 +15162,7 @@ MonoBehaviour:
   knockBackDuration: 0.07
   isKnocked: 0
   selfDestroyAfterDead: 10
+  isDead: 0
   canBeDamage_current: 0
   canBeDamage: 0
   difficulty: 10
@@ -15255,7 +15256,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   maxHealth:
-    baseValue: 10000
+    baseValue: 300
     modifiers: []
   armor:
     baseValue: 0
@@ -15323,7 +15324,7 @@ MonoBehaviour:
   thunderStrikeRate:
     baseValue: 0
     modifiers: []
-  defaultCritPower: 150
+  defaultCritPower: 75
   strength_damage: 1
   strength_critPower: 1
   agility_evasion: 1

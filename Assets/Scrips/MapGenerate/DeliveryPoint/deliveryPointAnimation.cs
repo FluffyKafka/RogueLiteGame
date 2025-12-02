@@ -7,6 +7,7 @@ public class DeliveryPointAnimation : MonoBehaviour
     public void AnimFinishTrigger()
     {
         GetComponentInParent<DeliveryPoint>().DeliverPlayerToPoint();
+        GetComponent<Animator>().SetTrigger("Active");
     }
     public void TiggerActive()
     {

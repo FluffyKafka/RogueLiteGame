@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditorInternal.Profiling.Memory.Experimental;
+#endif
 
 [CreateAssetMenu(fileName = "New EquipmentSCOBGenerator", menuName = "ExcelData/Equipment")]
 public class EquipmentSCOBGenerator : ScriptableObject
@@ -16,7 +18,7 @@ public class EquipmentSCOBGenerator : ScriptableObject
     public void ImportData()
     {
 #if UNITY_EDITOR
-        if(dataSet == null)
+        if (dataSet == null)
         {
             Debug.LogError("未提供数据来源");
             return;
@@ -107,6 +109,7 @@ public class EquipmentSCOBGenerator : ScriptableObject
         _newEquipment.statsModifierData.thunderStrikeCount = _data.ThunderStrikeCount;
         _newEquipment.statsModifierData.thunderStrikeRate = _data.ThunderStrikeRate;
 
+        _newEquipment.craftsId.Clear();
         _newEquipment.craftsId.Add(_data.Craft_0);
         _newEquipment.craftsId.Add(_data.Craft_1);
         _newEquipment.craftsId.Add(_data.Craft_2);

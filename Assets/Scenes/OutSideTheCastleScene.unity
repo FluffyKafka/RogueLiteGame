@@ -453,15 +453,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.924755
+      value: -23.79212
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.4687195
+      value: 9.368463
       objectReference: {fileID: 0}
     - target: {fileID: 2999161313258989378, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.485257
+      value: -6.7983036
       objectReference: {fileID: 0}
     - target: {fileID: 3592184860009003912, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -673,15 +673,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.924755
+      value: -23.79212
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.4687195
+      value: 9.368463
       objectReference: {fileID: 0}
     - target: {fileID: 6040374176662740728, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -9.485257
+      value: -6.7983036
       objectReference: {fileID: 0}
     - target: {fileID: 6316847320217188792, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -903,6 +903,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8730998142458758892, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8832721177689779337, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: playerInitTransform
       value: 
@@ -926,6 +930,10 @@ PrefabInstance:
     - target: {fileID: 9074473979367949926, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9199066994109547942, guid: 3a6d184d4ee4054419d04a4c2c7e5c82, type: 3}
+      propertyPath: testImage
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1709,7 +1717,6 @@ MonoBehaviour:
     battles:
     - difficulty: 120
     - difficulty: 180
-    - difficulty: 200
     rewards:
     - minRewardTime: 1
       maxRewardTime: 3
@@ -2075,12 +2082,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3a74581a34e06c44aab7a1b26f2ea5e3, type: 3}
   - {fileID: 21300000, guid: 42c70be15deaaac4c87c36616632ed1c, type: 3}
   - {fileID: 21300000, guid: 7c969826663c474488da130737a73252, type: 3}
-  - {fileID: 21300000, guid: ee0e2cc6160ad904a871d54db2ef0b38, type: 3}
-  - {fileID: 21300000, guid: 3e950528dbee1e849ac88cd6d61cae22, type: 3}
-  - {fileID: 21300000, guid: 7ddff0286ba57f146a4c1b0b603d6f06, type: 3}
-  - {fileID: 21300000, guid: 5db2f95dc9b3b734c887fcb3ee8e80bf, type: 3}
-  - {fileID: 21300000, guid: 4b4b02c4847c1ff46a4c5f6b4364e1b4, type: 3}
-  - {fileID: 21300000, guid: 98b7ea68eca09804d8620ebfab6e9b01, type: 3}
   - {fileID: 21300000, guid: a4858fd0287087249bbd13755b620710, type: 3}
   - {fileID: 21300000, guid: 71630e1e5bc9f4647994ca1c2427fbbe, type: 3}
   - {fileID: 21300000, guid: 8566d9190335a554cab835250b170b80, type: 3}

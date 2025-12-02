@@ -4,8 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
+#if UNITY_EDITOR
+using static UnityEditor.Progress;
+#endif
 public class UI_TradeSlot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private Image itemIcon;

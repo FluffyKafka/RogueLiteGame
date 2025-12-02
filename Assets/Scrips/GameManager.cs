@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour, ISaveManager
     {
         if(!CanPause())
         {
+            Debug.Log("Cannot Pause");
             return;
         }
 

@@ -4,7 +4,9 @@ using UnityEngine.Assertions;
 using Unity.VisualScripting;
 
 
+
 #if UNITY_EDITOR
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEditor;
 #endif
 
@@ -584,6 +586,11 @@ public class Inventory : MonoBehaviour, ISaveManager
 
             //数据库           
             itemDatabase.Add(itemData.itemId, itemData);
+        }
+        foreach (string SOName in assetNames)
+        {
+            var SOPath = AssetDatabase.GUIDToAssetPath(SOName);
+            var itemData = AssetDatabase.LoadAssetAtPath<ItemData>(SOPath);
 
             //制作页面
             if (itemData is ItemData_Equipment)
@@ -598,10 +605,11 @@ public class Inventory : MonoBehaviour, ISaveManager
                         equipment.craftingMaterials.Add(new InventoryItem(craft));
                     }
                 }
+                EditorUtility.SetDirty(itemData);
             }
-
+           
             //商人商品
-            if(itemData.price > 0)
+            if (itemData.price > 0)
             {
                 tradeGoods.Add(itemData);
             }

@@ -3313,8 +3313,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_CraftWindow, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SaveAndExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6012,8 +6012,8 @@ RectTransform:
   - {fileID: 30288988473384947}
   m_Father: {fileID: 7843182523933064022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3688, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
@@ -6640,8 +6640,8 @@ RectTransform:
   - {fileID: 5850319297870821295}
   m_Father: {fileID: 7568247735742180953}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3688, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
@@ -9441,7 +9441,7 @@ RectTransform:
   m_Father: {fileID: 7258473369926426368}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 2.499939, y: -0.3880005}
   m_SizeDelta: {x: 5, y: -1.8671}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -12183,7 +12183,7 @@ RectTransform:
   m_Father: {fileID: 8174541154593631021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 2.499939, y: -0.3880005}
   m_SizeDelta: {x: 5, y: -1.8671}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13883,8 +13883,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_CraftWindow, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14301,8 +14301,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_CraftWindow, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20919,7 +20919,7 @@ Transform:
   m_GameObject: {fileID: 2895476605924765021}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.74721, y: 13.807135, z: -9.995028}
+  m_LocalPosition: {x: -26.629118, y: 5.749119, z: -6.7983036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -25823,7 +25823,7 @@ RectTransform:
   m_Father: {fileID: 5875505465204681269}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 2.499939, y: -0.3880005}
   m_SizeDelta: {x: 5, y: -1.8671}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -27903,10 +27903,10 @@ RectTransform:
   - {fileID: 1793450593879374405}
   m_Father: {fileID: 6918587469803390175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 600, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &87741972027634998
 CanvasRenderer:
@@ -28445,7 +28445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\u5927\u6865"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bd99fc5dc55270048a0df0e158690ee4, type: 2}
   m_sharedMaterial: {fileID: -3085066179410023080, guid: bd99fc5dc55270048a0df0e158690ee4, type: 2}
@@ -28454,8 +28454,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -30941,8 +30941,8 @@ RectTransform:
   - {fileID: 708780315965889361}
   m_Father: {fileID: 9061053991241610072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3688, y: 0}
-  m_AnchorMax: {x: 0.3688, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -50, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0.5}
@@ -31901,10 +31901,10 @@ RectTransform:
   - {fileID: 1662866154066540422}
   m_Father: {fileID: 6918587469803390175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &580625929454038071
 CanvasRenderer:
@@ -34333,6 +34333,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47efaa99dc6ab374e99ff73cf86a2896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetDeliveryPoint: {fileID: 0}
+  originDeliveryPoint: {fileID: 0}
+  whatIsDoor:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!1 &4584962485488415231
 GameObject:
   m_ObjectHideFlags: 0
@@ -37828,10 +37833,10 @@ RectTransform:
   - {fileID: 4314344573490201606}
   m_Father: {fileID: 5276651359429286196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 750, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8503746289838813554
 CanvasRenderer:
@@ -37997,10 +38002,10 @@ RectTransform:
   - {fileID: 8668877127939464529}
   m_Father: {fileID: 5276651359429286196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 450, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3186098285430758053
 CanvasRenderer:
@@ -40824,10 +40829,10 @@ RectTransform:
   - {fileID: 250439699632501703}
   m_Father: {fileID: 6918587469803390175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1200, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3924091448588369581
 CanvasRenderer:
@@ -43479,8 +43484,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI_CraftWindow, Assembly-CSharp
-        m_MethodName: 
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SaveAndExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -52755,10 +52760,10 @@ RectTransform:
   - {fileID: 1652436498868865528}
   m_Father: {fileID: 6918587469803390175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1500, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7563188542179053592
 CanvasRenderer:
@@ -54717,7 +54722,7 @@ Transform:
   m_GameObject: {fileID: 7033209648328887106}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.74721, y: 13.807135, z: -9.995027}
+  m_LocalPosition: {x: -26.629118, y: 5.749119, z: -6.7983036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63377,10 +63382,10 @@ RectTransform:
   - {fileID: 8316001903526692075}
   m_Father: {fileID: 5276651359429286196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1050, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9005572413703270254
 CanvasRenderer:
@@ -67411,10 +67416,10 @@ RectTransform:
   - {fileID: 4181195365421989273}
   m_Father: {fileID: 5276651359429286196}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1350, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6382066863332253200
 CanvasRenderer:
@@ -69065,10 +69070,10 @@ RectTransform:
   - {fileID: 5907858059144756421}
   m_Father: {fileID: 6918587469803390175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 900, y: -50}
-  m_SizeDelta: {x: 300, y: 80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2683986833540481797
 CanvasRenderer:
@@ -70354,7 +70359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1465023713666299136}
         m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: RestartGame_PlayerRemaining
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -74186,6 +74191,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Name
       value: ItemSlot (4)
@@ -74309,6 +74318,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075577509573252313, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
@@ -75366,6 +75379,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Name
       value: ItemSlot (3)
@@ -75616,6 +75633,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Name
       value: ItemSlot (1)
@@ -75739,6 +75760,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1075577509573252313, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
@@ -77355,6 +77380,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6402099611422896449}
     m_Modifications:
+    - target: {fileID: 4139019375938094345, guid: 849f709813a39394aabc20c66656d974, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5586121110164791851, guid: 849f709813a39394aabc20c66656d974, type: 3}
       propertyPath: m_Name
       value: ItemSlot

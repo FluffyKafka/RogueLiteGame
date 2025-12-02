@@ -7,9 +7,11 @@ public class MapUI : MonoBehaviour
 {
     private Camera mapCamera;
     private RawImage mapImage;
-    private DeliveryPoint targetDeliveryPoint;
-    private DeliveryPoint originDeliveryPoint;
+    public DeliveryPoint targetDeliveryPoint;
+    public DeliveryPoint originDeliveryPoint;
     private bool isDelivering;
+    public LayerMask whatIsDoor;
+
 
     private void Start()
     {
@@ -50,8 +52,8 @@ public class MapUI : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 searchPoint = CalculateImagePosition(Input.mousePosition);
-            Collider2D hit = Physics2D.OverlapPoint(searchPoint);
+            Vector3 searchPoint = CalculateImagePosition(Input.mousePosition);   
+            Collider2D hit = Physics2D.OverlapPoint(searchPoint, whatIsDoor);
             if (hit != null && hit.GetComponent<DeliveryPoint>() != null)
             {
                 if (targetDeliveryPoint != null && targetDeliveryPoint != hit.GetComponent<DeliveryPoint>())

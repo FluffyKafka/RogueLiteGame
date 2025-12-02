@@ -134,7 +134,7 @@ public class UI : MonoBehaviour
             SwitchWithKeyTo(mapUI);
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !tradeBlock.gameObject.activeSelf && !communicationBlock.gameObject.activeSelf && !skillLearningBlock.gameObject.activeSelf)
         {
             if (inGame.activeSelf)
             {

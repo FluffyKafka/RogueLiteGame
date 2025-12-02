@@ -16,6 +16,11 @@ public class SceneSwitchEntry_OutCastle : MonoBehaviour, IPlayerEnterable
 
     public void Enter(Player _player)
     {
+        if(sceneName == "null")
+        {
+            PlayerManager.instance.player.fx.CreatePopUpText("此区域暂未开放");
+            return;
+        }
         if(UI.instance.isSwitching)
         {
             return;

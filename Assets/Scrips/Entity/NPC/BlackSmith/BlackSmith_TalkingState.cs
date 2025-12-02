@@ -27,7 +27,6 @@ public class BlackSmith_TalkingState : BlackSmithStateBase
         base.Exit();
         UI.instance.SpeakDone();
 
-        GameManager.instance.SetPauseGame(false);
         npc.anim.speed /= GameManager.instance.pauseTimeSpeedDivider;
         PlayerManager.instance.player.anim.speed /= GameManager.instance.pauseTimeSpeedDivider;
     }

@@ -7861,7 +7861,7 @@ Transform:
   m_GameObject: {fileID: 3738978942155913983}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 221, y: 22, z: 0}
+  m_LocalPosition: {x: 222, y: 23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7923,7 +7923,7 @@ Transform:
   m_GameObject: {fileID: 5779246833448099626}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 140, y: 22, z: 0}
+  m_LocalPosition: {x: 139, y: 21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32570,7 +32570,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff15e3eadde63b4591872ea7236c4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogLayerId: 0
 --- !u!1001 &2065973486180901996
 PrefabInstance:
   m_ObjectHideFlags: 0

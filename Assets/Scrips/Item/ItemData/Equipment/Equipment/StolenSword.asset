@@ -17,9 +17,9 @@ MonoBehaviour:
   itemName: "\u7A83\u8D3C\u5315\u9996"
   itemType: 1
   craftingMaterials:
-  - data: {fileID: 11400000, guid: 12ab6b390872dc744bbc21d7d61a6a56, type: 2}
+  - data: {fileID: 11400000, guid: e44239a3a6e262b47bbde16965aceaaf, type: 2}
     stackSize: 1
-  - data: {fileID: 11400000, guid: e419b9a9ca54e1d41a7e0dc26db59d03, type: 2}
+  - data: {fileID: 11400000, guid: e44239a3a6e262b47bbde16965aceaaf, type: 2}
     stackSize: 1
   description: "\u57CE\u5E02\u91CC\u7684\u5C0F\u5077\u4F1A\u7528\u5B83\u5212\u5F00\u4F60\u7684\u53E3\u888B"
   price: 150

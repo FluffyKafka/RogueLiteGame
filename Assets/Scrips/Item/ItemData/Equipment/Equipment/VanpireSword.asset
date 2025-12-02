@@ -16,7 +16,13 @@ MonoBehaviour:
   icon: {fileID: -362178505, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   itemName: "\u5438\u8840\u9B3C\u4E4B\u5251"
   itemType: 1
-  craftingMaterials: []
+  craftingMaterials:
+  - data: {fileID: 11400000, guid: e44239a3a6e262b47bbde16965aceaaf, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: e2e1c775d04f34843af74f1910cc6a01, type: 2}
+    stackSize: 1
+  - data: {fileID: 11400000, guid: a9cc844ea71d7444fb47ebe880fe4516, type: 2}
+    stackSize: 1
   description: "\u5B83\u5230\u5E95\u662F\u600E\u4E48\u5438\u5230\u9AB7\u9AC5\u7684\u8840\u7684\uFF1F"
   price: 600
   equipmentType: 0
