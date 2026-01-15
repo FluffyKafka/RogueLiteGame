@@ -1,6 +1,7 @@
 using EntitySystem.EntityActor;
 using EntitySystem.EntityActor.PlayerActor;
 using EntitySystem.EntityComponent.StateMachineComponent;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +26,7 @@ namespace EntitySystem
 
             public virtual void Enter()
             {
-                entity.StateChange?.Invoke();
+                entity.StateChange?.Invoke(animName);
             }
 
             public virtual void Update()

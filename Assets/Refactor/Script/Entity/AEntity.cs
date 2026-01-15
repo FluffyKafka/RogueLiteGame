@@ -8,12 +8,7 @@ namespace EntitySystem
 {
     namespace EntityActor
     {
-        public interface IAnimationController
-        {
-            public string CheckStateAnimationName();
-        }
-
-        internal class AEntity : MonoBehaviour, IAnimationController
+        internal class AEntity : MonoBehaviour
         {
             #region Actions
             public Action<EntitySpeedSetData> SetEntitySpeed;
@@ -51,13 +46,13 @@ namespace EntitySystem
                 public bool canBeDamage;
             }
 
-            public Action StateChange;
+            public Action<string> StateChange;
             #endregion
             #region Func
             public Func<bool> IsFacingLeft;
             public Func<int> CheckFacingDir;
 
-            public Func<bool> IsGrounded;
+            public Func<bool> IsGroundedOrPlatForm;
             public Func<bool> IsTouchWall;
 
             public Func<bool> IsKnockBack;
@@ -67,7 +62,27 @@ namespace EntitySystem
             public Func<string> CheckStateAnimName;
 
             public Func<bool> IsFall;
+            public Func<float> CheckYVelocity;
+
             #endregion
+
+            #region ActionAndFuncInvokeHelper
+            public void InvokeAction(Action _action)
+            {
+                _action?.Invoke();
+            }
+            public void InvokeAction<T>(Action<T> _action, T _arg)
+            {
+                _action?.Invoke(_arg);
+            }
+            public T InvokeFunc<T>(Func<T> _func)
+            {
+                Assert.IsNotNull(_func, "服务缺少提供者");
+                Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
+                return _func.Invoke();
+            }
+            #endregion
+
             #region Entity Base Info
             [Header("Entity Base Info")]
             [SerializeField] public string entityName;
@@ -105,18 +120,11 @@ namespace EntitySystem
                 }
             }
             #endregion
-
-            string IAnimationController.CheckStateAnimationName()
-            {
-                Assert.IsTrue(CheckStateAnimName != null, "无法获取状态动画名称，请检查状态机及其组件");
-                Assert.IsTrue(CheckStateAnimName.GetInvocationList().Length == 1, "存在复数状态机，单一实体上只允许一个状态机组件");
-                return CheckStateAnimName.Invoke();
-            }
         }
 
         public interface IEntityAnimation
         {
-            public void ChangeAnimationNotice();
+            public void ChangeAnimationNotice(string _stateAnimName);
         }
     }
 
@@ -125,11 +133,12 @@ namespace EntitySystem
         internal class CEntityComponentBase: MonoBehaviour
         {
             protected EntityActor.AEntity entity;
-            virtual protected void Awake()
+            protected virtual void Awake()
             {
                 entity = GetComponent<EntityActor.AEntity>();
                 Assert.IsTrue(entity != null, "组件" + GetType().ToString() +"必须挂载到一个AEntity上");
             }
+            protected virtual void Update() { }
         }
     }
 }

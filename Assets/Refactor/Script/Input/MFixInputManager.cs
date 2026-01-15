@@ -8,25 +8,39 @@ using UnityEngine.Windows;
 //需要被第一个Update
 namespace InputManager
 {
-    public interface IInputManagerInit
+    public interface IInitInputManager
     {
-        public void InitInputManager(IPlayerInput _player);
+        public void Init(IInputPlayer _player);
     }
 
-    internal class MFixInputManager : MonoBehaviour, IInputManagerInit
+    internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput
     {
-        [SerializeField] protected IPlayerInput player;
+        [SerializeField] protected IInputPlayer player;
 
-        public void InitInputManager(IPlayerInput _player)
+        public float CheckHorizonInput()
         {
-            Assert.IsTrue(_player is IPlayerInput);
-            player = _player as IPlayerInput;
+            return UnityEngine.Input.GetAxisRaw("Horizontal");
+        }
+
+        public float CheckVerticalInput()
+        {
+            return UnityEngine.Input.GetAxisRaw("Vertical");
+        }
+
+        public void Init(IInputPlayer _player)
+        {
+            player = _player;
         }
 
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件
         private void Update()
         {
-            if(UnityEngine.Input.GetKeyDown(KeyCode.Space))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                player.AttackInput();
+            }
+
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {
                 player.JumpInput();
             }
@@ -35,6 +49,12 @@ namespace InputManager
             if (xInput != 0)
             {
                 player.HorizonInput(xInput);
+            }
+
+            float yInput = UnityEngine.Input.GetAxisRaw("Vertical");
+            if(yInput != 0)
+            {
+                player.VerticalInput(yInput);
             }
         }
     }

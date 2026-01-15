@@ -11,10 +11,10 @@ namespace Main
         [SerializeField] protected GameObject player;
         [SerializeField] protected GameObject inputManager;
 
-        private void Start()
+        private void Awake()
         {
-            inputManager.GetComponent<IInputManagerInit>().InitInputManager(player.GetComponent<IPlayerInput>());
-
+            inputManager.GetComponent<IInitInputManager>().Init(player.GetComponent<IInputPlayer>());
+            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>());
         }
     }
 }

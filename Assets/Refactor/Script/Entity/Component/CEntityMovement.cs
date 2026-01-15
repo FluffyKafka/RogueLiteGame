@@ -24,6 +24,8 @@ namespace EntitySystem
 
                     entity.NoGravity += SetNoGravity;
                     entity.IsFall += IsFall;
+                    entity.CheckFacingDir += CheckFacingDir;
+                    entity.CheckYVelocity += CheckYVelocity;
                 }
 
                 protected virtual void SetNoGravity(bool _isNoGravity)
@@ -78,6 +80,16 @@ namespace EntitySystem
                 protected virtual bool IsFall()
                 {
                     return rg.velocity.y < 0;
+                }
+
+                protected virtual int CheckFacingDir()
+                {
+                    return facingDir;
+                }
+
+                protected virtual float CheckYVelocity()
+                {
+                    return rg.velocity.y;
                 }
             }
         }

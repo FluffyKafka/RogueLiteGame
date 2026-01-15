@@ -21,11 +21,7 @@ namespace EntitySystem
                 public override void Enter()
                 {
                     base.Enter();
-                    if(player.Jump == null)
-                    {
-                        Debug.LogWarning("Jump服务未提供，检查运动组件");
-                    }
-                    player.Jump?.Invoke();
+                    player.InvokeAction(player.Jump);
                     isFinishJump = false;
                 }
 
@@ -37,15 +33,14 @@ namespace EntitySystem
                 public override void Update()
                 {
                     base.Update();
-                    Assert.IsTrue(player.IsFall != null, "缺少IsFall服务提供者，检查运动组件是否正确");
-                    if(player.IsFall.Invoke())
+                    
+                    if(player.InvokeFunc(player.IsFall))
                     {
                         playerStateMachine.ChangeState(playerStateMachine.fall);
                         return;
                     }
 
-                    Assert.IsNotNull(player.IsGrounded, "IsGrounded服务未提供，检查碰撞系统");
-                    if (player.IsGrounded.Invoke())
+                    if (player.InvokeFunc(player.IsGroundedOrPlatForm))
                     {
                         if(isFinishJump)
                         {

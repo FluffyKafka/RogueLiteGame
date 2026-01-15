@@ -15,6 +15,7 @@ namespace EntitySystem
             {
                 protected SEntityState currentState;
                 protected bool haveStateChangeInThisUpdate = false;
+                protected bool isDenyStateChange = false;
 
                 protected override void Awake()
                 {
@@ -28,8 +29,13 @@ namespace EntitySystem
                     currentState.Enter();
                 }
 
-                public void ChangeState(SEntityState _newState)
+                public virtual void ChangeState(SEntityState _newState)
                 {
+                    if(isDenyStateChange)
+                    {
+                        return;
+                    }    
+
                     if(!haveStateChangeInThisUpdate)
                     {
                         currentState.Exit();
@@ -39,9 +45,14 @@ namespace EntitySystem
                     }
                 }
 
-                protected void Update()
+                protected override void Update()
                 {
                     currentState.Update();
+                }
+
+                virtual protected void Start()
+                {
+
                 }
 
                 protected void LateUpdate()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Windows;
 
 namespace EntitySystem
 {
@@ -26,9 +27,15 @@ namespace EntitySystem
                 [Header("Jump Info")]
                 [SerializeField] protected float jumpSpeed;
                 protected float defaultJumpSpeed;
-                [SerializeField] protected float moveInAirSpeed;
+                [SerializeField] protected bool canWallSlide = true;
                 [SerializeField] protected int jumpCountMax = 2;
                 protected int jumpCount = 0;
+                protected bool isJumpFinish = true;
+
+                [Header("Battle Movement Info")]
+                [SerializeField] public float movableDurationInAttacking;
+                [SerializeField] public float unmovableDurationAfterAttack;
+                [SerializeField] public float[] attackMovement;
 
                 APlayer player;
                 protected override void Awake()
@@ -39,26 +46,113 @@ namespace EntitySystem
                     player = entity as APlayer;
                     player.Move += Move;
                     player.Jump += Jump;
+                    player.WallSlide += WallSlide;
+                    player.WallJump += WallJump;
+                    player.Attack += Attack;
+                    player.CheckUnmovableDurationAfterAttack += CheckUnmoveableDurationAfterAttack;
+                }
+
+                protected override void Update()
+                {
+                    base.Update();
+
+                    if(jumpCount > 0)
+                    {
+                        if(isJumpFinish)
+                        {
+                            if (player.InvokeFunc(player.IsGroundedOrPlatform_Strict) || (canWallSlide && player.InvokeFunc(player.IsTouchWall)))
+                            {
+                                jumpCount = 0;
+                            }
+                        }
+                        else
+                        {
+                            if (!player.InvokeFunc(player.IsGroundedOrPlatform_Strict))
+                            {
+                                isJumpFinish = true;
+                            }
+                        }
+                    }
                 }
 
                 protected void Move(float _dir)
                 {
-                    if(_dir < 0)
-                    {
-                        _dir = -1;
-                    }
-                    if(_dir > 0)
-                    {
-                        _dir = 1;
-                    }
+                    _dir = ToAbsOneOrZero(_dir);
                     Vector2 newVelocity = new Vector2(moveSpeed * _dir, rg.velocity.y);
                     SetVelocity(newVelocity, false, true);
                 }
 
                 protected void Jump()
                 {
+                    if(jumpCount >= jumpCountMax)
+                    {
+                        return;
+                    }
                     Vector2 newVelocity = new Vector2(rg.velocity.x, jumpSpeed);
                     SetVelocity(newVelocity, false, true);
+                    ++jumpCount;
+                    isJumpFinish = false;
+                }
+
+                protected void WallSlide(float _dir)
+                {
+                    _dir = ToAbsOneOrZero(_dir);
+                    Vector2 newVelocity;
+                    if(_dir >= 0)
+                    {
+                        newVelocity = new Vector2(rg.velocity.x, -wallSlideSpeed + wallSlideUpAdjustSpeed);
+                    }
+                    else
+                    {
+                        newVelocity = new Vector2(rg.velocity.x, -wallSlideSpeed + wallSlideDownAdjustSpeed);
+                    }
+                    SetVelocity(newVelocity, false, false);
+                }
+
+                protected void WallJump()
+                {
+                    Assert.IsTrue(player.CheckFacingDir != null, "无法获取Entity的朝向，缺少CheckFacingDir服务的提供者");
+                    Assert.IsTrue(player.CheckFacingDir.GetInvocationList().Length == 1, "CheckFacingDir服务的提供者大于1");
+                    int facingDir = player.CheckFacingDir.Invoke();
+                    Vector2 newVelocity = new Vector2(wallJumpHorizontalSpeed * -facingDir, jumpSpeed);
+                    SetVelocity(newVelocity, false, true);
+                    ++jumpCount;
+                }
+
+                protected void Attack(int _count)
+                {
+                    float attackDir = facingDir;
+                    float xInput = player.InvokeFunc(player.CheckHorizonInput);
+                    if (xInput != 0)
+                    {
+                        attackDir = xInput;
+                    }
+                    Vector2 newVelocity = new Vector2(attackMovement[_count] * attackDir, rg.velocity.y);
+                    SetVelocity(newVelocity, false, true);
+                    StartCoroutine(AttackMoveableDuration());
+                }
+                protected IEnumerator AttackMoveableDuration()
+                {
+                    yield return new WaitForSeconds(movableDurationInAttacking);
+                    SetVelocity(Vector2.zero, false, false);
+                }
+
+                protected float CheckUnmoveableDurationAfterAttack()
+                {
+                    return unmovableDurationAfterAttack;
+                }
+
+                protected float ToAbsOneOrZero(float _dir)
+                {
+                    if (_dir < 0)
+                    {
+                        _dir = -1;
+                    }
+                    if (_dir > 0)
+                    {
+                        _dir = 1;
+                    }
+                    return _dir;
                 }
             }
         }

@@ -3,31 +3,31 @@ using EntitySystem.EntityComponent.StateMachineComponent;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Windows;
 namespace EntitySystem
 {
     namespace EntityState
     {
         namespace PlayerState
         {
-            internal class SPlayerGround : SPlayerState
+            internal class SPlayerPrimaryAttack : SPlayerState
             {
-                public SPlayerGround(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerPrimaryAttack(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
                 {
                 }
 
                 public override void Enter()
                 {
                     base.Enter();
-                    player.JumpInput += Jump;
-                    player.AttackInput += Attack;
+                    player.InvokeAction(player.AttackRaw);
+                    player.AttackFinish += OnAttackFinish;
                 }
 
                 public override void Exit()
                 {
                     base.Exit();
-                    player.JumpInput -= Jump;
-                    player.AttackInput -= Attack;
+                    playerStateMachine.BusyFor(player.InvokeFunc(player.CheckUnmovableDurationAfterAttack));
+                    player.AttackFinish -= OnAttackFinish;
                 }
 
                 public override void Update()
@@ -35,13 +35,9 @@ namespace EntitySystem
                     base.Update();
                 }
 
-                protected void Jump()
+                protected void OnAttackFinish()
                 {
-                    playerStateMachine.ChangeState(playerStateMachine.jump);
-                }
-                protected void Attack()
-                {
-                    playerStateMachine.ChangeState(playerStateMachine.primaryAttack);
+                    playerStateMachine.ChangeState(playerStateMachine.idle);
                 }
             }
         }

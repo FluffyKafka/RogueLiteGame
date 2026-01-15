@@ -24,20 +24,23 @@ namespace EntitySystem
                 {
                     base.Awake();
 
-                    entity.IsGrounded += IsGrounded;
+                    entity.IsGroundedOrPlatForm += IsGroundedOrPlatForm;
                     entity.IsTouchWall += IsTouchWall;
                 }
 
-                protected virtual bool IsGrounded()
+                protected virtual bool IsGroundedOrPlatForm()
                 {
                     return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround|whatIsPlatform);
                 }
 
                 protected virtual bool IsTouchWall()
                 {
-                    Assert.IsTrue(entity.CheckFacingDir != null, "无法获取Entity的朝向，缺少CheckFacingDir服务的提供者");
-                    Assert.IsTrue(entity.CheckFacingDir.GetInvocationList().Length == 1, "CheckFacingDir服务的提供者大于1");
-                    return Physics2D.Raycast(wallCheck.position, Vector2.right * entity.CheckFacingDir.Invoke(), wallCheckDistance, whatIsGround);
+                    return Physics2D.Raycast(wallCheck.position, Vector2.right * entity.InvokeFunc(entity.CheckFacingDir), wallCheckDistance, whatIsGround);
+                }
+
+                private void OnDrawGizmos()
+                {
+                    
                 }
             }
         }

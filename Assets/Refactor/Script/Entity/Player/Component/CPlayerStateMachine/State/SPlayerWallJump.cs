@@ -3,6 +3,8 @@ using EntitySystem.EntityComponent.StateMachineComponent;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
+
 
 namespace EntitySystem
 {
@@ -10,15 +12,17 @@ namespace EntitySystem
     {
         namespace PlayerState
         {
-            internal class SPlayerMove : SPlayerGround
+            internal class SPlayerWallJump : SPlayerAir
             {
-                public SPlayerMove(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerWallJump(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
                 {
                 }
 
                 public override void Enter()
                 {
                     base.Enter();
+                    player.InvokeAction(player.WallJump);
+                    canMove = false;
                 }
 
                 public override void Exit()
@@ -29,10 +33,9 @@ namespace EntitySystem
                 public override void Update()
                 {
                     base.Update();
-                    player.InvokeAction(player.Move, playerStateMachine.xInput);
-                    if(playerStateMachine.xInput == 0)
+                    if (player.InvokeFunc(player.IsFall))
                     {
-                        playerStateMachine.ChangeState(playerStateMachine.idle);
+                        stateMachine.ChangeState(playerStateMachine.fall);
                     }
                 }
             }

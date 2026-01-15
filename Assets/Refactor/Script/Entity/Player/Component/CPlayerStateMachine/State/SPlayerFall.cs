@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Windows;
 
 namespace EntitySystem
 {
@@ -30,10 +31,14 @@ namespace EntitySystem
                 public override void Update()
                 {
                     base.Update();
-                    Assert.IsNotNull(player.IsGrounded, "IsGrounded服务未提供，检查碰撞系统");
-                    if (player.IsGrounded.Invoke())
+
+                    if (player.InvokeFunc(player.IsGroundedOrPlatForm))
                     {
                         playerStateMachine.ChangeState(playerStateMachine.idle);
+                    }
+                    else if (player.InvokeFunc(player.IsTouchWall) && playerStateMachine.xInput == player.InvokeFunc(player.CheckFacingDir))
+                    {
+                        stateMachine.ChangeState(playerStateMachine.wallSlide);
                     }
                 }
             }
