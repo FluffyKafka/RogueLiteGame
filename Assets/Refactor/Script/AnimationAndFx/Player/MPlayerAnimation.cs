@@ -35,5 +35,10 @@ namespace AnimationAndFx
         {
             player.AttackFinish();
         }
+
+        public void OnAttackDamageTrigger()
+        {
+            player.AttackDamageTrigger();
+        }
     }
 }

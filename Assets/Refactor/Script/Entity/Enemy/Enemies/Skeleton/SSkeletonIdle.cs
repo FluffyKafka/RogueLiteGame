@@ -1,0 +1,52 @@
+using EntitySystem.EntityActor;
+using EntitySystem.EntityActor.EnemyActor;
+using EntitySystem.EntityComponent.StateMachineComponent;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Assertions;
+
+namespace EntitySystem
+{
+    namespace EntityState
+    {
+        namespace SkeletonState
+        {
+            internal class SSkeletonIdle : SSkeletonPeace
+            {
+                protected Coroutine idleToMoveNoticeCoRoutine;
+                public SSkeletonIdle(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                {
+                }
+
+                public override void Enter()
+                {
+                    base.Enter();
+                    idleToMoveNoticeCoRoutine = enemyStateMachine.StartCoroutine(IdleToMoveNotice(enemy.InvokeFunc(enemy.CheckIdleDuration)));
+                    enemy.InvokeAction(enemy.StandStill);
+                }
+
+                public override void Exit()
+                {
+                    base.Exit();
+                    enemyStateMachine.StopCoroutine(idleToMoveNoticeCoRoutine);
+                }
+
+                public override void Update()
+                {
+                    base.Update();
+                }
+
+                protected IEnumerator IdleToMoveNotice(float _after)
+                {
+                    yield return new WaitForSeconds(_after);
+                    if(enemy.InvokeFunc(enemy.IsTouchWall) || !enemy.InvokeFunc(enemy.IsGroundedOrPlatForm))
+                    {
+                        enemy.InvokeAction(enemy.Flip);
+                    }
+                    enemyStateMachine.ChangeState(enemyStateMachine.move);
+                }
+            }
+        }
+    }
+}

@@ -8,7 +8,13 @@ namespace EntitySystem
 {
     namespace EntityActor
     {
-        internal class AEntity : MonoBehaviour
+        public interface IAnimEntity
+        {
+            public void AttackFinish();
+            public void AttackDamageTrigger();
+        }
+
+        internal class AEntity : MonoBehaviour, IAnimEntity
         {
             #region Actions
             public Action<EntitySpeedSetData> SetEntitySpeed;
@@ -47,7 +53,11 @@ namespace EntitySystem
             }
 
             public Action<string> StateChange;
+
+            public Action AttackFinish;
+            public Action AttackDamageTrigger;
             #endregion
+
             #region Func
             public Func<bool> IsFacingLeft;
             public Func<int> CheckFacingDir;
@@ -83,13 +93,25 @@ namespace EntitySystem
             }
             #endregion
 
+            #region Animation
+            void IAnimEntity.AttackFinish()
+            {
+                InvokeAction(AttackFinish);
+            }
+
+            void IAnimEntity.AttackDamageTrigger()
+            {
+                InvokeAction(AttackDamageTrigger);
+            }
+            #endregion
+
             #region Entity Base Info
             [Header("Entity Base Info")]
             [SerializeField] public string entityName;
             [SerializeField] public Sprite entityIcon;
             [SerializeField] float selfDestroyAfterDead = 10f;
             protected IEntityAnimation anim;
-            public bool isDead;
+            public bool isDead = false;
 
             virtual protected void Awake()
             {
@@ -138,7 +160,10 @@ namespace EntitySystem
                 entity = GetComponent<EntityActor.AEntity>();
                 Assert.IsTrue(entity != null, "组件" + GetType().ToString() +"必须挂载到一个AEntity上");
             }
-            protected virtual void Update() { }
+            protected virtual void Update() 
+            {
+
+            }
         }
     }
 }

@@ -25,12 +25,18 @@ namespace EntitySystem
                 public void AttackInput();
             }
 
-            public interface IAnimPlayer
+            public interface IEnemyPlayer
             {
-                public void AttackFinish();
+                public bool IsDead();
+                public Vector3 CheckPosition();
             }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer
+            public interface IAnimPlayer: IAnimEntity
+            {
+
+            }
+
+            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer
             {
                 protected IPlayerInput input;
 
@@ -48,7 +54,6 @@ namespace EntitySystem
 
                 public Action AttackRaw;
                 public Action<int> Attack;
-                public Action AttackFinish;
                 #endregion
 
                 #region Func
@@ -64,6 +69,7 @@ namespace EntitySystem
                     input = _inputSource;
                 }
                 #endregion
+
                 #region Input
                 void IInputPlayer.HorizonInput(float _input)
                 {
@@ -74,7 +80,7 @@ namespace EntitySystem
                     InvokeAction(VerticalInput, _input);
                 }
                 void IInputPlayer.JumpInput()
-                {
+                {                    
                     InvokeAction(JumpInput);
                 }
                 void IInputPlayer.AttackInput()
@@ -82,10 +88,15 @@ namespace EntitySystem
                     InvokeAction(AttackInput);
                 }
                 #endregion
-                #region Animation
-                void IAnimPlayer.AttackFinish()
+
+                #region Enemy
+                bool IEnemyPlayer.IsDead()
                 {
-                    InvokeAction(AttackFinish);
+                    return isDead;
+                }
+                Vector3 IEnemyPlayer.CheckPosition()
+                {
+                    return transform.position;
                 }
                 #endregion
 
@@ -111,6 +122,11 @@ namespace EntitySystem
             {
                 public float CheckHorizonInput();
                 public float CheckVerticalInput();
+            }
+
+            public interface IPlayerEnemy
+            {
+
             }
         }        
     }
