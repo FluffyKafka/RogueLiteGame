@@ -19,7 +19,7 @@ namespace EntitySystem
                 protected APlayer player;
                 protected CPlayerStateMachine playerStateMachine;
 
-                public SPlayerState(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerState(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                     Assert.IsTrue(_entity is APlayer, "此状态属于Player专用状态，不能被用于控制其他Entity");
                     player = _entity as APlayer;

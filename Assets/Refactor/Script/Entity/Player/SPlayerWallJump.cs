@@ -14,7 +14,7 @@ namespace EntitySystem
         {
             internal class SPlayerWallJump : SPlayerAir
             {
-                public SPlayerWallJump(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerWallJump(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 

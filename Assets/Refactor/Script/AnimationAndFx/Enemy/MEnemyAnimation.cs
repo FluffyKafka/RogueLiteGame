@@ -6,9 +6,13 @@ using UnityEngine.Assertions;
 
 namespace AnimationAndFx
 {
-    public class MEnemyAnimation : MEntityAnimation
+    public class MEnemyAnimation : MEntityAnimation, IEnemyAnimation
     {
         protected IAnimEnemy enemy;
+        [SerializeField] protected string idleAnimName = "Idle";
+        [SerializeField] protected string moveAnimName = "Move";
+        [SerializeField] protected string attackAnimName = "Attack";
+        [SerializeField] protected string stunAnimName = "Stun";
 
         protected override void Awake()
         {
@@ -35,5 +39,24 @@ namespace AnimationAndFx
         {
             enemy.OpenStun(false);
         }
+
+        #region Enemy Animation
+        public void Idle()
+        {
+            ChangeAnimationTo(idleAnimName);
+        }
+        public void Move()
+        {
+            ChangeAnimationTo(moveAnimName);
+        }
+        public void Attack()
+        {
+            ChangeAnimationTo(attackAnimName);
+        }
+        public void Stun()
+        {
+            ChangeAnimationTo(stunAnimName);
+        }
+        #endregion
     }
 }

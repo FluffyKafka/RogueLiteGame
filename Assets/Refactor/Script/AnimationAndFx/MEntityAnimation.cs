@@ -18,7 +18,7 @@ namespace AnimationAndFx
             Assert.IsNotNull(anim, "实体动画系统需要管理一个Animator组件");
         }
 
-        void IEntityAnimation.ChangeAnimationNotice(string _stateAnimName)
+        protected void ChangeAnimationTo(string _stateAnimName)
         {
             if (currentAnimName == _stateAnimName)
             {

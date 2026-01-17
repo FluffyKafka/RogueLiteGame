@@ -14,7 +14,7 @@ namespace EntitySystem
             internal class SPlayerWallSlide : SPlayerState
             {
 
-                public SPlayerWallSlide(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerWallSlide(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
@@ -22,6 +22,7 @@ namespace EntitySystem
                 {
                     base.Enter();
                     player.JumpInput += OnJump;
+                    player.InvokeAction(player.ToWallSlide);
                 }
 
                 public override void Exit()

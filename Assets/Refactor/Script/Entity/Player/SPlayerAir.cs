@@ -14,7 +14,7 @@ namespace EntitySystem
             internal class SPlayerAir : SPlayerState
             {
                 protected bool canMove = true;
-                public SPlayerAir(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerAir(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
@@ -35,7 +35,7 @@ namespace EntitySystem
                 public override void Update()
                 {
                     base.Update();
-                    player.InvokeAction(player.UpdateAnimYVelocity, player.InvokeFunc(player.CheckYVelocity));
+                    player.InvokeAction(player.UpdateYVelocity, player.InvokeFunc(player.CheckYVelocity));
                     if(canMove)
                     {
                         player.InvokeAction(player.Move, playerStateMachine.xInput);

@@ -14,7 +14,7 @@ namespace EntitySystem
         {
             internal class SPlayerFall : SPlayerAir
             {
-                public SPlayerFall(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerFall(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 

@@ -12,7 +12,7 @@ namespace EntitySystem
         {
             internal class SPlayerGround : SPlayerState
             {
-                public SPlayerGround(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerGround(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 

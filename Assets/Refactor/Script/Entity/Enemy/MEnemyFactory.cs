@@ -46,7 +46,7 @@ namespace EntitySystem
                 }
 
 
-                public void InitEnemyNotGenerateByFactory_TestMode(IInitEnemy _enemy)
+                public void InitEnemyNotGenerateByFactory_TestMode(AEnemy _enemy)
                 {
                     Assert.IsTrue(isTestMode, "此方法只能在测试时执行，运行时所有敌人都由工厂生产而不是直接摆放入场景");
                     _enemy.Init(player);
@@ -58,7 +58,7 @@ namespace EntitySystem
                     player = _player;
                     TryInitPrefab<ASkeleton>(skeletonPrefab);
                 }
-                protected void TryInitPrefab<T>(GameObject _prefab)
+                protected void TryInitPrefab<T>(GameObject _prefab) where T : AEnemy
                 {
                     if (_prefab == null)
                     {
@@ -72,7 +72,7 @@ namespace EntitySystem
                         return;
                     }
 
-                    _prefab.GetComponent<IInitEnemy>().Init(player);
+                    _prefab.GetComponent<T>().Init(player);
                 }
 
                 public GameObject GetSkeleton(Vector3 _worldPosition)

@@ -15,18 +15,16 @@ namespace EntitySystem
         {
             protected CEntityStateMachine stateMachine;
             protected AEntity entity;
-            protected string animName;
 
-            public SEntityState(CEntityStateMachine _stateMachine, AEntity _entity, string _animName)
+            public SEntityState(CEntityStateMachine _stateMachine, AEntity _entity)
             {
                 this.stateMachine = _stateMachine;
                 entity = _entity;
-                animName = _animName;
             }
 
             public virtual void Enter()
             {
-                entity.StateChange?.Invoke(animName);
+                
             }
 
             public virtual void Update()
@@ -37,11 +35,6 @@ namespace EntitySystem
             public virtual void Exit()
             {
 
-            }
-
-            public virtual string CheckAnimName()
-            {
-                return animName;
             }
         }
     }

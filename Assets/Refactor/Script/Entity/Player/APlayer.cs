@@ -50,10 +50,14 @@ namespace EntitySystem
                 public Action<float> Move;
                 public Action<float> WallSlide;
                 public Action WallJump;
-                public Action<float> UpdateAnimYVelocity;
+                public Action<float> UpdateYVelocity;
 
                 public Action AttackRaw;
                 public Action<int> Attack;
+
+                public Action ToIdle;
+                public Action ToMove;
+                public Action ToWallSlide;
                 #endregion
 
                 #region Func
@@ -103,10 +107,18 @@ namespace EntitySystem
                 protected override void Awake()
                 {
                     base.Awake();
+
                     Assert.IsTrue(anim is IPlayerAnimation, "Player需要一个IPlayerAnimation的动画组件");
                     IPlayerAnimation playerAnim = anim as IPlayerAnimation;
-                    UpdateAnimYVelocity += playerAnim.UpdateYVelocity;
                     Attack += playerAnim.Attack;
+                    WallJump += playerAnim.Air;
+                    Jump += playerAnim.Air;
+                    UpdateYVelocity += playerAnim.UpdateYVelocity;
+                    ToIdle += playerAnim.Idle;
+                    ToMove += playerAnim.Move;
+                    ToWallSlide += playerAnim.WallSlide;
+
+
                     CheckHorizonInput += input.CheckHorizonInput;
                     CheckVerticalInput += input.CheckVerticalInput;
                 }
@@ -114,8 +126,12 @@ namespace EntitySystem
 
             public interface IPlayerAnimation : IEntityAnimation
             {
-                public void UpdateYVelocity(float _yVelocity);
+                public void Idle();
+                public void Move();
                 public void Attack(int _count);
+                public void Air();
+                public void UpdateYVelocity(float _yVelocity);
+                public void WallSlide();
             }
 
             public interface IPlayerInput

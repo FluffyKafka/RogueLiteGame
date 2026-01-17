@@ -12,7 +12,7 @@ namespace EntitySystem
         {
             internal class SSkeletonAttack : SSkeletonState
             {
-                public SSkeletonAttack(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SSkeletonAttack(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 

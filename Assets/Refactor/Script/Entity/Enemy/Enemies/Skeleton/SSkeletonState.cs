@@ -16,7 +16,7 @@ namespace EntitySystem
             {
                 protected ASkeleton enemy;
                 protected CSkeletonStateMachine enemyStateMachine;
-                public SSkeletonState(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SSkeletonState(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                     Assert.IsTrue(_entity is ASkeleton, "´Ë×´Ì¬ÊôÓÚSkeleton");
                     enemy = _entity as ASkeleton;

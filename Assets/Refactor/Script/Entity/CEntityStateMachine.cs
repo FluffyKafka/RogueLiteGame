@@ -20,7 +20,6 @@ namespace EntitySystem
                 protected override void Awake()
                 {
                     base.Awake();
-                    entity.CheckStateAnimName += CheckCurrentStateAnimName;
                     entity.Die += Die;
                 }
 
@@ -59,11 +58,6 @@ namespace EntitySystem
                 protected void LateUpdate()
                 {
                     haveStateChangeInThisUpdate = false;
-                }
-
-                protected string CheckCurrentStateAnimName()
-                {
-                    return currentState.CheckAnimName();
                 }
 
                 protected abstract void Die();

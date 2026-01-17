@@ -12,7 +12,7 @@ namespace EntitySystem
         {
             internal class SSkeletonBattleIdle : SSkeletonBattle
             {
-                public SSkeletonBattleIdle(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SSkeletonBattleIdle(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
@@ -20,6 +20,7 @@ namespace EntitySystem
                 {
                     base.Enter();
                     enemy.InvokeAction(enemy.StandStill);
+                    enemy.InvokeAction(enemy.ToIdle);
                 }
 
                 public override void Exit()

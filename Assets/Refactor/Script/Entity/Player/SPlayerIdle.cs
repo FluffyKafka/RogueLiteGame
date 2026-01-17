@@ -14,7 +14,7 @@ namespace EntitySystem
         {
             internal class SPlayerIdle : SPlayerGround
             {
-                public SPlayerIdle(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SPlayerIdle(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
@@ -22,6 +22,7 @@ namespace EntitySystem
                 {
                     base.Enter();
                     player.HorizonInput += Move;
+                    player.InvokeAction(player.ToIdle);
                 }
 
                 public override void Exit()

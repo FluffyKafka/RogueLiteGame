@@ -15,7 +15,7 @@ namespace EntitySystem
             internal class SSkeletonIdle : SSkeletonPeace
             {
                 protected Coroutine idleToMoveNoticeCoRoutine;
-                public SSkeletonIdle(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SSkeletonIdle(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
@@ -24,6 +24,7 @@ namespace EntitySystem
                     base.Enter();
                     idleToMoveNoticeCoRoutine = enemyStateMachine.StartCoroutine(IdleToMoveNotice(enemy.InvokeFunc(enemy.CheckIdleDuration)));
                     enemy.InvokeAction(enemy.StandStill);
+                    enemy.InvokeAction(enemy.ToIdle);
                 }
 
                 public override void Exit()

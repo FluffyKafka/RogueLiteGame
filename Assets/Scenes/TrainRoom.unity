@@ -300,13 +300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d114349c084b2a4ca8055d4933b539d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAnimName: Idle
-  moveAnimName: Move
-  battleIdleName: Idle
-  battleMoveName: Move
-  attackAnimName: Attack
-  stunnedAnimName: Stun
-  deadAnimName: Idle
 --- !u!114 &1467684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +309,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f9173e842c700459810309d4f306a1, type: 3}
+  m_Script: {fileID: 11500000, guid: dcb3f6120d6db32498d4c8adbb8327af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: 
@@ -689,8 +682,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04393fa22b8c5f84b97e74ba05bc0e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleAnimName: Idle
+  moveAnimName: Move
+  airAnimName: Air
   yVelocityName: yVelocity
+  attackAnimName: Attack
   comboCounterName: ComboCounter
+  wallSlideName: WallSlide
 --- !u!1 &962576269
 GameObject:
   m_ObjectHideFlags: 0
@@ -7285,14 +7283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1e48253ae49b84cb406223709e93ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleAnimName: Idle
-  moveAnimName: Move
-  jumpAnimName: Air
-  fallAnimName: Air
-  wallSlideAnimName: WallSlide
-  wallJumpAnimName: Air
-  primaryAttackAnimName: Attack
-  deadAnimName: Idle
 --- !u!114 &1128868209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7469,6 +7459,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76af133203c12ff4b8b8fd3f38cde3c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleAnimName: Idle
+  moveAnimName: Move
+  attackAnimName: Attack
+  stunAnimName: Stun
 --- !u!1 &1540203087
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,19 +20,12 @@ namespace EntitySystem
 
                 #region StateSet
                 public SEntityState idle { get; protected set; }
-                [SerializeField] protected string idleAnimName = "Idle";
                 public SEntityState move { get; protected set; }
-                [SerializeField] protected string moveAnimName = "Move";
                 public SEntityState battleIdle { get; protected set; }
-                [SerializeField] protected string battleIdleName = "Idle";
                 public SEntityState battleMove { get; protected set; }
-                [SerializeField] protected string battleMoveName = "Move";
                 public SEntityState attack { get; protected set; }
-                [SerializeField] protected string attackAnimName = "Attack";
                 public SEntityState stunned { get; protected set; }
-                [SerializeField] protected string stunnedAnimName = "Stun";
                 public SEntityState dead { get; protected set; }
-                [SerializeField] protected string deadAnimName = "Idle";
                 #endregion
                 protected override void Awake()
                 {
@@ -41,13 +34,13 @@ namespace EntitySystem
                     Assert.IsTrue(entity is ASkeleton, "ASkeleton状态机组件需要被附加至一个ASkeleton实体");
                     skeleton = entity as ASkeleton;
 
-                    idle = new SSkeletonIdle(this, entity, idleAnimName);
-                    move = new SSkeletonMove(this, entity, moveAnimName);
-                    battleIdle = new SSkeletonBattleIdle(this, entity, battleIdleName);
-                    battleMove = new SSkeletonBattleMove(this, entity, battleMoveName);
-                    attack = new SSkeletonAttack(this, entity, attackAnimName);
-                    stunned = new SSkeletonStunned(this, entity, stunnedAnimName);
-                    dead = new SSkeletonDead(this, entity, deadAnimName);
+                    idle = new SSkeletonIdle(this, entity);
+                    move = new SSkeletonMove(this, entity);
+                    battleIdle = new SSkeletonBattleIdle(this, entity);
+                    battleMove = new SSkeletonBattleMove(this, entity);
+                    attack = new SSkeletonAttack(this, entity);
+                    stunned = new SSkeletonStunned(this, entity);
+                    dead = new SSkeletonDead(this, entity);
                 }
 
                 protected override void Start()
@@ -64,11 +57,9 @@ namespace EntitySystem
 
                 public override void ChangeState(SEntityState _newState)
                 {
-                    Debug.Log("from: " + currentState.GetType().Name + " to: " + _newState.GetType().Name);
                     base.ChangeState(_newState);
                 }
             }
         }
     }
 }
-

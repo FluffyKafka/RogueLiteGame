@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace EntitySystem
 {
@@ -10,11 +11,6 @@ namespace EntitySystem
     {
         namespace EnemyActor
         {
-            public interface IInitEnemy
-            {
-                public void Init(IEnemyPlayer _player);
-            }
-
             public interface IAnimEnemy : IAnimEntity
             {
                 public void OpenStun(bool _isOpen);
@@ -25,7 +21,7 @@ namespace EntitySystem
                 public void StunCheck();
             }
 
-            internal class AEnemy : AEntity, IInitEnemy, IAnimEnemy, IPlayerEnemy
+            internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy
             {
                 public IEnemyPlayer player;
 
@@ -43,6 +39,9 @@ namespace EntitySystem
                 public Action BeStunned;
                 public Action<bool> OpenStun;
                 public Action StunFinish;
+
+                public Action ToIdle;
+                public Action ToMove;
                 #endregion
 
                 #region Func
@@ -51,15 +50,28 @@ namespace EntitySystem
                 public Func<int> CheckBattleMoveDir;
                 #endregion
 
+                protected override void Awake()
+                {
+                    base.Awake();
+
+                    Assert.IsTrue(anim is IEnemyAnimation);
+                    IEnemyAnimation enemyAnim = anim as IEnemyAnimation;
+                    ToIdle += enemyAnim.Idle;
+                    ToMove += enemyAnim.Move;
+                    Attack += enemyAnim.Attack;
+                    BeStunned += enemyAnim.Stun;
+                }
+
                 protected virtual void Start()
                 {
                     if(player == null)
                     {
                         MEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
                     }
+
                 }
 
-                void IInitEnemy.Init(IEnemyPlayer _player)
+                public void Init(IEnemyPlayer _player)
                 {
                     player = _player;
                 }
@@ -86,11 +98,12 @@ namespace EntitySystem
 
             }
 
-            //尚未实现Fx系统，实现后需要注册到对应事件
-            public interface IEnemyFx
+            public interface IEnemyAnimation
             {
-                public void PlayStunFx();
-                public void PlayTakeDamageFx();
+                public void Idle();
+                public void Move();
+                public void Attack();
+                public void Stun();
             }
         }
     }

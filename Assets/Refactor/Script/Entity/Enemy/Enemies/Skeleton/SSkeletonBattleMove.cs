@@ -12,13 +12,14 @@ namespace EntitySystem
         {
             internal class SSkeletonBattleMove : SSkeletonBattle
             {
-                public SSkeletonBattleMove(CEntityStateMachine _stateMachine, AEntity _entity, string _animName) : base(_stateMachine, _entity, _animName)
+                public SSkeletonBattleMove(CEntityStateMachine _stateMachine, AEntity _entity) : base(_stateMachine, _entity)
                 {
                 }
 
                 public override void Enter()
                 {
                     base.Enter();
+                    enemy.InvokeAction(enemy.ToMove);
                 }
 
                 public override void Exit()

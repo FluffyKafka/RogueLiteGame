@@ -69,8 +69,6 @@ namespace EntitySystem
 
             public Func<bool> CanBeDamage;
 
-            public Func<string> CheckStateAnimName;
-
             public Func<bool> IsFall;
             public Func<float> CheckYVelocity;
 
@@ -119,7 +117,6 @@ namespace EntitySystem
                 Assert.IsNotNull(anim, "实体缺少动画系统");
 
                 Die += EntityDie;
-                StateChange += anim.ChangeAnimationNotice;
             }
 
             public virtual void EntityDie()
@@ -146,7 +143,7 @@ namespace EntitySystem
 
         public interface IEntityAnimation
         {
-            public void ChangeAnimationNotice(string _stateAnimName);
+            
         }
     }
 
