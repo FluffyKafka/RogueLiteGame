@@ -25,6 +25,12 @@ namespace EntitySystem
                 [SerializeField] protected LayerMask whatIsGround;
                 [SerializeField] protected LayerMask whatIsPlatform;
 
+                [Header("Entity Movement KnockBack Info")]
+                [SerializeField] protected Vector2 knockBackDir;
+                [Range(0, 1)][SerializeField] protected float knockBackDirMapK = 0.5f;
+                [SerializeField] protected float knockBackDuration = 0.07f;
+                [SerializeField] protected bool isKnocked;
+
                 protected bool isVelocityLockUp = false;
 
                 override protected void Awake()

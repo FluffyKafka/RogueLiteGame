@@ -1,3 +1,6 @@
+using EntitySystem.EntityComponent.BattleComponent;
+using EntitySystem.EntityComponent.MovementComponent;
+using EntitySystem.EntityComponent.StateMachineComponent;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +17,13 @@ namespace EntitySystem
             public void AttackDamageTrigger();
         }
 
-        internal class AEntity : MonoBehaviour, IAnimEntity
+        public interface IStatEntity
+        {
+            public bool CanBeDamage();
+            public void SlowEntityByDuring(float _rate, float _duration);
+        }
+
+        internal abstract class AEntity : MonoBehaviour, IAnimEntity, IStatEntity
         {
             #region Actions
             public Action<EntitySpeedSetData> SetEntitySpeed;
@@ -23,13 +32,6 @@ namespace EntitySystem
                 public bool isSetToDefault;
                 public float rate;
                 public float duration;
-            }
-
-            public Action<DamageData> TakeDamage;
-            public struct DamageData
-            {
-                public float damageAmount;
-                public Entity damageSource;
             }
 
             public Action BeKnockedBack;
@@ -56,6 +58,9 @@ namespace EntitySystem
 
             public Action AttackFinish;
             public Action AttackDamageTrigger;
+
+            public Action<float> SlowEntityBy;
+            public Action RecoverEntitySpeed;
             #endregion
 
             #region Func
@@ -72,6 +77,8 @@ namespace EntitySystem
             public Func<bool> IsFall;
             public Func<float> CheckYVelocity;
 
+            public Func<WReadOnlyDamageData> GetPrimaryAttackDamage;
+            public Func<WReadOnlyDamageData, float> TakeDamage;
             #endregion
 
             #region ActionAndFuncInvokeHelper
@@ -85,13 +92,20 @@ namespace EntitySystem
             }
             public T InvokeFunc<T>(Func<T> _func)
             {
-                Assert.IsNotNull(_func, "服务缺少提供者");
+                Assert.IsNotNull(_func, GetType().Name + "的服务"+ _func.ToString() +"缺少提供者");
                 Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
                 return _func.Invoke();
+            }
+            public T2 InvokeFunc<T1, T2>(Func<T1, T2> _func, T1 _arg)
+            {
+                Assert.IsNotNull(_func, GetType().Name + "的服务" + _func.ToString() + "缺少提供者");
+                Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
+                return _func.Invoke(_arg);
             }
             #endregion
 
             #region Animation
+            protected IEntityAnimation anim;
             void IAnimEntity.AttackFinish()
             {
                 InvokeAction(AttackFinish);
@@ -103,23 +117,32 @@ namespace EntitySystem
             }
             #endregion
 
+            #region Stats
+            protected IEntityStats stats;
+            bool IStatEntity.CanBeDamage()
+            {
+                return InvokeFunc(CanBeDamage);
+            }
+            void IStatEntity.SlowEntityByDuring(float _rate, float _duration)
+            {
+                StartCoroutine(SlowEntityHelper(_rate, _duration));
+            }
+            protected IEnumerator SlowEntityHelper(float _rate, float _duration)
+            {
+                InvokeAction(SlowEntityBy, _rate);
+                yield return new WaitForSeconds(_duration);
+                InvokeAction(RecoverEntitySpeed);
+            }
+            #endregion
+
             #region Entity Base Info
             [Header("Entity Base Info")]
             [SerializeField] public string entityName;
             [SerializeField] public Sprite entityIcon;
             [SerializeField] float selfDestroyAfterDead = 10f;
-            protected IEntityAnimation anim;
             public bool isDead = false;
 
-            virtual protected void Awake()
-            {
-                anim = GetComponentInChildren<IEntityAnimation>();
-                Assert.IsNotNull(anim, "实体缺少动画系统");
-
-                Die += EntityDie;
-            }
-
-            public virtual void EntityDie()
+            protected virtual void EntityDie()
             {
                 if (!isDead)
                 {
@@ -127,7 +150,7 @@ namespace EntitySystem
                     Invoke("SelfDestroyAfterDead", selfDestroyAfterDead);
                 }
             }
-            private void SelfDestroyAfterDead()
+            protected virtual void SelfDestroyAfterDead()
             {
                 if (isDead)
                 {
@@ -139,11 +162,66 @@ namespace EntitySystem
                 }
             }
             #endregion
+
+            virtual protected void Awake()
+            {
+                anim = GetComponentInChildren<IEntityAnimation>();
+                Assert.IsNotNull(anim, "实体缺少动画系统");
+                SlowEntityBy += anim.SlowBy;
+                RecoverEntitySpeed += anim.RecoverSpeed;
+
+                stats = GetComponentInChildren<IEntityStats>();
+                Assert.IsNotNull(stats, "实体缺少数值系统");
+                GetPrimaryAttackDamage += stats.GetPrimaryAttackData;
+                TakeDamage += stats.TakeDamage;
+
+                Die += EntityDie;
+
+                ComponentValidCheck();
+            }
+            protected abstract void ComponentValidCheck();
         }
 
         public interface IEntityAnimation
         {
-            
+            public void SlowBy(float _rate);
+            public void RecoverSpeed();
+        }
+
+        public interface IEntityStats
+        {
+            public abstract WReadOnlyDamageData GetPrimaryAttackData();
+            public abstract float TakeDamage(WReadOnlyDamageData _damageData);
+        }
+        public class DDamageData
+        {
+            public IStatEntity damageSource = null;
+            public bool shouldPlayAnim = true;
+            public float physical = 0;
+            public bool isCrit = false;
+            public float magical = 0;
+            public bool ignite = false;
+            public float igniteDamageCooldown = float.PositiveInfinity;
+            public float igniteDuration = 0f;
+            public float igniteDamage = 0f;
+            public bool chill = false;
+            public float chillSlowPercentage = 0f;
+            public float chillDuration = 0f;
+            public float chillReduceArmorPer = 0f;
+            public bool shock = false;
+            public float shockDuration = 0f;
+            public float thunderStrikeRadius = 0f;
+            public float thunderStrikeRate = 0f;
+            public int thunderStrikeCounter = 0;
+            public float shockReduceAccuracy = 0f;
+        }
+        public struct WReadOnlyDamageData
+        {
+            public readonly DDamageData data;
+            public WReadOnlyDamageData(DDamageData _damageData)
+            {
+                data = _damageData;
+            }
         }
     }
 

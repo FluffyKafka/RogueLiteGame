@@ -1,3 +1,4 @@
+using EntitySystem.EntityActor;
 using EntitySystem.EntityActor.EnemyActor;
 using EntitySystem.EntityActor.PlayerActor;
 using System.Collections;
@@ -12,7 +13,7 @@ namespace EntitySystem
     {
         namespace BattleComponent
         {
-            internal class CEnemyBattle : CEntityComponentBase
+            internal class CEnemyBattle : CEntityBattle
             {
                 protected AEnemy enemy;
 
@@ -52,6 +53,7 @@ namespace EntitySystem
                     enemy.StunCheck += StunCheck;
                     enemy.CheckBattleMoveDir += CheckMoveDir;
                     enemy.AttackCheck += AttackCheck;
+                    enemy.AttackDamageTrigger += DamageTrigger;
                 }
 
                 protected override void Update()
@@ -169,6 +171,20 @@ namespace EntitySystem
                 {
                     yield return new WaitForSeconds(stunDuration);
                     enemy.InvokeAction(enemy.StunFinish);
+                }
+
+                protected void DamageTrigger()
+                {
+                    WReadOnlyDamageData damageData = enemy.InvokeFunc(enemy.GetPrimaryAttackDamage);
+                    Collider2D[] allHitEnemy = Physics2D.OverlapCircleAll(attackValidCheck.position, attackValidCheckRadius, whatIsPlayer);
+                    foreach (var hit in allHitEnemy)
+                    {
+                        IEnemyPlayer player = hit.GetComponent<IEnemyPlayer>();
+                        if (player != null)
+                        {
+                            player.TakeDamage(enemy.InvokeFunc(enemy.GetPrimaryAttackDamage));
+                        }
+                    }
                 }
             }
         }

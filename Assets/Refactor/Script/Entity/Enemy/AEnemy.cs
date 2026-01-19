@@ -1,4 +1,7 @@
 using EntitySystem.EntityActor.PlayerActor;
+using EntitySystem.EntityComponent.BattleComponent;
+using EntitySystem.EntityComponent.MovementComponent;
+using EntitySystem.EntityComponent.StateMachineComponent;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,11 +17,6 @@ namespace EntitySystem
             public interface IAnimEnemy : IAnimEntity
             {
                 public void OpenStun(bool _isOpen);
-            }
-
-            public interface IPlayerEnemy
-            {
-                public void StunCheck();
             }
 
             internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy
@@ -61,7 +59,11 @@ namespace EntitySystem
                     Attack += enemyAnim.Attack;
                     BeStunned += enemyAnim.Stun;
                 }
-
+                protected override void ComponentValidCheck()
+                {
+                    Assert.IsNotNull(GetComponent<CEnemyMovement>(), "缺少敌人运动组件");
+                    Assert.IsNotNull(GetComponent<CEnemyBattle>(), "缺少敌人战斗组件");
+                }
                 protected virtual void Start()
                 {
                     if(player == null)
@@ -71,15 +73,18 @@ namespace EntitySystem
 
                 }
 
+                #region Init
                 public void Init(IEnemyPlayer _player)
                 {
                     player = _player;
                 }
+                #endregion
 
+                #region Animation
                 void IAnimEntity.AttackDamageTrigger()
                 {
                     InvokeAction(AttackDamageTrigger);
-                }
+                }              
 
                 void IAnimEnemy.OpenStun(bool _isOpen)
                 {
@@ -90,11 +95,26 @@ namespace EntitySystem
                 {
                     InvokeAction(AttackFinish);
                 }
+                #endregion
 
+                #region Player
+                bool IPlayerEnemy.IsDead()
+                {
+                    return isDead;
+                }
+                Vector3 IPlayerEnemy.CheckPosition()
+                {
+                    return transform.position;
+                }
+                float IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
+                {
+                    return InvokeFunc(TakeDamage, _damageData);
+                }
                 void IPlayerEnemy.StunCheck()
                 {
                     InvokeAction(StunCheck);
                 }
+                #endregion
 
             }
 

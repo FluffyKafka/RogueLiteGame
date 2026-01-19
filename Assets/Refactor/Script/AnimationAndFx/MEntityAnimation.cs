@@ -34,6 +34,16 @@ namespace AnimationAndFx
             anim.SetBool(_stateAnimName, true);
             currentAnimName = _stateAnimName;
         }
+
+        void IEntityAnimation.SlowBy(float _rate)
+        {
+            anim.speed *= (1 - _rate);
+        }
+
+        void IEntityAnimation.RecoverSpeed()
+        {
+            anim.speed = 1;
+        }
     }
 }
 

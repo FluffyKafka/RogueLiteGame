@@ -584,7 +584,6 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-
     public virtual float TakeDamage(in DamageData _damageData, Transform _damageDirection)
     {
         if (!entity.CanBeDamage())

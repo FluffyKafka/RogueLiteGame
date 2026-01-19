@@ -1,3 +1,4 @@
+using EntitySystem.EntityActor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,6 @@ namespace EntitySystem
             {
                 [SerializeField] protected Transform attackValidCheck;
                 [SerializeField] protected float attackValidCheckRadius;
-                [SerializeField] protected Vector2 knockBackDir;
-                [Range(0, 1)][SerializeField] protected float knockBackDirMapK = 0.5f;
-                [SerializeField] protected float knockBackDuration = 0.07f;
-                [SerializeField] protected bool isKnocked;
 
                 protected bool canBeDamage_current;
                 protected bool canBeDamage;

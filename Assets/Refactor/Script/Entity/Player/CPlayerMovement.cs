@@ -46,6 +46,9 @@ namespace EntitySystem
                 {
                     base.Awake();
 
+                    defaultMoveSpeed = moveSpeed;
+                    defaultJumpSpeed = jumpSpeed;
+
                     Assert.IsTrue(entity is APlayer, "此组件属于Player组件，必须附加至一个APlayer");
                     player = entity as APlayer;
                     player.Move += Move;
@@ -55,6 +58,8 @@ namespace EntitySystem
                     player.Attack += Attack;
                     player.CheckUnmovableDurationAfterAttack += CheckUnmoveableDurationAfterAttack;
                     player.IsGroundedOrPlatform_Strict += IsGroundedOrPlatform_Strict;
+                    player.SlowEntityBy += SlowBy;
+                    player.RecoverEntitySpeed += RecoverSpeed;
                 }
 
                 protected override void Update()
@@ -173,6 +178,18 @@ namespace EntitySystem
                 protected virtual bool IsGroundedOrPlatform_Strict()
                 {
                     return Physics2D.Raycast(groundCheck.position, Vector2.down, strictGroundCheckDistance, whatIsGround | whatIsPlatform);
+                }
+
+                protected void SlowBy(float _rate)
+                {
+                    moveSpeed *= (1 - _rate);
+                    jumpSpeed *= (1 - _rate);
+                }
+
+                protected void RecoverSpeed()
+                {
+                    moveSpeed = defaultMoveSpeed;
+                    jumpSpeed = defaultJumpSpeed;
                 }
 
                 protected override void OnDrawGizmos()

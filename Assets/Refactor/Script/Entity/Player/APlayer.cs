@@ -1,5 +1,8 @@
 using EntitySystem.EntityActor;
 using EntitySystem.EntityActor.PlayerActor;
+using EntitySystem.EntityComponent.BattleComponent;
+using EntitySystem.EntityComponent.MovementComponent;
+using EntitySystem.EntityComponent.StateMachineComponent;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +32,8 @@ namespace EntitySystem
             {
                 public bool IsDead();
                 public Vector3 CheckPosition();
+
+                public float TakeDamage(WReadOnlyDamageData _damageData);
             }
 
             public interface IAnimPlayer: IAnimEntity
@@ -102,6 +107,10 @@ namespace EntitySystem
                 {
                     return transform.position;
                 }
+                float IEnemyPlayer.TakeDamage(WReadOnlyDamageData _damageData)
+                {
+                    return InvokeFunc(TakeDamage, _damageData);
+                }
                 #endregion
 
                 protected override void Awake()
@@ -121,6 +130,12 @@ namespace EntitySystem
 
                     CheckHorizonInput += input.CheckHorizonInput;
                     CheckVerticalInput += input.CheckVerticalInput;
+                }
+                override protected void ComponentValidCheck()
+                {
+                    Assert.IsNotNull(GetComponent<CPlayerMovement>(), "缺少玩家运动组件");
+                    Assert.IsNotNull(GetComponent<CPlayerBattle>(), "缺少玩家战斗组件");
+                    Assert.IsNotNull(GetComponent<CPlayerStateMachine>(), "缺少玩家状态机组件");
                 }
             }
 
@@ -142,7 +157,12 @@ namespace EntitySystem
 
             public interface IPlayerEnemy
             {
+                public bool IsDead();
+                public Vector3 CheckPosition();
 
+                public float TakeDamage(WReadOnlyDamageData _damageData);
+
+                public void StunCheck();
             }
         }        
     }

@@ -16,9 +16,11 @@ namespace EntitySystem
 
                 [Header("Enemy Regular Movement")]
                 [SerializeField] public float moveSpeed;
+                protected float defaultMoveSpeed;
                 [SerializeField] public float maxIdleDuration;
                 [SerializeField] public float minIdleDuration;
                 [SerializeField] public float battleMoveSpeed;
+                protected float defaultBattleMoveSpeed;
 
                 [Header("Enemy Stunned Movement")]
                 [SerializeField] public Vector2 stunDir;
@@ -26,6 +28,9 @@ namespace EntitySystem
                 protected override void Awake()
                 {
                     base.Awake();
+
+                    defaultMoveSpeed = moveSpeed;
+
                     Assert.IsTrue(entity is AEnemy, "此为Enemy组件");
                     enemy = entity as AEnemy;
 
@@ -36,6 +41,7 @@ namespace EntitySystem
                     enemy.FacingToPlayer += FacingToPlayer;
                     enemy.BeStunned += BeStunned;
                     enemy.StandStill += StandStill;
+                    enemy.SlowEntityBy += SlowBy;
                 }
 
                 protected float CheckRandomIdleDuration()
@@ -82,6 +88,18 @@ namespace EntitySystem
                 {
                     Vector2 newVelocity = new Vector2(-facingDir * stunDir.x, stunDir.y);
                     SetVelocity(newVelocity, false);
+                }
+
+                protected void SlowBy(float _rate)
+                {
+                    moveSpeed *= (1 - _rate);
+                    battleMoveSpeed *= (1 - _rate);
+                }
+
+                protected void RecoverSpeed()
+                {
+                    moveSpeed = defaultMoveSpeed;
+                    battleMoveSpeed = defaultBattleMoveSpeed;
                 }
 
                 protected override void OnDrawGizmos()
