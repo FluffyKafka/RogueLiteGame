@@ -59,7 +59,7 @@ namespace EntitySystem
                         IPlayerEnemy enemy = hit.GetComponent<IPlayerEnemy>();
                         if (enemy != null)
                         {
-                            enemy.TakeDamage(player.InvokeFunc(player.GetPrimaryAttackDamage));
+                            WReadOnlyDamageData damage = enemy.TakeDamage(player.InvokeFunc(player.GetPrimaryAttackDamage));
                         }
                     }
                 }

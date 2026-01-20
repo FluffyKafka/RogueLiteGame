@@ -35,7 +35,7 @@ public class EntityFX : MonoBehaviour
     [SerializeField] private ParticleSystem chillParticleFX;
     [SerializeField] private ParticleSystem shockParticleFX;
 
-    [Header("Fit FX")]
+    [Header("Hit FX")]
     [SerializeField] private GameObject hitFXPrefab;
     [SerializeField] private Vector2 maxXYRandomPositionOffset_Hit;
     [SerializeField] private GameObject hitCritFXPrefab;

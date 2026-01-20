@@ -6,9 +6,10 @@ using UnityEngine.Assertions;
 
 namespace AnimationAndFx
 {
-    public class MEnemyAnimation : MEntityAnimation, IEnemyAnimation
+    internal class CEnemyAnimation : CEntityAnimation
     {
-        protected IAnimEnemy enemy;
+        protected MEnemyAnimationFxSystem enemyAnimFxSystem;
+
         [SerializeField] protected string idleAnimName = "Idle";
         [SerializeField] protected string moveAnimName = "Move";
         [SerializeField] protected string attackAnimName = "Attack";
@@ -17,30 +18,14 @@ namespace AnimationAndFx
         protected override void Awake()
         {
             base.Awake();
-            enemy = GetComponentInParent<IAnimEnemy>();
-            Assert.IsNotNull(enemy, "MEnemyAnimation需要挂载在一个Enemy上");
-        }
-        public void OnAttackFinish()
-        {
-            enemy.AttackFinish();
-        }
-
-        public void OnAttackDamageTrigger()
-        {
-            enemy.AttackDamageTrigger();
+            Assert.IsTrue(animFxSystem is MEnemyAnimationFxSystem, "敌人动画组件需要附加在敌人动画特效系统上");
+            enemyAnimFxSystem = animFxSystem as MEnemyAnimationFxSystem;
+            enemyAnimFxSystem.Idle += Idle;
+            enemyAnimFxSystem.Move += Move;
+            enemyAnimFxSystem.Attack += Attack;
+            enemyAnimFxSystem.Stun += Stun;
         }
 
-        public void OnStunOpen()
-        {
-            enemy.OpenStun(true);
-        }
-
-        public void OnStunClose()
-        {
-            enemy.OpenStun(false);
-        }
-
-        #region Enemy Animation
         public void Idle()
         {
             ChangeAnimationTo(idleAnimName);
@@ -57,6 +42,5 @@ namespace AnimationAndFx
         {
             ChangeAnimationTo(stunAnimName);
         }
-        #endregion
     }
 }

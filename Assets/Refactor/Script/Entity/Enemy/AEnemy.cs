@@ -16,7 +16,7 @@ namespace EntitySystem
         {
             public interface IAnimEnemy : IAnimEntity
             {
-                public void OpenStun(bool _isOpen);
+                public abstract void OpenStun(bool _isOpen);
             }
 
             internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy
@@ -57,7 +57,8 @@ namespace EntitySystem
                     ToIdle += enemyAnim.Idle;
                     ToMove += enemyAnim.Move;
                     Attack += enemyAnim.Attack;
-                    BeStunned += enemyAnim.Stun;
+                    BeStunned += enemyAnim.BeStunned;
+                    StunFinish += enemyAnim.StunFinish;
                 }
                 protected override void ComponentValidCheck()
                 {
@@ -106,9 +107,11 @@ namespace EntitySystem
                 {
                     return transform.position;
                 }
-                float IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
+                WReadOnlyDamageData IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
                 {
-                    return InvokeFunc(TakeDamage, _damageData);
+                    WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
+                    InvokeAction(TakeDamage, damage);
+                    return damage;
                 }
                 void IPlayerEnemy.StunCheck()
                 {
@@ -118,12 +121,11 @@ namespace EntitySystem
 
             }
 
-            public interface IEnemyAnimation
+            public interface IEnemyAnimation : IEntityAnimation
             {
                 public void Idle();
                 public void Move();
                 public void Attack();
-                public void Stun();
             }
         }
     }

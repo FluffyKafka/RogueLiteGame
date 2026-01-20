@@ -20,18 +20,19 @@ namespace StatsSystem
             statsManager.CheckDefensiveStat += CheckStats;
         }
 
-        public virtual float CalculateFinalDamage(WReadOnlyDamageData _damageData)
+        public virtual void CalculateFinalDamage(WReadOnlyDamageData _damageData, DDamageData _takeDamageData)
         {
             if (statsManager.InvokeFunc(statsManager.CanEnyityBeDamage))
             {
-                return 0f;
+                _takeDamageData.physical = 0;
+                _takeDamageData.magical = 0;
+                _takeDamageData.isCrit = false;
+                return;
             }
 
-            float finalPhysicalDamage = CalculatePhysicalDamageTake(_damageData);
-            float finalMagicalDamage = CalculateMagicalDamageTake(_damageData);
-            float finalDamage = finalPhysicalDamage + finalMagicalDamage;
-
-            return finalDamage;
+            _takeDamageData.physical = CalculatePhysicalDamageTake(_damageData);
+            _takeDamageData.magical = CalculateMagicalDamageTake(_damageData);
+            _takeDamageData.isCrit = _damageData.data.isCrit;
         }
         protected virtual float CalculatePhysicalDamageTake(WReadOnlyDamageData _damageData)
         {

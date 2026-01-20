@@ -182,7 +182,7 @@ namespace EntitySystem
                         IEnemyPlayer player = hit.GetComponent<IEnemyPlayer>();
                         if (player != null)
                         {
-                            player.TakeDamage(enemy.InvokeFunc(enemy.GetPrimaryAttackDamage));
+                            WReadOnlyDamageData realDamage = player.TakeDamage(enemy.InvokeFunc(enemy.GetPrimaryAttackDamage));
                         }
                     }
                 }

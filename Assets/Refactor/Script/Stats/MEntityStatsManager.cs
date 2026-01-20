@@ -37,15 +37,16 @@ namespace StatsSystem
     internal class MEntityStatsManager : MonoBehaviour, IEntityStats
     {
         protected DDamageData damageData;
+        protected DDamageData takeDamageData;
         protected IStatEntity entity;
 
         #region Action
         public Action<DDamageData> CalculatePrimaryAttackData;
         public Action<WReadOnlyDamageData> TakeDamageStatsEffect;
+        public Action<WReadOnlyDamageData, DDamageData> CalculateFinalDamage;
         #endregion
 
         #region Func
-        public Func<WReadOnlyDamageData, float> CalculateFinalDamage;
         public Func<bool> CanEnyityBeDamage;
         public Func<EStatType, float> CheckOffensiveStat;
         public Func<EStatType, float> CheckDefensiveStat;
@@ -60,6 +61,10 @@ namespace StatsSystem
         public void InvokeAction<T>(Action<T> _action, T _arg)
         {
             _action?.Invoke(_arg);
+        }
+        public void InvokeAction<T1, T2>(Action<T1, T2> _action, T1 _arg1, T2 _arg2)
+        {
+            _action?.Invoke(_arg1, _arg2);
         }
         public T InvokeFunc<T>(Func<T> _func)
         {
@@ -105,7 +110,7 @@ namespace StatsSystem
         }
         WReadOnlyDamageData IEntityStats.GetPrimaryAttackData()
         {
-            damageData.damageSource = entity;
+            damageData.damageSourceTransform = transform;
             if(UnityEngine.Random.Range(0, 100) < accuracy)
             {
                 InvokeAction(CalculatePrimaryAttackData, damageData);
@@ -118,34 +123,66 @@ namespace StatsSystem
             return new WReadOnlyDamageData(damageData);
         }
 
-        float IEntityStats.TakeDamage(WReadOnlyDamageData _damageData)
+        WReadOnlyDamageData IEntityStats.CalculateDamageTaken(WReadOnlyDamageData _damageData)
         {
-            float finalDamage = InvokeFunc(CalculateFinalDamage, _damageData);
-            if(finalDamage <= 0)
+            takeDamageData.damageSourceTransform = _damageData.data.damageSourceTransform;
+            InvokeAction(CalculateFinalDamage, _damageData, takeDamageData);
+            CalculateTakeDamageAilmentArg(_damageData);
+            return new WReadOnlyDamageData(takeDamageData);
+        }
+        private void CalculateTakeDamageAilmentArg(WReadOnlyDamageData _damageData)
+        {
+            if (isIgnite || isChill || isShock)
             {
-                return 0;
+                takeDamageData.ignite = false;
+                takeDamageData.chill = false;
+                takeDamageData.shock = false;
+                return;
             }
 
-            currentHealth -= finalDamage;
-            ApplyAilment(_damageData);
-            return finalDamage;
+            takeDamageData.ignite = _damageData.data.ignite;
+            takeDamageData.chill = _damageData.data.chill;
+            takeDamageData.shock = _damageData.data.shock;
+            takeDamageData.igniteDuration = _damageData.data.igniteDuration;
+            takeDamageData.igniteDamage = _damageData.data.igniteDamage;
+            takeDamageData.igniteDamageCooldown = _damageData.data.igniteDamageCooldown;
+            takeDamageData.chillDuration = _damageData.data.chillDuration;
+            takeDamageData.chillReduceArmorPer = _damageData.data.chillReduceArmorPer;
+            takeDamageData.chillSlowPercentage = _damageData.data.chillSlowPercentage;
+            takeDamageData.shockDuration = _damageData.data.shockDuration;
+            takeDamageData.shockReduceAccuracy = _damageData.data.shockReduceAccuracy;
+            takeDamageData.thunderStrikeCounter = _damageData.data.thunderStrikeCounter;
+            takeDamageData.thunderStrikeRadius = _damageData.data.thunderStrikeRadius;
+            takeDamageData.thunderStrikeRate = _damageData.data.thunderStrikeRate;
         }
-        protected void ApplyAilment(WReadOnlyDamageData _damageData)
+
+        void IEntityStats.TakeDamage(WReadOnlyDamageData _damage)
         {
-            if(isIgnite || isChill || isShock)
+            float finalDamage = takeDamageData.physical + takeDamageData.magical;
+            if (finalDamage <= 0)
             {
                 return;
             }
 
-            if(_damageData.data.ignite)
+            currentHealth -= finalDamage;
+            ApplyAilment(_damage);
+        }
+        protected void ApplyAilment(WReadOnlyDamageData _damageData)
+        {
+            if (isIgnite || isChill || isShock)
+            {
+                return;
+            }
+
+            if (_damageData.data.ignite)
             {
                 StartCoroutine(IgniteHelper(_damageData));
             }
-            else if(_damageData.data.chill)
+            else if (_damageData.data.chill)
             {
                 StartCoroutine(ChillHelper(_damageData));
             }
-            else if(_damageData.data.shock)
+            else if (_damageData.data.shock)
             {
                 StartCoroutine(ShockHelper(_damageData));
             }

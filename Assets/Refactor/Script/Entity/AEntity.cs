@@ -61,6 +61,8 @@ namespace EntitySystem
 
             public Action<float> SlowEntityBy;
             public Action RecoverEntitySpeed;
+
+            public Action<WReadOnlyDamageData> TakeDamage;
             #endregion
 
             #region Func
@@ -78,7 +80,7 @@ namespace EntitySystem
             public Func<float> CheckYVelocity;
 
             public Func<WReadOnlyDamageData> GetPrimaryAttackDamage;
-            public Func<WReadOnlyDamageData, float> TakeDamage;
+            public Func<WReadOnlyDamageData, WReadOnlyDamageData> CalculateDamageTaken;
             #endregion
 
             #region ActionAndFuncInvokeHelper
@@ -169,10 +171,12 @@ namespace EntitySystem
                 Assert.IsNotNull(anim, "实体缺少动画系统");
                 SlowEntityBy += anim.SlowBy;
                 RecoverEntitySpeed += anim.RecoverSpeed;
+                TakeDamage += anim.Hit;
 
                 stats = GetComponentInChildren<IEntityStats>();
                 Assert.IsNotNull(stats, "实体缺少数值系统");
                 GetPrimaryAttackDamage += stats.GetPrimaryAttackData;
+                CalculateDamageTaken += stats.CalculateDamageTaken;
                 TakeDamage += stats.TakeDamage;
 
                 Die += EntityDie;
@@ -184,18 +188,22 @@ namespace EntitySystem
 
         public interface IEntityAnimation
         {
-            public void SlowBy(float _rate);
-            public void RecoverSpeed();
+            public abstract void SlowBy(float _rate);
+            public abstract void RecoverSpeed();
+            public abstract void Hit(WReadOnlyDamageData _data);
+            public abstract void BeStunned();
+            public abstract void StunFinish();
         }
 
         public interface IEntityStats
         {
             public abstract WReadOnlyDamageData GetPrimaryAttackData();
-            public abstract float TakeDamage(WReadOnlyDamageData _damageData);
+            public abstract WReadOnlyDamageData CalculateDamageTaken(WReadOnlyDamageData _damageData);
+            public abstract void TakeDamage(WReadOnlyDamageData _damage);
         }
         public class DDamageData
         {
-            public IStatEntity damageSource = null;
+            public Transform damageSourceTransform = null;
             public bool shouldPlayAnim = true;
             public float physical = 0;
             public bool isCrit = false;

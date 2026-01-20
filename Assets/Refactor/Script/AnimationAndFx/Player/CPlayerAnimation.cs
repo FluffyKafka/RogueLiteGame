@@ -7,9 +7,9 @@ using UnityEngine.Assertions;
 
 namespace AnimationAndFx
 {
-    public class MPlayerAnimation : MEntityAnimation, IPlayerAnimation
+    internal class CPlayerAnimation : CEntityAnimation
     {
-        protected IAnimPlayer player;
+        protected MPlayerAnimationFxSystem playerAnimFxSystem;
 
         [SerializeField] protected string idleAnimName = "Idle";
         [SerializeField] protected string moveAnimName = "Move";
@@ -22,47 +22,43 @@ namespace AnimationAndFx
         protected override void Awake()
         {
             base.Awake();
-            player = GetComponentInParent<IAnimPlayer>();
-            Assert.IsNotNull(player, "MPlayerAnimation需要挂载在一个Player上");
+            Assert.IsTrue(animFxSystem is MPlayerAnimationFxSystem, "玩家动画组件需要附加在玩家动画特效系统上");
+            playerAnimFxSystem = animFxSystem as MPlayerAnimationFxSystem;
+            playerAnimFxSystem.Idle += Idle;
+            playerAnimFxSystem.Move += Move;
+            playerAnimFxSystem.Attack += Attack;
+            playerAnimFxSystem.Air += Air;
+            playerAnimFxSystem.WallSlide += WallSlide;
+            playerAnimFxSystem.UpdateYVelocity += UpdateYVelocity;
         }
 
-        public void OnAttackFinish()
-        {
-            player.AttackFinish();
-        }
-
-        public void OnAttackDamageTrigger()
-        {
-            player.AttackDamageTrigger();
-        }
-
-        void IPlayerAnimation.Idle()
+        protected void Idle()
         {
             ChangeAnimationTo(idleAnimName);
         }
 
-        void IPlayerAnimation.Move()
+        protected void Move()
         {
             ChangeAnimationTo(moveAnimName);
         }
 
-        void IPlayerAnimation.Attack(int _count)
+        protected void Attack(int _count)
         {
             ChangeAnimationTo(attackAnimName);
             anim.SetInteger(comboCounterName, _count);
         }
 
-        void IPlayerAnimation.Air()
+        protected void Air()
         {
             ChangeAnimationTo(airAnimName);        
         }
 
-        void IPlayerAnimation.UpdateYVelocity(float _yVelocity)
+        protected void UpdateYVelocity(float _yVelocity)
         {
             anim.SetFloat(yVelocityName, _yVelocity);
         }
 
-        void IPlayerAnimation.WallSlide()
+        protected void WallSlide()
         {
             ChangeAnimationTo(wallSlideName);
         }

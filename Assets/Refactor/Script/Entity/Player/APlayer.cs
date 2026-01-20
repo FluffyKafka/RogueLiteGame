@@ -33,7 +33,7 @@ namespace EntitySystem
                 public bool IsDead();
                 public Vector3 CheckPosition();
 
-                public float TakeDamage(WReadOnlyDamageData _damageData);
+                public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
             }
 
             public interface IAnimPlayer: IAnimEntity
@@ -107,9 +107,11 @@ namespace EntitySystem
                 {
                     return transform.position;
                 }
-                float IEnemyPlayer.TakeDamage(WReadOnlyDamageData _damageData)
+                WReadOnlyDamageData IEnemyPlayer.TakeDamage(WReadOnlyDamageData _damageData)
                 {
-                    return InvokeFunc(TakeDamage, _damageData);
+                    WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
+                    InvokeAction(TakeDamage, damage);
+                    return damage;
                 }
                 #endregion
 
@@ -141,12 +143,12 @@ namespace EntitySystem
 
             public interface IPlayerAnimation : IEntityAnimation
             {
-                public void Idle();
-                public void Move();
-                public void Attack(int _count);
-                public void Air();
-                public void UpdateYVelocity(float _yVelocity);
-                public void WallSlide();
+                public abstract void Idle();
+                public abstract void Move();
+                public abstract void Attack(int _count);
+                public abstract void Air();
+                public abstract void UpdateYVelocity(float _yVelocity);
+                public abstract void WallSlide();
             }
 
             public interface IPlayerInput
@@ -160,7 +162,7 @@ namespace EntitySystem
                 public bool IsDead();
                 public Vector3 CheckPosition();
 
-                public float TakeDamage(WReadOnlyDamageData _damageData);
+                public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
 
                 public void StunCheck();
             }

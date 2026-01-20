@@ -6,16 +6,18 @@ using UnityEngine.Assertions;
 
 namespace AnimationAndFx
 {
-    public class MEntityAnimation : MonoBehaviour, IEntityAnimation
-    {
+    internal class CEntityAnimation : CEntityAnimFxComponentBase
+    {        
         protected string currentAnimName = "";
         protected Animator anim;
-        protected bool isUpdateYVelocity;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
             anim = GetComponent<Animator>();
-            Assert.IsNotNull(anim, "实体动画系统需要管理一个Animator组件");
+            Assert.IsNotNull(anim, "动画组件需要管理一个Animator组件");
+
+            animFxSystem.SlowBy += SlowBy;
+            animFxSystem.RecoverSpeed += RecoverSpeed;
         }
 
         protected void ChangeAnimationTo(string _stateAnimName)
@@ -35,12 +37,12 @@ namespace AnimationAndFx
             currentAnimName = _stateAnimName;
         }
 
-        void IEntityAnimation.SlowBy(float _rate)
+        protected void SlowBy(float _rate)
         {
             anim.speed *= (1 - _rate);
         }
 
-        void IEntityAnimation.RecoverSpeed()
+        protected void RecoverSpeed()
         {
             anim.speed = 1;
         }
