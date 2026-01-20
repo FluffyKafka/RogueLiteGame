@@ -38,9 +38,12 @@ namespace AnimationAndFx
         {
             ChangeAnimationTo(attackAnimName);
         }
-        public void Stun()
+        public void Stun(bool isStun)
         {
-            ChangeAnimationTo(stunAnimName);
+            if(isStun)
+            {
+                ChangeAnimationTo(stunAnimName);
+            }         
         }
     }
 }
