@@ -8,9 +8,9 @@ namespace AnimationAndFx
 {
     internal class CEntityHitFx_HitFlash : CEntityAnimFxComponentBase
     {
-        [SerializeField] private Material hitMat;
-        [SerializeField] private float fleshDuration = 0.3f;
-        public Material originalMat;
+        [SerializeField] protected Material hitMat;
+        [SerializeField] protected float fleshDuration = 0.3f;
+        protected Material originalMat;
 
         protected SpriteRenderer sr;
 
@@ -36,6 +36,7 @@ namespace AnimationAndFx
         }
         protected IEnumerator FlashFX()
         {
+            originalMat = sr.material;
             sr.material = hitMat;
             sr.color = Color.white;
             yield return new WaitForSeconds(fleshDuration);

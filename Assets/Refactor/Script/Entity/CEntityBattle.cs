@@ -46,6 +46,12 @@ namespace EntitySystem
                 {
                     return canBeDamage_current;
                 }
+
+                protected virtual void OnDrawGizmos()
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawWireSphere(attackValidCheck.position, attackValidCheckRadius);
+                }
             }
         }
     }

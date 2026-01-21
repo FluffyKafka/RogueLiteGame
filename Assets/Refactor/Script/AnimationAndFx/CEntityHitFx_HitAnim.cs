@@ -20,6 +20,12 @@ namespace AnimationAndFx
 
         protected void Hit(WReadOnlyDamageData _data)
         {
+            float finalDamage = _data.data.physical + _data.data.magical;
+            if(finalDamage <= 0)
+            {
+                return;
+            }
+
             if(_data.data.isCrit)
             {
                 CreateCritHitFX(_data.data.damageSourceTransform);

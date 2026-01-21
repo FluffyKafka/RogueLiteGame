@@ -1,3 +1,4 @@
+using EntitySystem.EntityActor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace EntitySystem
                 [SerializeField] protected Vector2 knockBackDir;
                 [Range(0, 1)][SerializeField] protected float knockBackDirMapK = 0.5f;
                 [SerializeField] protected float knockBackDuration = 0.07f;
-                [SerializeField] protected bool isKnocked;
+                protected bool isKnocked;
 
                 protected bool isVelocityLockUp = false;
 
@@ -44,6 +45,32 @@ namespace EntitySystem
                     entity.CheckYVelocity += CheckYVelocity;
                     entity.IsGroundedOrPlatForm += IsGroundedOrPlatForm;
                     entity.IsTouchWall += IsTouchWall;
+                    entity.TakeDamage += KnockBack;
+                }
+
+                protected virtual void KnockBack(WReadOnlyDamageData _damage)
+                {
+                    float knockBackFacing = 1;
+                    if (_damage.data.damageSourceTransform.position.x > transform.position.x)
+                    {
+                        knockBackFacing = -1;
+                    }
+                    else if (_damage.data.damageSourceTransform.position.x == transform.position.x)
+                    {
+                        knockBackFacing = -facingDir;
+                    }
+
+                    float damageAmount = _damage.data.physical + _damage.data.magical;
+                    float alpha = 1 - (1 / Mathf.Pow(1 + damageAmount, knockBackDirMapK));
+
+                    SetVelocity(new Vector2(alpha * knockBackDir.x * knockBackFacing, alpha * knockBackDir.y), false, knockBackDuration);
+                }
+                protected virtual IEnumerator HitKnockBack(Transform _damageDirection, float _damageAmount)
+                {
+                    isKnocked = true;
+                    
+                    yield return new WaitForSeconds(knockBackDuration);
+                    isKnocked = false;
                 }
 
                 protected virtual void SetNoGravity(bool _isNoGravity)

@@ -13,6 +13,8 @@ namespace AnimationAndFx
 
         protected override void Awake()
         {
+            base.Awake();
+
             anim = GetComponent<Animator>();
             Assert.IsNotNull(anim, "动画组件需要管理一个Animator组件");
 

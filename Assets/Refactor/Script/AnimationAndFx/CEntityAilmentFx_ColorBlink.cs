@@ -12,6 +12,7 @@ namespace AnimationAndFx
 
         [Header("Ignite")]
         [SerializeField] protected List<Color> igniteColor = new();
+        [Range(0.1f, 1f)][SerializeField] protected float igniteFlashRate = 0.1f;
 
         [Header("Chill")]
         [SerializeField] protected List<Color> chillColor = new();
@@ -36,9 +37,16 @@ namespace AnimationAndFx
 
         protected void ApplyAilment(WReadOnlyDamageData _data)
         {
+            if(_data.data.magical <= 0)
+            {
+                return;
+            }
+
+            Debug.Log("Hit");
             if(_data.data.ignite)
             {
-                StartCoroutine(StartBlink(igniteColor, _data.data.igniteDamageCooldown, _data.data.igniteDuration));
+                Debug.Log("ignite");
+                StartCoroutine(StartBlink(igniteColor, igniteFlashRate, _data.data.igniteDuration));
             }
             else if(_data.data.chill)
             {
@@ -52,15 +60,19 @@ namespace AnimationAndFx
 
         protected IEnumerator StartBlink(List<Color> _colorList, float _cooldown, float _duration)
         {
+            Debug.Log("StartIgnite");
             isBlink = true;
-            ColorBlink(_colorList, _cooldown);
+            StartCoroutine(ColorBlink(_colorList, _cooldown));
             yield return new WaitForSeconds(_duration);
+            sr.color = Color.white;
             isBlink = false;
+            colorIndex = 0;
         }
         protected IEnumerator ColorBlink(List<Color> _colorList, float _cooldown)
         {
             while(isBlink)
             {
+                Debug.Log("igniteUpdate");
                 ++colorIndex;
                 if (colorIndex >= _colorList.Count)
                 {

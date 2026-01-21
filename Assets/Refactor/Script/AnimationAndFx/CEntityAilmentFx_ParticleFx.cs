@@ -20,6 +20,11 @@ namespace AnimationAndFx
 
         protected void ApplyAilment(WReadOnlyDamageData _data)
         {
+            if(_data.data.magical <= 0)
+            {
+                return;
+            }
+
             if (_data.data.ignite)
             {
                 StartCoroutine(ParticleGenerate(igniteParticleFX, _data.data.igniteDuration));

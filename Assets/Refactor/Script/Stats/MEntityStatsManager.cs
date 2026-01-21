@@ -91,6 +91,7 @@ namespace StatsSystem
         protected virtual void Awake()
         {
             damageData = new DDamageData();
+            takeDamageData = new DDamageData();
 
             entity = GetComponentInParent<IStatEntity>();
             Assert.IsNotNull(entity, "数值系统必须附加在一个Entity上");
