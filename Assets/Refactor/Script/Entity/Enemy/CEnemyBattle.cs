@@ -1,6 +1,7 @@
 using EntitySystem.EntityActor;
 using EntitySystem.EntityActor.EnemyActor;
 using EntitySystem.EntityActor.PlayerActor;
+using StatsData;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;

@@ -2,6 +2,7 @@ using EntitySystem.EntityActor.PlayerActor;
 using EntitySystem.EntityComponent.BattleComponent;
 using EntitySystem.EntityComponent.MovementComponent;
 using EntitySystem.EntityComponent.StateMachineComponent;
+using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;

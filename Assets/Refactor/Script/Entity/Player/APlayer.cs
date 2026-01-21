@@ -3,6 +3,7 @@ using EntitySystem.EntityActor.PlayerActor;
 using EntitySystem.EntityComponent.BattleComponent;
 using EntitySystem.EntityComponent.MovementComponent;
 using EntitySystem.EntityComponent.StateMachineComponent;
+using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +42,13 @@ namespace EntitySystem
 
             }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer
+            public interface IInventoryPlayer
+            {
+                public void AddModifier(WReadOnlyStatsData _data);
+                public void RemoveModifier(WReadOnlyStatsData _data);
+            }
+
+            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer
             {
                 protected IPlayerInput input;
 
@@ -115,6 +122,17 @@ namespace EntitySystem
                 }
                 #endregion
 
+                #region Inventory
+                void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
+                {
+                    InvokeAction(AddModifier, _data);                 
+                }
+                void IInventoryPlayer.RemoveModifier(WReadOnlyStatsData _data)
+                {
+                    InvokeAction(RemoveModifier, _data);
+                }
+                #endregion
+
                 protected override void Awake()
                 {
                     base.Awake();
@@ -132,6 +150,8 @@ namespace EntitySystem
 
                     CheckHorizonInput += input.CheckHorizonInput;
                     CheckVerticalInput += input.CheckVerticalInput;
+
+
                 }
                 override protected void ComponentValidCheck()
                 {

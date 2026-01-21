@@ -1,4 +1,5 @@
 using EntitySystem.EntityActor;
+using StatsData;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -6,35 +7,7 @@ using UnityEngine.Assertions;
 
 namespace StatsSystem
 {
-    public enum EStatType
-    {
-        MaxHealth,
-        Armor,
-        Evasion,
-        MagicResistance,
-        Damage,
-        CritChance,
-        CritPower,
-        AttackSpeed,
-        FireDamage,
-        IceDamage,
-        LightningDamage,
-        FireDuration,
-        IceDuration,
-        LightningDuration,
-        FireDamageCooldown,
-        FireDamageTransform,
-        ChillArmorReduce,
-        ChillSlowRate,
-        ShockAccuracyReduce,
-        ThunderStrikeCount,
-        ThunderStrikeRate,
-        ThunderStrikeRadius,
-        MaxFlaskUsageTime,
-        FlaskUsageRecover
-    }
-
-    internal class MEntityStatsManager : MonoBehaviour, IEntityStats
+    internal class MEntityStatsManager : ComponentManagerBase, IEntityStats
     {
         protected DDamageData damageData;
         protected DDamageData takeDamageData;
@@ -44,6 +17,8 @@ namespace StatsSystem
         public Action<DDamageData> CalculatePrimaryAttackData;
         public Action<WReadOnlyDamageData> TakeDamageStatsEffect;
         public Action<WReadOnlyDamageData, DDamageData> CalculateFinalDamage;
+        public Action<WReadOnlyStatsData> AddModifier;
+        public Action<WReadOnlyStatsData> RemoveModifier;
         #endregion
 
         #region Func
@@ -51,34 +26,7 @@ namespace StatsSystem
         public Func<EStatType, float> CheckOffensiveStat;
         public Func<EStatType, float> CheckDefensiveStat;
         public Func<EStatType, float> CheckMagicStat;
-        #endregion
-
-        #region ActionAndFuncInvokeHelper
-        public void InvokeAction(Action _action)
-        {
-            _action?.Invoke();
-        }
-        public void InvokeAction<T>(Action<T> _action, T _arg)
-        {
-            _action?.Invoke(_arg);
-        }
-        public void InvokeAction<T1, T2>(Action<T1, T2> _action, T1 _arg1, T2 _arg2)
-        {
-            _action?.Invoke(_arg1, _arg2);
-        }
-        public T InvokeFunc<T>(Func<T> _func)
-        {
-            Assert.IsNotNull(_func, GetType().Name + "的服务缺少提供者");
-            Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
-            return _func.Invoke();
-        }
-        public T2 InvokeFunc<T1, T2>(Func<T1, T2> _func, T1 _arg)
-        {
-            Assert.IsNotNull(_func, GetType().Name + "的服务缺少提供者");
-            Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
-            return _func.Invoke(_arg);
-        }
-        #endregion
+        #endregion       
 
         #region RunTimeStats
         protected float currentHealth;
@@ -219,6 +167,16 @@ namespace StatsSystem
             yield return new WaitForSeconds(_damageData.data.shockDuration);
             accuracy += _damageData.data.shockReduceAccuracy;
             isShock = false;
+        }
+
+        void IEntityStats.AddStatModifier(WReadOnlyStatsData _data)
+        {
+            InvokeAction(AddModifier, _data);
+        }
+
+        void IEntityStats.RemoveStatModifier(WReadOnlyStatsData _data)
+        {
+            InvokeAction(RemoveModifier, _data);
         }
     }
 }

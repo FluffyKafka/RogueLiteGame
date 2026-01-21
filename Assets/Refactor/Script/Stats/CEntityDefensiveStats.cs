@@ -1,4 +1,5 @@
 using EntitySystem.EntityActor;
+using StatsData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace StatsSystem
             base.Awake();
             statsManager.CalculateFinalDamage += CalculateFinalDamage;
             statsManager.CheckDefensiveStat += CheckStats;
+            statsManager.AddModifier += AddModifier;
+            statsManager.RemoveModifier += RemoveModifier;
         }
 
         public virtual void CalculateFinalDamage(WReadOnlyDamageData _damageData, DDamageData _takeDamageData)
@@ -89,6 +92,52 @@ namespace StatsSystem
                 case EStatType.Evasion: return evasion.GetValue();
                 case EStatType.MagicResistance: return magicResistance.GetValue();
                 default: Assert.IsTrue(false, _type.ToString() + "不是防御型数值"); return 0;
+            }
+        }
+
+        protected void AddModifier(WReadOnlyStatsData _data)
+        {
+            if(_data.data.maxHealth > 0)
+            {
+                maxHealth.AddAdder(_data.data.maxHealth);
+            }
+
+            if(_data.data.armor > 0)
+            {
+                armor.AddAdder(_data.data.armor);
+            }
+
+            if(_data.data.evasion > 0)
+            {
+                evasion.AddAdder(_data.data.evasion);
+            }
+
+            if(_data.data.magicResistance > 0)
+            {
+                magicResistance.AddAdder(_data.data.magicResistance);
+            }
+        }
+
+        protected void RemoveModifier(WReadOnlyStatsData _data)
+        {
+            if (_data.data.maxHealth > 0)
+            {
+                maxHealth.RemoveAdder(_data.data.maxHealth);
+            }
+
+            if (_data.data.armor > 0)
+            {
+                armor.RemoveAdder(_data.data.armor);
+            }
+
+            if (_data.data.evasion > 0)
+            {
+                evasion.RemoveAdder(_data.data.evasion);
+            }
+
+            if (_data.data.magicResistance > 0)
+            {
+                magicResistance.RemoveAdder(_data.data.magicResistance);
             }
         }
     }

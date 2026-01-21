@@ -1,6 +1,7 @@
 using EntitySystem.EntityComponent.BattleComponent;
 using EntitySystem.EntityComponent.MovementComponent;
 using EntitySystem.EntityComponent.StateMachineComponent;
+using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace EntitySystem
             public void SlowEntityByDuring(float _rate, float _duration);
         }
 
-        internal abstract class AEntity : MonoBehaviour, IAnimEntity, IStatEntity
+        internal abstract class AEntity : ComponentManagerBase, IAnimEntity, IStatEntity
         {
             #region Actions
             public Action<EntitySpeedSetData> SetEntitySpeed;
@@ -63,6 +64,9 @@ namespace EntitySystem
             public Action RecoverEntitySpeed;
 
             public Action<WReadOnlyDamageData> TakeDamage;
+
+            public Action<WReadOnlyStatsData> AddModifier;
+            public Action<WReadOnlyStatsData> RemoveModifier;
             #endregion
 
             #region Func
@@ -81,29 +85,6 @@ namespace EntitySystem
 
             public Func<WReadOnlyDamageData> GetPrimaryAttackDamage;
             public Func<WReadOnlyDamageData, WReadOnlyDamageData> CalculateDamageTaken;
-            #endregion
-
-            #region ActionAndFuncInvokeHelper
-            public void InvokeAction(Action _action)
-            {
-                _action?.Invoke();
-            }
-            public void InvokeAction<T>(Action<T> _action, T _arg)
-            {
-                _action?.Invoke(_arg);
-            }
-            public T InvokeFunc<T>(Func<T> _func)
-            {
-                Assert.IsNotNull(_func, GetType().Name + "的服务"+ _func.ToString() +"缺少提供者");
-                Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
-                return _func.Invoke();
-            }
-            public T2 InvokeFunc<T1, T2>(Func<T1, T2> _func, T1 _arg)
-            {
-                Assert.IsNotNull(_func, GetType().Name + "的服务" + _func.ToString() + "缺少提供者");
-                Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
-                return _func.Invoke(_arg);
-            }
             #endregion
 
             #region Animation
@@ -178,6 +159,8 @@ namespace EntitySystem
                 GetPrimaryAttackDamage += stats.GetPrimaryAttackData;
                 CalculateDamageTaken += stats.CalculateDamageTaken;
                 TakeDamage += stats.TakeDamage;
+                AddModifier += stats.AddStatModifier;
+                RemoveModifier += stats.RemoveStatModifier;
 
                 Die += EntityDie;
 
@@ -200,36 +183,15 @@ namespace EntitySystem
             public abstract WReadOnlyDamageData GetPrimaryAttackData();
             public abstract WReadOnlyDamageData CalculateDamageTaken(WReadOnlyDamageData _damageData);
             public abstract void TakeDamage(WReadOnlyDamageData _damage);
-        }
-        public class DDamageData
-        {
-            public Transform damageSourceTransform = null;
-            public bool shouldPlayAnim = true;
-            public float physical = 0;
-            public bool isCrit = false;
-            public float magical = 0;
-            public bool ignite = false;
-            public float igniteDamageCooldown = float.PositiveInfinity;
-            public float igniteDuration = 0f;
-            public float igniteDamage = 0f;
-            public bool chill = false;
-            public float chillSlowPercentage = 0f;
-            public float chillDuration = 0f;
-            public float chillReduceArmorPer = 0f;
-            public bool shock = false;
-            public float shockDuration = 0f;
-            public float thunderStrikeRadius = 0f;
-            public float thunderStrikeRate = 0f;
-            public int thunderStrikeCounter = 0;
-            public float shockReduceAccuracy = 0f;
-        }
-        public struct WReadOnlyDamageData
-        {
-            public readonly DDamageData data;
-            public WReadOnlyDamageData(DDamageData _damageData)
-            {
-                data = _damageData;
-            }
+
+            //装备修改流程：
+            //UI传入装备修改信号
+            //Player（entity）收到信号转发出装备修改信号（只有Player有装备）
+            //Inventory收到信号修改装备并向Player发出数值修改信号
+            //Entity收到信号再度广播
+            //Stats收到信号并修改属性
+            public abstract void AddStatModifier(WReadOnlyStatsData _data);
+            public abstract void RemoveStatModifier(WReadOnlyStatsData _data);
         }
     }
 

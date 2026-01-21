@@ -1,5 +1,6 @@
 using EntitySystem.EntityActor;
 using EntitySystem.EntityActor.PlayerActor;
+using StatsData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
