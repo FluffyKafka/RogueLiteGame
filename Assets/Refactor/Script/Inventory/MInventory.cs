@@ -83,7 +83,6 @@ namespace InventorySystem
         }
         #endregion
 
-        //尝试尽可能将逻辑分离到各个组件
         #region Player
         void IPlayerInventory.Equip(IEquipment _newEquip)
         {
@@ -126,7 +125,7 @@ namespace InventorySystem
             {
                 InvokeAction(RemoveFromMaterialStash, _data);
             }
-            StashFull(_data);
+            DropItem(_data);
         }
 
         public bool TryCraft(IEquipmentData _data)
@@ -182,6 +181,11 @@ namespace InventorySystem
         protected void StashFull(IItem _data)
         {
             //生成提示
+
+            DropItem(_data);
+        }
+        protected void DropItem(IItem _data)
+        {
             //生成一个掉落物
         }
         #endregion

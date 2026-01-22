@@ -19,7 +19,7 @@ namespace EntitySystem
         {
             public interface IInitPlayer
             {
-                public void Init(IPlayerInput _inputSource);
+                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory);
             }
 
             public interface IInputPlayer
@@ -52,6 +52,7 @@ namespace EntitySystem
             internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer
             {
                 protected IPlayerInput input;
+                protected IPlayerInventory inventory;
 
                 #region Action
                 public Action<float> HorizonInput;
@@ -81,9 +82,10 @@ namespace EntitySystem
                 #endregion
 
                 #region Init
-                void IInitPlayer.Init(IPlayerInput _inputSource)
+                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory)
                 {
                     input = _inputSource;
+                    inventory = _inventory;
                 }
                 #endregion
 

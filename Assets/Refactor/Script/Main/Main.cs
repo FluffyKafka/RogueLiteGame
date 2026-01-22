@@ -20,9 +20,9 @@ namespace Main
         private void Awake()
         {
             inputManager.GetComponent<IInitInputManager>().Init(player.GetComponent<IInputPlayer>());
-            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>());
+            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>(), inventory.GetComponent<IPlayerInventory>());
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(player.GetComponent<IEnemyPlayer>());
-            inventory.GetComponent<IInitInventory>().Init(equipmentFactory.GetComponent<IEquipmentFactory>(), player.GetComponent<IInventoryPlayer>()); ;
+            inventory.GetComponent<IInitInventory>().Init(equipmentFactory.GetComponent<IEquipmentFactory>(), player.GetComponent<IInventoryPlayer>());
         }
     }
 }
