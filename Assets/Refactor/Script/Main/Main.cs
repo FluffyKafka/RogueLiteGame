@@ -5,6 +5,7 @@ using InventorySystem;
 using Item;
 using System.Collections;
 using System.Collections.Generic;
+using UISystem;
 using UnityEngine;
 
 namespace Main
@@ -16,13 +17,15 @@ namespace Main
         [SerializeField] protected GameObject enemyFactory;
         [SerializeField] protected GameObject equipmentFactory;
         [SerializeField] protected GameObject inventory;
+        [SerializeField] protected GameObject ui;
 
         private void Awake()
         {
             inputManager.GetComponent<IInitInputManager>().Init(player.GetComponent<IInputPlayer>());
-            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>(), inventory.GetComponent<IPlayerInventory>());
+            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>(), inventory.GetComponent<IPlayerInventory>(), ui.GetComponent<IPlayerUI>());
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(player.GetComponent<IEnemyPlayer>());
             inventory.GetComponent<IInitInventory>().Init(equipmentFactory.GetComponent<IEquipmentFactory>(), player.GetComponent<IInventoryPlayer>());
+            ui.GetComponent<IInitUI>().Init(player.GetComponent<IUIPlayer>());
         }
     }
 }

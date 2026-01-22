@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using static UnityEditor.Progress;
 
 namespace EntitySystem
 {
@@ -19,7 +20,7 @@ namespace EntitySystem
         {
             public interface IInitPlayer
             {
-                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory);
+                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui);
             }
 
             public interface IInputPlayer
@@ -47,14 +48,30 @@ namespace EntitySystem
             {
                 public void AddModifier(WReadOnlyStatsData _data);
                 public void RemoveModifier(WReadOnlyStatsData _data);
+                public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack);
+                public void StashFullNotice(IItem _itemToFull);
             }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer
+            public interface IUIPlayer
+            {
+                public bool TryCraft(IEquipmentData _data);
+                public void Equip(IEquipment _equip);
+                public void UnEquip(IEquipment _Equip);
+                public void DropItem(IItem _item);
+                public IEquipment CheckEquipmentByType(EEquipmentType _type);
+                public IReadOnlyList<IEquipment> CheckEquipmentStash();
+                public IReadOnlyList<IItem> CheckMaterialStash();
+                public int CheckEquipmentStashMaxSize();
+                public int CheckMaterialStashMaxSize();
+            }
+
+            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer
             {
                 protected IPlayerInput input;
                 protected IPlayerInventory inventory;
+                protected IPlayerUI ui;
 
-                #region Action
+                #region Internal Action
                 public Action<float> HorizonInput;
                 public Action<float> VerticalInput;
                 public Action JumpInput;
@@ -74,7 +91,7 @@ namespace EntitySystem
                 public Action ToWallSlide;
                 #endregion
 
-                #region Func
+                #region Internal Func
                 public Func<bool> IsGroundedOrPlatform_Strict;//确保只有当Player接触地面时才返回true
                 public Func<float> CheckHorizonInput;
                 public Func<float> CheckVerticalInput;
@@ -82,10 +99,11 @@ namespace EntitySystem
                 #endregion
 
                 #region Init
-                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory)
+                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui)
                 {
                     input = _inputSource;
                     inventory = _inventory;
+                    ui = _ui;
                 }
                 #endregion
 
@@ -126,6 +144,9 @@ namespace EntitySystem
                 #endregion
 
                 #region Inventory
+
+                public Action<IReadOnlyList<IItem>> CraftFailNotice_LackMaterial;
+                public Action<IItem> StashFullNotice;
                 void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
                 {
                     InvokeAction(AddModifier, _data);                 
@@ -133,6 +154,62 @@ namespace EntitySystem
                 void IInventoryPlayer.RemoveModifier(WReadOnlyStatsData _data)
                 {
                     InvokeAction(RemoveModifier, _data);
+                }
+                void IInventoryPlayer.CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack)
+                {
+                    InvokeAction(CraftFailNotice_LackMaterial, _lack);
+                }
+                void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
+                {
+                    InvokeAction(StashFullNotice, _itemToFull);
+                }
+                #endregion
+
+                //暂时直接转发，若有需要再引入事件机制
+                #region UI
+                bool IUIPlayer.TryCraft(IEquipmentData _data)
+                {
+                    return inventory.TryCraft(_data);
+                }
+
+                void IUIPlayer.Equip(IEquipment _equip)
+                {
+                    inventory.Equip(_equip);
+                }
+
+                void IUIPlayer.UnEquip(IEquipment _equip)
+                {
+                    inventory.Equip(_equip);
+                }
+
+                void IUIPlayer.DropItem(IItem _item)
+                {
+                    inventory.DropFromStash(_item);
+                }
+
+                IEquipment IUIPlayer.CheckEquipmentByType(EEquipmentType _type)
+                {
+                    return inventory.CheckEquipmentByType(_type);
+                }
+
+                IReadOnlyList<IEquipment> IUIPlayer.CheckEquipmentStash()
+                {
+                    return inventory.CheckEquipmentStash();
+                }
+
+                IReadOnlyList<IItem> IUIPlayer.CheckMaterialStash()
+                {
+                    return inventory.CheckMaterialStash();
+                }
+
+                int IUIPlayer.CheckEquipmentStashMaxSize()
+                {
+                    return inventory.CheckEquipmentStashMaxSize();
+                }
+
+                int IUIPlayer.CheckMaterialStashMaxSize()
+                {
+                    return inventory.CheckMaterialStashMaxSize();
                 }
                 #endregion
 
@@ -154,7 +231,9 @@ namespace EntitySystem
                     CheckHorizonInput += input.CheckHorizonInput;
                     CheckVerticalInput += input.CheckVerticalInput;
 
-
+                    //UI
+                    CraftFailNotice_LackMaterial += ui.CraftFailNotice_LackMaterial;
+                    StashFullNotice += ui.StashFullNotice;
                 }
                 override protected void ComponentValidCheck()
                 {
@@ -194,14 +273,24 @@ namespace EntitySystem
             {
                 public void Equip(IEquipment _newEquip);
                 public void UnEquip(IEquipment _equip);
-                public IEquipment CheckEquipment(EEquipmentType _type);
+                public IEquipment CheckEquipmentByType(EEquipmentType _type);
                 public IReadOnlyList<IEquipment> CheckEquipmentStash();
-                public int CheckEquipmentStashSize();
+                public int CheckEquipmentStashMaxSize();
                 public IReadOnlyList<IItem> CheckMaterialStash();
-                public int CheckMaterialStashSize();
+                public int CheckMaterialStashMaxSize();
                 public void DropFromStash(IItem _data);
                 public bool TryCraft(IEquipmentData _data);
                 public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
+            }
+
+            public interface IPlayerUI
+            {
+                public void StatsChangeNotice(DStatsData _data);
+                public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
+                public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
+                public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
+                public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack);
+                public void StashFullNotice(IItem _itemToFull);
             }
         }        
     }

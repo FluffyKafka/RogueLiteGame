@@ -101,7 +101,7 @@ namespace InventorySystem
             UnEquipEquipment(oldEquipment);
         }
 
-        IEquipment IPlayerInventory.CheckEquipment(EEquipmentType _type)
+        IEquipment IPlayerInventory.CheckEquipmentByType(EEquipmentType _type)
         {
             return InvokeFunc(CheckEquipment, _type);
         }
@@ -128,7 +128,7 @@ namespace InventorySystem
             DropItem(_data);
         }
 
-        public bool TryCraft(IEquipmentData _data)
+        bool IPlayerInventory.TryCraft(IEquipmentData _data)
         {
             IReadOnlyList<IEquipmentData> equipmentLack = InvokeFunc(CheckCraft_EquipLack, _data);
             IReadOnlyList<IItemData> materialLack = InvokeFunc(CheckCraft_MaterialLack, _data);
@@ -149,11 +149,11 @@ namespace InventorySystem
             }
         }
 
-        int IPlayerInventory.CheckEquipmentStashSize()
+        int IPlayerInventory.CheckEquipmentStashMaxSize()
         {
             return InvokeFunc(CheckEquipmentStashMaxSize);
         }
-        public int CheckMaterialStashSize()
+        int IPlayerInventory.CheckMaterialStashMaxSize()
         {
             return InvokeFunc(CheckMaterialStashMaxSize);
         }
