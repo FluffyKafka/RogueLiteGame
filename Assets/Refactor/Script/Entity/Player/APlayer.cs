@@ -3,6 +3,7 @@ using EntitySystem.EntityActor.PlayerActor;
 using EntitySystem.EntityComponent.BattleComponent;
 using EntitySystem.EntityComponent.MovementComponent;
 using EntitySystem.EntityComponent.StateMachineComponent;
+using Item;
 using StatsData;
 using System;
 using System.Collections;
@@ -185,6 +186,20 @@ namespace EntitySystem
                 public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
 
                 public void StunCheck();
+            }
+
+            public interface IPlayerInventory
+            {
+                public void Equip(IEquipment _newEquip);
+                public void UnEquip(IEquipment _equip);
+                public IEquipment CheckEquipment(EEquipmentType _type);
+                public IReadOnlyList<IEquipment> CheckEquipmentStash();
+                public int CheckEquipmentStashSize();
+                public IReadOnlyList<IItem> CheckMaterialStash();
+                public int CheckMaterialStashSize();
+                public void DropFromStash(IItem _data);
+                public bool TryCraft(IEquipmentData _data);
+                public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
             }
         }        
     }

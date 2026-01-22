@@ -19,7 +19,7 @@ namespace Item
         public Sprite CheckIcon();
         public string CheckItemName();
         public EItemType CheckItemType();
-        public IReadOnlyCollection<IItemData> CheckCraftingMaterials();
+        public IReadOnlyList<IItemData> CheckCraftingMaterials();
         public string CheckDescription();
         public int CheckPrice();
     }
@@ -41,7 +41,7 @@ namespace Item
             return itemId;
         }
 
-        IReadOnlyCollection<IItemData> IItemData.CheckCraftingMaterials()
+        IReadOnlyList<IItemData> IItemData.CheckCraftingMaterials()
         {
             return craftingMaterials.AsReadOnly();
         }
