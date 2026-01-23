@@ -20,7 +20,7 @@ namespace Item
         public WReadOnlyStatsData CheckStatsModifierData();
         public void ExcuteItemEffect(DEffectExcuteData _target);
         public float CheckCooldown();
-        public string GetEffectText();
+        public string CheckEffectText();
     }
 
 
@@ -55,7 +55,7 @@ namespace Item
         {
             return cooldown;
         }
-        public string GetEffectText()
+        public string CheckEffectText()
         {
             sb.Clear();
             if (cooldown > 0)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    public class CMagicalStatsUI : MonoBehaviour
+    internal class CUIDescriptionDatabase : MonoBehaviour
     {
 
     }

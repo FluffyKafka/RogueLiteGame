@@ -285,7 +285,7 @@ namespace EntitySystem
 
             public interface IPlayerUI
             {
-                public void StatsChangeNotice(DStatsData _data);
+                public void StatsChangeNotice(WReadOnlyStatsData _data);
                 public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
                 public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
                 public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    public class CCraftUI : MonoBehaviour
+    internal class CCraftUI : CUIComponentBase
     {
 
     }

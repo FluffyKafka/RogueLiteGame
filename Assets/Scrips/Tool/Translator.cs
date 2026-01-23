@@ -12,10 +12,11 @@ public class TranslatePair
 public class Translator : MonoBehaviour
 {
     public static Translator instance;
-    [SerializeField] private List<TranslatePair> translateInfo;
-    Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
-    private void Awake()
+    [SerializeField] protected List<TranslatePair> translateInfo = new();
+    Dictionary<string, string> dictionary = new();
+
+    protected void Awake()
     {
         if (instance == null)
         {
@@ -30,6 +31,15 @@ public class Translator : MonoBehaviour
         {
             dictionary.Add(pair.from, pair.to);
         }
+    }
+
+    protected void Start()
+    {
+        
+    }
+    protected void AddEnumTranslateSlot()
+    {
+
     }
 
     public string Translate(string _eng)
