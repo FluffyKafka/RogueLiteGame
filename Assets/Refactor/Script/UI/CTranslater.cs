@@ -1,3 +1,6 @@
+using Item;
+using StatsData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -5,23 +8,42 @@ using UnityEngine;
 
 namespace UISystem
 {
-    internal class DTranslateSlot
-    {
-        public string origin;
-        public string target;
-    }
-
     internal class CTranslater : CUIComponentBase
     {
-        [SerializeField] protected List<DTranslateSlot> translateInfo;
-        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        [Serializable]
+        protected class DTranslateStatsTypeSlot
+        {
+            public EStatType origin;
+            public string target;
+        }
+
+        [Serializable]
+        protected class DTranslateEquipmentTypeSlot
+        {
+            public EEquipmentType origin;
+            public string target;
+        }
+
+        [SerializeField] protected List<DTranslateStatsTypeSlot> statsTypeTranslateInfo;
+        [SerializeField] protected List<DTranslateEquipmentTypeSlot> equipmentTypeTanslateInfo;
+        protected Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        protected bool isInit = false;
 
         protected override void OnEnable()
         {
-            foreach (DTranslateSlot pair in translateInfo)
+            if(!isInit)
             {
-                dictionary.Add(pair.origin, pair.target);
+                foreach (var pair in statsTypeTranslateInfo)
+                {
+                    dictionary.Add(pair.origin.ToString(), pair.target);
+                }
+                foreach (var pair in equipmentTypeTanslateInfo)
+                {
+                    dictionary.Add(pair.origin.ToString(), pair.target);
+                }
+                isInit = true;
             }
+            
 
             ui.Translate += Translate;
         }

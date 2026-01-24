@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace UISystem
 {
-    internal class SLStatSlot : MonoBehaviour
+    internal class SLStatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         protected MUIManager ui;
 
@@ -33,6 +34,16 @@ namespace UISystem
         public EStatType CheckType()
         {
             return type;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            ui.InvokeAction(ui.ShowStatsDetail, type);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            ui.InvokeAction(ui.HideTooltip);
         }
     }
 }

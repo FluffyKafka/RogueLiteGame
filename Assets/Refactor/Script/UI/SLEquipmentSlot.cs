@@ -63,11 +63,11 @@ namespace UISystem
             }
             if (_eventData.button == PointerEventData.InputButton.Left)
             {
-                //使用物品逻辑（脱装备）
+                ui.InvokeAction(ui.UnEquip, equipment);
             }
             else if (_eventData.button == PointerEventData.InputButton.Right)
             {
-                //丢弃物品逻辑
+                ui.InvokeAction(ui.dropItem, equipment);
             }
         }
 
@@ -77,12 +77,12 @@ namespace UISystem
             {
                 return;
             }
-            //显示物品详情逻辑
+            ui.InvokeAction(ui.ShowEquipmentDetail, equipment.CheckEquipmentData());
         }
 
         public void OnPointerExit(PointerEventData _eventData)
         {
-            //取消显示物品详情逻辑
+            ui.InvokeAction(ui.HideTooltip);
         }
     }
 }

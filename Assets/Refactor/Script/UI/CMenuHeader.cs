@@ -13,16 +13,20 @@ namespace UISystem
         [SerializeField] protected Button toSkill;
         [SerializeField] protected Button toMap;
         [SerializeField] protected Button toOption;
+        protected bool isInit = false;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            toCharactor.onClick.AddListener(() => ChangePageTo(EUIPageType.Charactor));
-            toCraft.onClick.AddListener(() => ChangePageTo(EUIPageType.Craft));
-            toSkill.onClick.AddListener(() => ChangePageTo(EUIPageType.Skill));
-            toMap.onClick.AddListener(() => ChangePageTo(EUIPageType.Map));
-            toOption.onClick.AddListener(() => ChangePageTo(EUIPageType.Option));
+            if(!isInit)
+            {
+                toCharactor.onClick.AddListener(() => ChangePageTo(EUIPageType.Charactor));
+                toCraft.onClick.AddListener(() => ChangePageTo(EUIPageType.Craft));
+                toSkill.onClick.AddListener(() => ChangePageTo(EUIPageType.Skill));
+                toMap.onClick.AddListener(() => ChangePageTo(EUIPageType.Map));
+                toOption.onClick.AddListener(() => ChangePageTo(EUIPageType.Option));
+            }
         }
 
         protected void ChangePageTo(EUIPageType _type)

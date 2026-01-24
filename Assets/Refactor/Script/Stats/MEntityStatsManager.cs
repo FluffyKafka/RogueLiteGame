@@ -43,7 +43,7 @@ namespace StatsSystem
 
             entity = GetComponentInParent<IStatEntity>();
             Assert.IsNotNull(entity, "数值系统必须附加在一个Entity上");
-            CanEnyityBeDamage += entity.CanBeDamage;          
+            CanEnyityBeDamage += entity.CanBeDamage;  
         }
 
         protected virtual void Start()

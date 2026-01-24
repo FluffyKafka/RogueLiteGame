@@ -44,6 +44,10 @@ namespace EntitySystem
 
             }
 
+            //Inventory似乎不应该使用这两个接口：
+            //public void AddModifier(WReadOnlyStatsData _data);
+            //public void RemoveModifier(WReadOnlyStatsData _data);
+            //考虑改名和改变参数类型
             public interface IInventoryPlayer
             {
                 public void AddModifier(WReadOnlyStatsData _data);
@@ -65,7 +69,12 @@ namespace EntitySystem
                 public int CheckMaterialStashMaxSize();
             }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer
+            public interface IStatsPlayer : IStatEntity
+            {
+                public void StatsChangeNotice(WReadOnlyStatsData _data);
+            }
+
+            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer
             {
                 protected IPlayerInput input;
                 protected IPlayerInventory inventory;
@@ -162,6 +171,14 @@ namespace EntitySystem
                 void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
                 {
                     InvokeAction(StashFullNotice, _itemToFull);
+                }
+                #endregion
+
+                //暂时直接转发，若有需要再引入事件机制
+                #region Stats
+                void IStatsPlayer.StatsChangeNotice(WReadOnlyStatsData _data)
+                {
+                    ui.StatsChangeNotice(_data);
                 }
                 #endregion
 

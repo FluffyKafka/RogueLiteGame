@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    internal class SLMaterialStashSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    internal class SLMaterialStashSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         protected Image itemImage;
         protected IItem material = null;
@@ -47,18 +47,30 @@ namespace UISystem
             return material == null;
         }
 
+        public virtual void OnPointerDown(PointerEventData _eventData)
+        {
+            if (material == null)
+            {
+                return;
+            }
+            if (_eventData.button == PointerEventData.InputButton.Right)
+            {
+                ui.InvokeAction(ui.dropItem, material);
+            }
+        }
+
         public void OnPointerEnter(PointerEventData _eventData)
         {
             if (material == null)
             {
                 return;
             }
-            //显示物品详情逻辑
+            ui.InvokeAction(ui.ShowMaterialDetail, material.CheckData());
         }
 
         public void OnPointerExit(PointerEventData _eventData)
         {
-            //取消显示物品详情逻辑
+            ui.InvokeAction(ui.HideTooltip);
         }
     }
 }
