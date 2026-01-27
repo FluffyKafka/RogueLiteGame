@@ -52,13 +52,12 @@ namespace EntitySystem
             {
                 public void AddModifier(WReadOnlyStatsData _data);
                 public void RemoveModifier(WReadOnlyStatsData _data);
-                public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack);
                 public void StashFullNotice(IItem _itemToFull);
             }
 
             public interface IUIPlayer
             {
-                public bool TryCraft(IEquipmentData _data);
+                public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
                 public void Equip(IEquipment _equip);
                 public void UnEquip(IEquipment _Equip);
                 public void DropItem(IItem _item);
@@ -67,6 +66,7 @@ namespace EntitySystem
                 public IReadOnlyList<IItem> CheckMaterialStash();
                 public int CheckEquipmentStashMaxSize();
                 public int CheckMaterialStashMaxSize();
+                public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
             }
 
             public interface IStatsPlayer : IStatEntity
@@ -164,10 +164,6 @@ namespace EntitySystem
                 {
                     InvokeAction(RemoveModifier, _data);
                 }
-                void IInventoryPlayer.CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack)
-                {
-                    InvokeAction(CraftFailNotice_LackMaterial, _lack);
-                }
                 void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
                 {
                     InvokeAction(StashFullNotice, _itemToFull);
@@ -184,7 +180,7 @@ namespace EntitySystem
 
                 //暂时直接转发，若有需要再引入事件机制
                 #region UI
-                bool IUIPlayer.TryCraft(IEquipmentData _data)
+                IReadOnlyList<IItemData> IUIPlayer.TryCraft(IEquipmentData _data)
                 {
                     return inventory.TryCraft(_data);
                 }
@@ -227,6 +223,11 @@ namespace EntitySystem
                 int IUIPlayer.CheckMaterialStashMaxSize()
                 {
                     return inventory.CheckMaterialStashMaxSize();
+                }
+
+                IReadOnlyList<IEquipmentData> IUIPlayer.CheckCraftableEquipmentByType(EEquipmentType _type)
+                {
+                    return inventory.CheckCraftableEquipmentByType(_type);
                 }
                 #endregion
 
@@ -296,8 +297,9 @@ namespace EntitySystem
                 public IReadOnlyList<IItem> CheckMaterialStash();
                 public int CheckMaterialStashMaxSize();
                 public void DropFromStash(IItem _data);
-                public bool TryCraft(IEquipmentData _data);
+                public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
                 public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
+                public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
             }
 
             public interface IPlayerUI

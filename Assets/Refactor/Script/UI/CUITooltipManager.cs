@@ -11,6 +11,8 @@ namespace UISystem
         [SerializeField] protected CEquipmentDetailUI equipmentDetailTootip;
         [SerializeField] protected CItemDetailUI materialDetailTooltip;
         [SerializeField] protected CStatsDetailUI statsDetailTooltip;
+        [SerializeField] protected CWarningToolTip warningToolTip;
+        [SerializeField] protected CCraftWindowUI craftWindow;
 
         protected override void OnEnable()
         {
@@ -27,6 +29,15 @@ namespace UISystem
             {
                 ui.ShowStatsDetail += ShowStatTooltip;
             }            
+            if(warningToolTip != null)
+            {
+                ui.ShowWarning += ShowWarning;
+            }
+            if(craftWindow != null)
+            {
+                ui.ShowCraftWindow += ShowCraftWindow;
+            }
+
             ui.HideTooltip += HideTooltip;
         }
 
@@ -50,17 +61,27 @@ namespace UISystem
 
         protected void ShowEquipmentTootip(IEquipmentData _data)
         {
-            equipmentDetailTootip?.ShowToolTip(_data);
+            equipmentDetailTootip?.ShowDetail(_data);
         }
 
         protected void ShowMaterialTooltip(IItemData _data)
         {
-            materialDetailTooltip?.ShowToolTip(_data);
+            materialDetailTooltip?.ShowDetail(_data);
         }
 
         protected void ShowStatTooltip(EStatType _type)
         {
             statsDetailTooltip?.ShowToolTip(_type);
+        }
+
+        protected void ShowWarning(string _text)
+        {
+            warningToolTip.ShowWarning(_text);
+        }
+
+        protected void ShowCraftWindow(IEquipmentData _data)
+        {
+            craftWindow.Setup(_data);
         }
 
         protected void HideTooltip()
@@ -77,6 +98,10 @@ namespace UISystem
             {
                 statsDetailTooltip.HideToolTip();
             }
+            if(warningToolTip != null && warningToolTip.gameObject.activeSelf)
+            {
+                warningToolTip.Hide();
+    }
         }
     }
 }

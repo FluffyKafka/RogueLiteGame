@@ -67,7 +67,7 @@ namespace UISystem
             }
             else if (_eventData.button == PointerEventData.InputButton.Right)
             {
-                ui.InvokeAction(ui.dropItem, equipment);
+                ui.InvokeAction(ui.DropItem, equipment);
             }
         }
 

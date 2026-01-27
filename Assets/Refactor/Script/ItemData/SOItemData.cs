@@ -27,21 +27,22 @@ namespace Item
     [CreateAssetMenu(fileName = "New Material Data", menuName = "Item Data/Material")]
     internal class SOItemData : ScriptableObject, IItemData
     {
-        [SerializeField] protected string itemId;
+        [SerializeField] public string itemId;
 
-        [SerializeField] protected Sprite icon;
-        [SerializeField] protected string itemName;
-        [SerializeField] protected EItemType itemType;
-        [SerializeField] protected List<IItemData> craftingMaterials;
-        [TextArea][SerializeField] protected string description;
-        [SerializeField] protected int price;
+        [SerializeField] public Sprite icon;
+        [SerializeField] public string itemName;
+        [SerializeField] public EItemType itemType;
+        [SerializeField] public List<IItemData> craftingMaterials;
+        [TextArea][SerializeField] public string description;
+        [SerializeField] public int price;
+        [SerializeField] public List<int> craftingMaterialsId;
 
-        string IItemData.ChechItemId()
+        public string ChechItemId()
         {
             return itemId;
         }
 
-        IReadOnlyList<IItemData> IItemData.CheckCraftingMaterials()
+        public IReadOnlyList<IItemData> CheckCraftingMaterials()
         {
             return craftingMaterials.AsReadOnly();
         }
@@ -70,6 +71,8 @@ namespace Item
         {
             return price;
         }
+
+
     }
 }
 

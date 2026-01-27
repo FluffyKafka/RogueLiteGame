@@ -27,13 +27,13 @@ namespace Item
     [CreateAssetMenu(fileName = "New Equipment Data", menuName = "Item Data/Equipment")]
     internal class SOEquipmentData : SOItemData, IEquipmentData
     {
-        [SerializeField] protected EEquipmentType equipmentType;
-        [SerializeField] protected DStatsData statsModifierData;
-        [SerializeField] protected List<SOItemEffect> effects;
-        [SerializeField] protected float cooldown;
-        [SerializeField][TextArea] protected string detail;
+        [SerializeField] public EEquipmentType equipmentType;
+        [SerializeField] public DStatsData statsModifierData;
+        [SerializeField] public List<SOItemEffect> effects;
+        [SerializeField] public float cooldown;
+        [SerializeField][TextArea] public string detail;
 
-        protected StringBuilder sb = new StringBuilder();
+        protected StringBuilder sb = new();
 
         public EEquipmentType CheckEquipmentType()
         {

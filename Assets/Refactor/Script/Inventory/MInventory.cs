@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -12,12 +13,13 @@ namespace InventorySystem
 {
     public interface IInitInventory
     {
-        public abstract void Init(IEquipmentFactory _factory, IInventoryPlayer _player);
+        public abstract void Init(IEquipmentFactory _factory, IInventoryPlayer _player, IItemDataBase _itemDatabase);
     }
 
     internal class MInventory : ComponentManagerBase, IInitInventory, IPlayerInventory
     {
         protected IInventoryPlayer player;
+        protected IItemDataBase itemDataBase;
 
         #region Action 
         public Action<IEquipment> Equip;
@@ -76,10 +78,11 @@ namespace InventorySystem
         }
 
         #region Init
-        void IInitInventory.Init(IEquipmentFactory _factory, IInventoryPlayer _player)
+        void IInitInventory.Init(IEquipmentFactory _factory, IInventoryPlayer _player, IItemDataBase _itemDatabase)
         {
             itemFactory = _factory;
             player = _player;
+            itemDataBase = _itemDatabase;
         }
         #endregion
 
@@ -128,7 +131,7 @@ namespace InventorySystem
             DropItem(_data);
         }
 
-        bool IPlayerInventory.TryCraft(IEquipmentData _data)
+        IReadOnlyList<IItemData> IPlayerInventory.TryCraft(IEquipmentData _data)
         {
             IReadOnlyList<IEquipmentData> equipmentLack = InvokeFunc(CheckCraft_EquipLack, _data);
             IReadOnlyList<IItemData> materialLack = InvokeFunc(CheckCraft_MaterialLack, _data);
@@ -141,11 +144,11 @@ namespace InventorySystem
                 {
                     StashFull(newEquipment);
                 }
-                return true;
+                return null;
             }
             else
             {
-                return false;
+                return equipmentLack.Cast<IItemData>().Concat(materialLack.Cast<IItemData>()).ToList().AsReadOnly();
             }
         }
 
@@ -161,6 +164,18 @@ namespace InventorySystem
         public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data)
         {
             InvokeAction(EffectEquipment, _type, _data);
+        }
+
+        IReadOnlyList<IEquipmentData> IPlayerInventory.CheckCraftableEquipmentByType(EEquipmentType _type)
+        {
+            switch(_type)
+            {
+                case EEquipmentType.Weapon: return itemDataBase.CheckCraftableWeapon();
+                case EEquipmentType.Amulet: return itemDataBase.CheckCraftableAmulet();
+                case EEquipmentType.Armor: return itemDataBase.CheckCraftableArmor();
+                case EEquipmentType.Flask: return itemDataBase.CheckCraftableFlask();
+                default: Assert.IsFalse(true, "未知的装备类型"); return null;
+            }           
         }
         #endregion
 

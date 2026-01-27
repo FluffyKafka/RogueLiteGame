@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Item;
+using StatsData;
+
+
 #if UNITY_EDITOR
 using UnityEditorInternal.Profiling.Memory.Experimental;
 #endif
@@ -29,11 +33,11 @@ public class EquipmentSCOBGenerator : ScriptableObject
             
             if (data.EquipmentType == "Material")
             {
-                ItemData newItem;
-                newItem = AssetDatabase.LoadAssetAtPath<ItemData>(targetFile_Material + "/" + data.ObjectName + ".asset");
+                SOItemData newItem;
+                newItem = AssetDatabase.LoadAssetAtPath<SOItemData>(targetFile_Material + "/" + data.ObjectName + ".asset");
                 if (newItem == null)
                 {
-                    newItem = ScriptableObject.CreateInstance<ItemData>();
+                    newItem = ScriptableObject.CreateInstance<SOItemData>();
                     LoadData_Material(newItem, data);
                     UnityEditor.AssetDatabase.CreateAsset(newItem, targetFile_Material + "/" + data.ObjectName + ".asset");
                 }
@@ -45,11 +49,11 @@ public class EquipmentSCOBGenerator : ScriptableObject
             }
             else
             {
-                ItemData_Equipment newEquipment;
-                newEquipment = AssetDatabase.LoadAssetAtPath<ItemData_Equipment>(targetFile_Equipment + "/" + data.ObjectName + ".asset");
+                SOEquipmentData newEquipment;
+                newEquipment = AssetDatabase.LoadAssetAtPath<SOEquipmentData>(targetFile_Equipment + "/" + data.ObjectName + ".asset");
                 if (newEquipment == null)
                 {
-                    newEquipment = ScriptableObject.CreateInstance<ItemData_Equipment>();
+                    newEquipment = ScriptableObject.CreateInstance<SOEquipmentData>();
                     LoadData_Equipment(newEquipment, data);
                     UnityEditor.AssetDatabase.CreateAsset(newEquipment, targetFile_Equipment + "/" + data.ObjectName + ".asset");
                 }
@@ -64,11 +68,11 @@ public class EquipmentSCOBGenerator : ScriptableObject
 #endif
     }
 
-    private void LoadData_Equipment(ItemData_Equipment _newEquipment, ExcelEquipmentData _data)
+    private void LoadData_Equipment(SOEquipmentData _newEquipment, ExcelEquipmentData _data)
     {
         _newEquipment.itemId = _data.Id;
         _newEquipment.itemName = _data.ItemName;
-        _newEquipment.itemType = ItemType.Equipment;
+        _newEquipment.itemType = EItemType.Equipment;
         _newEquipment.equipmentType = TransTypeFromString(_data.EquipmentType);
 
         _newEquipment.description = _data.Description;
@@ -76,11 +80,7 @@ public class EquipmentSCOBGenerator : ScriptableObject
         _newEquipment.price = (int)_data.Price;
         _newEquipment.cooldown = _data.CoolDown;
 
-        _newEquipment.statsModifierData = new StatsModifierData();
-        _newEquipment.statsModifierData.strength = _data.Strength;
-        _newEquipment.statsModifierData.agility = _data.Agility;
-        _newEquipment.statsModifierData.intelligence = _data.Intelligence;
-        _newEquipment.statsModifierData.vitality = _data.Vitality;
+        _newEquipment.statsModifierData = new DStatsData();
 
         _newEquipment.statsModifierData.maxHealth = _data.MaxHealth;
         _newEquipment.statsModifierData.armor = _data.Armor;
@@ -109,31 +109,31 @@ public class EquipmentSCOBGenerator : ScriptableObject
         _newEquipment.statsModifierData.thunderStrikeCount = _data.ThunderStrikeCount;
         _newEquipment.statsModifierData.thunderStrikeRate = _data.ThunderStrikeRate;
 
-        _newEquipment.craftsId.Clear();
-        _newEquipment.craftsId.Add(_data.Craft_0);
-        _newEquipment.craftsId.Add(_data.Craft_1);
-        _newEquipment.craftsId.Add(_data.Craft_2);
-        _newEquipment.craftsId.Add(_data.Craft_3);
-        _newEquipment.craftsId.Add(_data.Craft_4);
+        _newEquipment.craftingMaterialsId.Clear();
+        _newEquipment.craftingMaterialsId.Add(_data.Craft_0);
+        _newEquipment.craftingMaterialsId.Add(_data.Craft_1);
+        _newEquipment.craftingMaterialsId.Add(_data.Craft_2);
+        _newEquipment.craftingMaterialsId.Add(_data.Craft_3);
+        _newEquipment.craftingMaterialsId.Add(_data.Craft_4);
     }
-    private void LoadData_Material(ItemData _newItem, ExcelEquipmentData _data)
+    private void LoadData_Material(SOItemData _newItem, ExcelEquipmentData _data)
     {
         _newItem.itemId = _data.Id;
         _newItem.itemName = _data.ItemName;
-        _newItem.itemType = ItemType.Material;
+        _newItem.itemType = EItemType.Material;
         _newItem.description = _data.Description;
         _newItem.price = (int)_data.Price;
     }
 
-    private EquipmentType TransTypeFromString(string _type)
+    private EEquipmentType TransTypeFromString(string _type)
     {
         switch(_type)
         {
-            case "Amulet": return EquipmentType.Amulet;
-            case "Weapon": return EquipmentType.Weapon;
-            case "Flask": return EquipmentType.Flask;
-            case "Armor": return EquipmentType.Armor;
-            default: Debug.LogError("Undefine equipment type: " + _type); return EquipmentType.Weapon;
+            case "Amulet": return EEquipmentType.Amulet;
+            case "Weapon": return EEquipmentType.Weapon;
+            case "Flask": return EEquipmentType.Flask;
+            case "Armor": return EEquipmentType.Armor;
+            default: Debug.LogError("Undefine equipment type: " + _type); return EEquipmentType.Weapon;
         }
     }
 }

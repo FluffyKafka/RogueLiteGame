@@ -8,64 +8,52 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    internal class SLMaterialStashSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    internal class SLMaterialStashSlot : CUIComponentBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        protected IItem item = null;
         protected Image itemImage;
-        protected IItem material = null;
-        protected MUIManager ui;
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
             itemImage = GetComponent<Image>();
         }
 
-        public void Init(MUIManager _ui)
+        public virtual void DisplayItem(IItem _item)
         {
-            ui = _ui;
-        }
-
-        public void UpdateSlot(IItem _newEquipment)
-        {
-            material = _newEquipment;
-
-            if (material != null)
+            item = _item;
+            if (item != null)
             {
+                gameObject.SetActive(true);
                 itemImage.color = Color.white;
-                itemImage.sprite = material.CheckData().CheckIcon();
+                itemImage.sprite = item.CheckData().CheckIcon();
             }
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
-            material = null;
             itemImage.sprite = null;
             itemImage.color = Color.clear;
+            item = null;
         }
-
-        public bool IsNull()
-        {
-            return material == null;
-        }
-
         public virtual void OnPointerDown(PointerEventData _eventData)
         {
-            if (material == null)
+            if (item == null)
             {
                 return;
             }
             if (_eventData.button == PointerEventData.InputButton.Right)
             {
-                ui.InvokeAction(ui.dropItem, material);
+                ui.InvokeAction(ui.DropItem, item);
             }
         }
 
         public void OnPointerEnter(PointerEventData _eventData)
         {
-            if (material == null)
+            if (item == null)
             {
                 return;
             }
-            ui.InvokeAction(ui.ShowMaterialDetail, material.CheckData());
+            ui.InvokeAction(ui.ShowMaterialDetail, item.CheckData());
         }
 
         public void OnPointerExit(PointerEventData _eventData)

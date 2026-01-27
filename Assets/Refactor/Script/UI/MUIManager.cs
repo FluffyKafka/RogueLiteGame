@@ -21,7 +21,7 @@ namespace UISystem
         #region Action
         public Action<IEquipment> Equip;
         public Action<IEquipment> UnEquip;
-        public Action<IItem> dropItem;
+        public Action<IItem> DropItem;
         public Action<IReadOnlyList<IEquipment>> EquipmentStashChange;
         public Action<IReadOnlyList<IItem>> MaterialStashChange;
         public Action<WReadOnlyStatsData> StatsUpdate;
@@ -30,6 +30,8 @@ namespace UISystem
         public Action<IEquipmentData> ShowEquipmentDetail;
         public Action<IItemData> ShowMaterialDetail;
         public Action<EStatType> ShowStatsDetail;
+        public Action<IEquipmentData> ShowCraftWindow;
+        public Action<string> ShowWarning;
         public Action HideTooltip;
         #endregion
 
@@ -38,6 +40,8 @@ namespace UISystem
         public Func<int> CheckEquipmentStashMaxSize;
         public Func<string, string> Translate;
         public Func<string, string> CheckKeyWordStatDescription;
+        public Func<IEquipmentData, IReadOnlyList<IItemData>> TryCraft;
+        public Func<EEquipmentType, IReadOnlyList<IEquipmentData>> CheckCraftableEquipmentByType;
         #endregion
 
         #region Pages
@@ -56,17 +60,20 @@ namespace UISystem
             ChangePageTo += ChangePageToByType;
             Equip += player.Equip;
             UnEquip += player.UnEquip;
-            dropItem += player.DropItem;
+            DropItem += player.DropItem;
+            TryCraft += player.TryCraft;
+            CheckCraftableEquipmentByType += player.CheckCraftableEquipmentByType;
         }
 
         protected virtual void OnDisable()
         {
             CheckEquipmentStashMaxSize -= player.CheckEquipmentStashMaxSize;
             CheckMaterialStashMaxSize -= player.CheckMaterialStashMaxSize;
-            ChangePageTo += ChangePageToByType;
+            ChangePageTo -= ChangePageToByType;
             Equip -= player.Equip;
             UnEquip -= player.UnEquip;
-            dropItem -= player.DropItem;
+            DropItem -= player.DropItem;
+            TryCraft -= player.TryCraft;
         }
 
         #region Init

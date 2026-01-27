@@ -35,9 +35,9 @@ namespace UISystem
             }
         }
 
-        public override void ShowToolTip(IItemData _item)
+        public override void ShowDetail(IItemData _item)
         {
-            base.ShowToolTip(_item);
+            base.ShowDetail(_item);
 
             IEquipmentData equip = _item as IEquipmentData;
 

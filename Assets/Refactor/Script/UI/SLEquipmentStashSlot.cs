@@ -8,45 +8,34 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    internal class SLEquipmentStashSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    internal class SLEquipmentStashSlot : CUIComponentBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         protected Image itemImage;
-        protected IEquipment equipment = null;
-        protected MUIManager ui;
+        IEquipment equipment = null;
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
             itemImage = GetComponent<Image>();
         }
 
-        public void Init(MUIManager _ui)
+        public virtual void DisplayItem(IEquipment _equip)
         {
-            ui = _ui;
-        }
-
-        public void UpdateSlot(IEquipment _newEquipment)
-        {
-            equipment = _newEquipment;
-
-            if (equipment != null)
+            equipment = _equip;
+            if (_equip != null)
             {
+                gameObject.SetActive(true);
                 itemImage.color = Color.white;
-                itemImage.sprite = equipment.CheckData().CheckIcon();
+                itemImage.sprite = _equip.CheckEquipmentData().CheckIcon();
             }
         }
 
-        public void Clear()
+        public virtual void Clear()
         {
-            equipment = null;
             itemImage.sprite = null;
             itemImage.color = Color.clear;
+            equipment = null;
         }
-
-        public bool IsNull()
-        {
-            return equipment == null;
-        }
-
+        
         public virtual void OnPointerDown(PointerEventData _eventData)
         {
             if (equipment == null)
@@ -59,7 +48,7 @@ namespace UISystem
             }
             else if (_eventData.button == PointerEventData.InputButton.Right)
             {
-                ui.InvokeAction(ui.dropItem, equipment);
+                ui.InvokeAction(ui.DropItem, equipment);
             }
         }
 
@@ -69,7 +58,7 @@ namespace UISystem
             {
                 return;
             }
-            ui.InvokeAction(ui.ShowEquipmentDetail, equipment.CheckEquipmentData());
+            ui.InvokeAction(ui.ShowEquipmentDetail, (equipment).CheckEquipmentData());
         }
 
         public void OnPointerExit(PointerEventData _eventData)

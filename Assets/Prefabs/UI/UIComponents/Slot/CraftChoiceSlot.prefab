@@ -87,9 +87,9 @@ GameObject:
   - component: {fileID: 3794317743033798458}
   - component: {fileID: 3137487951672470751}
   - component: {fileID: 5341889155693425027}
-  - component: {fileID: 1450274919318954795}
+  - component: {fileID: -2957706811731457967}
   m_Layer: 5
-  m_Name: CraftSlot
+  m_Name: CraftChoiceSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1450274919318954795
+--- !u!114 &-2957706811731457967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d20d1f5044d54e95cbe036b6fc020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pressColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+  pressColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   equipName: {fileID: 1535758837302870796}
 --- !u!1 &5789116191127235114
 GameObject:

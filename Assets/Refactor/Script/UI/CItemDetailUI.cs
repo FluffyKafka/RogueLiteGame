@@ -24,7 +24,7 @@ namespace UISystem
         {
             base.OnDisable();
         }
-        public virtual void ShowToolTip(IItemData _item)
+        public virtual void ShowDetail(IItemData _item)
         {
             if (_item != null)
             {

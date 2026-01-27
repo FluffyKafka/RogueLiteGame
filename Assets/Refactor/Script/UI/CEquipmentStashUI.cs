@@ -29,7 +29,6 @@ namespace UISystem
             for(int i = 0; i < maxEquipmentStashSize; ++i)
             {
                 SLEquipmentStashSlot slot = Instantiate(stashPrefab, slotContainer.transform).GetComponent<SLEquipmentStashSlot>();
-                slot.Init(ui);
                 stash.Add(slot);
             }
         }
@@ -39,7 +38,7 @@ namespace UISystem
             ClearSlots();
             for(int i = 0; i < _stash.Count; ++i)
             {
-                stash[i].UpdateSlot(_stash[i]);
+                stash[i].DisplayItem(_stash[i]);
             }
         }
 
