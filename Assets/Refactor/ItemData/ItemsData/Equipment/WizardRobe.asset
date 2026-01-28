@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: WizardRobe
+  m_EditorClassIdentifier: 
+  itemId: 25
+  icon: {fileID: 21300000, guid: 8f8dab98ae0fd0c4391aeca280979a18, type: 3}
+  itemName: "\u5DEB\u5E08\u6CD5\u888D"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 913b57acf546ce3488a15aefc6f0c447, type: 2}
+  - {fileID: 11400000, guid: 546b3e9571302b240b746758ae7097bc, type: 2}
+  - {fileID: 11400000, guid: a9ed0f20165033b4a97480eeb5345847, type: 2}
+  description: "\u5E1D\u56FD\u7684\u5DEB\u5E08\u5F80\u5F80\u7A7F\u7740\u8FD9\u4EF6\u6545\u5F04\u7384\u865A\u7684\u888D\u5B50"
+  price: 200
+  craftingMaterialsId: 420000002b00000028000000ffffffffffffffff
+  equipmentType: 1
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 2
+    damage: 0
+    critChance: 0
+    critPower: 0
+    attackSpeed: 0
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 1
+    lightningDuration: 1
+    fireDamageCooldown: 0.5
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: 

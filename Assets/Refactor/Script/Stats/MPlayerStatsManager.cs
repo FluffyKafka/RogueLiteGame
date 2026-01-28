@@ -1,4 +1,6 @@
 using EntitySystem.EntityActor.PlayerActor;
+using StatsData;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,19 +12,37 @@ namespace StatsSystem
     {
         protected IStatsPlayer player;
 
+        public Func<EStatType, float> CheckFlaskStat;
+
         protected override void Awake()
         {
             base.Awake();
             player = GetComponentInParent<IStatsPlayer>();
             Assert.IsNotNull(player, "MPlayerStatsManager组件必须附加至一个Player");
-            AddModifier += player.StatsChangeNotice;
-            RemoveModifier += player.StatsChangeNotice;
+
+            AddModifier += (WReadOnlyStatsData _data) => { player.StatsChangeNotice(); };
+            RemoveModifier += (WReadOnlyStatsData _data) => { player.StatsChangeNotice(); };
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            player.StatsChangeNotice();
         }
 
         protected override void ComponentValidCheck()
         {
             base.ComponentValidCheck();
             Assert.IsNotNull(GetComponent<CPlayerFlaskStats>(), "缺少药物数值组件");
+        }
+
+        public override float TryCheckStat(EStatType _type)
+        {
+            float stat = base.TryCheckStat(_type);
+            if (!float.IsNaN(stat)) return stat;
+            stat = InvokeFunc(CheckFlaskStat, _type);
+            if (!float.IsNaN(stat)) return stat;
+            return float.NaN;
         }
     }
 }

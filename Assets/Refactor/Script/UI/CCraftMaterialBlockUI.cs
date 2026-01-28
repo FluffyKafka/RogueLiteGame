@@ -7,10 +7,10 @@ namespace UISystem
 {
     internal class CCraftMaterialBlockUI : CUIComponentBase
     {
-        [SerializeField] protected SLMaterialStashSlot displaySlotPrefab;
+        [SerializeField] protected SLCraftMaterialSlot displaySlotPrefab;
         [SerializeField] protected Transform slotContainer;
 
-        protected List<SLItemDataDisplaySlot> slots = new();
+        protected List<SLCraftMaterialSlot> slots = new();
 
         public void DisplayEquipmentCraftMaterials(IReadOnlyList<IItemData> _data)
         {
@@ -34,7 +34,7 @@ namespace UISystem
         {
             while(slots.Count < _count)
             {
-                slots.Add(Instantiate(displaySlotPrefab, slotContainer).GetComponent<SLItemDataDisplaySlot>());
+                slots.Add(Instantiate(displaySlotPrefab.gameObject, slotContainer).GetComponent<SLCraftMaterialSlot>());
             }
         }
     }

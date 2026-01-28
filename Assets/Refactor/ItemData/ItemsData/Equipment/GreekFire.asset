@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: GreekFire
+  m_EditorClassIdentifier: 
+  itemId: 3
+  icon: {fileID: 21300000, guid: 6ef705566f9e3cc4cb69fab2be825920, type: 3}
+  itemName: "\u5E0C\u814A\u706B"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 45829ac0fefcb7340a9498b5453887d4, type: 2}
+  - {fileID: 11400000, guid: a54743c3429926649a30f2ed9bf0b5bc, type: 2}
+  - {fileID: 11400000, guid: cae3cb33292c07c448869ca81d721876, type: 2}
+  description: "\u201C\u6BCF\u5F53\u654C\u4EBA\u7528\u5E0C\u814A\u706B\u653B\u51FB\u6211\u4EEC\uFF0C\u6240\u505A\u7684\u4E8B\u53EA\u6709\u5C48\u819D\u4E0B\u8DEA\uFF0C\u7948\u6C42\u4E0A\u5929\u7684\u62EF\u6551\u201D"
+  price: 600
+  craftingMaterialsId: 350000002c00000040000000ffffffffffffffff
+  equipmentType: 2
+  statsModifierData:
+    maxHealth: 10
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 0
+    critChance: 0
+    critPower: 0
+    attackSpeed: -5
+    fireDamage: 2
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 1
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: -0.3
+    fireDamageTransform: 10
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 5
+  detail: "\u7A7F\u6234\u8005\u7684\u6280\u80FD\u9020\u6210\u4F24\u5BB3\u540E\uFF0C\u7A7F\u6234\u8005\u8EAB\u540E\u7684\u5730\u9762\u5C06\u88AB\u70B9\u71C32s\u3002\u7AD9\u7ACB\u5176\u4E0A\u7684\u654C\u4EBA\u5C06\u88AB\u6309\u7167\u73A9\u5BB6\u706B\u7130\u4F24\u5BB3\u70B9\u71C3\uFF0C\u6301\u7EED3s"

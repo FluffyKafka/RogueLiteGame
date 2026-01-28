@@ -147,7 +147,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6930289097443599781}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -361,6 +361,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CraftMaterialBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 395540319055995442, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 395540319055995442, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 114
+      objectReference: {fileID: 0}
     - target: {fileID: 1624645560566322994, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}
       propertyPath: m_SizeDelta.x
       value: -40.1175
@@ -481,8 +489,13 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8122287102186252829, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}
+      propertyPath: displaySlotPrefab
+      value: 
+      objectReference: {fileID: 3997946324100652085, guid: 62da478ed0398a74eb74d56f62479be9, type: 3}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8522240786749219976, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c45228d20a3f954e8a674954ce71fdf, type: 3}

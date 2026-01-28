@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: HealFlask
+  m_EditorClassIdentifier: 
+  itemId: 29
+  icon: {fileID: 21300000, guid: 0ac3189f29a3d3c42918757ec4a50a7e, type: 3}
+  itemName: "\u6CBB\u6108\u836F\u74F6"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 20e31b27a7f17c949b7575ef13b7172f, type: 2}
+  - {fileID: 11400000, guid: 1a0ae862cfba8324480c47bbc1eaf123, type: 2}
+  - {fileID: 11400000, guid: fc11dd64cb7f82a47a754d8c02ead0e5, type: 2}
+  description: "\u559D\u8D77\u6765\u50CF\u897F\u74DC\u6C41"
+  price: 300
+  craftingMaterialsId: 440000003200000033000000ffffffffffffffff
+  equipmentType: 3
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 0
+    critChance: 0
+    critPower: 0
+    attackSpeed: 0
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 3
+    flaskUsageRecover: 0.1
+  effects: []
+  cooldown: 8
+  detail: "\u996E\u7528\u65F6\u589E\u52A0\u529B\u91CF10\u548C\u751F\u547D\u4E0A\u965010,\u6301\u7EED5\u79D2\n\u996E\u7528\u65F6\u56DE\u590D15%\u7684\u8840\u91CF"

@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: VanpireSword
+  m_EditorClassIdentifier: 
+  itemId: 34
+  icon: {fileID: 21300000, guid: dcdc96a5d4c945e4d91801bf90c88833, type: 3}
+  itemName: "\u5438\u8840\u9B3C\u4E4B\u5251"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: dfdde5b6fd15c60439a8bb6331596c7c, type: 2}
+  - {fileID: 11400000, guid: 6fee2b88acab2774fb7645a0d1e36f25, type: 2}
+  - {fileID: 11400000, guid: 79e73dba17456064190e6ec5be902456, type: 2}
+  description: "\u5B83\u5230\u5E95\u662F\u600E\u4E48\u5438\u5230\u9AB7\u9AC5\u7684\u8840\u7684\uFF1F"
+  price: 600
+  craftingMaterialsId: 370000004500000036000000ffffffffffffffff
+  equipmentType: 0
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 5
+    damage: 10
+    critChance: 10
+    critPower: 5
+    attackSpeed: 0
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 10
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: "\u51FB\u4E2D\u65F6\u56DE\u590D30%\u6240\u9020\u6210\u4F24\u5BB3\u7684\u751F\u547D\u503C"

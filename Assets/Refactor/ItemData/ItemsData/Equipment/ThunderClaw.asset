@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: ThunderClaw
+  m_EditorClassIdentifier: 
+  itemId: 37
+  icon: {fileID: 21300000, guid: f79777de1aafa6a4aa1f76c56aff2838, type: 3}
+  itemName: "\u96F7\u722A"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: b8d4a9466ac57964484ff1b1eeee86f4, type: 2}
+  - {fileID: 11400000, guid: b8d4a9466ac57964484ff1b1eeee86f4, type: 2}
+  - {fileID: 11400000, guid: cc6cd18e4c4bf3346a2e1a08274feaa7, type: 2}
+  - {fileID: 11400000, guid: 71de5ead4881c0b4d8b317efa58f9e4a, type: 2}
+  description: "\u8FD9\u597D\u50CF\u662F\u4E2A\u907F\u96F7\u9488\uFF1F"
+  price: 600
+  craftingMaterialsId: 3000000030000000390000003d000000ffffffff
+  equipmentType: 0
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 5
+    critChance: 10
+    critPower: 0
+    attackSpeed: 10
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 5
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0.5
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 10
+    thunderStrikeCount: 0
+    thunderStrikeRate: 5
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: "\u51FB\u4E2D\u65F6\u53EC\u5524\u96F7\u51FB,\u9020\u6210\u9B54\u6CD5\u4F24\u5BB310\u5E76\u65BD\u52A0\u611F\u7535\u72B6\u60014\u79D2"

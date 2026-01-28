@@ -8,33 +8,33 @@ using UnityEngine.UI;
 
 namespace UISystem
 {
-    internal class SLEquipmentSlot : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
+    internal class SLEquipmentSlot : CUIComponentBase, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected EEquipmentType equipmentType;
 
         protected Image itemImage;
         protected IEquipment equipment = null;
-        protected MUIManager ui;
 
-        protected void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             itemImage = GetComponent<Image>();
-        }
-
-        public void Init(MUIManager _ui)
-        {
-            ui = _ui;
+            UpdateSlot(ui.InvokeFunc(ui.CheckEquipmentByType, equipmentType));
         }
 
         public void UpdateSlot(IEquipment _newEquipment)
         {
-            Assert.IsTrue(_newEquipment.CheckEquipmentData().CheckEquipmentType() == equipmentType, "装备被放入错误的槽位");
+            Assert.IsTrue(_newEquipment == null || _newEquipment.CheckEquipmentData().CheckEquipmentType() == equipmentType, "装备被放入错误的槽位");
             equipment = _newEquipment;
 
             if (equipment != null)
             {
                 itemImage.color = Color.white;
                 itemImage.sprite = equipment.CheckData().CheckIcon();
+            }
+            else
+            {
+                Clear();
             }
         }
 

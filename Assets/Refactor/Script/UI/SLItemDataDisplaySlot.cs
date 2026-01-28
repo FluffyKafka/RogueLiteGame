@@ -2,19 +2,15 @@ using Item;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UISystem
 {
     internal class SLItemDataDisplaySlot : CUIComponentBase
     {
-        protected Image itemImage;
+        [SerializeField] protected Image itemImage;
         protected IItemData item;
-
-        protected override void OnEnable()
-        {
-            itemImage = GetComponent<Image>();
-        }
 
         public virtual void DisplayItem(IItemData _itemData)
         {
@@ -33,7 +29,7 @@ namespace UISystem
             itemImage.sprite = null;
             itemImage.color = Color.clear;
             item = null;
-        }
+        } 
     }
 }
 

@@ -38,7 +38,6 @@ namespace UISystem
         protected void ShowList(EEquipmentType _type)
         {
             IReadOnlyList<IEquipmentData> choiceList = ui.InvokeFunc(ui.CheckCraftableEquipmentByType, _type);
-
             GenerateSlotTo(choiceList.Count);
             HideAllSlot();
             for(int i = 0; i < choiceList.Count; ++i)

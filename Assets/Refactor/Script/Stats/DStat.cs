@@ -7,8 +7,9 @@ namespace StatsSystem
     internal class DStat
     {
         [SerializeField] protected float baseValue;
-        protected List<float> adders = new List<float>();
-        protected List<float> multiplyers = new List<float>();
+        [Header("Test")]
+        [SerializeField] protected List<float> adders = new List<float>();
+        [SerializeField] protected List<float> multiplyers = new List<float>();
 
         public float GetValue()
         {

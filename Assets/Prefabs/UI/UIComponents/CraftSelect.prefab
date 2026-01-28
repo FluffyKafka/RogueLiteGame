@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponListButton: {fileID: 6178134151629212414}
-  armorListButton: {fileID: 6083692509957190938}
+  armorListButton: {fileID: 4916988796474114179}
   amuletListButton: {fileID: 6083692509957190938}
   flaskListButton: {fileID: 4978174739171264134}
   slotPrefab: {fileID: -2957706811731457967, guid: 3c4f2289ad515bf499f36242341e130f, type: 3}

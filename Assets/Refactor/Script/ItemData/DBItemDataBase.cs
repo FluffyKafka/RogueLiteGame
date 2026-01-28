@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Item
 {
     public interface IItemDataBase
     {
+        public IReadOnlyList<IItemData> CheckStartItemList();
         public IReadOnlyList<IEquipmentData> CheckCraftableWeapon();
         public IReadOnlyList<IEquipmentData> CheckCraftableArmor();
         public IReadOnlyList<IEquipmentData> CheckCraftableAmulet();
@@ -17,12 +19,14 @@ namespace Item
     internal class DBItemDataBase : MonoBehaviour, IItemDataBase
     {
         [SerializeField] protected string assetDirectorPath;
+        [SerializeField] protected List<SOItemData> startItems;
 
-        protected SerializableDictionary<string, SOItemData> itemDatabase;
-        protected List<IEquipmentData> weaponList;
-        protected List<IEquipmentData> armorList;
-        protected List<IEquipmentData> amuletList;
-        protected List<IEquipmentData> flaskList;
+        [Header("Debug")]
+        [SerializeField] protected SerializableDictionary<string, SOItemData> itemDatabase = new();
+        [SerializeField] protected List<SOEquipmentData> weaponList = new();
+        [SerializeField] protected List<SOEquipmentData> armorList = new();
+        [SerializeField] protected List<SOEquipmentData> amuletList = new();
+        [SerializeField] protected List<SOEquipmentData> flaskList = new();
 
         public IReadOnlyList<IEquipmentData> CheckCraftableWeapon()
         {
@@ -39,6 +43,10 @@ namespace Item
         public IReadOnlyList<IEquipmentData> CheckCraftableFlask()
         {
             return flaskList;
+        }
+        public IReadOnlyList<IItemData> CheckStartItemList()
+        {
+            return startItems.Cast<IItemData>().ToList().AsReadOnly();
         }
 
         public IItemData TryCheckItemDataById(string _id)
@@ -62,6 +70,10 @@ namespace Item
             string[] assetNames = AssetDatabase.FindAssets("t:SOItemData", new[] { assetDirectorPath });
 
             itemDatabase.Clear();
+            weaponList.Clear();
+            armorList.Clear();
+            amuletList.Clear();
+            flaskList.Clear();
             foreach (string SOName in assetNames)
             {
                 var SOPath = AssetDatabase.GUIDToAssetPath(SOName);

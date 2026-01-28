@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: StolenSword
+  m_EditorClassIdentifier: 
+  itemId: 33
+  icon: {fileID: 21300000, guid: d8b9c7ed1543c8d4b849c49e8dc9dd09, type: 3}
+  itemName: "\u7A83\u8D3C\u5315\u9996"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: dfdde5b6fd15c60439a8bb6331596c7c, type: 2}
+  - {fileID: 11400000, guid: dfdde5b6fd15c60439a8bb6331596c7c, type: 2}
+  description: "\u57CE\u5E02\u91CC\u7684\u5C0F\u5077\u4F1A\u7528\u5B83\u5212\u5F00\u4F60\u7684\u53E3\u888B"
+  price: 150
+  craftingMaterialsId: 3700000037000000ffffffffffffffffffffffff
+  equipmentType: 0
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 10
+    critChance: 10
+    critPower: 10
+    attackSpeed: 0
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: 

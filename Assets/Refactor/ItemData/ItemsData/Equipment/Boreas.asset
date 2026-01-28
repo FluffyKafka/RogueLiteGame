@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: Boreas
+  m_EditorClassIdentifier: 
+  itemId: 9
+  icon: {fileID: 21300000, guid: 364b505596e99db4698f84fd72f9d214, type: 3}
+  itemName: "\u6CE2\u745E\u963F\u65AF"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 53cb8f978db34004597fd3d0c2587c7f, type: 2}
+  - {fileID: 11400000, guid: aeca312be61df5e42b8490b8e19a0d42, type: 2}
+  - {fileID: 11400000, guid: aeca312be61df5e42b8490b8e19a0d42, type: 2}
+  - {fileID: 11400000, guid: cc6cd18e4c4bf3346a2e1a08274feaa7, type: 2}
+  description: "\u9664\u4E86\u6218\u6597\u8FD8\u80FD\u5F53\u4FBF\u643A\u5F0F\u98CE\u6247"
+  price: 600
+  craftingMaterialsId: 140000002f0000002f00000039000000ffffffff
+  equipmentType: 0
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 2
+    critChance: 20
+    critPower: 15
+    attackSpeed: 5
+    fireDamage: 0
+    iceDamage: 8
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0.5
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 8
+    chillSlowRate: 20
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 5
+  detail: "\u666E\u901A\u653B\u51FB\u5BF9\u654C\u4EBA\u9020\u6210\u4F24\u5BB3\u65F6\u4F1A\u5411\u524D\u522E\u51FA\u4E00\u9053\u65CB\u98CE\uFF0C\u88AB\u65CB\u98CE\u51FB\u4E2D\u7684\u654C\u4EBA\u5C06\u88AB\u51FB\u6655\u5E76\u53D7\u52305\u51B0\u51BB\u4F24\u5BB3"

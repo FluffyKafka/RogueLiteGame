@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &330576113177759684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5698052846156538801}
+  - component: {fileID: 1394193280223572521}
+  m_Layer: 0
+  m_Name: Tranlater
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5698052846156538801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330576113177759684}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -334.81366, y: -245.17776, z: -10.996815}
+  m_LocalScale: {x: 1.7712177, y: 1.7712177, z: 1.7712177}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1394193280223572521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330576113177759684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9a2f1e8773d51643a6456988bb508b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsTypeTranslateInfo:
+  - origin: 0
+    target: "\u6700\u5927\u751F\u547D"
+  - origin: 1
+    target: "\u62A4\u7532"
+  - origin: 2
+    target: "\u95EA\u907F"
+  - origin: 3
+    target: "\u9B54\u6CD5\u62B5\u6297"
+  - origin: 4
+    target: "\u4F24\u5BB3"
+  - origin: 5
+    target: "\u66B4\u51FB\u7387"
+  - origin: 6
+    target: "\u66B4\u51FB\u500D\u7387"
+  - origin: 7
+    target: "\u653B\u901F"
+  - origin: 8
+    target: "\u706B\u7130\u4F24\u5BB3"
+  - origin: 9
+    target: "\u51B0\u51BB\u4F24\u5BB3"
+  - origin: 10
+    target: "\u96F7\u7535\u4F24\u5BB3"
+  - origin: 11
+    target: "\u70B9\u71C3\u65F6\u95F4"
+  - origin: 12
+    target: "\u51BB\u7ED3\u65F6\u95F4"
+  - origin: 13
+    target: "\u611F\u7535\u65F6\u95F4"
+  - origin: 14
+    target: "\u71C3\u70E7\u95F4\u9694"
+  - origin: 15
+    target: "\u71C3\u70E7\u500D\u7387"
+  - origin: 16
+    target: "\u62A4\u7532\u51BB\u7ED3"
+  - origin: 17
+    target: "\u51B0\u51BB\u8FDF\u7F13"
+  - origin: 18
+    target: "\u9707\u64BC\u5F3A\u5EA6"
+  - origin: 19
+    target: "\u7535\u5F27\u6570"
+  - origin: 20
+    target: "\u7535\u5F27\u4EA7\u751F\u7387"
+  - origin: 21
+    target: "\u7535\u5F27\u534A\u5F84"
+  - origin: 22
+    target: "\u6700\u5927\u8010\u836F"
+  - origin: 23
+    target: "\u8010\u836F\u6062\u590D"
+  equipmentTypeTanslateInfo:
+  - origin: 0
+    target: "\u6B66\u5668"
+  - origin: 1
+    target: "\u62A4\u7532"
+  - origin: 2
+    target: "\u9970\u54C1"
+  - origin: 3
+    target: "\u836F\u7269"

@@ -11,29 +11,13 @@ namespace UISystem
 
         protected override void OnEnable()
         {
+            base.OnEnable();
             slots = GetComponentsInChildren<SLStatSlot>();
-            ui.StatsUpdate += UpdateStats;
         }
 
         protected override void OnDisable()
         {
-            ui.StatsUpdate -= UpdateStats;
-        }
-
-        protected void Start()
-        {
-            foreach(var slot in slots)
-            {
-                slot.Init(ui);
-            }
-        }
-
-        protected void UpdateStats(WReadOnlyStatsData _data)
-        {
-            foreach(var slot in slots)
-            {
-                slot.SetValue(_data);
-            }
+            base.OnDisable();
         }
     }
 }

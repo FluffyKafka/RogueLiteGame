@@ -3,27 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
 
 namespace UISystem
 {
-    internal class SLStatSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    internal class SLStatSlot : CUIComponentBase, IPointerEnterHandler, IPointerExitHandler
     {
-        protected MUIManager ui;
-
         [SerializeField] protected EStatType type;
         [SerializeField] protected TextMeshProUGUI statName;
         [SerializeField] protected TextMeshProUGUI statValue;
 
-        private void OnValidate()
+        protected override void OnEnable()
         {
-            statName.text = type.ToString();
+            base.OnEnable();
+            statName.text = ui.InvokeFunc(ui.Translate, type.ToString());
+            ui.UpdateStats += UpdateStat;
+            UpdateStat();
         }
 
-        public void Init(MUIManager _ui)
+        protected override void OnDisable()
         {
-            ui = _ui;
-            statName.text = _ui.InvokeFunc(ui.Translate, type.ToString());
+            base.OnDisable();
+        }
+
+        protected void OnValidate()
+        {
+            statName.text = type.ToString();
         }
 
         public void SetValue(WReadOnlyStatsData _data)
@@ -44,6 +50,13 @@ namespace UISystem
         public void OnPointerExit(PointerEventData eventData)
         {
             ui.InvokeAction(ui.HideTooltip);
+        }
+
+        public void UpdateStat()
+        {
+            float stat = ui.InvokeFunc(ui.TryCheckStat, type);
+            Assert.IsTrue(!float.IsNaN(stat), "无法获取：" + type + "类型属性数据");
+            statValue.text = stat.ToString();
         }
     }
 }

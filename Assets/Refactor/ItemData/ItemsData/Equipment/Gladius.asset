@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: Gladius
+  m_EditorClassIdentifier: 
+  itemId: 17
+  icon: {fileID: 21300000, guid: 98da8dce77c1e714c9f6d890889db169, type: 3}
+  itemName: "\u683C\u62C9\u8FEA\u5384\u65AF"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 7379eff6e492fdf4da00211f1ff11b66, type: 2}
+  - {fileID: 11400000, guid: dfdde5b6fd15c60439a8bb6331596c7c, type: 2}
+  - {fileID: 11400000, guid: dfdde5b6fd15c60439a8bb6331596c7c, type: 2}
+  description: "\u5E1D\u56FD\u519B\u961F\u4E2D\u5E38\u89C1\u7684\u77ED\u5251\u88C5\u5907"
+  price: 150
+  craftingMaterialsId: 2d0000003700000037000000ffffffffffffffff
+  equipmentType: 0
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 3
+    magicResistance: 0
+    damage: 3
+    critChance: 0
+    critPower: 0
+    attackSpeed: 15
+    fireDamage: 0
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: 

@@ -9,12 +9,13 @@ namespace UISystem
     internal class CEquipmentStashUI : CUIComponentBase
     {
         protected List<SLEquipmentStashSlot> stash;
-        [SerializeField] protected GameObject stashPrefab;
-        [SerializeField] protected GameObject slotContainer;
+        [SerializeField] protected SLEquipmentStashSlot stashPrefab;
+        [SerializeField] protected Transform slotContainer;
 
         protected override void OnEnable()
         {
             ui.EquipmentStashChange += StashUpdate;
+            StashUpdate(ui.InvokeFunc(ui.CheckEquipmentStash));
         }
 
         protected override void OnDisable()
@@ -22,19 +23,9 @@ namespace UISystem
             ui.EquipmentStashChange -= StashUpdate;
         }
 
-        protected virtual void Start()
-        {        
-            int maxEquipmentStashSize = ui.InvokeFunc(ui.CheckEquipmentStashMaxSize);
-            stash = new List<SLEquipmentStashSlot>(maxEquipmentStashSize);
-            for(int i = 0; i < maxEquipmentStashSize; ++i)
-            {
-                SLEquipmentStashSlot slot = Instantiate(stashPrefab, slotContainer.transform).GetComponent<SLEquipmentStashSlot>();
-                stash.Add(slot);
-            }
-        }
-
         protected void StashUpdate(IReadOnlyList<IEquipment> _stash)
         {
+            StashInitIfNull();
             ClearSlots();
             for(int i = 0; i < _stash.Count; ++i)
             {
@@ -47,6 +38,20 @@ namespace UISystem
             foreach(var slot in stash)
             {
                 slot.Clear();
+            }
+        }
+
+        protected void StashInitIfNull()
+        {
+            if(stash == null)
+            {
+                int maxEquipmentStashSize = ui.InvokeFunc(ui.CheckEquipmentStashMaxSize);
+                stash = new List<SLEquipmentStashSlot>(maxEquipmentStashSize);
+                for (int i = 0; i < maxEquipmentStashSize; ++i)
+                {
+                    SLEquipmentStashSlot slot = Instantiate(stashPrefab, slotContainer.transform).GetComponent<SLEquipmentStashSlot>();
+                    stash.Add(slot);
+                }
             }
         }
     }

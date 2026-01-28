@@ -9,9 +9,10 @@ namespace StatsSystem
 {
     internal class MEntityStatsManager : ComponentManagerBase, IEntityStats
     {
+        protected IStatEntity entity;
+
         protected DDamageData damageData;
         protected DDamageData takeDamageData;
-        protected IStatEntity entity;
 
         #region Action
         public Action<DDamageData> CalculatePrimaryAttackData;
@@ -177,6 +178,17 @@ namespace StatsSystem
         void IEntityStats.RemoveStatModifier(WReadOnlyStatsData _data)
         {
             InvokeAction(RemoveModifier, _data);
+        }
+
+        public virtual float TryCheckStat(EStatType _type)
+        {
+            float stat = InvokeFunc(CheckOffensiveStat, _type);
+            if (!float.IsNaN(stat)) return stat;
+            stat = InvokeFunc(CheckDefensiveStat, _type);
+            if (!float.IsNaN(stat)) return stat;
+            stat = InvokeFunc(CheckMagicStat, _type);
+            if (!float.IsNaN(stat)) return stat;
+            return float.NaN;
         }
     }
 }

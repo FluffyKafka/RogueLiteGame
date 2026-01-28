@@ -192,6 +192,8 @@ namespace EntitySystem
             //Stats收到信号并修改属性
             public abstract void AddStatModifier(WReadOnlyStatsData _data);
             public abstract void RemoveStatModifier(WReadOnlyStatsData _data);
+
+            public abstract float TryCheckStat(EStatType _type);
         }
     }
 

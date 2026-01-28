@@ -43,10 +43,8 @@ namespace AnimationAndFx
                 return;
             }
 
-            Debug.Log("Hit");
             if(_data.data.ignite)
             {
-                Debug.Log("ignite");
                 StartCoroutine(StartBlink(igniteColor, igniteFlashRate, _data.data.igniteDuration));
             }
             else if(_data.data.chill)
@@ -61,7 +59,6 @@ namespace AnimationAndFx
 
         protected IEnumerator StartBlink(List<Color> _colorList, float _cooldown, float _duration)
         {
-            Debug.Log("StartIgnite");
             isBlink = true;
             StartCoroutine(ColorBlink(_colorList, _cooldown));
             yield return new WaitForSeconds(_duration);
@@ -73,7 +70,6 @@ namespace AnimationAndFx
         {
             while(isBlink)
             {
-                Debug.Log("igniteUpdate");
                 ++colorIndex;
                 if (colorIndex >= _colorList.Count)
                 {

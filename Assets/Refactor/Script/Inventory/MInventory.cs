@@ -42,12 +42,11 @@ namespace InventorySystem
         public Func<IReadOnlyList<IItem>> CheckItemStash;
         #endregion
 
-        [SerializeField] protected List<IItemData> startItems;
         protected IEquipmentFactory itemFactory;
 
         protected virtual void Awake()
         {
-            
+
         }
         protected virtual void Start()
         {
@@ -55,6 +54,7 @@ namespace InventorySystem
         }
         protected void AddStartItems()
         {
+            IReadOnlyList<IItemData> startItems = itemDataBase.CheckStartItemList();
             foreach (var item in startItems)
             {
                 if(item is IEquipmentData)
@@ -72,9 +72,10 @@ namespace InventorySystem
                     {
                         return;
                     }
-                }
-                
+                }   
             }
+            player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
+            player.MaterialStashChangeNotice(InvokeFunc(CheckItemStash));
         }
 
         #region Init
@@ -89,6 +90,7 @@ namespace InventorySystem
         #region Player
         void IPlayerInventory.Equip(IEquipment _newEquip)
         {
+            InvokeAction(RemoveFromEquipmentStash, _newEquip);
             IEquipment oldEquipment = CheckEquipment(_newEquip.CheckEquipmentData().CheckEquipmentType());
             if(oldEquipment != null)
             {
@@ -96,12 +98,18 @@ namespace InventorySystem
             }
             InvokeAction(Equip, _newEquip);
             player.AddModifier(_newEquip.CheckEquipmentData().CheckStatsModifierData());
+
+            player.EquipmentChangeNotice(_newEquip.CheckEquipmentData().CheckEquipmentType(), _newEquip);
+            player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
         }
         void IPlayerInventory.UnEquip(IEquipment _equip)
         {
             IEquipment oldEquipment = CheckEquipment(_equip.CheckEquipmentData().CheckEquipmentType());
             Assert.IsNotNull(oldEquipment, "行为错误：尝试卸除一个未装备的装备");
             UnEquipEquipment(oldEquipment);
+
+            player.EquipmentChangeNotice(_equip.CheckEquipmentData().CheckEquipmentType(), null);
+            player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
         }
 
         IEquipment IPlayerInventory.CheckEquipmentByType(EEquipmentType _type)
@@ -123,27 +131,31 @@ namespace InventorySystem
             {
                 IEquipment equip = _data as IEquipment;
                 InvokeAction(RemoveFromEquipmentStash, equip);
+                player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
             }
             else
             {
                 InvokeAction(RemoveFromMaterialStash, _data);
+                player.MaterialStashChangeNotice(InvokeFunc(CheckMaterialStash));
             }
-            DropItem(_data);
+            DropItem(_data);          
         }
 
         IReadOnlyList<IItemData> IPlayerInventory.TryCraft(IEquipmentData _data)
         {
             IReadOnlyList<IEquipmentData> equipmentLack = InvokeFunc(CheckCraft_EquipLack, _data);
             IReadOnlyList<IItemData> materialLack = InvokeFunc(CheckCraft_MaterialLack, _data);
-            //发出警告？
             if (equipmentLack.Count == 0 && materialLack.Count == 0)
             {
                 InvokeAction(CraftConsumeStash, _data);
                 IEquipment newEquipment = itemFactory.GenerateEquipment(_data);
-                if (InvokeFunc(TryAddEquipment, newEquipment))
+                if (!InvokeFunc(TryAddEquipment, newEquipment))
                 {
                     StashFull(newEquipment);
                 }
+
+                player.MaterialStashChangeNotice(InvokeFunc(CheckItemStash));
+                player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
                 return null;
             }
             else

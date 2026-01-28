@@ -32,10 +32,10 @@ namespace Item
         [SerializeField] public Sprite icon;
         [SerializeField] public string itemName;
         [SerializeField] public EItemType itemType;
-        [SerializeField] public List<IItemData> craftingMaterials;
+        [SerializeField] public List<SOItemData> craftingMaterials = new();
         [TextArea][SerializeField] public string description;
         [SerializeField] public int price;
-        [SerializeField] public List<int> craftingMaterialsId;
+        [SerializeField] public List<int> craftingMaterialsId = new();
 
         public string ChechItemId()
         {

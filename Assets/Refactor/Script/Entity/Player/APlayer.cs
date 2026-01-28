@@ -53,6 +53,9 @@ namespace EntitySystem
                 public void AddModifier(WReadOnlyStatsData _data);
                 public void RemoveModifier(WReadOnlyStatsData _data);
                 public void StashFullNotice(IItem _itemToFull);
+                public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
+                public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
+                public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
             }
 
             public interface IUIPlayer
@@ -67,11 +70,12 @@ namespace EntitySystem
                 public int CheckEquipmentStashMaxSize();
                 public int CheckMaterialStashMaxSize();
                 public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
+                public float TryCheckStat(EStatType _type);
             }
 
             public interface IStatsPlayer : IStatEntity
             {
-                public void StatsChangeNotice(WReadOnlyStatsData _data);
+                public void StatsChangeNotice();
             }
 
             internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer
@@ -153,8 +157,6 @@ namespace EntitySystem
                 #endregion
 
                 #region Inventory
-
-                public Action<IReadOnlyList<IItem>> CraftFailNotice_LackMaterial;
                 public Action<IItem> StashFullNotice;
                 void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
                 {
@@ -168,13 +170,26 @@ namespace EntitySystem
                 {
                     InvokeAction(StashFullNotice, _itemToFull);
                 }
+
+                void IInventoryPlayer.EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
+                {
+                    ui.EquipmentChangeNotice(_type, _equip);
+                }
+                void IInventoryPlayer.EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash)
+                {
+                    ui.EquipmentStashChangeNotice(_stash);
+                }
+                void IInventoryPlayer.MaterialStashChangeNotice(IReadOnlyList<IItem> _stash)
+                {
+                    ui.MaterialStashChangeNotice(_stash);
+                }
                 #endregion
 
                 //暂时直接转发，若有需要再引入事件机制
                 #region Stats
-                void IStatsPlayer.StatsChangeNotice(WReadOnlyStatsData _data)
+                void IStatsPlayer.StatsChangeNotice()
                 {
-                    ui.StatsChangeNotice(_data);
+                    ui.StatsChangeNotice();
                 }
                 #endregion
 
@@ -192,7 +207,7 @@ namespace EntitySystem
 
                 void IUIPlayer.UnEquip(IEquipment _equip)
                 {
-                    inventory.Equip(_equip);
+                    inventory.UnEquip(_equip);
                 }
 
                 void IUIPlayer.DropItem(IItem _item)
@@ -229,6 +244,11 @@ namespace EntitySystem
                 {
                     return inventory.CheckCraftableEquipmentByType(_type);
                 }
+
+                public float TryCheckStat(EStatType _type)
+                {
+                    return stats.TryCheckStat(_type);
+                }
                 #endregion
 
                 protected override void Awake()
@@ -250,7 +270,6 @@ namespace EntitySystem
                     CheckVerticalInput += input.CheckVerticalInput;
 
                     //UI
-                    CraftFailNotice_LackMaterial += ui.CraftFailNotice_LackMaterial;
                     StashFullNotice += ui.StashFullNotice;
                 }
                 override protected void ComponentValidCheck()
@@ -304,11 +323,10 @@ namespace EntitySystem
 
             public interface IPlayerUI
             {
-                public void StatsChangeNotice(WReadOnlyStatsData _data);
+                public void StatsChangeNotice();
                 public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
                 public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
                 public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
-                public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack);
                 public void StashFullNotice(IItem _itemToFull);
             }
         }        

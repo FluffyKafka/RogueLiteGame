@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac33bed9e936ce041a5c674483150fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNameText: {fileID: 7129127359471898799}
+  itemNameText: {fileID: 7008067070375722865}
   itemDescriptionText: {fileID: 5484330853001208630}
   iconImage: {fileID: 4781697324773156428}
   itemPriceText: {fileID: 3953099255725252521}

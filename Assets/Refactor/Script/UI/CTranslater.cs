@@ -24,8 +24,8 @@ namespace UISystem
             public string target;
         }
 
-        [SerializeField] protected List<DTranslateStatsTypeSlot> statsTypeTranslateInfo;
-        [SerializeField] protected List<DTranslateEquipmentTypeSlot> equipmentTypeTanslateInfo;
+        [SerializeField] protected List<DTranslateStatsTypeSlot> statsTypeTranslateInfo = new();
+        [SerializeField] protected List<DTranslateEquipmentTypeSlot> equipmentTypeTanslateInfo = new();
         protected Dictionary<string, string> dictionary = new Dictionary<string, string>();
         protected bool isInit = false;
 
@@ -39,7 +39,10 @@ namespace UISystem
                 }
                 foreach (var pair in equipmentTypeTanslateInfo)
                 {
-                    dictionary.Add(pair.origin.ToString(), pair.target);
+                    if(!dictionary.ContainsKey(pair.origin.ToString()))
+                    {
+                        dictionary.Add(pair.origin.ToString(), pair.target);
+                    }
                 }
                 isInit = true;
             }

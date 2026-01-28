@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d20d1f5044d54e95cbe036b6fc020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemImage: {fileID: 8967585684214899818}
   pressColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   equipName: {fileID: 1535758837302870796}
 --- !u!1 &5789116191127235114

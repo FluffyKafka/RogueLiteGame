@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: ProtectionOfDemeter
+  m_EditorClassIdentifier: 
+  itemId: 8
+  icon: {fileID: 21300000, guid: e64eb0213376dc34da2699026d79e47a, type: 3}
+  itemName: "\u5F97\u58A8\u7279\u5C14\u7684\u5B88\u62A4"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: aeca312be61df5e42b8490b8e19a0d42, type: 2}
+  - {fileID: 11400000, guid: aeca312be61df5e42b8490b8e19a0d42, type: 2}
+  - {fileID: 11400000, guid: 618bb08cfaf28654a82b62c7ce97f3e8, type: 2}
+  - {fileID: 11400000, guid: b66065d45ef94ad4791eaffb06599584, type: 2}
+  description: "\u201C\u5979\u7ED9\u4E88\uFF0C\u5979\u6536\u53D6\u201D"
+  price: 600
+  craftingMaterialsId: 2f0000002f000000200000002a000000ffffffff
+  equipmentType: 1
+  statsModifierData:
+    maxHealth: 5
+    armor: 4
+    evasion: 20
+    magicResistance: 0
+    damage: 0
+    critChance: 10
+    critPower: 10
+    attackSpeed: 0
+    fireDamage: 0
+    iceDamage: 5
+    lightningDamage: 0
+    fireDuration: 0
+    iceDuration: 1
+    lightningDuration: 0
+    fireDamageCooldown: 0
+    fireDamageTransform: 0
+    chillArmorReduce: 0
+    chillSlowRate: 5
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 3
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 3
+  detail: "\u7A7F\u6234\u8005\u88AB\u51FB\u4E2D\u65F6\u51BB\u4F4F\u653B\u51FB\u8005"

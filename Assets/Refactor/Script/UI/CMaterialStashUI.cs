@@ -14,6 +14,7 @@ namespace UISystem
         protected override void OnEnable()
         {
             ui.MaterialStashChange += StashUpdate;
+            StashUpdate(ui.InvokeFunc(ui.CheckMaterialStash));
         }
 
         protected override void OnDisable()
@@ -23,17 +24,12 @@ namespace UISystem
 
         protected virtual void Start()
         {
-            int maxMaterialStashSize = ui.InvokeFunc(ui.CheckMaterialStashMaxSize);
-            stash = new List<SLMaterialStashSlot>(maxMaterialStashSize);
-            for (int i = 0; i < maxMaterialStashSize; ++i)
-            {
-                SLMaterialStashSlot slot = Instantiate(stashPrefab, slotContainer.transform).GetComponent<SLMaterialStashSlot>();
-                stash.Add(slot);
-            }
+            
         }
 
         protected void StashUpdate(IReadOnlyList<IItem> _stash)
         {
+            GenerateMaterialStashIfNull();
             ClearSlots();
             for (int i = 0; i < _stash.Count; ++i)
             {
@@ -46,6 +42,20 @@ namespace UISystem
             foreach (var slot in stash)
             {
                 slot.Clear();
+            }
+        }
+
+        protected void GenerateMaterialStashIfNull()
+        {
+            if(stash == null)
+            {
+                int maxMaterialStashSize = ui.InvokeFunc(ui.CheckMaterialStashMaxSize);
+                stash = new List<SLMaterialStashSlot>(maxMaterialStashSize);
+                for (int i = 0; i < maxMaterialStashSize; ++i)
+                {
+                    SLMaterialStashSlot slot = Instantiate(stashPrefab, slotContainer.transform).GetComponent<SLMaterialStashSlot>();
+                    stash.Add(slot);
+                }
             }
         }
     }

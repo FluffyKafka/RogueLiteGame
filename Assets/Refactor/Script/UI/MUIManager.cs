@@ -24,7 +24,7 @@ namespace UISystem
         public Action<IItem> DropItem;
         public Action<IReadOnlyList<IEquipment>> EquipmentStashChange;
         public Action<IReadOnlyList<IItem>> MaterialStashChange;
-        public Action<WReadOnlyStatsData> StatsUpdate;
+        public Action UpdateStats;
         public Action<EEquipmentType, IEquipment> EquipmentChange;
         public Action<EUIPageType> ChangePageTo;
         public Action<IEquipmentData> ShowEquipmentDetail;
@@ -42,9 +42,14 @@ namespace UISystem
         public Func<string, string> CheckKeyWordStatDescription;
         public Func<IEquipmentData, IReadOnlyList<IItemData>> TryCraft;
         public Func<EEquipmentType, IReadOnlyList<IEquipmentData>> CheckCraftableEquipmentByType;
+        public Func<EStatType, float> TryCheckStat;
+        public Func<IReadOnlyList<IItem>> CheckMaterialStash;
+        public Func<IReadOnlyList<IEquipment>> CheckEquipmentStash;
+        public Func<EEquipmentType, IEquipment> CheckEquipmentByType;
         #endregion
 
         #region Pages
+        [Serializable]
         protected class DPage
         {
             public EUIPageType type;
@@ -53,7 +58,9 @@ namespace UISystem
         [SerializeField] protected List<DPage> pages;
         #endregion
 
-        protected virtual void OnEnable()
+        [SerializeField] protected EUIPageType initPage;
+
+        protected void Awake()
         {
             CheckEquipmentStashMaxSize += player.CheckEquipmentStashMaxSize;
             CheckMaterialStashMaxSize += player.CheckMaterialStashMaxSize;
@@ -63,17 +70,15 @@ namespace UISystem
             DropItem += player.DropItem;
             TryCraft += player.TryCraft;
             CheckCraftableEquipmentByType += player.CheckCraftableEquipmentByType;
+            TryCheckStat += player.TryCheckStat;
+            CheckEquipmentByType += player.CheckEquipmentByType;
+            CheckEquipmentStash += player.CheckEquipmentStash;
+            CheckMaterialStash += player.CheckMaterialStash;
         }
 
-        protected virtual void OnDisable()
+        protected void Start()
         {
-            CheckEquipmentStashMaxSize -= player.CheckEquipmentStashMaxSize;
-            CheckMaterialStashMaxSize -= player.CheckMaterialStashMaxSize;
-            ChangePageTo -= ChangePageToByType;
-            Equip -= player.Equip;
-            UnEquip -= player.UnEquip;
-            DropItem -= player.DropItem;
-            TryCraft -= player.TryCraft;
+            ChangePageTo(initPage);
         }
 
         #region Init
@@ -108,7 +113,7 @@ namespace UISystem
 
         public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
         {
-            throw new System.NotImplementedException();
+            InvokeAction(EquipmentChange, _type, _equip);
         }
 
         public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash)
@@ -126,9 +131,9 @@ namespace UISystem
             throw new System.NotImplementedException();
         }
 
-        public void StatsChangeNotice(WReadOnlyStatsData _data)
+        public void StatsChangeNotice()
         {
-            InvokeAction(StatsUpdate, _data);
+            InvokeAction(UpdateStats);
         }
     }
 }

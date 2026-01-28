@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b127aa3621f2cf4ca5e005cfa4de3ff, type: 3}
+  m_Name: RedAmberPendant
+  m_EditorClassIdentifier: 
+  itemId: 20
+  icon: {fileID: 21300000, guid: 37aaf2792d6bde640b0271c41bcba2b1, type: 3}
+  itemName: "\u7EA2\u7425\u73C0\u540A\u5760"
+  itemType: 1
+  craftingMaterials:
+  - {fileID: 11400000, guid: 1e3815de77d4faa4e91762b88b50e4fb, type: 2}
+  - {fileID: 11400000, guid: a9ed0f20165033b4a97480eeb5345847, type: 2}
+  - {fileID: 11400000, guid: c351860f87d75c04ea80a71fe53ee770, type: 2}
+  description: "\u50CF\u662F\u5728\u80F8\u53E3\u71C3\u70E7\u7684\u4E00\u56E2\u706B\u7130"
+  price: 150
+  craftingMaterialsId: 2e000000280000003a000000ffffffffffffffff
+  equipmentType: 2
+  statsModifierData:
+    maxHealth: 0
+    armor: 0
+    evasion: 0
+    magicResistance: 0
+    damage: 0
+    critChance: 0
+    critPower: 0
+    attackSpeed: 0
+    fireDamage: 4
+    iceDamage: 0
+    lightningDamage: 0
+    fireDuration: 1
+    iceDuration: 0
+    lightningDuration: 0
+    fireDamageCooldown: -0.2
+    fireDamageTransform: 10
+    chillArmorReduce: 0
+    chillSlowRate: 0
+    shockAccuracyReduce: 0
+    thunderStrikeCount: 0
+    thunderStrikeRate: 0
+    thunderStrikeRadius: 0
+    maxFlaskUsageTime: 0
+    flaskUsageRecover: 0
+  effects: []
+  cooldown: 0
+  detail: 
