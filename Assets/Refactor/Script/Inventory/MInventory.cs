@@ -136,9 +136,9 @@ namespace InventorySystem
             else
             {
                 InvokeAction(RemoveFromMaterialStash, _data);
-                player.MaterialStashChangeNotice(InvokeFunc(CheckMaterialStash));
+                player.MaterialStashChangeNotice(InvokeFunc(CheckItemStash));
             }
-            DropItem(_data);          
+            player.DiscardItem(_data);        
         }
 
         IReadOnlyList<IItemData> IPlayerInventory.TryCraft(IEquipmentData _data)
@@ -189,6 +189,27 @@ namespace InventorySystem
                 default: Assert.IsFalse(true, "未知的装备类型"); return null;
             }           
         }
+
+        bool IPlayerInventory.TryTakeItem(IItem _item)
+        {
+            if (_item is IEquipment)
+            {
+                if(InvokeFunc(TryAddEquipment, _item as IEquipment))
+                {
+                    player.EquipmentStashChangeNotice(InvokeFunc(CheckEquipmentStash));
+                    return true;
+                }                
+            }
+            else
+            {
+                if(InvokeFunc(TryAddItem, _item))
+                {
+                    player.MaterialStashChangeNotice(InvokeFunc(CheckItemStash));
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         //未完成
@@ -207,13 +228,7 @@ namespace InventorySystem
         //未实现
         protected void StashFull(IItem _data)
         {
-            //生成提示
-
-            DropItem(_data);
-        }
-        protected void DropItem(IItem _data)
-        {
-            //生成一个掉落物
+            player.StashFullNotice(_data);
         }
         #endregion
     }

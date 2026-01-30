@@ -20,7 +20,12 @@ namespace EntitySystem
                 public abstract void OpenStun(bool _isOpen);
             }
 
-            internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy
+            public interface IObjectEnemy
+            {
+
+            }
+
+            internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy
             {
                 public IEnemyPlayer player;
 
@@ -127,6 +132,10 @@ namespace EntitySystem
                 public void Idle();
                 public void Move();
                 public void Attack();
+            }
+            public interface IEnemyObjectFactory
+            {
+                
             }
         }
     }

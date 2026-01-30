@@ -20,7 +20,7 @@ namespace EntitySystem
         {
             public interface IInitPlayer
             {
-                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui);
+                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory);
             }
 
             public interface IInputPlayer
@@ -47,12 +47,13 @@ namespace EntitySystem
             //Inventory似乎不应该使用这两个接口：
             //public void AddModifier(WReadOnlyStatsData _data);
             //public void RemoveModifier(WReadOnlyStatsData _data);
-            //考虑改名和改变参数类型
+            //考虑改名和改变参数类型表示装备被装备的行为，传输IEquipmentData或IEquipment（物品耐久磨损？）
             public interface IInventoryPlayer
             {
                 public void AddModifier(WReadOnlyStatsData _data);
                 public void RemoveModifier(WReadOnlyStatsData _data);
-                public void StashFullNotice(IItem _itemToFull);
+                public void StashFullNotice(IItem _item);
+                public void DiscardItem(IItem _item);
                 public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
                 public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
                 public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
@@ -78,11 +79,17 @@ namespace EntitySystem
                 public void StatsChangeNotice();
             }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer
+            public interface IObjectPlayer
+            {
+                public bool TryTakeItem(IItem _item);
+            }
+
+            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer
             {
                 protected IPlayerInput input;
                 protected IPlayerInventory inventory;
                 protected IPlayerUI ui;
+                protected IPlayerObjectFactory playerObjectFactory;
 
                 #region Internal Action
                 public Action<float> HorizonInput;
@@ -112,11 +119,12 @@ namespace EntitySystem
                 #endregion
 
                 #region Init
-                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui)
+                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory)
                 {
                     input = _inputSource;
                     inventory = _inventory;
                     ui = _ui;
+                    playerObjectFactory = _factory;
                 }
                 #endregion
 
@@ -158,6 +166,7 @@ namespace EntitySystem
 
                 #region Inventory
                 public Action<IItem> StashFullNotice;
+                public Action<IItem> DiscardItemNotice;
                 void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
                 {
                     InvokeAction(AddModifier, _data);                 
@@ -165,10 +174,6 @@ namespace EntitySystem
                 void IInventoryPlayer.RemoveModifier(WReadOnlyStatsData _data)
                 {
                     InvokeAction(RemoveModifier, _data);
-                }
-                void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
-                {
-                    InvokeAction(StashFullNotice, _itemToFull);
                 }
 
                 void IInventoryPlayer.EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
@@ -182,6 +187,15 @@ namespace EntitySystem
                 void IInventoryPlayer.MaterialStashChangeNotice(IReadOnlyList<IItem> _stash)
                 {
                     ui.MaterialStashChangeNotice(_stash);
+                }
+
+                void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
+                {
+                    InvokeAction(StashFullNotice, _itemToFull);
+                }
+                void IInventoryPlayer.DiscardItem(IItem _item)
+                {
+                    InvokeAction(DiscardItemNotice, _item);
                 }
                 #endregion
 
@@ -251,6 +265,14 @@ namespace EntitySystem
                 }
                 #endregion
 
+                //暂时直接转发，若有需要再引入事件机制
+                #region ObjectController
+                public bool TryTakeItem(IItem _item)
+                {
+                    return inventory.TryTakeItem(_item);
+                }
+                #endregion
+
                 protected override void Awake()
                 {
                     base.Awake();
@@ -269,8 +291,10 @@ namespace EntitySystem
                     CheckHorizonInput += input.CheckHorizonInput;
                     CheckVerticalInput += input.CheckVerticalInput;
 
-                    //UI
+                    //Inventory
                     StashFullNotice += ui.StashFullNotice;
+                    StashFullNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
+                    DiscardItemNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
                 }
                 override protected void ComponentValidCheck()
                 {
@@ -278,6 +302,24 @@ namespace EntitySystem
                     Assert.IsNotNull(GetComponent<CPlayerBattle>(), "缺少玩家战斗组件");
                     Assert.IsNotNull(GetComponent<CPlayerStateMachine>(), "缺少玩家状态机组件");
                 }
+            }
+
+            public interface IPlayerEnterable : IEntityObject
+            {
+                public void Enter(IObjectPlayer _player);
+            }
+            public interface IPlayerInteractable : IEntityObject
+            {
+                public void Interact(IObjectPlayer _player);
+            }
+            public interface IPlayerReflectable : IEntityObject
+            {
+                public void Reflect(IObjectPlayer _player);
+            }
+
+            public interface IPlayerObjectFactory
+            {
+                public void GenerateDropItemObject(IItem _data, Vector3 position);                
             }
 
             public interface IPlayerAnimation : IEntityAnimation
@@ -319,6 +361,7 @@ namespace EntitySystem
                 public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
                 public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
                 public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
+                public bool TryTakeItem(IItem _item);
             }
 
             public interface IPlayerUI

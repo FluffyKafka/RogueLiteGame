@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Door : MonoBehaviour, IPlayerEnterable
+public class Door : MonoBehaviour, IPlayerEnterableo
 {
     [SerializeField] public Transform otherDoor;
 

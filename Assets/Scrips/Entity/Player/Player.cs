@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-public interface IPlayerEnterable
+public interface IPlayerEnterableo
 {
     public void Enter(Player _player);
 }
@@ -178,9 +178,9 @@ public class Player : Entity
             Collider2D collider = Physics2D.OverlapCircle(transform.position, enterCheckRadius, whatIsDoor);
             if(collider != null)
             {
-                if (collider.GetComponent<IPlayerEnterable>() != null)
+                if (collider.GetComponent<IPlayerEnterableo>() != null)
                 {
-                    collider.GetComponent<IPlayerEnterable>().Enter(this);
+                    collider.GetComponent<IPlayerEnterableo>().Enter(this);
                 }
             }
         }

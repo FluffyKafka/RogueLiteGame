@@ -19,11 +19,12 @@ namespace Main
         [SerializeField] protected GameObject inventory;
         [SerializeField] protected GameObject ui;
         [SerializeField] protected GameObject itemDataBase;
+        [SerializeField] protected GameObject ObjectFactory;
 
         private void Awake()
         {
             inputManager.GetComponent<IInitInputManager>().Init(player.GetComponent<IInputPlayer>());
-            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>(), inventory.GetComponent<IPlayerInventory>(), ui.GetComponent<IPlayerUI>());
+            player.GetComponent<IInitPlayer>().Init(inputManager.GetComponent<IPlayerInput>(), inventory.GetComponent<IPlayerInventory>(), ui.GetComponent<IPlayerUI>(), ObjectFactory.GetComponent<IPlayerObjectFactory>());
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(player.GetComponent<IEnemyPlayer>());
             inventory.GetComponent<IInitInventory>().Init(equipmentFactory.GetComponent<IEquipmentFactory>(), player.GetComponent<IInventoryPlayer>(), itemDataBase.GetComponent<IItemDataBase>());
             ui.GetComponent<IInitUI>().Init(player.GetComponent<IUIPlayer>());

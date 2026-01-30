@@ -195,6 +195,11 @@ namespace EntitySystem
 
             public abstract float TryCheckStat(EStatType _type);
         }
+
+        public interface IEntityObject
+        {
+            
+        }
     }
 
     namespace EntityComponent
