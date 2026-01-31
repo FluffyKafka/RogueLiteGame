@@ -1,8 +1,5 @@
-using EntitySystem.EntityActor.PlayerActor;
 using Item;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using PlayerSystem;
 using UnityEngine.Assertions;
 
 namespace ObjectController

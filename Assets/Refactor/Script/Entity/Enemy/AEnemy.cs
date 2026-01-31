@@ -1,143 +1,166 @@
-using EntitySystem.EntityActor.PlayerActor;
-using EntitySystem.EntityComponent.BattleComponent;
-using EntitySystem.EntityComponent.MovementComponent;
-using EntitySystem.EntityComponent.StateMachineComponent;
+using EntitySystem;
+using PlayerSystem;
 using StatsData;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace EntitySystem
+namespace EnemySystem
 {
-    namespace EntityActor
+    public interface IBehaviourEnemy
     {
-        namespace EnemyActor
+        public void ToAttack();
+        public void BeStunned();
+        public void StunnedFinish();
+        public void ToIdle();
+        public void ToMove();
+
+        public bool IsPlayer(GameObject _object);
+        public Vector3 CheckPlayerPosition();
+        public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage);
+        public bool IsPlayerAlive();
+        public bool IsPlayerAlive(GameObject _player);
+    }
+
+    public interface IAnimEnemy : IAnimEntity
+    {
+        public abstract void OpenStun(bool _isOpen);
+    }
+
+    public interface IObjectEnemy
+    {
+
+    }
+
+    internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy
+    {
+        protected IEnemyPlayer player;
+        protected IEnemyAnimation enemyAnim;
+        protected IEnemyBehaviour behaviour;
+
+        protected override void Awake()
         {
-            public interface IAnimEnemy : IAnimEntity
-            {
-                public abstract void OpenStun(bool _isOpen);
-            }
+            base.Awake();
 
-            public interface IObjectEnemy
-            {
-
-            }
-
-            internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy
-            {
-                public IEnemyPlayer player;
-
-                #region Action
-                public Action StandStill;
-                public Action<int> MoveForward;
-                public Action<int> MoveToward;
-                public Action<int> MoveToward_Battle;
-                public Action UpdateBattle;
-                public Action StopBattle;
-                public Action FacingToPlayer;
-                public Action AttackCheck;
-                public Action Attack;
-                public Action StunCheck;
-                public Action BeStunned;
-                public Action<bool> OpenStun;
-                public Action StunFinish;
-
-                public Action ToIdle;
-                public Action ToMove;
-                #endregion
-
-                #region Func
-                public Func<float> CheckIdleDuration;
-                public Func<bool> IsDetectPlayer;
-                public Func<int> CheckBattleMoveDir;
-                #endregion
-
-                protected override void Awake()
-                {
-                    base.Awake();
-
-                    Assert.IsTrue(anim is IEnemyAnimation);
-                    IEnemyAnimation enemyAnim = anim as IEnemyAnimation;
-                    ToIdle += enemyAnim.Idle;
-                    ToMove += enemyAnim.Move;
-                    Attack += enemyAnim.Attack;
-                    BeStunned += enemyAnim.BeStunned;
-                    StunFinish += enemyAnim.StunFinish;
-                }
-                protected override void ComponentValidCheck()
-                {
-                    Assert.IsNotNull(GetComponent<CEnemyMovement>(), "缺少敌人运动组件");
-                    Assert.IsNotNull(GetComponent<CEnemyBattle>(), "缺少敌人战斗组件");
-                }
-                protected virtual void Start()
-                {
-                    if(player == null)
-                    {
-                        MEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
-                    }
-
-                }
-
-                #region Init
-                public void Init(IEnemyPlayer _player)
-                {
-                    player = _player;
-                }
-                #endregion
-
-                #region Animation
-                void IAnimEntity.AttackDamageTrigger()
-                {
-                    InvokeAction(AttackDamageTrigger);
-                }              
-
-                void IAnimEnemy.OpenStun(bool _isOpen)
-                {
-                    InvokeAction(OpenStun, true);
-                }
-
-                void IAnimEntity.AttackFinish()
-                {
-                    InvokeAction(AttackFinish);
-                }
-                #endregion
-
-                #region Player
-                bool IPlayerEnemy.IsDead()
-                {
-                    return isDead;
-                }
-                Vector3 IPlayerEnemy.CheckPosition()
-                {
-                    return transform.position;
-                }
-                WReadOnlyDamageData IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
-                {
-                    WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
-                    InvokeAction(TakeDamage, damage);
-                    return damage;
-                }
-                void IPlayerEnemy.StunCheck()
-                {
-                    InvokeAction(StunCheck);
-                }
-                #endregion
-
-            }
-
-            public interface IEnemyAnimation : IEntityAnimation
-            {
-                public void Idle();
-                public void Move();
-                public void Attack();
-            }
-            public interface IEnemyObjectFactory
-            {
-                
-            }
+            Assert.IsTrue(anim is IEnemyAnimation);
+            enemyAnim = anim as IEnemyAnimation;
         }
+        protected virtual void Start()
+        {
+            if (player == null)
+            {
+                MEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
+            }
+
+        }
+
+        #region Init
+        public void Init(IEnemyPlayer _player)
+        {
+            player = _player;
+        }
+        #endregion
+
+        #region Behaviour
+        public void ToAttack()
+        {
+            enemyAnim.Attack();
+        }
+
+        void IBehaviourEnemy.BeStunned()
+        {
+            enemyAnim.BeStunned();
+        }
+
+        public void StunnedFinish()
+        {
+            enemyAnim.StunFinish();
+        }
+
+        void IBehaviourEnemy.ToIdle()
+        {
+            enemyAnim.Idle();
+        }
+
+        void IBehaviourEnemy.ToMove()
+        {
+            enemyAnim.Move();
+        }
+
+        public bool IsPlayer(GameObject _object)
+        {
+            return _object.GetComponent<IEnemyPlayer>() != null;
+        }
+
+        public Vector3 CheckPlayerPosition()
+        {
+            return player.CheckPosition();
+        }
+
+        public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage)
+        {
+            return _player.GetComponent<IEnemyPlayer>().TakeDamage(_damage);
+        }
+        public bool IsPlayerAlive()
+        {
+            return !player.IsDead();
+        }
+        public bool IsPlayerAlive(GameObject _player)
+        {
+            return !_player.GetComponent<IEnemyPlayer>().IsDead();
+        }
+        #endregion
+
+        #region Animation
+        void IAnimEntity.AttackDamageTrigger()
+        {
+            InvokeAction(AttackDamageTrigger);
+        }
+
+        void IAnimEnemy.OpenStun(bool _isOpen)
+        {
+            behaviour.OpenStun(_isOpen);
+        }
+
+        void IAnimEntity.AttackFinish()
+        {
+            InvokeAction(AttackFinish);
+        }
+        #endregion
+
+        #region Player
+        bool IPlayerEnemy.IsDead()
+        {
+            return isDead;
+        }
+        WReadOnlyDamageData IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
+        {
+            WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
+            InvokeAction(TakeDamage, damage);
+            return damage;
+        }
+        void IPlayerEnemy.StunCheck()
+        {
+            behaviour.StunCheck();
+        }
+        #endregion
+
+    }
+
+    public interface IEnemyBehaviour
+    {
+        public void OpenStun(bool _isOpen);
+        public void StunCheck();
+    }
+
+    public interface IEnemyAnimation : IEntityAnimation
+    {
+        public void Idle();
+        public void Move();
+        public void Attack();
+    }
+    public interface IEnemyObjectFactory
+    {
+
     }
 }
 

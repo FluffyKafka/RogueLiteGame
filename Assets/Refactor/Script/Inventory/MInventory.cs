@@ -1,12 +1,8 @@
-using EntitySystem.EntityActor.PlayerActor;
 using Item;
-using StatsData;
+using PlayerSystem;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace InventorySystem

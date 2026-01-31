@@ -1,4 +1,4 @@
-using EntitySystem.EntityActor.PlayerActor;
+using PlayerSystem;
 using UnityEngine;
 
 //需要被第一个Update

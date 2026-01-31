@@ -31,5 +31,11 @@ public abstract class ComponentManagerBase : MonoBehaviour
         Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
         return _func.Invoke(_arg);
     }
+    public T3 InvokeFunc<T1, T2, T3>(Func<T1, T2, T3> _func, T1 _arg0, T2 _arg1)
+    {
+        Assert.IsNotNull(_func, GetType().Name + "的服务缺少提供者");
+        Assert.IsTrue(_func.GetInvocationList().Length == 1, "服务" + _func.ToString() + "有复数提供者");
+        return _func.Invoke(_arg0, _arg1);
+    }
     #endregion
 }

@@ -1,8 +1,8 @@
-using EntitySystem.EntityActor.EnemyActor;
-using EntitySystem.EntityActor.PlayerActor;
+using EnemySystem;
 using InputManager;
 using InventorySystem;
 using Item;
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UISystem;

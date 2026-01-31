@@ -1,9 +1,5 @@
-using EntitySystem.EntityActor;
-using EntitySystem.EntityActor.PlayerActor;
+using PlayerSystem;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace AnimationAndFx

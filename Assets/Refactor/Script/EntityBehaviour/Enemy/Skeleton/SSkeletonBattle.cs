@@ -1,0 +1,69 @@
+
+namespace EnemyBehaviour
+{
+    internal class SSkeletonBattle : SSkeletonState
+    {
+        public SSkeletonBattle(CEnemyStateMachine _stateMachine, MEnemyBehaviour _entity) : base(_stateMachine, _entity)
+        {
+        }
+
+        public override void Enter()
+        {
+            base.Enter();
+            enemy.StopBattle += StopBattle;
+            enemy.Attack += Attack;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            enemy.StopBattle -= StopBattle;
+            enemy.Attack -= Attack;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            enemy.InvokeAction(enemy.UpdateBattle);
+            enemy.InvokeAction(enemy.AttackCheck);
+        }
+
+        protected void StopBattle()
+        {
+            enemyStateMachine.ChangeState(enemyStateMachine.idle);
+        }
+
+        protected bool IdleCheckWithFlip()
+        {
+            int moveDir = enemy.InvokeFunc(enemy.CheckBattleMoveDir);
+            if (moveDir == 0)
+            {
+                return true;
+            }
+            else
+            {
+                if (!enemy.InvokeFunc(enemy.IsGroundedOrPlatForm) || enemy.InvokeFunc(enemy.IsTouchWall))
+                {
+                    if (moveDir == enemy.InvokeFunc(enemy.CheckFacingDir))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        enemy.InvokeAction(enemy.Flip);
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        protected void Attack()
+        {
+            enemyStateMachine.ChangeState(enemyStateMachine.attack);
+        }
+    }
+}

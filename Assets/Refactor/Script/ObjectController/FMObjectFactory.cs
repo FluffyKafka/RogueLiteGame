@@ -1,14 +1,8 @@
-using EntitySystem.EntityActor;
-using EntitySystem.EntityActor.EnemyActor;
-using EntitySystem.EntityActor.PlayerActor;
+using EnemySystem;
 using Item;
+using PlayerSystem;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml.Linq;
-using Tool;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace ObjectController
 {

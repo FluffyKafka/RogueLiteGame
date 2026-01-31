@@ -1,4 +1,4 @@
-using EntitySystem.EntityActor.PlayerActor;
+using PlayerSystem;
 using StatsData;
 using System;
 using System.Collections;

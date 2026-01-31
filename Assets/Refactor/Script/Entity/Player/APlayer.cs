@@ -1,8 +1,4 @@
-using EntitySystem.EntityActor;
-using EntitySystem.EntityActor.PlayerActor;
-using EntitySystem.EntityComponent.BattleComponent;
-using EntitySystem.EntityComponent.MovementComponent;
-using EntitySystem.EntityComponent.StateMachineComponent;
+using EntitySystem;
 using Item;
 using StatsData;
 using System;
@@ -10,368 +6,419 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
-using static UnityEditor.Progress;
 
-namespace EntitySystem
+namespace PlayerSystem
 {
-    namespace EntityActor
+    public interface IInitPlayer
     {
-        namespace PlayerActor
+        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory);
+    }
+
+    public interface IInputPlayer
+    {
+        public void HorizonInput(float _input);
+        public void VerticalInput(float _input);
+        public void JumpInput();
+        public void AttackInput();
+    }
+
+    public interface IEnemyPlayer
+    {
+        public bool IsDead();
+        public Vector3 CheckPosition();
+
+        public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
+    }
+
+    public interface IAnimPlayer : IAnimEntity
+    {
+
+    }
+
+    //Inventory似乎不应该使用这两个接口：
+    //public void AddModifier(WReadOnlyStatsData _data);
+    //public void RemoveModifier(WReadOnlyStatsData _data);
+    //考虑改名和改变参数类型表示装备被装备的行为，传输IEquipmentData或IEquipment（物品耐久磨损？）
+    public interface IInventoryPlayer
+    {
+        public void AddModifier(WReadOnlyStatsData _data);
+        public void RemoveModifier(WReadOnlyStatsData _data);
+        public void StashFullNotice(IItem _item);
+        public void DiscardItem(IItem _item);
+        public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
+        public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
+        public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
+    }
+
+    public interface IUIPlayer
+    {
+        public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
+        public void Equip(IEquipment _equip);
+        public void UnEquip(IEquipment _Equip);
+        public void DropItem(IItem _item);
+        public IEquipment CheckEquipmentByType(EEquipmentType _type);
+        public IReadOnlyList<IEquipment> CheckEquipmentStash();
+        public IReadOnlyList<IItem> CheckMaterialStash();
+        public int CheckEquipmentStashMaxSize();
+        public int CheckMaterialStashMaxSize();
+        public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
+        public float TryCheckStat(EStatType _type);
+    }
+
+    public interface IStatsPlayer : IStatEntity
+    {
+        public void StatsChangeNotice();
+    }
+
+    public interface IObjectPlayer
+    {
+        public bool TryTakeItem(IItem _item);
+    }
+
+    public interface IBehaviourPlayer : IBehaviourEntity
+    {
+        public void ToJump();
+        public void ToWallJump();
+        public void ToAttack(int _count);
+        public void UpdateYVelocity(float _yVelocity);
+        public void ToIdle();
+        public void ToMove();
+        public void ToWallSlide();
+        public float CheckHorizonInput();
+        public float CheckVerticalInput();
+
+        public bool IsEnemy(GameObject _enemy);
+        public bool IsEnemyAlive(GameObject _enemy);
+        public WReadOnlyDamageData DamageTo(GameObject _enemy, WReadOnlyDamageData _damage);
+        public void StunCheck(GameObject _enemy);
+    }
+
+    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer
+    {
+        protected IPlayerInput input;
+        protected IPlayerInventory inventory;
+        protected IPlayerUI ui;
+        protected IPlayerObjectFactory playerObjectFactory;
+        protected IPlayerAnimation playerAnim;
+        protected IPlayerBehaviour behaviour;
+
+        //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
+        //暂时直接转发，若有需要再引入事件机制
+        #region Behaviour
+        void IBehaviourPlayer.ToJump()
         {
-            public interface IInitPlayer
-            {
-                public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory);
-            }
+            playerAnim.Air();
+        }
 
-            public interface IInputPlayer
-            {
-                public void HorizonInput(float _input);
-                public void VerticalInput(float _input);
-                public void JumpInput();
-                public void AttackInput();
-            }
+        void IBehaviourPlayer.ToWallJump()
+        {
+            playerAnim.Air();
+        }
 
-            public interface IEnemyPlayer
-            {
-                public bool IsDead();
-                public Vector3 CheckPosition();
+        void IBehaviourPlayer.ToAttack(int _count)
+        {
+            playerAnim.Attack(_count);
+        }
 
-                public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
-            }
+        void IBehaviourPlayer.UpdateYVelocity(float _yVelocity)
+        {
+            playerAnim.UpdateYVelocity(_yVelocity);
+        }
 
-            public interface IAnimPlayer: IAnimEntity
-            {
+        void IBehaviourPlayer.ToIdle()
+        {
+            playerAnim.Idle();
+        }
 
-            }
+        void IBehaviourPlayer.ToMove()
+        {
+            playerAnim.Move();
+        }
 
-            //Inventory似乎不应该使用这两个接口：
-            //public void AddModifier(WReadOnlyStatsData _data);
-            //public void RemoveModifier(WReadOnlyStatsData _data);
-            //考虑改名和改变参数类型表示装备被装备的行为，传输IEquipmentData或IEquipment（物品耐久磨损？）
-            public interface IInventoryPlayer
-            {
-                public void AddModifier(WReadOnlyStatsData _data);
-                public void RemoveModifier(WReadOnlyStatsData _data);
-                public void StashFullNotice(IItem _item);
-                public void DiscardItem(IItem _item);
-                public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
-                public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
-                public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
-            }
+        void IBehaviourPlayer.ToWallSlide()
+        {
+            playerAnim.WallSlide();
+        }
 
-            public interface IUIPlayer
-            {
-                public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
-                public void Equip(IEquipment _equip);
-                public void UnEquip(IEquipment _Equip);
-                public void DropItem(IItem _item);
-                public IEquipment CheckEquipmentByType(EEquipmentType _type);
-                public IReadOnlyList<IEquipment> CheckEquipmentStash();
-                public IReadOnlyList<IItem> CheckMaterialStash();
-                public int CheckEquipmentStashMaxSize();
-                public int CheckMaterialStashMaxSize();
-                public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
-                public float TryCheckStat(EStatType _type);
-            }
+        float IBehaviourPlayer.CheckHorizonInput()
+        {
+            return input.CheckHorizonInput();
+        }
 
-            public interface IStatsPlayer : IStatEntity
-            {
-                public void StatsChangeNotice();
-            }
+        float IBehaviourPlayer.CheckVerticalInput()
+        {
+            return input.CheckVerticalInput();
+        }
 
-            public interface IObjectPlayer
-            {
-                public bool TryTakeItem(IItem _item);
-            }
+        public bool IsEnemy(GameObject _enemy)
+        {
+            return _enemy.GetComponent<IPlayerEnemy>() != null;
+        }
 
-            internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer
-            {
-                protected IPlayerInput input;
-                protected IPlayerInventory inventory;
-                protected IPlayerUI ui;
-                protected IPlayerObjectFactory playerObjectFactory;
+        public bool IsEnemyAlive(GameObject _enemy)
+        {
+            return !_enemy.GetComponent<IPlayerEnemy>().IsDead();
+        }
 
-                #region Internal Action
-                public Action<float> HorizonInput;
-                public Action<float> VerticalInput;
-                public Action JumpInput;
-                public Action AttackInput;
+        public WReadOnlyDamageData DamageTo(GameObject _enemy, WReadOnlyDamageData _damage)
+        {
+            return _enemy.GetComponent<IPlayerEnemy>().TakeDamage(_damage);
+        }
 
-                public Action Jump;
-                public Action<float> Move;
-                public Action<float> WallSlide;
-                public Action WallJump;
-                public Action<float> UpdateYVelocity;
+        public void StunCheck(GameObject _enemy)
+        {
+            _enemy.GetComponent<IPlayerEnemy>().StunCheck();
+        }
+        #endregion
 
-                public Action AttackRaw;
-                public Action<int> Attack;
+        //暂时直接转发，若有需要再引入事件机制
+        #region Init
+        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory)
+        {
+            input = _inputSource;
+            inventory = _inventory;
+            ui = _ui;
+            playerObjectFactory = _factory;
+        }
+        #endregion
 
-                public Action ToIdle;
-                public Action ToMove;
-                public Action ToWallSlide;
-                #endregion
+        //暂时直接转发，若有需要再引入事件机制
+        #region Input
+        void IInputPlayer.HorizonInput(float _input)
+        {
+            behaviour.HorizonInput(_input);
+        }
+        void IInputPlayer.VerticalInput(float _input)
+        {
+            behaviour.VerticalInput(_input);
+        }
+        void IInputPlayer.JumpInput()
+        {
+            behaviour.JumpInput();
+        }
+        void IInputPlayer.AttackInput()
+        {
+            behaviour.AttackInput();
+        }
+        #endregion
 
-                #region Internal Func
-                public Func<bool> IsGroundedOrPlatform_Strict;//确保只有当Player接触地面时才返回true
-                public Func<float> CheckHorizonInput;
-                public Func<float> CheckVerticalInput;
-                public Func<float> CheckUnmovableDurationAfterAttack;
-                #endregion
+        //暂时直接转发，若有需要再引入事件机制
+        #region Enemy
+        bool IEnemyPlayer.IsDead()
+        {
+            return isDead;
+        }
+        Vector3 IEnemyPlayer.CheckPosition()
+        {
+            return transform.position;
+        }
+        WReadOnlyDamageData IEnemyPlayer.TakeDamage(WReadOnlyDamageData _damageData)
+        {
+            WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
+            InvokeAction(TakeDamage, damage);
+            return damage;
+        }
+        #endregion
 
-                #region Init
-                void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory)
-                {
-                    input = _inputSource;
-                    inventory = _inventory;
-                    ui = _ui;
-                    playerObjectFactory = _factory;
-                }
-                #endregion
+        //暂时直接转发，若有需要再引入事件机制
+        #region Inventory
+        public Action<IItem> StashFullNotice;
+        public Action<IItem> DiscardItemNotice;
+        void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
+        {
+            InvokeAction(AddModifier, _data);
+        }
+        void IInventoryPlayer.RemoveModifier(WReadOnlyStatsData _data)
+        {
+            InvokeAction(RemoveModifier, _data);
+        }
 
-                #region Input
-                void IInputPlayer.HorizonInput(float _input)
-                {
-                    InvokeAction(HorizonInput, _input);
-                }
-                void IInputPlayer.VerticalInput(float _input)
-                {
-                    InvokeAction(VerticalInput, _input);
-                }
-                void IInputPlayer.JumpInput()
-                {                    
-                    InvokeAction(JumpInput);
-                }
-                void IInputPlayer.AttackInput()
-                {
-                    InvokeAction(AttackInput);
-                }
-                #endregion
+        void IInventoryPlayer.EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
+        {
+            ui.EquipmentChangeNotice(_type, _equip);
+        }
+        void IInventoryPlayer.EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash)
+        {
+            ui.EquipmentStashChangeNotice(_stash);
+        }
+        void IInventoryPlayer.MaterialStashChangeNotice(IReadOnlyList<IItem> _stash)
+        {
+            ui.MaterialStashChangeNotice(_stash);
+        }
 
-                #region Enemy
-                bool IEnemyPlayer.IsDead()
-                {
-                    return isDead;
-                }
-                Vector3 IEnemyPlayer.CheckPosition()
-                {
-                    return transform.position;
-                }
-                WReadOnlyDamageData IEnemyPlayer.TakeDamage(WReadOnlyDamageData _damageData)
-                {
-                    WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
-                    InvokeAction(TakeDamage, damage);
-                    return damage;
-                }
-                #endregion
+        void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
+        {
+            InvokeAction(StashFullNotice, _itemToFull);
+        }
+        void IInventoryPlayer.DiscardItem(IItem _item)
+        {
+            InvokeAction(DiscardItemNotice, _item);
+        }
+        #endregion
 
-                #region Inventory
-                public Action<IItem> StashFullNotice;
-                public Action<IItem> DiscardItemNotice;
-                void IInventoryPlayer.AddModifier(WReadOnlyStatsData _data)
-                {
-                    InvokeAction(AddModifier, _data);                 
-                }
-                void IInventoryPlayer.RemoveModifier(WReadOnlyStatsData _data)
-                {
-                    InvokeAction(RemoveModifier, _data);
-                }
+        //暂时直接转发，若有需要再引入事件机制
+        #region Stats
+        void IStatsPlayer.StatsChangeNotice()
+        {
+            ui.StatsChangeNotice();
+        }
+        #endregion
 
-                void IInventoryPlayer.EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
-                {
-                    ui.EquipmentChangeNotice(_type, _equip);
-                }
-                void IInventoryPlayer.EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash)
-                {
-                    ui.EquipmentStashChangeNotice(_stash);
-                }
-                void IInventoryPlayer.MaterialStashChangeNotice(IReadOnlyList<IItem> _stash)
-                {
-                    ui.MaterialStashChangeNotice(_stash);
-                }
+        //暂时直接转发，若有需要再引入事件机制
+        #region UI
+        IReadOnlyList<IItemData> IUIPlayer.TryCraft(IEquipmentData _data)
+        {
+            return inventory.TryCraft(_data);
+        }
 
-                void IInventoryPlayer.StashFullNotice(IItem _itemToFull)
-                {
-                    InvokeAction(StashFullNotice, _itemToFull);
-                }
-                void IInventoryPlayer.DiscardItem(IItem _item)
-                {
-                    InvokeAction(DiscardItemNotice, _item);
-                }
-                #endregion
+        void IUIPlayer.Equip(IEquipment _equip)
+        {
+            inventory.Equip(_equip);
+        }
 
-                //暂时直接转发，若有需要再引入事件机制
-                #region Stats
-                void IStatsPlayer.StatsChangeNotice()
-                {
-                    ui.StatsChangeNotice();
-                }
-                #endregion
+        void IUIPlayer.UnEquip(IEquipment _equip)
+        {
+            inventory.UnEquip(_equip);
+        }
 
-                //暂时直接转发，若有需要再引入事件机制
-                #region UI
-                IReadOnlyList<IItemData> IUIPlayer.TryCraft(IEquipmentData _data)
-                {
-                    return inventory.TryCraft(_data);
-                }
+        void IUIPlayer.DropItem(IItem _item)
+        {
+            inventory.DropFromStash(_item);
+        }
 
-                void IUIPlayer.Equip(IEquipment _equip)
-                {
-                    inventory.Equip(_equip);
-                }
+        IEquipment IUIPlayer.CheckEquipmentByType(EEquipmentType _type)
+        {
+            return inventory.CheckEquipmentByType(_type);
+        }
 
-                void IUIPlayer.UnEquip(IEquipment _equip)
-                {
-                    inventory.UnEquip(_equip);
-                }
+        IReadOnlyList<IEquipment> IUIPlayer.CheckEquipmentStash()
+        {
+            return inventory.CheckEquipmentStash();
+        }
 
-                void IUIPlayer.DropItem(IItem _item)
-                {
-                    inventory.DropFromStash(_item);
-                }
+        IReadOnlyList<IItem> IUIPlayer.CheckMaterialStash()
+        {
+            return inventory.CheckMaterialStash();
+        }
 
-                IEquipment IUIPlayer.CheckEquipmentByType(EEquipmentType _type)
-                {
-                    return inventory.CheckEquipmentByType(_type);
-                }
+        int IUIPlayer.CheckEquipmentStashMaxSize()
+        {
+            return inventory.CheckEquipmentStashMaxSize();
+        }
 
-                IReadOnlyList<IEquipment> IUIPlayer.CheckEquipmentStash()
-                {
-                    return inventory.CheckEquipmentStash();
-                }
+        int IUIPlayer.CheckMaterialStashMaxSize()
+        {
+            return inventory.CheckMaterialStashMaxSize();
+        }
 
-                IReadOnlyList<IItem> IUIPlayer.CheckMaterialStash()
-                {
-                    return inventory.CheckMaterialStash();
-                }
+        IReadOnlyList<IEquipmentData> IUIPlayer.CheckCraftableEquipmentByType(EEquipmentType _type)
+        {
+            return inventory.CheckCraftableEquipmentByType(_type);
+        }
 
-                int IUIPlayer.CheckEquipmentStashMaxSize()
-                {
-                    return inventory.CheckEquipmentStashMaxSize();
-                }
+        public float TryCheckStat(EStatType _type)
+        {
+            return stats.TryCheckStat(_type);
+        }
+        #endregion
 
-                int IUIPlayer.CheckMaterialStashMaxSize()
-                {
-                    return inventory.CheckMaterialStashMaxSize();
-                }
+        //暂时直接转发，若有需要再引入事件机制
+        #region ObjectController
+        public bool TryTakeItem(IItem _item)
+        {
+            return inventory.TryTakeItem(_item);
+        }
+        #endregion
 
-                IReadOnlyList<IEquipmentData> IUIPlayer.CheckCraftableEquipmentByType(EEquipmentType _type)
-                {
-                    return inventory.CheckCraftableEquipmentByType(_type);
-                }
+        protected override void Awake()
+        {
+            base.Awake();
 
-                public float TryCheckStat(EStatType _type)
-                {
-                    return stats.TryCheckStat(_type);
-                }
-                #endregion
+            Assert.IsTrue(anim is IPlayerAnimation, "Player需要一个IPlayerAnimation的动画组件");
+            IPlayerAnimation playerAnim = anim as IPlayerAnimation;
 
-                //暂时直接转发，若有需要再引入事件机制
-                #region ObjectController
-                public bool TryTakeItem(IItem _item)
-                {
-                    return inventory.TryTakeItem(_item);
-                }
-                #endregion
+            behaviour = GetComponentInChildren<IPlayerBehaviour>();
 
-                protected override void Awake()
-                {
-                    base.Awake();
+            //Inventory
+            StashFullNotice += ui.StashFullNotice;
+            StashFullNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
+            DiscardItemNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
+        }
+    }
 
-                    Assert.IsTrue(anim is IPlayerAnimation, "Player需要一个IPlayerAnimation的动画组件");
-                    IPlayerAnimation playerAnim = anim as IPlayerAnimation;
-                    Attack += playerAnim.Attack;
-                    WallJump += playerAnim.Air;
-                    Jump += playerAnim.Air;
-                    UpdateYVelocity += playerAnim.UpdateYVelocity;
-                    ToIdle += playerAnim.Idle;
-                    ToMove += playerAnim.Move;
-                    ToWallSlide += playerAnim.WallSlide;
+    public interface IPlayerBehaviour : IEntityBehaviour
+    {
+        public void HorizonInput(float _xInput);
+        public void VerticalInput(float _yInput);
+        public void JumpInput();
+        public void AttackInput();
+    }
 
+    public interface IPlayerEnterable : IEntityObject
+    {
+        public void Enter(IObjectPlayer _player);
+    }
+    public interface IPlayerInteractable : IEntityObject
+    {
+        public void Interact(IObjectPlayer _player);
+    }
+    public interface IPlayerReflectable : IEntityObject
+    {
+        public void Reflect(IObjectPlayer _player);
+    }
 
-                    CheckHorizonInput += input.CheckHorizonInput;
-                    CheckVerticalInput += input.CheckVerticalInput;
+    public interface IPlayerObjectFactory
+    {
+        public void GenerateDropItemObject(IItem _data, Vector3 position);
+    }
 
-                    //Inventory
-                    StashFullNotice += ui.StashFullNotice;
-                    StashFullNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
-                    DiscardItemNotice += (IItem _item) => { playerObjectFactory.GenerateDropItemObject(_item, transform.position); };
-                }
-                override protected void ComponentValidCheck()
-                {
-                    Assert.IsNotNull(GetComponent<CPlayerMovement>(), "缺少玩家运动组件");
-                    Assert.IsNotNull(GetComponent<CPlayerBattle>(), "缺少玩家战斗组件");
-                    Assert.IsNotNull(GetComponent<CPlayerStateMachine>(), "缺少玩家状态机组件");
-                }
-            }
+    public interface IPlayerAnimation : IEntityAnimation
+    {
+        public abstract void Idle();
+        public abstract void Move();
+        public abstract void Attack(int _count);
+        public abstract void Air();
+        public abstract void UpdateYVelocity(float _yVelocity);
+        public abstract void WallSlide();
+    }
 
-            public interface IPlayerEnterable : IEntityObject
-            {
-                public void Enter(IObjectPlayer _player);
-            }
-            public interface IPlayerInteractable : IEntityObject
-            {
-                public void Interact(IObjectPlayer _player);
-            }
-            public interface IPlayerReflectable : IEntityObject
-            {
-                public void Reflect(IObjectPlayer _player);
-            }
+    public interface IPlayerInput
+    {
+        public float CheckHorizonInput();
+        public float CheckVerticalInput();
+    }
 
-            public interface IPlayerObjectFactory
-            {
-                public void GenerateDropItemObject(IItem _data, Vector3 position);                
-            }
+    public interface IPlayerEnemy
+    {
+        public bool IsDead();
 
-            public interface IPlayerAnimation : IEntityAnimation
-            {
-                public abstract void Idle();
-                public abstract void Move();
-                public abstract void Attack(int _count);
-                public abstract void Air();
-                public abstract void UpdateYVelocity(float _yVelocity);
-                public abstract void WallSlide();
-            }
+        public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
 
-            public interface IPlayerInput
-            {
-                public float CheckHorizonInput();
-                public float CheckVerticalInput();
-            }
+        public void StunCheck();
+    }
 
-            public interface IPlayerEnemy
-            {
-                public bool IsDead();
-                public Vector3 CheckPosition();
+    public interface IPlayerInventory
+    {
+        public void Equip(IEquipment _newEquip);
+        public void UnEquip(IEquipment _equip);
+        public IEquipment CheckEquipmentByType(EEquipmentType _type);
+        public IReadOnlyList<IEquipment> CheckEquipmentStash();
+        public int CheckEquipmentStashMaxSize();
+        public IReadOnlyList<IItem> CheckMaterialStash();
+        public int CheckMaterialStashMaxSize();
+        public void DropFromStash(IItem _data);
+        public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
+        public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
+        public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
+        public bool TryTakeItem(IItem _item);
+    }
 
-                public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
-
-                public void StunCheck();
-            }
-
-            public interface IPlayerInventory
-            {
-                public void Equip(IEquipment _newEquip);
-                public void UnEquip(IEquipment _equip);
-                public IEquipment CheckEquipmentByType(EEquipmentType _type);
-                public IReadOnlyList<IEquipment> CheckEquipmentStash();
-                public int CheckEquipmentStashMaxSize();
-                public IReadOnlyList<IItem> CheckMaterialStash();
-                public int CheckMaterialStashMaxSize();
-                public void DropFromStash(IItem _data);
-                public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
-                public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
-                public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
-                public bool TryTakeItem(IItem _item);
-            }
-
-            public interface IPlayerUI
-            {
-                public void StatsChangeNotice();
-                public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
-                public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
-                public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
-                public void StashFullNotice(IItem _itemToFull);
-            }
-        }        
+    public interface IPlayerUI
+    {
+        public void StatsChangeNotice();
+        public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
+        public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
+        public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
+        public void StashFullNotice(IItem _itemToFull);
     }
 }
