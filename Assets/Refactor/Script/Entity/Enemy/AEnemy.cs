@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 
 namespace EnemySystem
 {
-    public interface IBehaviourEnemy
+    public interface IBehaviourEnemy: IBehaviourEntity
     {
         public void ToAttack();
         public void BeStunned();
@@ -43,12 +43,17 @@ namespace EnemySystem
 
             Assert.IsTrue(anim is IEnemyAnimation);
             enemyAnim = anim as IEnemyAnimation;
+
+            behaviour = GetComponent<IEnemyBehaviour>();
+            AttackFinish += behaviour.AttackFinish;
+            AttackDamageTrigger += behaviour.AttackDamageTrigger;
+            CanBeDamage += behaviour.CanBeDamage;
         }
         protected virtual void Start()
         {
             if (player == null)
             {
-                MEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
+                FEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
             }
 
         }
@@ -146,7 +151,7 @@ namespace EnemySystem
 
     }
 
-    public interface IEnemyBehaviour
+    public interface IEnemyBehaviour : IEntityBehaviour
     {
         public void OpenStun(bool _isOpen);
         public void StunCheck();

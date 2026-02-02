@@ -10,6 +10,7 @@ namespace EntitySystem
     public interface IBehaviourEntity
     {
         public void Flip();
+        public WReadOnlyDamageData GetPrimaryAttackDamage();
     }
 
     public interface IAnimEntity
@@ -56,6 +57,10 @@ namespace EntitySystem
         void IBehaviourEntity.Flip()
         {
             InvokeAction(Flip);
+        }
+        WReadOnlyDamageData IBehaviourEntity.GetPrimaryAttackDamage()
+        {
+            return InvokeFunc(GetPrimaryAttackDamage);
         }
         #endregion
 
@@ -134,6 +139,8 @@ namespace EntitySystem
             TakeDamage += stats.TakeDamage;
             AddModifier += stats.AddStatModifier;
             RemoveModifier += stats.RemoveStatModifier;
+
+            
 
             Die += EntityDie;
         }

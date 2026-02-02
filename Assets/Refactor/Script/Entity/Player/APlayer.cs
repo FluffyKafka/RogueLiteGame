@@ -335,9 +335,12 @@ namespace PlayerSystem
             base.Awake();
 
             Assert.IsTrue(anim is IPlayerAnimation, "Player需要一个IPlayerAnimation的动画组件");
-            IPlayerAnimation playerAnim = anim as IPlayerAnimation;
+            playerAnim = anim as IPlayerAnimation;
 
             behaviour = GetComponentInChildren<IPlayerBehaviour>();
+            AttackFinish += behaviour.AttackFinish;
+            AttackDamageTrigger += behaviour.AttackDamageTrigger;
+            CanBeDamage += behaviour.CanBeDamage;
 
             //Inventory
             StashFullNotice += ui.StashFullNotice;

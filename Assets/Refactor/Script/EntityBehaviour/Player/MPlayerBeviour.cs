@@ -42,15 +42,26 @@ namespace PlayerBebaviour
 
         protected void Awake()
         {
+            playerSystem = GetComponent<IBehaviourPlayer>();
             StunCheck += playerSystem.StunCheck;
             IsEnemy += playerSystem.IsEnemy;
             IsEnemyAlive += playerSystem.IsEnemyAlive;
             DamageTo += playerSystem.DamageTo;
+            CheckHorizonInput += playerSystem.CheckHorizonInput;
+            CheckVerticalInput += playerSystem.CheckVerticalInput;
+            Attack += playerSystem.ToAttack;
+            Jump += playerSystem.ToJump;
+            ToIdle += playerSystem.ToIdle;
+            ToMove += playerSystem.ToMove;
+            ToWallSlide += playerSystem.ToWallSlide;
+            WallJump += playerSystem.ToWallJump;
+            UpdateYVelocity += playerSystem.UpdateYVelocity;
+            GetPrimaryAttackDamage += playerSystem.GetPrimaryAttackDamage;
         }
 
         void IPlayerBehaviour.AttackInput()
         {
-            InvokeAction(AttackRaw);
+            InvokeAction(AttackInput);
         }
 
         void IPlayerBehaviour.HorizonInput(float _xInput)

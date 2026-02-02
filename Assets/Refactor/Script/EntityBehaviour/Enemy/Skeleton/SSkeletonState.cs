@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace EnemyBehaviour
@@ -14,6 +15,7 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("enterState: " + GetType().Name);
         }
 
         public override void Exit()

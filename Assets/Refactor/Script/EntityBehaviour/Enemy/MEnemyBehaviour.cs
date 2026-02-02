@@ -45,6 +45,11 @@ namespace EnemyBehaviour
             DamageTo += enemySystem.DamageTo;
             IsPlayerAlive += enemySystem.IsPlayerAlive;
             IsThisPlayerAlive += enemySystem.IsPlayerAlive;
+            ToIdle += enemySystem.ToIdle;
+            ToMove += enemySystem.ToMove;
+            Attack += enemySystem.ToAttack;
+            BeStunned += enemySystem.BeStunned;
+            GetPrimaryAttackDamage += enemySystem.GetPrimaryAttackDamage;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)

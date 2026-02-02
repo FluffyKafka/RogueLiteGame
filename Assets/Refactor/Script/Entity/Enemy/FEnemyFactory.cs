@@ -8,9 +8,9 @@ namespace EnemySystem
     {
         public void Init(IEnemyPlayer _player);
     }
-    internal class MEnemyFactory : MonoBehaviour, IInitEnemyFactory
+    internal class FEnemyFactory : MonoBehaviour, IInitEnemyFactory
     {
-        protected static MEnemyFactory instance;
+        protected static FEnemyFactory instance;
         protected static IEnemyPlayer player;
 
         [Header("EnemyPrefab")]
@@ -33,7 +33,7 @@ namespace EnemySystem
             }
         }
 
-        public static MEnemyFactory GetInstance_TestMode()
+        public static FEnemyFactory GetInstance_TestMode()
         {
             Assert.IsTrue(isTestMode_Class, "此方法只能在测试时执行，运行时所有敌人都由工厂生产而不是直接摆放入场景");
             return instance;
