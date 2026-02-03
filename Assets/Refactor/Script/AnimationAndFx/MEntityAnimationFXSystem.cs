@@ -11,6 +11,8 @@ namespace AnimationAndFx
         public Action RecoverSpeed;
         public Action<WReadOnlyDamageData> Hit;
         public Action<bool> Stun;
+        public Action AfterImageBegin;
+        public Action AfterImageEnd;
         #endregion
 
         #region Func

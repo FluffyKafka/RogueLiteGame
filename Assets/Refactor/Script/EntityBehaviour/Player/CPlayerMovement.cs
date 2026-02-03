@@ -35,6 +35,10 @@ namespace PlayerBebaviour
         [SerializeField] protected float groundCheckWidth;
         [SerializeField] protected float strictGroundCheckDistance;
 
+        #region Skill
+        protected float dashSpeed;
+        #endregion
+
         MPlayerBeviour player;
         protected override void Awake()
         {
@@ -54,6 +58,8 @@ namespace PlayerBebaviour
             player.IsGroundedOrPlatform_Strict += IsGroundedOrPlatform_Strict;
             player.SlowEntityBy += SlowBy;
             player.RecoverEntitySpeed += RecoverSpeed;
+            player.DashBeginNotice += SetDashSpeed;
+            player.DashMovementUpdate += DashVelocityUpdate;
         }
 
         protected override void Update()
@@ -184,6 +190,15 @@ namespace PlayerBebaviour
         {
             moveSpeed = defaultMoveSpeed;
             jumpSpeed = defaultJumpSpeed;
+        }
+
+        protected void SetDashSpeed(float _speed)
+        {
+            dashSpeed = _speed;
+        }
+        protected void DashVelocityUpdate()
+        {
+            rg.velocity = new Vector2(dashSpeed, rg.velocity.y);
         }
 
         protected override void OnDrawGizmos()

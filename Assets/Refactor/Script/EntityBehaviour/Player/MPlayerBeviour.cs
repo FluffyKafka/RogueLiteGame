@@ -28,6 +28,11 @@ namespace PlayerBebaviour
         public Action AttackInput;
         public Action<float> UpdateYVelocity;
         public Action<GameObject> StunCheck;
+
+        //Skill
+        public Action<float> DashBeginNotice;
+        public Action DashEndNotice;
+        public Action DashMovementUpdate;
         #endregion
 
         #region Func
@@ -38,6 +43,7 @@ namespace PlayerBebaviour
         public Func<GameObject, bool> IsEnemy;
         public Func<GameObject, bool> IsEnemyAlive;
         public Func<GameObject, WReadOnlyDamageData,  WReadOnlyDamageData> DamageTo;
+        public Func<bool> CanEffectBehaviourSkillNotice;
         #endregion
 
         protected void Awake()
@@ -77,6 +83,21 @@ namespace PlayerBebaviour
         void IPlayerBehaviour.VerticalInput(float _yInput)
         {
             InvokeAction(VerticalInput, _yInput);
+        }
+
+        public void DashBegin(float _speed)
+        {
+            InvokeAction(DashBeginNotice, _speed);//状态组件进入dash，移动组件dash
+        }
+
+        public void DashEnd()
+        {
+            InvokeAction(DashEndNotice);
+        }
+
+        public bool CanEffectBehaviourSkill()
+        {
+            return InvokeFunc(CanEffectBehaviourSkillNotice);
         }
     }
 }

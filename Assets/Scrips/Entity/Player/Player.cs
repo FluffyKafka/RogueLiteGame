@@ -253,15 +253,15 @@ public class Player : Entity
             return;
         }
 
-        if(CheckInput_KeyDown(KeyCode.LeftShift) && !IsTouchWall() && skill.dash.TryUseSkill() && !isKnocked)
-        {
-            dashDir = Input.GetAxisRaw("Horizontal");
-            if (dashDir == 0)
-            {
-                dashDir = facingDir;
-            }
-            stateMachine.ChangeState(dashState);
-        }
+        //if(CheckInput_KeyDown(KeyCode.LeftShift) && !IsTouchWall() && skill.dash.TryUseSkill() && !isKnocked)
+        //{
+        //    dashDir = Input.GetAxisRaw("Horizontal");
+        //    if (dashDir == 0)
+        //    {
+        //        dashDir = facingDir;
+        //    }
+        //    stateMachine.ChangeState(dashState);
+        //}
     }
     private bool IsInStateNotAllowDash()
     {

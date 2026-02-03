@@ -14,6 +14,7 @@ namespace AnimationAndFx
         [SerializeField] protected string attackAnimName = "Attack";
         [SerializeField] protected string comboCounterName = "ComboCounter";
         [SerializeField] protected string wallSlideName = "WallSlide";
+        [SerializeField] protected string dashName = "Dash";
  
         protected override void Awake()
         {
@@ -26,6 +27,7 @@ namespace AnimationAndFx
             playerAnimFxSystem.Air += Air;
             playerAnimFxSystem.WallSlide += WallSlide;
             playerAnimFxSystem.UpdateYVelocity += UpdateYVelocity;
+            playerAnimFxSystem.DashBeginNotice += Dash;
         }
 
         protected void Idle()
@@ -57,6 +59,11 @@ namespace AnimationAndFx
         protected void WallSlide()
         {
             ChangeAnimationTo(wallSlideName);
+        }
+
+        protected void Dash()
+        {
+            ChangeAnimationTo(dashName);
         }
     }
 }

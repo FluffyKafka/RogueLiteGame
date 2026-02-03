@@ -93,7 +93,15 @@ namespace PlayerSystem
         public void StunCheck(GameObject _enemy);
     }
 
-    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer
+    public interface ISkillManagerPlayer
+    {
+        public void DashBegin(float _speed);
+        public void DashEnd();
+
+        public bool CanEffectBehaviourSkill();
+    }
+
+    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
     {
         protected IPlayerInput input;
         protected IPlayerInventory inventory;
@@ -330,6 +338,25 @@ namespace PlayerSystem
         }
         #endregion
 
+        #region Skill
+        public void DashBegin(float _speed)
+        {
+            behaviour.DashBegin(_speed);
+            playerAnim.DashBegin();
+        }
+
+        public void DashEnd()
+        {
+            behaviour.DashEnd();
+            playerAnim.DashEnd();
+        }
+
+        public bool CanEffectBehaviourSkill()
+        {
+            return behaviour.CanEffectBehaviourSkill();
+        }
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();
@@ -349,12 +376,20 @@ namespace PlayerSystem
         }
     }
 
+    public interface IPlayerSkillManager
+    {
+        public void SkillInput(int _input);
+    }
+
     public interface IPlayerBehaviour : IEntityBehaviour
     {
         public void HorizonInput(float _xInput);
         public void VerticalInput(float _yInput);
         public void JumpInput();
         public void AttackInput();
+        public void DashBegin(float _speed);
+        public void DashEnd();
+        public bool CanEffectBehaviourSkill();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -383,6 +418,8 @@ namespace PlayerSystem
         public abstract void Air();
         public abstract void UpdateYVelocity(float _yVelocity);
         public abstract void WallSlide();
+        public abstract void DashBegin();
+        public abstract void DashEnd();
     }
 
     public interface IPlayerInput

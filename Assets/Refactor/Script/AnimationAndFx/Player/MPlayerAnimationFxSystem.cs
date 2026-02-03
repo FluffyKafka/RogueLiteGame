@@ -1,5 +1,6 @@
 using PlayerSystem;
 using System;
+using Unity.VisualScripting;
 using UnityEngine.Assertions;
 
 namespace AnimationAndFx
@@ -15,6 +16,8 @@ namespace AnimationAndFx
         public Action Move;
         public Action WallSlide;
         public Action<float> UpdateYVelocity;
+        public Action DashBeginNotice;
+        public Action DashEndNotice; 
         #endregion
 
         protected override void Awake()
@@ -52,6 +55,18 @@ namespace AnimationAndFx
             InvokeAction(UpdateYVelocity, _yVelocity);
         }
 
+        public void DashBegin()
+        {
+            InvokeAction(DashBeginNotice);
+            InvokeAction(AfterImageBegin);
+        }
+
+        public void DashEnd()
+        {
+            InvokeAction(DashEndNotice);
+            InvokeAction(AfterImageEnd);
+        }
+
         public void OnAttackFinish()
         {
             player.AttackFinish();
@@ -61,5 +76,7 @@ namespace AnimationAndFx
         {
             player.AttackDamageTrigger();
         }
+
+        
     }
 }

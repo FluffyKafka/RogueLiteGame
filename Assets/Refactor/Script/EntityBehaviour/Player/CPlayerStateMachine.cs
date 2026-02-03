@@ -19,6 +19,10 @@ namespace PlayerBebaviour
         public SEntityState dead { get; protected set; }
         #endregion
 
+        #region SkillStates
+        public SEntityState dash { get; protected set; }
+        #endregion
+
         #region InputHandle
         public float xInput { get; protected set; } = 0;
         public float yInput { get; protected set; } = 0;
@@ -43,6 +47,11 @@ namespace PlayerBebaviour
             wallJump = new SPlayerWallJump(this, entity);
             primaryAttack = new SPlayerPrimaryAttack(this, entity);
             dead = new SPlayerDead(this, entity);
+
+            //SkillStats
+            dash = new SPlayerDash(this, entity);
+
+            player.CanEffectBehaviourSkillNotice += () => { return currentState is SPlayerRegularState; };
         }
 
         protected override void Start()
