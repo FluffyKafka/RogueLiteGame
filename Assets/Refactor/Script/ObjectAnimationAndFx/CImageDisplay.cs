@@ -22,6 +22,7 @@ namespace AnimationAndFx
         {
             sr.sprite = _image;
         }
+
     }
 }
 

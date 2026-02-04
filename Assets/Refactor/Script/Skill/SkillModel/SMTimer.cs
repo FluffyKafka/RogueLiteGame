@@ -7,7 +7,7 @@ namespace SkillSystem
 {
     internal class SMTimer : SMSkillModel
     {
-        protected Dictionary<string, float> timers;
+        protected Dictionary<string, float> timers = new();
 
         public void SetTimer(string _id)
         {
@@ -29,8 +29,7 @@ namespace SkillSystem
                 return time;
             }
             else
-            {
-                Assert.IsFalse(true, "尝试检查一个未初始化的技能计时器");
+            {                
                 return 0;
             }
         }

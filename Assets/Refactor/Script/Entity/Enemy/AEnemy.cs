@@ -23,7 +23,7 @@ namespace EnemySystem
 
     public interface IAnimEnemy : IAnimEntity
     {
-        public abstract void OpenStun(bool _isOpen);
+        public abstract void OpenStun(bool _isOpen);       
     }
 
     public interface IObjectEnemy
@@ -59,9 +59,11 @@ namespace EnemySystem
         }
 
         #region Init
-        public void Init(IEnemyPlayer _player)
+        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory)
         {
             player = _player;
+            objectFactory = _objectFactory;
+            enemyObjectFactory = _objectFactory;
         }
         #endregion
 
@@ -149,6 +151,10 @@ namespace EnemySystem
         }
         #endregion
 
+        #region Object
+        protected IEnemyObjectFactory enemyObjectFactory;
+        #endregion
+
     }
 
     public interface IEnemyBehaviour : IEntityBehaviour
@@ -163,7 +169,7 @@ namespace EnemySystem
         public void Move();
         public void Attack();
     }
-    public interface IEnemyObjectFactory
+    public interface IEnemyObjectFactory: IEntityObjectFactory
     {
 
     }

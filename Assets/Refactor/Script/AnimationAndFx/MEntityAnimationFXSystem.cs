@@ -1,11 +1,15 @@
 using EntitySystem;
 using StatsData;
 using System;
+using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace AnimationAndFx
 {
     internal class MEntityAnimationFXSystem : ComponentManagerBase, IEntityAnimation
     {
+        protected IAnimEntity entity;
+
         #region Action
         public Action<float> SlowBy;
         public Action RecoverSpeed;
@@ -20,7 +24,8 @@ namespace AnimationAndFx
 
         protected virtual void Awake()
         {
-            
+            entity = GetComponentInParent<IAnimEntity>();
+            Assert.IsNotNull(entity, "实体动画组件需要被附加在一个实体下");
         }
 
         void IEntityAnimation.SlowBy(float _rate)
@@ -47,6 +52,20 @@ namespace AnimationAndFx
         {
             InvokeAction(Stun, false);
         }
+
+        #region AfterImage
+        public void EntityGenerateAfterImage(DAfterImageData _data)
+        {
+            entity.GenerateAfterImage(_data);
+        }
+        #endregion
+
+        #region EntityRequest
+        public int CheckFacingDir()
+        {
+            return entity.CheckFacingDir();
+        }
+        #endregion
     }
 }
 

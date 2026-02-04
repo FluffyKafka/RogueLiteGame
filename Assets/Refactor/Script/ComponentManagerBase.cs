@@ -19,6 +19,10 @@ public abstract class ComponentManagerBase : MonoBehaviour
     {
         _action?.Invoke(_arg1, _arg2);
     }
+    public void InvokeAction<T1, T2, T3>(Action<T1, T2, T3> _action, T1 _arg1, T2 _arg2, T3 _arg3)
+    {
+        _action?.Invoke(_arg1, _arg2, _arg3);
+    }
     public T InvokeFunc<T>(Func<T> _func)
     {
         Assert.IsNotNull(_func, GetType().Name + "的服务缺少提供者");

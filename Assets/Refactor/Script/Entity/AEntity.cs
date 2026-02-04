@@ -4,9 +4,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 
 namespace EntitySystem
 {
+    public struct DAfterImageData
+    {
+        public Sprite image;
+        public Vector3 position;
+        public float duration;
+        public int facingDir;
+        public float fadeSpeed;
+        public DAfterImageData(Sprite _image, Vector3 _position, float _duration, int _dir, float _fadeSpeed)
+        {
+            image = _image;
+            position = _position;
+            duration = _duration;
+            facingDir = _dir;
+            fadeSpeed = _fadeSpeed;
+        }
+    }
+
     public interface IBehaviourEntity
     {
         public void Flip();
@@ -17,6 +35,8 @@ namespace EntitySystem
     {
         public void AttackFinish();
         public void AttackDamageTrigger();
+        public void GenerateAfterImage(DAfterImageData _data);
+        public int CheckFacingDir();
     }
 
     public interface IStatEntity
@@ -54,6 +74,7 @@ namespace EntitySystem
         #endregion
 
         #region Behaviour
+        private IEntityBehaviour behaviour;
         void IBehaviourEntity.Flip()
         {
             InvokeAction(Flip);
@@ -75,6 +96,14 @@ namespace EntitySystem
         {
             InvokeAction(AttackDamageTrigger);
         }
+        void IAnimEntity.GenerateAfterImage(DAfterImageData _data)
+        {
+            objectFactory.GenerateAfterImage(_data);
+        }
+        public int CheckFacingDir()
+        {
+            return behaviour.CheckFacingDir();
+        }
         #endregion
 
         #region Stats
@@ -93,6 +122,10 @@ namespace EntitySystem
             yield return new WaitForSeconds(_duration);
             InvokeAction(RecoverEntitySpeed);
         }
+        #endregion
+
+        #region Object
+        protected IEntityObjectFactory objectFactory;
         #endregion
 
         #region Entity Base Info
@@ -140,10 +173,16 @@ namespace EntitySystem
             AddModifier += stats.AddStatModifier;
             RemoveModifier += stats.RemoveStatModifier;
 
-            
+            behaviour = GetComponent<IEntityBehaviour>();
+            Assert.IsNotNull(behaviour, "实体缺少行为系统");
 
             Die += EntityDie;
         }
+    }
+
+    public interface IEntityObjectFactory
+    {
+        public void GenerateAfterImage(DAfterImageData _data);
     }
 
     public interface IEntityBehaviour
@@ -156,6 +195,8 @@ namespace EntitySystem
         public void TakeDamage(WReadOnlyDamageData _damage);
         public bool CanBeDamage();
         public void Die();
+
+        public int CheckFacingDir();
     }
 
     public interface IEntityAnimation

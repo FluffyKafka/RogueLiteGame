@@ -6,7 +6,12 @@ using UnityEngine;
 
 namespace SkillSystem
 {
-    internal class MSkillManager : ComponentManagerBase, IPlayerSkillManager
+    public interface IInitSkillManager
+    {
+        public void Init(ISkillManagerPlayer _player);
+    }
+
+    internal class MSkillManager : ComponentManagerBase, IInitSkillManager, IPlayerSkillManager
     {
         protected ISkillManagerPlayer player;
 
@@ -22,10 +27,17 @@ namespace SkillSystem
             DashBegin += player.DashBegin;
             DashEnd += player.DashEnd;
         }
+
+        public void Init(ISkillManagerPlayer _player)
+        {
+            player = _player;
+        }
+
         public void SkillInput(int _input)
         {
             InvokeAction(SkillInputNotice, _input);
         }
+
         public bool CanEffectBehaviourSkill()
         {
             return player.CanEffectBehaviourSkill();

@@ -22,6 +22,7 @@ namespace AnimationAndFx
 
         protected override void Awake()
         {
+            base.Awake();
             player = GetComponentInParent<IAnimPlayer>();
             Assert.IsNotNull(player, "MPlayerAnimation需要挂载在一个Player上");
         }

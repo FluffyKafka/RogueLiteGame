@@ -60,6 +60,7 @@ namespace PlayerBebaviour
             player.RecoverEntitySpeed += RecoverSpeed;
             player.DashBeginNotice += SetDashSpeed;
             player.DashMovementUpdate += DashVelocityUpdate;
+            player.ToIdle += StandStill;
         }
 
         protected override void Update()
@@ -83,6 +84,11 @@ namespace PlayerBebaviour
                     }
                 }
             }
+        }
+
+        protected void StandStill()
+        {
+            SetVelocity(Vector2.zero, false);
         }
 
         protected void Move(float _dir)
@@ -198,7 +204,7 @@ namespace PlayerBebaviour
         }
         protected void DashVelocityUpdate()
         {
-            rg.velocity = new Vector2(dashSpeed, rg.velocity.y);
+            SetVelocity(new Vector2(dashSpeed * facingDir, rg.velocity.y), true);
         }
 
         protected override void OnDrawGizmos()

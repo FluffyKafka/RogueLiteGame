@@ -11,10 +11,20 @@ namespace AnimationAndFx
     {
         #region Action
         public Action<Sprite> InitAnimImageNotice;
+        public Action<float, float> SetFadeAwayNotice;
+        public Action ClearNotice;
         #endregion
         public void InitAnimImage(Sprite _image)
         {
             InvokeAction(InitAnimImageNotice, _image);
+        }
+        public void SetFadeAway(float _speed, float _cooldown)
+        {
+            InvokeAction(SetFadeAwayNotice, _speed, _cooldown);
+        }
+        public void Clear()
+        {
+            InvokeAction(ClearNotice);
         }
     }
 

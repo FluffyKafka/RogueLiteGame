@@ -5,9 +5,7 @@ using UnityEngine.Assertions;
 namespace ObjectController
 {
     internal class ADropItem : AObjectController
-    {
-        protected FCDropItemFactory factory;
-
+    {   
         protected IItem item;
 
         public void Setup(FCDropItemFactory _factory, IItem _item)
@@ -23,7 +21,7 @@ namespace ObjectController
             HitPlayer += PlayerPickUp;
         }
 
-        public void Clear()
+        public override void Clear()
         {
             item = null;
         }
@@ -35,12 +33,6 @@ namespace ObjectController
             {
                 SelfRecycle();
             }
-        }
-
-        protected override void SelfRecycle()
-        {
-            InvokeAction(SelfRecycleNotice);
-            factory.RecycleDropItem(this);
         }
     }
 }

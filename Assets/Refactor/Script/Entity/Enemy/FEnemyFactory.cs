@@ -6,12 +6,13 @@ namespace EnemySystem
 {
     public interface IInitEnemyFactory
     {
-        public void Init(IEnemyPlayer _player);
+        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory);
     }
     internal class FEnemyFactory : MonoBehaviour, IInitEnemyFactory
     {
         protected static FEnemyFactory instance;
         protected static IEnemyPlayer player;
+        protected static IEnemyObjectFactory objectFactory;
 
         [Header("EnemyPrefab")]
         [SerializeField] protected GameObject skeletonPrefab;
@@ -43,13 +44,14 @@ namespace EnemySystem
         public void InitEnemyNotGenerateByFactory_TestMode(AEnemy _enemy)
         {
             Assert.IsTrue(isTestMode, "此方法只能在测试时执行，运行时所有敌人都由工厂生产而不是直接摆放入场景");
-            _enemy.Init(player);
+            _enemy.Init(player, objectFactory);
         }
 
 
-        void IInitEnemyFactory.Init(IEnemyPlayer _player)
+        void IInitEnemyFactory.Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory)
         {
             player = _player;
+            objectFactory = _objectFactory;
             TryInitPrefab(skeletonPrefab);
         }
         protected void TryInitPrefab(GameObject _prefab)
@@ -59,7 +61,7 @@ namespace EnemySystem
                 return;
             }
 
-            _prefab.GetComponent<AEnemy>().Init(player);
+            _prefab.GetComponent<AEnemy>().Init(player, objectFactory);
         }
 
         public GameObject GetSkeleton(Vector3 _worldPosition)

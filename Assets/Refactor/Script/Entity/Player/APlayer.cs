@@ -11,7 +11,7 @@ namespace PlayerSystem
 {
     public interface IInitPlayer
     {
-        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory);
+        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager);
     }
 
     public interface IInputPlayer
@@ -20,6 +20,7 @@ namespace PlayerSystem
         public void VerticalInput(float _input);
         public void JumpInput();
         public void AttackInput();
+        public void SkillInput(int _input);
     }
 
     public interface IEnemyPlayer
@@ -109,6 +110,7 @@ namespace PlayerSystem
         protected IPlayerObjectFactory playerObjectFactory;
         protected IPlayerAnimation playerAnim;
         protected IPlayerBehaviour behaviour;
+        protected IPlayerSkillManager skillManager;
 
         //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
         //暂时直接转发，若有需要再引入事件机制
@@ -181,12 +183,14 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region Init
-        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory)
+        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager)
         {
             input = _inputSource;
             inventory = _inventory;
             ui = _ui;
             playerObjectFactory = _factory;
+            objectFactory = _factory;
+            skillManager = _skillManager;
         }
         #endregion
 
@@ -207,6 +211,10 @@ namespace PlayerSystem
         void IInputPlayer.AttackInput()
         {
             behaviour.AttackInput();
+        }
+        void IInputPlayer.SkillInput(int _input)
+        {
+            skillManager.SkillInput(_input);
         }
         #endregion
 
@@ -404,8 +412,7 @@ namespace PlayerSystem
     {
         public void Reflect(IObjectPlayer _player);
     }
-
-    public interface IPlayerObjectFactory
+    public interface IPlayerObjectFactory: IEntityObjectFactory
     {
         public void GenerateDropItemObject(IItem _data, Vector3 position);
     }

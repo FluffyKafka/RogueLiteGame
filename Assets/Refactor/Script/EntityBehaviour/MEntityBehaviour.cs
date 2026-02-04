@@ -70,6 +70,10 @@ namespace EntityBehaviour
         {
             InvokeAction(Die);
         }
+        int IEntityBehaviour.CheckFacingDir()
+        {
+            return InvokeFunc(CheckFacingDir);
+        }
         #endregion
     }
 

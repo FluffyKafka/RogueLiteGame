@@ -23,7 +23,11 @@ namespace ObjectController
         public Action<Sprite> InitAnimSprite;
         public Action ResetTrigger;
         public Action SelfRecycleNotice;
+        public Action<float, float> SetFadeAway;
+        public Action ClearNotice;
         #endregion
+
+        protected FCObjectFactoryComponentBase factory;
 
         protected IObjectAnim anim;
 
@@ -37,10 +41,16 @@ namespace ObjectController
             else
             {
                 InitAnimSprite += anim.InitAnimImage;
+                SetFadeAway += anim.SetFadeAway;
+                ClearNotice += anim.Clear;
             }
         }
 
-        protected abstract void SelfRecycle();
+        protected void SelfRecycle()
+        {
+            InvokeAction(SelfRecycleNotice);
+            factory.RecycleObject(this);
+        }
 
         public void Enter(IObjectPlayer _player)
         {
@@ -56,10 +66,14 @@ namespace ObjectController
         {
             InvokeAction(PlayerReflect, _player);
         }
+
+        public abstract void Clear();
     }
 
     public interface IObjectAnim
     {
         public void InitAnimImage(Sprite _image);
+        public void SetFadeAway(float _speed, float _cooldown);
+        public void Clear();
     }
 }

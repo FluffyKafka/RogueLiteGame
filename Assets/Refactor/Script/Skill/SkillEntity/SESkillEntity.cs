@@ -49,6 +49,18 @@ namespace SkillSystem
         public void Init(bool _isUnlock)
         {
             isUnlock = _isUnlock;
+            if(isUnlock)
+            {
+                foreach (var effect in unlockEffects)
+                {
+                    effect.Effect();
+                }
+
+                foreach (var time in effectTimes)
+                {
+                    time.Effect += TryEffect;
+                }
+            }
         }
 
         public bool CanUnlock()

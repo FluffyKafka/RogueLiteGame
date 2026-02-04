@@ -41,6 +41,11 @@ namespace InputManager
                 player.JumpInput();
             }
 
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                player.SkillInput(0);
+            }
+
             float xInput = Input.GetAxisRaw("Horizontal");
             if (xInput != 0)
             {
