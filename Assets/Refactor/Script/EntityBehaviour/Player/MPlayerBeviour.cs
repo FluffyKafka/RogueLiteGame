@@ -63,6 +63,7 @@ namespace PlayerBebaviour
             WallJump += playerSystem.ToWallJump;
             UpdateYVelocity += playerSystem.UpdateYVelocity;
             GetPrimaryAttackDamage += playerSystem.GetPrimaryAttackDamage;
+            ToDead += playerSystem.ToDead;
         }
 
         void IPlayerBehaviour.AttackInput()

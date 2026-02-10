@@ -23,24 +23,30 @@ namespace AnimationAndFx
             enemyAnimFxSystem.Stun += Stun;
         }
 
-        public void Idle()
+        protected void Idle()
         {
             ChangeAnimationTo(idleAnimName);
         }
-        public void Move()
+        protected void Move()
         {
             ChangeAnimationTo(moveAnimName);
         }
-        public void Attack()
+        protected void Attack()
         {
             ChangeAnimationTo(attackAnimName);
         }
-        public void Stun(bool isStun)
+        protected void Stun(bool isStun)
         {
             if(isStun)
             {
                 ChangeAnimationTo(stunAnimName);
             }         
+        }
+
+        protected void Dead()
+        {
+            anim.SetBool(currentAnimName, true);
+            anim.speed = 0;
         }
     }
 }

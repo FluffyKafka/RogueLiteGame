@@ -17,6 +17,8 @@ namespace AnimationAndFx
         public Action<bool> Stun;
         public Action AfterImageBegin;
         public Action AfterImageEnd;
+        public Action<float> UpdateHealthBar;
+        public Action ToDead;
         #endregion
 
         #region Func
@@ -52,7 +54,14 @@ namespace AnimationAndFx
         {
             InvokeAction(Stun, false);
         }
-
+        void IEntityAnimation.UpdateHealthBar(float _hpPercent)
+        {
+            InvokeAction(UpdateHealthBar, _hpPercent);
+        }
+        void IEntityAnimation.ToDead()
+        {
+            InvokeAction(ToDead);
+        }
         #region AfterImage
         public void EntityGenerateAfterImage(DAfterImageData _data)
         {

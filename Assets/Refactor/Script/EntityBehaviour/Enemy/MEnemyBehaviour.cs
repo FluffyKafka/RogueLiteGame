@@ -50,6 +50,7 @@ namespace EnemyBehaviour
             Attack += enemySystem.ToAttack;
             BeStunned += enemySystem.BeStunned;
             GetPrimaryAttackDamage += enemySystem.GetPrimaryAttackDamage;
+            ToDead += enemySystem.ToDead;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)

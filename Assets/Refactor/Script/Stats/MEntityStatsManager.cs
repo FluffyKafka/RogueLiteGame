@@ -30,7 +30,7 @@ namespace StatsSystem
         #endregion       
 
         #region RunTimeStats
-        protected float currentHealth;
+        [SerializeField] protected float currentHealth;//必须使用UpdateCurrentHealth进行修改
         protected bool isIgnite;
         protected bool isChill;
         protected bool isShock;
@@ -49,7 +49,7 @@ namespace StatsSystem
 
         protected virtual void Start()
         {
-            currentHealth = InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth);
+            UpdateCurrentHealth(InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth));
         }
 
         protected virtual void ComponentValidCheck()
@@ -114,7 +114,7 @@ namespace StatsSystem
                 return;
             }
 
-            currentHealth -= finalDamage;
+            UpdateCurrentHealth(currentHealth - finalDamage);
             ApplyAilment(_damage);
         }
         protected void ApplyAilment(WReadOnlyDamageData _damageData)
@@ -150,7 +150,7 @@ namespace StatsSystem
         {
             while(isIgnite)
             {
-                currentHealth -= _damageData.data.igniteDamage;
+                UpdateCurrentHealth(currentHealth - _damageData.data.igniteDamage);
                 yield return new WaitForSeconds(_damageData.data.igniteDamageCooldown);
             }
         }
@@ -190,5 +190,20 @@ namespace StatsSystem
             if (!float.IsNaN(stat)) return stat;
             return float.NaN;
         }
+        
+        protected void UpdateCurrentHealth(float _current)
+        {
+            if(currentHealth == _current)
+            {
+                return;
+            }
+            currentHealth = _current;
+            entity.CurrentHealthUpdate(_current/InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth));
+            if(currentHealth <= 0)
+            {
+                entity.Die();
+            }
+        }
+
     }
 }

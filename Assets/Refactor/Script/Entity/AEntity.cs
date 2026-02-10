@@ -29,6 +29,7 @@ namespace EntitySystem
     {
         public void Flip();
         public WReadOnlyDamageData GetPrimaryAttackDamage();
+        public void ToDead();
     }
 
     public interface IAnimEntity
@@ -43,6 +44,8 @@ namespace EntitySystem
     {
         public bool CanBeDamage();
         public void SlowEntityByDuring(float _rate, float _duration);
+        public void Die();
+        public void CurrentHealthUpdate(float _hpPercent);
     }
 
     internal abstract class AEntity : ComponentManagerBase, IAnimEntity, IStatEntity, IBehaviourEntity
@@ -50,7 +53,8 @@ namespace EntitySystem
         #region Actions
         public Action Flip;
 
-        public Action Die;
+        public Action Die;//提供行为组件判断死亡前行为
+        public Action ToDead;//确认死亡
 
         public Action AttackFinish;
         public Action AttackDamageTrigger;
@@ -82,6 +86,10 @@ namespace EntitySystem
         WReadOnlyDamageData IBehaviourEntity.GetPrimaryAttackDamage()
         {
             return InvokeFunc(GetPrimaryAttackDamage);
+        }
+        void IBehaviourEntity.ToDead()
+        {
+            InvokeAction(ToDead);
         }
         #endregion
 
@@ -121,6 +129,14 @@ namespace EntitySystem
             InvokeAction(SlowEntityBy, _rate);
             yield return new WaitForSeconds(_duration);
             InvokeAction(RecoverEntitySpeed);
+        }
+        void IStatEntity.Die()
+        {
+            InvokeAction(Die);
+        }
+        void IStatEntity.CurrentHealthUpdate(float _hpPercent)
+        {
+            anim.UpdateHealthBar(_hpPercent);
         }
         #endregion
 
@@ -175,8 +191,9 @@ namespace EntitySystem
 
             behaviour = GetComponent<IEntityBehaviour>();
             Assert.IsNotNull(behaviour, "实体缺少行为系统");
+            Die += behaviour.Die;
 
-            Die += EntityDie;
+            ToDead += EntityDie;
         }
     }
 
@@ -206,6 +223,8 @@ namespace EntitySystem
         public abstract void Hit(WReadOnlyDamageData _data);
         public abstract void BeStunned();
         public abstract void StunFinish();
+        public abstract void UpdateHealthBar(float _hpPercent);
+        public abstract void ToDead();
     }
 
     public interface IEntityStats

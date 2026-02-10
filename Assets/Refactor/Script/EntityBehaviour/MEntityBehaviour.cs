@@ -20,6 +20,7 @@ namespace EntityBehaviour
         public Action<WReadOnlyDamageData> TakeDamage;
         public Action Flip;
         public Action Die;
+        public Action ToDead;
         public Action AttackDamageTrigger;
         public Action<float> SlowEntityBy;
         public Action RecoverEntitySpeed;
@@ -75,6 +76,7 @@ namespace EntityBehaviour
             return InvokeFunc(CheckFacingDir);
         }
         #endregion
+
     }
 
     internal class CEntityComponentBase : MonoBehaviour

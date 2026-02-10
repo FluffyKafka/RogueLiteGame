@@ -10,6 +10,7 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            enemy.InvokeAction(enemy.ToDead);
         }
 
         public override void Exit()

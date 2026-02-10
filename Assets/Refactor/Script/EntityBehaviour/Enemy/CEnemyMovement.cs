@@ -1,4 +1,5 @@
 using EntityBehaviour;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -9,15 +10,20 @@ namespace EnemyBehaviour
         protected MEnemyBehaviour enemy;
 
         [Header("Enemy Regular Movement")]
-        [SerializeField] public float moveSpeed;
+        [SerializeField] protected float moveSpeed;
         protected float defaultMoveSpeed;
-        [SerializeField] public float maxIdleDuration;
-        [SerializeField] public float minIdleDuration;
-        [SerializeField] public float battleMoveSpeed;
+        [SerializeField] protected float maxIdleDuration;
+        [SerializeField] protected float minIdleDuration;
+        [SerializeField] protected float battleMoveSpeed;
         protected float defaultBattleMoveSpeed;
 
         [Header("Enemy Stunned Movement")]
-        [SerializeField] public Vector2 stunDir;
+        [SerializeField] protected Vector2 stunDir;
+
+        [Header("Enemy Dead Movement")]
+        [SerializeField] protected float deadAnimDuration;
+        [SerializeField] protected Vector2 deadAnimVelocity;
+        protected bool isDeadMove;
 
         protected override void Awake()
         {
@@ -37,6 +43,17 @@ namespace EnemyBehaviour
             enemy.StandStill += StandStill;
 
             enemy.SlowEntityBy += SlowBy;
+
+            enemy.ToDead += Die;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if(isDeadMove)
+            {
+                rg.velocity = deadAnimVelocity;
+            }
         }
 
         protected float CheckRandomIdleDuration()
@@ -96,6 +113,18 @@ namespace EnemyBehaviour
         {
             moveSpeed = defaultMoveSpeed;
             battleMoveSpeed = defaultBattleMoveSpeed;
+        }
+
+        protected void Die()
+        {
+            GetComponent<Collider2D>().enabled = false;
+            StartCoroutine(DeadMove());
+        }
+        protected IEnumerator DeadMove()
+        {
+            isDeadMove = true;
+            yield return new WaitForSeconds(deadAnimDuration);
+            isDeadMove = false;
         }
 
         protected override void OnDrawGizmos()
