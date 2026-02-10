@@ -13,12 +13,19 @@ namespace EnemySystem
         public void StunnedFinish();
         public void ToIdle();
         public void ToMove();
+        public void ToPullBack();
+        public void ToPullBackJump();
+        public void ToFall();
 
         public bool IsPlayer(GameObject _object);
         public Vector3 CheckPlayerPosition();
+        public Vector3 CheckPlayerVelocity();
+        public float CheckPlayerGravityScale();
         public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage);
         public bool IsPlayerAlive();
         public bool IsPlayerAlive(GameObject _player);
+        public float CheckArrowGravity();
+        public void GenerateArrowAt(DArrowData _data, Vector3 _position);
     }
 
     public interface IAnimEnemy : IAnimEntity
@@ -28,7 +35,8 @@ namespace EnemySystem
 
     public interface IObjectEnemy
     {
-
+        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
+        public Transform CheckTransform();
     }
 
     internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy
@@ -93,6 +101,21 @@ namespace EnemySystem
             enemyAnim.Move();
         }
 
+        void IBehaviourEnemy.ToPullBack()
+        {
+            enemyAnim.PullBack();
+        }
+
+        void IBehaviourEnemy.ToPullBackJump()
+        {
+            enemyAnim.PullBackJump();
+        }
+
+        void IBehaviourEnemy.ToFall()
+        {
+            enemyAnim.Fall();
+        }
+
         public bool IsPlayer(GameObject _object)
         {
             return _object.GetComponent<IEnemyPlayer>() != null;
@@ -101,6 +124,16 @@ namespace EnemySystem
         public Vector3 CheckPlayerPosition()
         {
             return player.CheckPosition();
+        }
+
+        public Vector3 CheckPlayerVelocity()
+        {
+            return player.CheckVelocity();
+        }
+
+        public float CheckPlayerGravityScale()
+        {
+            return player.CheckGravityScale();
         }
 
         public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage)
@@ -115,6 +148,16 @@ namespace EnemySystem
         {
             return !_player.GetComponent<IEnemyPlayer>().IsDead();
         }
+
+        public float CheckArrowGravity()
+        {
+            return enemyObjectFactory.CheckArrowGravityScale();
+        }
+        public void GenerateArrowAt(DArrowData _data, Vector3 _position)
+        {
+            enemyObjectFactory.GenerateArrow(_data, _position);
+        }
+
         #endregion
 
         #region Animation
@@ -153,6 +196,16 @@ namespace EnemySystem
 
         #region Object
         protected IEnemyObjectFactory enemyObjectFactory;
+        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage)
+        {
+            WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damage);
+            InvokeAction(TakeDamage, damage);
+            return damage;
+        }
+        public Transform CheckTransform()
+        {
+            return transform;
+        }
         #endregion
 
     }
@@ -168,10 +221,14 @@ namespace EnemySystem
         public void Idle();
         public void Move();
         public void Attack();
+        public void PullBack();
+        public void PullBackJump();
+        public void Fall();
     }
     public interface IEnemyObjectFactory: IEntityObjectFactory
     {
-
+        public void GenerateArrow(DArrowData _data, Vector3 _position);
+        public float CheckArrowGravityScale();
     }
 }
 

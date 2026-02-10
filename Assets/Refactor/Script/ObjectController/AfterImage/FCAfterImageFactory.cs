@@ -8,7 +8,6 @@ namespace ObjectController
 {
     internal class FCAfterImageFactory : FCObjectFactoryComponentBase
     {
-
         protected override void Awake()
         {
             base.Awake();

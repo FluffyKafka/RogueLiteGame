@@ -10,6 +10,11 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            enemy.InvokeAction(enemy.ToPullbackJump);
+            if (!enemy.InvokeFunc(enemy.TryEffectPullBackJump))
+            {
+                enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
+            }
         }
 
         public override void Exit()
@@ -20,6 +25,16 @@ namespace EnemyBehaviour
         public override void Update()
         {
             base.Update();
+
+            if(enemy.InvokeFunc(enemy.IsFall))
+            {
+                enemy.InvokeAction(enemy.ToFall);
+            }
+
+            if(enemy.InvokeFunc(enemy.IsGroundedOrPlatForm))
+            {
+                enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
+            }
         }
     }
 }

@@ -1,4 +1,8 @@
 using EntityBehaviour;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace EnemyBehaviour
@@ -6,6 +10,8 @@ namespace EnemyBehaviour
     internal abstract class CEnemyStateMachine : CEntityStateMachine
     {
         protected MEnemyBehaviour enemy;
+        protected List<Coroutine> currentStateCoroutine;
+
         protected override void Awake()
         {
             base.Awake();

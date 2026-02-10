@@ -10,6 +10,7 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            enemy.InvokeAction(enemy.ToPullBack);
         }
 
         public override void Exit()
@@ -20,6 +21,10 @@ namespace EnemyBehaviour
         public override void Update()
         {
             base.Update();
+            if (!TryBattleStateChange())
+            {
+                enemy.InvokeAction(enemy.PullBackUpdate);
+            }
         }
     }
 }

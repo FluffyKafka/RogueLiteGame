@@ -15,7 +15,7 @@ namespace ObjectController
             Assert.IsNotNull(_item, "不允许使用null初始化ADropItem对象");
 
             item = _item;
-            InvokeAction(InitAnimSprite, _item.CheckData().CheckIcon());
+            anim.InitAnimImage(_item.CheckData().CheckIcon());
             InvokeAction(OriginProjectToward, 0);
             InvokeAction(ResetTrigger);
             HitPlayer += PlayerPickUp;
@@ -24,6 +24,7 @@ namespace ObjectController
         public override void Clear()
         {
             item = null;
+            HitPlayer -= PlayerPickUp;
         }
 
         protected void PlayerPickUp(IObjectPlayer _player)

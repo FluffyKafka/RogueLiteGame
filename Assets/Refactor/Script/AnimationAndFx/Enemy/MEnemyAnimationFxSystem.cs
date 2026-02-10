@@ -12,6 +12,10 @@ namespace AnimationAndFx
         public Action Idle;
         public Action Move;
         public Action Attack;
+        public Action<bool> StunOpen;
+        public Action PullBack;
+        public Action PullBackJump;
+        public Action Fall;
         #endregion
 
         #region Func
@@ -37,11 +41,13 @@ namespace AnimationAndFx
         public void OnStunOpen()
         {
             enemy.OpenStun(true);
+            InvokeAction(StunOpen, true);
         }
 
         public void OnStunClose()
         {
             enemy.OpenStun(false);
+            InvokeAction(StunOpen, false);
         }
 
         void IEnemyAnimation.Idle()
@@ -57,6 +63,21 @@ namespace AnimationAndFx
         void IEnemyAnimation.Attack()
         {
             InvokeAction(Attack);
+        }
+
+        void IEnemyAnimation.PullBack()
+        {
+            InvokeAction(PullBack);
+        }
+
+        void IEnemyAnimation.PullBackJump()
+        {
+            InvokeAction(PullBackJump);
+        }
+
+        void IEnemyAnimation.Fall()
+        {
+            InvokeAction(Fall);
         }
     }
 }

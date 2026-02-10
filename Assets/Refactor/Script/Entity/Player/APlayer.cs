@@ -27,6 +27,8 @@ namespace PlayerSystem
     {
         public bool IsDead();
         public Vector3 CheckPosition();
+        public Vector3 CheckVelocity();
+        public float CheckGravityScale();
 
         public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
     }
@@ -74,6 +76,8 @@ namespace PlayerSystem
     public interface IObjectPlayer
     {
         public bool TryTakeItem(IItem _item);
+        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
+        public Transform CheckTransform();
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -234,6 +238,16 @@ namespace PlayerSystem
             InvokeAction(TakeDamage, damage);
             return damage;
         }
+
+        Vector3 IEnemyPlayer.CheckVelocity()
+        {
+            return GetComponent<Rigidbody2D>().velocity;
+        }
+
+        float IEnemyPlayer.CheckGravityScale()
+        {
+            return GetComponent<Rigidbody2D>().gravityScale;
+        }
         #endregion
 
         //暂时直接转发，若有需要再引入事件机制
@@ -343,6 +357,16 @@ namespace PlayerSystem
         public bool TryTakeItem(IItem _item)
         {
             return inventory.TryTakeItem(_item);
+        }
+        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage)
+        {
+            WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damage);
+            InvokeAction(TakeDamage, damage);
+            return damage;
+        }
+        public Transform CheckTransform()
+        {
+            return transform;
         }
         #endregion
 

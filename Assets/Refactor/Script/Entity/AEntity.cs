@@ -24,6 +24,24 @@ namespace EntitySystem
             fadeSpeed = _fadeSpeed;
         }
     }
+    public struct DArrowData
+    {
+        public WReadOnlyDamageData damage;
+        public EEntityType targetType;
+        public Vector2 velocity;
+        public DArrowData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity)
+        {
+            damage = _damage;
+            targetType = _targetType;
+            velocity = _velocity;
+        }
+    }
+
+    public enum EEntityType
+    {
+        Player,
+        Enemy
+    }
 
     public interface IBehaviourEntity
     {

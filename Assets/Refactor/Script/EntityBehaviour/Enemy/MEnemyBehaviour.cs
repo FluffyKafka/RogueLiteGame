@@ -1,5 +1,6 @@
 using EnemySystem;
 using EntityBehaviour;
+using EntitySystem;
 using StatsData;
 using System;
 using System.Collections;
@@ -30,9 +31,29 @@ namespace EnemyBehaviour
         public Action Attack;
         public Action ToIdle;
         public Action ToMove;
+        public Action ToFall;
+
+        #region Arrow
+        public Action<DArrowData, Vector3> GenerateArrowAt;
+        public Func<float> CheckArrowGravity;
+        #endregion
+
+        #region PullBack
+        public Func<bool> CanPullBack;
+        public Action PullBackUpdate;
+        public Action ToPullBack;
+        #endregion
+
+        #region PullBackJump
+        public Func<bool> CanPullBackJump;
+        public Func<bool> TryEffectPullBackJump;
+        public Action ToPullbackJump;
+        #endregion
 
         public Func<GameObject, bool> IsPlayer;
         public Func<Vector3> CheckPlayerPosition;
+        public Func<Vector3> CheckPlayerVelocity;
+        public Func<float> CheckPlayerGravityScale;
         public Func<GameObject, WReadOnlyDamageData, WReadOnlyDamageData> DamageTo;
         public Func<bool> IsPlayerAlive;
         public Func<GameObject, bool> IsThisPlayerAlive;
@@ -42,6 +63,8 @@ namespace EnemyBehaviour
             enemySystem = GetComponentInParent<IBehaviourEnemy>();
             IsPlayer += enemySystem.IsPlayer;
             CheckPlayerPosition += enemySystem.CheckPlayerPosition;
+            CheckPlayerVelocity += enemySystem.CheckPlayerVelocity;
+            CheckPlayerGravityScale += enemySystem.CheckPlayerGravityScale;
             DamageTo += enemySystem.DamageTo;
             IsPlayerAlive += enemySystem.IsPlayerAlive;
             IsThisPlayerAlive += enemySystem.IsPlayerAlive;
@@ -51,6 +74,10 @@ namespace EnemyBehaviour
             BeStunned += enemySystem.BeStunned;
             GetPrimaryAttackDamage += enemySystem.GetPrimaryAttackDamage;
             ToDead += enemySystem.ToDead;
+            ToPullBack += enemySystem.ToPullBack;
+            ToPullbackJump += enemySystem.ToPullBackJump;
+            CheckArrowGravity += enemySystem.CheckArrowGravity;
+            GenerateArrowAt += enemySystem.GenerateArrowAt;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)

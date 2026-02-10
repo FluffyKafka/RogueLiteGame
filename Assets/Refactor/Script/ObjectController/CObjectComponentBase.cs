@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ObjectController
 {
-    internal class CObjectControllerComponentBase : MonoBehaviour
+    internal class CObjectComponentBase : MonoBehaviour
     {
         protected AObjectController controller;
         protected virtual void Awake()

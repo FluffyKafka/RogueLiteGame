@@ -12,6 +12,8 @@ namespace ObjectController
     {
         public Action<IItem, Vector3> GenerateDropItemAt;
         public Action<DAfterImageData> GenerateAfterImageAt;
+        public Action<DArrowData, Vector3> GenerateArrowAt;
+        public Func<float> CheckArrowGravityNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -21,6 +23,16 @@ namespace ObjectController
         public void GenerateDropItemObject(IItem _data, Vector3 _position)
         {
             InvokeAction(GenerateDropItemAt, _data, _position);
+        }
+
+        public void GenerateArrow(DArrowData _data, Vector3 _position)
+        {
+            InvokeAction(GenerateArrowAt, _data, _position);
+        }
+
+        public float CheckArrowGravityScale()
+        {
+            return InvokeFunc(CheckArrowGravityNotice);
         }
     }
 

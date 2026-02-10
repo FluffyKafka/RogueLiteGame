@@ -171,7 +171,7 @@ namespace PlayerBebaviour
             return _dir;
         }
 
-        protected override bool IsGroundedOrPlatForm()
+        public override bool IsGroundedOrPlatForm()
         {
             Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
             Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace StatsData
@@ -32,6 +33,32 @@ namespace StatsData
         public WReadOnlyDamageData(DDamageData _damageData)
         {
             data = _damageData;
+        }
+        public DDamageData Clone()
+        {
+            DDamageData newData = new DDamageData
+            {
+                damageSourceTransform = data.damageSourceTransform, 
+                shouldPlayAnim = data.shouldPlayAnim,
+                physical = data.physical,
+                isCrit = data.isCrit,
+                magical = data.magical,
+                ignite = data.ignite,
+                igniteDamageCooldown = data.igniteDamageCooldown,
+                igniteDuration = data.igniteDuration,
+                igniteDamage = data.igniteDamage,
+                chill = data.chill,
+                chillSlowPercentage = data.chillSlowPercentage,
+                chillDuration = data.chillDuration,
+                chillReduceArmorPer = data.chillReduceArmorPer,
+                shock = data.shock,
+                shockDuration = data.shockDuration,
+                thunderStrikeRadius = data.thunderStrikeRadius,
+                thunderStrikeRate = data.thunderStrikeRate,
+                thunderStrikeCounter = data.thunderStrikeCounter,
+                shockReduceAccuracy = data.shockReduceAccuracy
+            };
+            return newData;
         }
     }
 }

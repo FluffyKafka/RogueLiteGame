@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ObjectController
 {
 
-    internal class CProjectileMovement : CObjectControllerComponentBase
+    internal class CProjectileMovement : CObjectComponentBase
     {
         [SerializeField] protected Vector2 randomOriginProjectXRange;
         [SerializeField] protected Vector2 randomOriginProjectYRange;
@@ -19,6 +19,7 @@ namespace ObjectController
             rg = GetComponent<Rigidbody2D>();
             controller.OriginProjectToward += (int _dir) => { Project(GetRandomOriginProjectVelocity(), _dir); };
             controller.SecondaryProjectToward += (int _dir) => { Project(GetRandomSecondaryProjectVelocity(), _dir); };
+            controller.Project += (Vector2 _velocity) => { Project(_velocity, 1); };
         }
 
         protected void Project(Vector2 _velocity, int _dir)

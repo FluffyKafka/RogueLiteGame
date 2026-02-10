@@ -10,16 +10,23 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            enemy.AttackFinish += OnAttackFinish;
         }
 
         public override void Exit()
         {
             base.Exit();
+            enemy.AttackFinish -= OnAttackFinish;
         }
 
         public override void Update()
         {
             base.Update();
+        }
+
+        protected void OnAttackFinish()
+        {
+            enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
         }
     }
 }

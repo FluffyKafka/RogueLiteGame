@@ -18,8 +18,8 @@ namespace ObjectController
             {
                 transform.Rotate(0, 180, 0);
             }
-            InvokeAction(InitAnimSprite, _data.image);
-            InvokeAction(SetFadeAway, _data.fadeSpeed, _data.duration * _data.fadeSpeed);
+            anim.InitAnimImage(_data.image);
+            anim.SetFadeAway(_data.fadeSpeed, _data.duration * _data.fadeSpeed, 0);
             StartCoroutine(SelfRecycle(_data.duration));
         }
         protected IEnumerator SelfRecycle(float _delay)

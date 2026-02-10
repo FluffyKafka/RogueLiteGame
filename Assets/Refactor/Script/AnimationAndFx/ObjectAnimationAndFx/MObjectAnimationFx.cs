@@ -11,20 +11,30 @@ namespace AnimationAndFx
     {
         #region Action
         public Action<Sprite> InitAnimImageNotice;
-        public Action<float, float> SetFadeAwayNotice;
+        public Action<float, float, float> SetFadeAwayNotice;
+        public Action FadeAwayNotice;
         public Action ClearNotice;
+        public Action<bool> ShowTrailNotice;
         #endregion
         public void InitAnimImage(Sprite _image)
         {
             InvokeAction(InitAnimImageNotice, _image);
         }
-        public void SetFadeAway(float _speed, float _cooldown)
+        public void SetFadeAway(float _speed, float _cooldown, float _delay)
         {
-            InvokeAction(SetFadeAwayNotice, _speed, _cooldown);
+            InvokeAction(SetFadeAwayNotice, _speed, _cooldown, _delay);
+        }
+        public void FadeAway()
+        {
+            InvokeAction(FadeAwayNotice);
         }
         public void Clear()
         {
             InvokeAction(ClearNotice);
+        }
+        public void ShowTrail(bool _isShow)
+        {
+            InvokeAction(ShowTrail, _isShow);
         }
     }
 

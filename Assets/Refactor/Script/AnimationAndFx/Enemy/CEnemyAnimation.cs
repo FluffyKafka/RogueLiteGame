@@ -11,6 +11,9 @@ namespace AnimationAndFx
         [SerializeField] protected string moveAnimName = "Move";
         [SerializeField] protected string attackAnimName = "Attack";
         [SerializeField] protected string stunAnimName = "Stun";
+        [SerializeField] protected string pullbackAnimName = "Move";
+        [SerializeField] protected string fallAnimName = "Fall";
+        [SerializeField] protected string pullbackJumpAnimName = "PullBackJump";
 
         protected override void Awake()
         {
@@ -21,6 +24,9 @@ namespace AnimationAndFx
             enemyAnimFxSystem.Move += Move;
             enemyAnimFxSystem.Attack += Attack;
             enemyAnimFxSystem.Stun += Stun;
+            enemyAnimFxSystem.PullBack += PullBack;
+            enemyAnimFxSystem.PullBackJump += PullBackJump;
+            enemyAnimFxSystem.Fall += Fall;
         }
 
         protected void Idle()
@@ -41,6 +47,21 @@ namespace AnimationAndFx
             {
                 ChangeAnimationTo(stunAnimName);
             }         
+        }
+
+        protected void PullBack()
+        {
+            ChangeAnimationTo(pullbackAnimName);
+        }
+
+        protected void PullBackJump()
+        {
+            ChangeAnimationTo(pullbackJumpAnimName);
+        }
+
+        protected void Fall()
+        {
+            ChangeAnimationTo(fallAnimName);
         }
 
         protected void Dead()

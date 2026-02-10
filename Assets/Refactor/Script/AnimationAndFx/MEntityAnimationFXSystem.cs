@@ -19,6 +19,7 @@ namespace AnimationAndFx
         public Action AfterImageEnd;
         public Action<float> UpdateHealthBar;
         public Action ToDead;
+
         #endregion
 
         #region Func

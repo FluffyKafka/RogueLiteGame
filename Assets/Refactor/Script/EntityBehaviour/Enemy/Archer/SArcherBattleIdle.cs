@@ -11,6 +11,8 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
+            enemy.InvokeAction(enemy.StandStill);
+            enemy.InvokeAction(enemy.ToIdle);
         }
 
         public override void Exit()
@@ -21,6 +23,7 @@ namespace EnemyBehaviour
         public override void Update()
         {
             base.Update();
+            TryBattleStateChange();
         }
     }
 }

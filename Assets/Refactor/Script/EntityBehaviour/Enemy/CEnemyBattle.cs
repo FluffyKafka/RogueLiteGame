@@ -132,7 +132,7 @@ namespace EnemyBehaviour
             }
         }
 
-        protected void AttackCheck()
+        protected virtual void AttackCheck()
         {
             if (!isAttackCooldown)
             {
@@ -170,7 +170,7 @@ namespace EnemyBehaviour
             enemy.InvokeAction(enemy.StunFinish);
         }
 
-        protected void DamageTrigger()
+        protected virtual void DamageTrigger()
         {
             WReadOnlyDamageData damageData = enemy.InvokeFunc(enemy.GetPrimaryAttackDamage);
             Collider2D[] allHitEnemy = Physics2D.OverlapCircleAll(attackValidCheck.position, attackValidCheckRadius, whatIsPlayer);
@@ -182,6 +182,18 @@ namespace EnemyBehaviour
                     WReadOnlyDamageData realDamage = enemy.InvokeFunc(enemy.DamageTo, hit.gameObject, damage);
                 }
             }
+        }
+
+        protected override void OnDrawGizmos()
+        {
+            base.OnDrawGizmos();
+            Gizmos.color = Color.blue;
+            Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + playerCheckDistance, playerCheck.position.y));
+            Gizmos.DrawWireSphere(playerCheck.position, playerDetectRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, toAttackRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, battleIdleRadius);
         }
     }
 }

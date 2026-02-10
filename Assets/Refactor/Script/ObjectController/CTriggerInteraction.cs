@@ -1,3 +1,5 @@
+using EnemySystem;
+using EntitySystem;
 using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +9,13 @@ using UnityEngine.Assertions;
 
 namespace ObjectController
 {
-    internal class CTriggerInteraction : CObjectControllerComponentBase
+    internal class CTriggerInteraction : CObjectComponentBase
     {
+        [Tooltip("小于等于0表示不延迟")]
         [SerializeField] protected float allowTriggerDelay = 0.5f;
+        [SerializeField] protected bool isGroundTrigger = false;
+        [SerializeField] protected LayerMask whatIsGround;
+        [SerializeField] EEntityType targetType;
         protected bool canTrigger = false;
         protected override void Awake()
         {
@@ -22,13 +28,21 @@ namespace ObjectController
 
         protected void ResetTrigger()
         {
-            StartCoroutine(SetCanTriggerAfterDelay());
+            if(allowTriggerDelay > 0)
+            {
+                StartCoroutine(SetCanTriggerAfterDelay());
+            }
         }
         protected IEnumerator SetCanTriggerAfterDelay()
         {
             canTrigger = false;
             yield return new WaitForSeconds(allowTriggerDelay);
             canTrigger = true;
+        }
+
+        public void SwitchTargetTo(EEntityType _type)
+        {
+            targetType = _type;
         }
 
         protected void OnTriggerEnter2D(Collider2D _collision)
@@ -38,9 +52,19 @@ namespace ObjectController
                 return;
             }
 
-            if (_collision.GetComponent<IObjectPlayer>() != null)
+            if(targetType == EEntityType.Player && _collision.GetComponent<IObjectPlayer>() != null)
             {
                 controller.InvokeAction(controller.HitPlayer, _collision.GetComponent<IObjectPlayer>());
+            }
+
+            if(targetType == EEntityType.Enemy && _collision.GetComponent<IObjectEnemy>() != null)
+            {
+                controller.InvokeAction(controller.HitEnemy, _collision.GetComponent<IObjectEnemy>());
+            }
+
+            if(isGroundTrigger && _collision.gameObject.layer == whatIsGround)
+            {
+                controller.InvokeAction(controller.HitGround, _collision.transform);
             }
         }
     }

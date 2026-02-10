@@ -6,26 +6,26 @@ namespace EntityBehaviour
 {
     internal class CEntityMovement : CEntityComponentBase
     {
-        protected Rigidbody2D rg;
-        protected bool isFacingLeft = false;
-        protected int facingDir = 1;
-        protected float defaultGravity = 0;
+        [HideInInspector] public Rigidbody2D rg;
+        [HideInInspector] public bool isFacingLeft = false;
+        [HideInInspector] public int facingDir = 1;
+        [HideInInspector] public float defaultGravity = 0;
 
         [Header("Entity Movement Collision Info")]
-        [SerializeField] protected float groundCheckDistance;
-        [SerializeField] protected Transform groundCheck;
-        [SerializeField] protected float wallCheckDistance;
-        [SerializeField] protected Transform wallCheck;
-        [SerializeField] protected LayerMask whatIsGround;
-        [SerializeField] protected LayerMask whatIsPlatform;
+        [SerializeField] public float groundCheckDistance;
+        [SerializeField] public Transform groundCheck;
+        [SerializeField] public float wallCheckDistance;
+        [SerializeField] public Transform wallCheck;
+        [SerializeField] public LayerMask whatIsGround;
+        [SerializeField] public LayerMask whatIsPlatform;
 
         [Header("Entity Movement KnockBack Info")]
-        [SerializeField] protected Vector2 knockBackDir;
-        [Range(0, 1)][SerializeField] protected float knockBackDirMapK = 0.5f;
-        [SerializeField] protected float knockBackDuration = 0.07f;
-        protected bool isKnocked;
+        [SerializeField] public Vector2 knockBackDir;
+        [Range(0, 1)][SerializeField] public float knockBackDirMapK = 0.5f;
+        [SerializeField] public float knockBackDuration = 0.07f;
+        public bool isKnocked;
 
-        protected bool isVelocityLockUp = false;
+        public bool isVelocityLockUp = false;
 
         override protected void Awake()
         {
@@ -41,7 +41,7 @@ namespace EntityBehaviour
             entity.TakeDamage += KnockBack;
         }
 
-        protected virtual void KnockBack(WReadOnlyDamageData _damage)
+        public virtual void KnockBack(WReadOnlyDamageData _damage)
         {
             float knockBackFacing = 1;
             if (_damage.data.damageSourceTransform.position.x > transform.position.x)
@@ -58,7 +58,7 @@ namespace EntityBehaviour
 
             SetVelocity(new Vector2(alpha * knockBackDir.x * knockBackFacing, alpha * knockBackDir.y), false, knockBackDuration);
         }
-        protected virtual IEnumerator HitKnockBack(Transform _damageDirection, float _damageAmount)
+        public virtual IEnumerator HitKnockBack(Transform _damageDirection, float _damageAmount)
         {
             isKnocked = true;
 
@@ -66,7 +66,7 @@ namespace EntityBehaviour
             isKnocked = false;
         }
 
-        protected virtual void SetNoGravity(bool _isNoGravity)
+        public virtual void SetNoGravity(bool _isNoGravity)
         {
             if (_isNoGravity)
             {
@@ -78,7 +78,7 @@ namespace EntityBehaviour
             }
         }
 
-        protected virtual void SetVelocity(Vector2 _velocity, bool _canFlip, float _lockDuration = -1)
+        public virtual void SetVelocity(Vector2 _velocity, bool _canFlip, float _lockDuration = -1)
         {
             if (isVelocityLockUp)
             {
@@ -96,14 +96,14 @@ namespace EntityBehaviour
                 FlipCheck(_velocity.x);
             }
         }
-        protected IEnumerator VelocityLockUpHelper(float _duration)
+        public IEnumerator VelocityLockUpHelper(float _duration)
         {
             isVelocityLockUp = true;
             yield return new WaitForSeconds(_duration);
             isVelocityLockUp = false;
         }
 
-        protected virtual void FlipCheck(float _xVelocity)
+        public virtual void FlipCheck(float _xVelocity)
         {
             if (_xVelocity < 0 && !isFacingLeft)
             {
@@ -115,7 +115,7 @@ namespace EntityBehaviour
             }
         }
 
-        protected virtual void Flip()
+        public virtual void Flip()
         {
             isFacingLeft = !isFacingLeft;
             facingDir *= -1;
@@ -124,27 +124,27 @@ namespace EntityBehaviour
             entity.InvokeAction(entity.Flip);
         }
 
-        protected virtual bool IsFall()
+        public virtual bool IsFall()
         {
             return rg.velocity.y < 0;
         }
 
-        protected virtual int CheckFacingDir()
+        public virtual int CheckFacingDir()
         {
             return facingDir;
         }
 
-        protected virtual float CheckYVelocity()
+        public virtual float CheckYVelocity()
         {
             return rg.velocity.y;
         }
 
-        protected virtual bool IsGroundedOrPlatForm()
+        public virtual bool IsGroundedOrPlatForm()
         {
             return Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround | whatIsPlatform);
         }
 
-        protected virtual bool IsTouchWall()
+        public virtual bool IsTouchWall()
         {
             return Physics2D.Raycast(wallCheck.position, Vector2.right * entity.InvokeFunc(entity.CheckFacingDir), wallCheckDistance, whatIsGround);
         }
