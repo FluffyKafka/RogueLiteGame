@@ -23,6 +23,7 @@ namespace ObjectController
 
         public override void Clear()
         {
+            base.Clear();
             item = null;
             HitPlayer -= PlayerPickUp;
         }

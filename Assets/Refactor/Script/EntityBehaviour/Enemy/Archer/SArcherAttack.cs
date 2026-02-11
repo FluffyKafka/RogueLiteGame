@@ -22,6 +22,7 @@ namespace EnemyBehaviour
         public override void Update()
         {
             base.Update();
+            enemy.InvokeAction(enemy.StandStill);
         }
 
         protected void OnAttackFinish()

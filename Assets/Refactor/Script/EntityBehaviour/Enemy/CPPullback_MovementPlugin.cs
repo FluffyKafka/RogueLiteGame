@@ -25,7 +25,7 @@ namespace EnemyBehaviour
         protected bool CanPullBack()
         {
             Vector3 playerPosition = enemy.InvokeFunc(enemy.CheckPlayerPosition);
-            if(Vector3.Distance(playerPosition, transform.position) < pullbackRadius)
+            if (Vector3.Distance(playerPosition, transform.position) < pullbackRadius)
             {
                 return true;
             }

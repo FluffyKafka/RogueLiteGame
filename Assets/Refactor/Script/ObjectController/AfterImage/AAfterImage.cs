@@ -30,8 +30,8 @@ namespace ObjectController
 
         public override void Clear()
         {
+            base.Clear();
             transform.rotation = Quaternion.identity;
-            InvokeAction(ClearNotice);
         }
     }
 }

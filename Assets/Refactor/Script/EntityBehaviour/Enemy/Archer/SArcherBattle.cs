@@ -1,4 +1,8 @@
 
+
+
+using UnityEngine;
+
 namespace EnemyBehaviour
 {
     internal class SArcherBattle : SArcherState
@@ -26,6 +30,7 @@ namespace EnemyBehaviour
             base.Update();
             enemy.InvokeAction(enemy.UpdateBattle);
             enemy.InvokeAction(enemy.AttackCheck);
+            enemy.InvokeAction(enemy.FacingToPlayer);
         }
 
         protected void StopBattle()
@@ -36,17 +41,38 @@ namespace EnemyBehaviour
         protected bool TryBattleStateChange()
         {
             SArcherBattle targetBattleState;
-            if(enemy.InvokeFunc(enemy.CheckBattleMoveDir) != 0)
+
+            int moveDir = enemy.InvokeFunc(enemy.CheckBattleMoveDir);
+            int faceDir = enemy.InvokeFunc(enemy.CheckFacingDir);
+            bool isGround = enemy.InvokeFunc(enemy.IsGroundedOrPlatForm);
+            bool isWall = enemy.InvokeFunc(enemy.IsTouchWall);
+            bool CanMove = isGround && !isWall;
+
+            if (moveDir != 0)
             {
-                targetBattleState = enemyStateMachine.battleMove as SArcherBattle;
+                if(moveDir == faceDir && !CanMove)
+                {
+                    targetBattleState = enemyStateMachine.battleIdle as SArcherBattle;
+                }
+                else
+                {
+                    targetBattleState = enemyStateMachine.battleMove as SArcherBattle;
+                }
             }
             else if(enemy.InvokeFunc(enemy.CanPullBackJump))
-            {
+            {                
                 targetBattleState = enemyStateMachine.pullBackJump as SArcherBattle;
             }
             else if(enemy.InvokeFunc(enemy.CanPullBack))
             {
-                targetBattleState = enemyStateMachine.pullBack as SArcherBattle;
+                if (!CanMove)
+                {
+                    targetBattleState = enemyStateMachine.battleIdle as SArcherBattle;
+                }
+                else
+                {
+                    targetBattleState = enemyStateMachine.pullBack as SArcherBattle;
+                }
             }
             else
             {

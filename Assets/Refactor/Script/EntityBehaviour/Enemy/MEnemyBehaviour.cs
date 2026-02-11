@@ -46,7 +46,7 @@ namespace EnemyBehaviour
 
         #region PullBackJump
         public Func<bool> CanPullBackJump;
-        public Func<bool> TryEffectPullBackJump;
+        public Action EffectPullBackJump;
         public Action ToPullbackJump;
         #endregion
 

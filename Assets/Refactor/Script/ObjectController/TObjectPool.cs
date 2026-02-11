@@ -2,6 +2,7 @@ using ObjectController;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -29,6 +30,7 @@ namespace Tool
             for (int i = 0; i < _initSize; ++i)
             {
                 GameObject newObject = Instantiate(prototype);
+                newObject.SetActive(false);
                 itemPool.Push(newObject);
             }
         }
@@ -38,12 +40,14 @@ namespace Tool
             if(itemPool.Count == 0)
             {
                 GameObject newObject = Instantiate(prototype);
+                newObject.SetActive(false);
                 itemPool.Push(newObject);
             }
 
             GameObject res = itemPool.Peek();
             itemPool.Pop();
             usingItem.Add(res);
+            res.SetActive(true);
             return res;
         }
 

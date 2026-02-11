@@ -24,6 +24,7 @@ namespace EnemyBehaviour
         {
             base.Update();
             TryBattleStateChange();
+            enemy.InvokeAction(enemy.FacingToPlayer);
         }
     }
 }

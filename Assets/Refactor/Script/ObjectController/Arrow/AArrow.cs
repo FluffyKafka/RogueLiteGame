@@ -12,6 +12,7 @@ namespace ObjectController
     internal class AArrow : AObjectController
     {
         [SerializeField] protected float reflectPhysicalDamageMultiplier;
+        [SerializeField] protected float lifeTime = 10f;
 
         protected DDamageData damage;
         protected EEntityType target;
@@ -31,6 +32,15 @@ namespace ObjectController
             HitPlayer += DamageToPlayer;
             HitEnemy += DamageToEnemy;
             HitGround += HitEffect;
+            InvokeAction(SetLookAtMovement, true);
+
+            StartCoroutine(SelfRecycleAfter(lifeTime));
+        }
+
+        protected IEnumerator SelfRecycleAfter(float _time)
+        {
+            yield return new WaitForSeconds(_time);
+            SelfRecycle();
         }
 
         public void BeReflect(IObjectPlayer _player)
@@ -57,16 +67,19 @@ namespace ObjectController
         {
             anim.FadeAway();
             anim.ShowTrail(false);
-            InvokeAction(StuckInto, transform, _target);
+            InvokeAction(StuckInto, _target);
+            InvokeAction(SetLookAtMovement, false);
         }
 
         public override void Clear()
         {
+            base.Clear();
             damage = null;
             FadeFinish -= SelfRecycle;
             PlayerReflect -= BeReflect;
             HitPlayer -= DamageToPlayer;
             HitEnemy -= DamageToEnemy;
+            StopAllCoroutines();
         }
 
         public float CheckGravityScale()

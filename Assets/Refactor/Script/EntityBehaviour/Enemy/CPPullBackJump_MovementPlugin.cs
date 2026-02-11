@@ -18,8 +18,6 @@ namespace EnemyBehaviour
         [SerializeField] protected Vector2 minPullbackJumpForce;
         [Tooltip("当后方有障碍物或没有地面导致角色无法跳跃时，角色将将跳跃强度减少此值再次尝试，直到强度小于等于最小值")]
         [SerializeField] protected float pullbackJumpXForceCulculateAlpha;
-        [Tooltip("角色跳跃后距离边界或障碍物的预留距离")]
-        [SerializeField] protected float pullbackJumpXBufferDistance;
         protected bool isCooldown = false;
         protected Vector2 pullBackJumpForce;
 
@@ -30,11 +28,11 @@ namespace EnemyBehaviour
             enemy = GetComponent<MEnemyBehaviour>();
 
             enemy.CanPullBackJump += CanPullBackJump;
-            enemy.TryEffectPullBackJump += TryEffectPullBackJump;
+            enemy.EffectPullBackJump += EffectPullBackJump;
         }
 
         protected bool CanPullBackJump()
-        {
+        {            
             if(isCooldown)
             {
                 return false;
@@ -42,7 +40,38 @@ namespace EnemyBehaviour
             
             if(Vector3.Distance(enemy.InvokeFunc(enemy.CheckPlayerPosition), transform.position) < pullbackJumpRadius)
             {
-                return true;
+                int pullBackDir = GetPullBackDir();
+                pullBackJumpForce = maxPullbackJumpForce;
+                while (pullBackJumpForce.x > minPullbackJumpForce.x)
+                {
+                    float jumpDuration = (2 * pullBackJumpForce.y) / (-Physics2D.gravity.y * movement.rg.gravityScale);
+                    float moveDistance = pullBackJumpForce.x * jumpDuration;
+
+                    bool haveGround =
+                        Physics2D.Raycast(
+                            movement.groundCheck.transform.position + new Vector3(pullBackDir * moveDistance, 0),
+                            Vector2.down,
+                            movement.groundCheckDistance,
+                            movement.whatIsGround
+                        );
+                    bool haveWall =
+                        Physics2D.Raycast(
+                            movement.wallCheck.transform.position,
+                            Vector2.right * pullBackDir,
+                            movement.groundCheckDistance + moveDistance,
+                            movement.whatIsGround
+                        );
+                    if (haveGround && !haveWall)
+                    {
+                        pullBackJumpForce.x *= pullBackDir;                        
+                        return true;
+                    }
+                    else
+                    {
+                        pullBackJumpForce.x -= pullbackJumpXForceCulculateAlpha;
+                    }
+                }
+                return false;
             }
             else
             {
@@ -50,42 +79,10 @@ namespace EnemyBehaviour
             }
 
         }
-        protected bool TryEffectPullBackJump()
-        {            
-            int pullBackDir = GetPullBackDir();
-
-            pullBackJumpForce = maxPullbackJumpForce;
-            while (pullBackJumpForce.x > minPullbackJumpForce.x)
-            {
-                float jumpDuration = (2 * pullBackJumpForce.y) / (-Physics2D.gravity.y * movement.rg.gravityScale);
-                float moveDistance = pullBackJumpForce.x * jumpDuration;
-
-                bool haveGround =
-                    Physics2D.Raycast(
-                        movement.groundCheck.transform.position + new Vector3(pullBackDir * moveDistance + pullbackJumpXBufferDistance, 0),
-                        Vector2.down,
-                        movement.groundCheckDistance,
-                        movement.whatIsGround
-                    );
-                bool haveWall =
-                    Physics2D.Raycast(
-                        movement.wallCheck.transform.position,
-                        Vector2.right * pullBackDir,
-                        movement.groundCheckDistance + moveDistance + pullbackJumpXBufferDistance,
-                        movement.whatIsGround
-                    );
-                if (haveGround && !haveWall)
-                {
-                    movement.SetVelocity(pullBackJumpForce, false);
-                    Cooldown();
-                    return true;
-                }
-                else
-                {
-                    pullBackJumpForce.x -= pullbackJumpXForceCulculateAlpha;
-                }
-            }
-            return false;
+        protected void EffectPullBackJump()
+        {
+            Cooldown();
+            movement.SetVelocity(pullBackJumpForce, false);
         }
         public int GetPullBackDir()
         {

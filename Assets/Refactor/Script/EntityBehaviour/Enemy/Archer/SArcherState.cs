@@ -7,7 +7,7 @@ namespace EnemyBehaviour
         protected new CArcherStateMachine enemyStateMachine;
         public SArcherState(CArcherStateMachine _stateMachine, MEnemyBehaviour _entity) : base(_stateMachine, _entity)
         {
-            Assert.IsTrue(_stateMachine is CArcherStateMachine, "´Ë×´Ì¬ÊôÓÚCArcherStateMachine");
+            enemyStateMachine = _stateMachine;
         }
 
         public override void Enter()

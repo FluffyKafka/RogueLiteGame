@@ -9,13 +9,23 @@ namespace AnimationAndFx
 
     internal class MObjectAnimationFx : ComponentManagerBase, IObjectAnim
     {
+        protected IAnimObject controller; 
+
         #region Action
         public Action<Sprite> InitAnimImageNotice;
         public Action<float, float, float> SetFadeAwayNotice;
         public Action FadeAwayNotice;
         public Action ClearNotice;
         public Action<bool> ShowTrailNotice;
+        public Action FadeAwayFinishNotice;
         #endregion
+
+        protected void Awake()
+        {
+            controller = GetComponentInParent<IAnimObject>();
+            FadeAwayFinishNotice += controller.FadeFinishNotice;
+        }
+
         public void InitAnimImage(Sprite _image)
         {
             InvokeAction(InitAnimImageNotice, _image);
@@ -34,7 +44,7 @@ namespace AnimationAndFx
         }
         public void ShowTrail(bool _isShow)
         {
-            InvokeAction(ShowTrail, _isShow);
+            InvokeAction(ShowTrailNotice, _isShow);
         }
     }
 

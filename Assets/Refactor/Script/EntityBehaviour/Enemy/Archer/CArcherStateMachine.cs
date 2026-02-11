@@ -30,7 +30,7 @@ namespace EnemyBehaviour
             battleIdle = new SArcherBattleIdle(this, archer);
             battleMove = new SArcherBattleMove(this, archer);
             pullBack = new SArcherPullBack(this, archer);
-            pullBackJump = new SArcherPullBack(this, archer);
+            pullBackJump = new SArcherPullBackJump(this, archer);
             attack = new SArcherAttack(this, archer);
             dead = new SArcherDead(this, archer);
         }
@@ -49,7 +49,6 @@ namespace EnemyBehaviour
 
         public override void ChangeState(SEntityState _newState)
         {
-            Debug.Log("from: " + currentState.GetType().Name + " to: " + _newState.GetType().Name);
             base.ChangeState(_newState);
         }
     }

@@ -14,16 +14,27 @@ namespace ObjectController
             base.Awake();
             rg = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
+            controller.StuckInto += StuckInto;
+            controller.ClearNotice += Clear;
         }
 
-        protected void StuckInto(Transform _self, Transform _target)
+        protected void StuckInto(Transform _target)
         {
             col.enabled = false;
             rg.isKinematic = true;
             rg.constraints = RigidbodyConstraints2D.FreezeAll;
-            _self.parent = _target.transform;
+            transform.SetParent(_target, true);
             isStuck = true;
-        }        
+        }   
+        
+        protected void Clear()
+        {
+            col.enabled = true;
+            rg.isKinematic = false;
+            rg.constraints = RigidbodyConstraints2D.None;
+            transform.SetParent(null);
+            isStuck = false;
+        }
     }
 }
 

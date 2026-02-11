@@ -31,7 +31,8 @@ namespace ObjectController
         public Action<EEntityType> SwitchTargetTo;
         public Action FadeFinish;
         public Action ClearNotice;
-        public Action<Transform, Transform> StuckInto;
+        public Action<Transform> StuckInto;
+        public Action<bool> SetLookAtMovement;
         #endregion
 
         protected FCObjectFactoryComponentBase factory;
@@ -72,7 +73,10 @@ namespace ObjectController
             InvokeAction(PlayerReflect, _player);
         }
 
-        public abstract void Clear();
+        public virtual void Clear()
+        {
+            InvokeAction(ClearNotice);
+        }
 
         public void FadeFinishNotice()
         {

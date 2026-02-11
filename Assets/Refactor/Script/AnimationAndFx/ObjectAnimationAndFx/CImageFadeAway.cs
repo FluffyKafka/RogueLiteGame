@@ -39,6 +39,7 @@ namespace AnimationAndFx
                 sr.color = newColor;
                 yield return new WaitForSeconds(_cooldown);
             }
+            anim.InvokeAction(anim.FadeAwayFinishNotice);
         }
         protected void Clear()
         {

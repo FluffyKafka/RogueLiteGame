@@ -24,6 +24,8 @@ namespace ObjectController
             Assert.IsNotNull(GetComponent<Collider2D>(), "CCollisionInteraction需要管理一个Collider2D");
             Assert.IsTrue(GetComponent<Collider2D>().isTrigger, "CCollisionInteraction需要管理一个触发器");
             controller.ResetTrigger += ResetTrigger;
+            canTrigger = true;
+            controller.ClearNotice += Clear;
         }
 
         protected void ResetTrigger()
@@ -31,6 +33,10 @@ namespace ObjectController
             if(allowTriggerDelay > 0)
             {
                 StartCoroutine(SetCanTriggerAfterDelay());
+            }
+            else
+            {
+                canTrigger = true;
             }
         }
         protected IEnumerator SetCanTriggerAfterDelay()
@@ -55,17 +61,29 @@ namespace ObjectController
             if(targetType == EEntityType.Player && _collision.GetComponent<IObjectPlayer>() != null)
             {
                 controller.InvokeAction(controller.HitPlayer, _collision.GetComponent<IObjectPlayer>());
+                Debug.Log("HitPlayer");
+                canTrigger = false;
             }
 
             if(targetType == EEntityType.Enemy && _collision.GetComponent<IObjectEnemy>() != null)
             {
                 controller.InvokeAction(controller.HitEnemy, _collision.GetComponent<IObjectEnemy>());
+                canTrigger = false;
             }
 
-            if(isGroundTrigger && _collision.gameObject.layer == whatIsGround)
+            //LayerMask的value为掩码（3 => 1000 => 8）
+            //1 << _collision.gameObject.layer将1左移3位（0001 -> 1000）最后或运算
+            if (isGroundTrigger && (whatIsGround.value & (1 << _collision.gameObject.layer)) != 0)
             {
                 controller.InvokeAction(controller.HitGround, _collision.transform);
+                Debug.Log("HitDround");
+                canTrigger = false;
             }
+        }
+
+        protected void Clear()
+        {
+            canTrigger = true;
         }
     }
 }
