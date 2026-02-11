@@ -16,6 +16,7 @@ namespace AnimationAndFx
         public Action PullBack;
         public Action PullBackJump;
         public Action Fall;
+        public Action Controll;
         #endregion
 
         #region Func
@@ -78,6 +79,11 @@ namespace AnimationAndFx
         void IEnemyAnimation.Fall()
         {
             InvokeAction(Fall);
+        }
+
+        void IEnemyAnimation.Controll()
+        {
+            InvokeAction(Controll);
         }
     }
 }

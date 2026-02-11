@@ -5,11 +5,16 @@ using UnityEngine;
 
 namespace EnemyBehaviour
 {
+    internal enum ProjectileBulletType
+    {
+        Arrow
+    }
     internal class CProjectileShootBattle : CEnemyBattle
     {
         [SerializeField] protected float arrowSpeedReference;
         [SerializeField] protected float speedMapK;
         [SerializeField] protected Transform arrowShootTransform;
+        [SerializeField] protected ProjectileBulletType bulletType;
 
         protected override void Awake()
         {
@@ -34,7 +39,12 @@ namespace EnemyBehaviour
         protected override void DamageTrigger()
         {
             WReadOnlyDamageData damageData = enemy.InvokeFunc(enemy.GetPrimaryAttackDamage);
-            enemy.InvokeAction(enemy.GenerateArrowAt, new DArrowData(damageData, EEntityType.Player, CulculateArrowVelocity()), arrowShootTransform.position);
+            switch(bulletType)
+            {
+                case ProjectileBulletType.Arrow:
+                    enemy.InvokeAction(enemy.GenerateArrowAt, new DProjectileData(damageData, EEntityType.Player, CulculateArrowVelocity()), arrowShootTransform.position);break;
+            }
+            
         }
         protected Vector2 CulculateArrowVelocity()
         {

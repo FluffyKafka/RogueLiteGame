@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace AnimationAndFx
 {
-
     internal class MObjectAnimationFx : ComponentManagerBase, IObjectAnim
     {
         protected IAnimObject controller; 
@@ -18,6 +17,7 @@ namespace AnimationAndFx
         public Action ClearNotice;
         public Action<bool> ShowTrailNotice;
         public Action FadeAwayFinishNotice;
+        public Action ToExplodeNotice;
         #endregion
 
         protected void Awake()
@@ -45,6 +45,19 @@ namespace AnimationAndFx
         public void ShowTrail(bool _isShow)
         {
             InvokeAction(ShowTrailNotice, _isShow);
+        }
+        public void ToExplode()
+        {
+            InvokeAction(ToExplodeNotice);
+        }
+
+        public void AnimDamageTrigger()
+        {
+            controller.DamageTrigger();
+        }
+        public void AnimDamageFinish()
+        {
+            controller.DamageFinish();
         }
     }
 

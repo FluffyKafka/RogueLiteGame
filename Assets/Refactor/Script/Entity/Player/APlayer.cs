@@ -31,6 +31,7 @@ namespace PlayerSystem
         public float CheckGravityScale();
 
         public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
+        public Transform CheckTransform();
     }
 
     public interface IAnimPlayer : IAnimEntity
@@ -73,11 +74,9 @@ namespace PlayerSystem
         public void StatsChangeNotice();
     }
 
-    public interface IObjectPlayer
+    public interface IObjectPlayer : IObjectEntity
     {
         public bool TryTakeItem(IItem _item);
-        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
-        public Transform CheckTransform();
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -248,6 +247,11 @@ namespace PlayerSystem
         {
             return GetComponent<Rigidbody2D>().gravityScale;
         }
+
+        Transform IEnemyPlayer.CheckTransform()
+        {
+            return transform;
+        }
         #endregion
 
         //暂时直接转发，若有需要再引入事件机制
@@ -367,6 +371,11 @@ namespace PlayerSystem
         public Transform CheckTransform()
         {
             return transform;
+        }
+
+        public void ObjectFinish()
+        {
+            //暂时空置
         }
         #endregion
 

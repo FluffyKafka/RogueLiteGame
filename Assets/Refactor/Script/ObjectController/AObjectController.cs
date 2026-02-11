@@ -2,6 +2,7 @@ using EnemySystem;
 using EntitySystem;
 using Item;
 using PlayerSystem;
+using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace ObjectController
     public interface IAnimObject
     {
         public void FadeFinishNotice();
+        public void DamageTrigger();
+        public void DamageFinish();
     }
 
     internal abstract class AObjectController : ComponentManagerBase, IPlayerEnterable, IPlayerInteractable, IPlayerReflectable, IAnimObject
@@ -33,6 +36,11 @@ namespace ObjectController
         public Action ClearNotice;
         public Action<Transform> StuckInto;
         public Action<bool> SetLookAtMovement;
+        public Action Launch;
+        public Action<Transform, float> SetMoveToTarget;
+        public Action DamageTriggerNotice;
+        public Action<WReadOnlyDamageData, EEntityType> EffectAreaDamageTo;
+        public Action DamageFinishNotice;
         #endregion
 
         protected FCObjectFactoryComponentBase factory;
@@ -82,6 +90,16 @@ namespace ObjectController
         {
             InvokeAction(FadeFinish);
         }
+
+        public void DamageTrigger()
+        {
+            InvokeAction(DamageTriggerNotice);
+        }
+
+        public void DamageFinish()
+        {
+            InvokeAction(DamageFinishNotice);
+        }
     }
 
     public interface IObjectAnim
@@ -91,5 +109,6 @@ namespace ObjectController
         public void FadeAway();
         public void Clear();
         public void ShowTrail(bool _isShow);
+        public void ToExplode();
     }
 }

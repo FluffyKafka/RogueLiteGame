@@ -107,10 +107,12 @@ namespace EntityBehaviour
         {
             if (_xVelocity < 0 && !isFacingLeft)
             {
+                entity.InvokeAction(entity.Flip);
                 Flip();
             }
             else if (_xVelocity > 0 && isFacingLeft)
             {
+                entity.InvokeAction(entity.Flip);
                 Flip();
             }
         }
@@ -119,9 +121,7 @@ namespace EntityBehaviour
         {
             isFacingLeft = !isFacingLeft;
             facingDir *= -1;
-            transform.Rotate(new Vector3(0, 180, 0));
-
-            entity.InvokeAction(entity.Flip);
+            transform.Rotate(new Vector3(0, 180, 0));           
         }
 
         public virtual bool IsFall()

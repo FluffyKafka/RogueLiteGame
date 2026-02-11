@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace ObjectController
-{
-
+{    
     internal class CProjectileMovement : CObjectComponentBase
     {
         [SerializeField] protected Vector2 randomOriginProjectXRange;

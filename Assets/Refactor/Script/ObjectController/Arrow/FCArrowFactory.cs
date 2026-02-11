@@ -21,7 +21,7 @@ namespace ObjectController
             RecycleObject(newArrow);
         }
 
-        protected void GenerateArrow(DArrowData _data, Vector3 _position)
+        protected void GenerateArrow(DProjectileData _data, Vector3 _position)
         {
             GameObject newObject = pool.GetObject();
             newObject.SetActive(true);

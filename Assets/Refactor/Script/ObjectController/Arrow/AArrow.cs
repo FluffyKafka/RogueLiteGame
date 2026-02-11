@@ -17,13 +17,12 @@ namespace ObjectController
         protected DDamageData damage;
         protected EEntityType target;
 
-        public void Setup(FCArrowFactory _factory, DArrowData _data)
+        public void Setup(FCArrowFactory _factory, DProjectileData _data)
         {
             factory = _factory;
 
             damage = _data.damage.Clone();
-            InvokeAction(Project, _data.velocity);
-            InvokeAction(SwitchTargetTo, EEntityType.Player);
+            InvokeAction(SwitchTargetTo, _data.targetType);
             target = _data.targetType;
             anim.ShowTrail(true);
 
@@ -79,6 +78,7 @@ namespace ObjectController
             PlayerReflect -= BeReflect;
             HitPlayer -= DamageToPlayer;
             HitEnemy -= DamageToEnemy;
+            HitGround -= HitEffect;
             StopAllCoroutines();
         }
 

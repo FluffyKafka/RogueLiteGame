@@ -1,4 +1,7 @@
 
+
+using UnityEngine;
+
 namespace EnemyBehaviour
 {
     internal class SArcherDead : SArcherState

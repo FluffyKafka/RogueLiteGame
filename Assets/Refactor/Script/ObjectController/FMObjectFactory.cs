@@ -12,8 +12,9 @@ namespace ObjectController
     {
         public Action<IItem, Vector3> GenerateDropItemAt;
         public Action<DAfterImageData> GenerateAfterImageAt;
-        public Action<DArrowData, Vector3> GenerateArrowAt;
+        public Action<DProjectileData, Vector3> GenerateArrowAt;
         public Func<float> CheckArrowGravityNotice;
+        public Action<DAmmoData, Vector3> GenerateSkullAmmoAt; 
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -25,7 +26,7 @@ namespace ObjectController
             InvokeAction(GenerateDropItemAt, _data, _position);
         }
 
-        public void GenerateArrow(DArrowData _data, Vector3 _position)
+        public void GenerateArrow(DProjectileData _data, Vector3 _position)
         {
             InvokeAction(GenerateArrowAt, _data, _position);
         }
@@ -33,6 +34,11 @@ namespace ObjectController
         public float CheckArrowGravityScale()
         {
             return InvokeFunc(CheckArrowGravityNotice);
+        }
+        
+        public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position)
+        {
+            InvokeAction(GenerateSkullAmmoAt, _data, _position);
         }
     }
 

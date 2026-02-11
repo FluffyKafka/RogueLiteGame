@@ -5,10 +5,11 @@ namespace EnemyBehaviour
 {
     internal class SSkeletonIdle : SSkeletonPeace
     {
-        protected Coroutine idleToMoveNoticeCoRoutine;
         public SSkeletonIdle(CEnemyStateMachine _stateMachine, MEnemyBehaviour _entity) : base(_stateMachine, _entity)
         {
         }
+
+        protected Coroutine idleToMoveNoticeCoRoutine;
 
         public override void Enter()
         {

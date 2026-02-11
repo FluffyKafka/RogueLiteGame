@@ -24,16 +24,30 @@ namespace EntitySystem
             fadeSpeed = _fadeSpeed;
         }
     }
-    public struct DArrowData
+    public struct DProjectileData
     {
         public WReadOnlyDamageData damage;
         public EEntityType targetType;
         public Vector2 velocity;
-        public DArrowData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity)
+        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity)
         {
             damage = _damage;
             targetType = _targetType;
             velocity = _velocity;
+        }
+    }
+    public struct DAmmoData
+    {
+        public WReadOnlyDamageData damage;
+        public Transform target;
+        public EEntityType targetType;
+        public IObjectEntity originEntity;
+        public DAmmoData(WReadOnlyDamageData _damage, EEntityType _targetType, Transform _target, IObjectEntity _origin)
+        {
+            damage = _damage;
+            targetType = _targetType;
+            target = _target;
+            originEntity = _origin;
         }
     }
 
@@ -41,6 +55,13 @@ namespace EntitySystem
     {
         Player,
         Enemy
+    }
+
+    public interface IObjectEntity
+    {
+        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
+        public Transform CheckTransform();
+        public void ObjectFinish();
     }
 
     public interface IBehaviourEntity

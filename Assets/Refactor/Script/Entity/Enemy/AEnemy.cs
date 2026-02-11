@@ -1,6 +1,7 @@
 using EntitySystem;
 using PlayerSystem;
 using StatsData;
+using System;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -16,16 +17,19 @@ namespace EnemySystem
         public void ToPullBack();
         public void ToPullBackJump();
         public void ToFall();
+        public void ToControll();
 
         public bool IsPlayer(GameObject _object);
         public Vector3 CheckPlayerPosition();
         public Vector3 CheckPlayerVelocity();
         public float CheckPlayerGravityScale();
+        public Transform CheckPlayerTransform();
         public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage);
         public bool IsPlayerAlive();
         public bool IsPlayerAlive(GameObject _player);
         public float CheckArrowGravity();
-        public void GenerateArrowAt(DArrowData _data, Vector3 _position);
+        public void GenerateArrowAt(DProjectileData _data, Vector3 _position);
+        public void GenerateSkullAmmoAt(DAmmoData _data, Vector3 _position);
     }
 
     public interface IAnimEnemy : IAnimEntity
@@ -33,10 +37,9 @@ namespace EnemySystem
         public abstract void OpenStun(bool _isOpen);       
     }
 
-    public interface IObjectEnemy
+    public interface IObjectEnemy : IObjectEntity
     {
-        public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
-        public Transform CheckTransform();
+
     }
 
     internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy
@@ -116,6 +119,11 @@ namespace EnemySystem
             enemyAnim.Fall();
         }
 
+        void IBehaviourEnemy.ToControll()
+        {
+            enemyAnim.Controll();
+        }
+
         public bool IsPlayer(GameObject _object)
         {
             return _object.GetComponent<IEnemyPlayer>() != null;
@@ -136,6 +144,11 @@ namespace EnemySystem
             return player.CheckGravityScale();
         }
 
+        public Transform CheckPlayerTransform()
+        {
+            return player.CheckTransform();
+        }
+
         public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage)
         {
             return _player.GetComponent<IEnemyPlayer>().TakeDamage(_damage);
@@ -153,9 +166,15 @@ namespace EnemySystem
         {
             return enemyObjectFactory.CheckArrowGravityScale();
         }
-        public void GenerateArrowAt(DArrowData _data, Vector3 _position)
+        public void GenerateArrowAt(DProjectileData _data, Vector3 _position)
         {
             enemyObjectFactory.GenerateArrow(_data, _position);
+        }
+
+        public void GenerateSkullAmmoAt(DAmmoData _data, Vector3 _position)
+        {
+            _data.originEntity = this; 
+            enemyObjectFactory.GenerateSkullAmmo(_data, _position);
         }
 
         #endregion
@@ -196,6 +215,11 @@ namespace EnemySystem
 
         #region Object
         protected IEnemyObjectFactory enemyObjectFactory;
+
+        public void ObjectFinish()
+        {
+            behaviour.ObjectFinish();
+        }
         public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage)
         {
             WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damage);
@@ -214,6 +238,7 @@ namespace EnemySystem
     {
         public void OpenStun(bool _isOpen);
         public void StunCheck();
+        public void ObjectFinish();
     }
 
     public interface IEnemyAnimation : IEntityAnimation
@@ -224,11 +249,15 @@ namespace EnemySystem
         public void PullBack();
         public void PullBackJump();
         public void Fall();
+        public void Controll();
     }
+
     public interface IEnemyObjectFactory: IEntityObjectFactory
     {
-        public void GenerateArrow(DArrowData _data, Vector3 _position);
+        public void GenerateArrow(DProjectileData _data, Vector3 _position);
         public float CheckArrowGravityScale();
+
+        public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position);
     }
 }
 

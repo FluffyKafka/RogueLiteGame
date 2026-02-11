@@ -11,6 +11,7 @@ namespace AnimationAndFx
         [SerializeField] protected Material hitMat;
         [SerializeField] protected float fleshDuration = 0.3f;
         protected Material originalMat;
+        protected bool isFlash = false;
 
         protected SpriteRenderer sr;
 
@@ -26,6 +27,11 @@ namespace AnimationAndFx
 
         protected void Hit(WReadOnlyDamageData _data)
         {
+            if(isFlash)
+            {
+                return;
+            }
+
             float finalDamage = _data.data.physical + _data.data.magical;
             if(finalDamage <= 0)
             {
@@ -36,11 +42,13 @@ namespace AnimationAndFx
         }
         protected IEnumerator FlashFX()
         {
+            isFlash = true;
             originalMat = sr.material;
             sr.material = hitMat;
             sr.color = Color.white;
             yield return new WaitForSeconds(fleshDuration);
             sr.material = originalMat;
+            isFlash = false;
         }
     }
 }

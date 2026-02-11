@@ -32,11 +32,18 @@ namespace EnemyBehaviour
         public Action ToIdle;
         public Action ToMove;
         public Action ToFall;
+        public Action ToControll;
 
         #region Arrow
-        public Action<DArrowData, Vector3> GenerateArrowAt;
+        public Action<DProjectileData, Vector3> GenerateArrowAt;
         public Func<float> CheckArrowGravity;
         #endregion
+
+        #region Ammo
+        public Action<DAmmoData, Vector3> GenerateSkullAmmo;
+        #endregion
+
+        public Action ObjectFinishNotice;
 
         #region PullBack
         public Func<bool> CanPullBack;
@@ -54,6 +61,7 @@ namespace EnemyBehaviour
         public Func<Vector3> CheckPlayerPosition;
         public Func<Vector3> CheckPlayerVelocity;
         public Func<float> CheckPlayerGravityScale;
+        public Func<Transform> CheckPlayerTransform;
         public Func<GameObject, WReadOnlyDamageData, WReadOnlyDamageData> DamageTo;
         public Func<bool> IsPlayerAlive;
         public Func<GameObject, bool> IsThisPlayerAlive;
@@ -78,6 +86,9 @@ namespace EnemyBehaviour
             ToPullbackJump += enemySystem.ToPullBackJump;
             CheckArrowGravity += enemySystem.CheckArrowGravity;
             GenerateArrowAt += enemySystem.GenerateArrowAt;
+            GenerateSkullAmmo += enemySystem.GenerateSkullAmmoAt;
+            CheckPlayerTransform += enemySystem.CheckPlayerTransform;
+            ToControll += enemySystem.ToControll;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)
@@ -88,6 +99,11 @@ namespace EnemyBehaviour
         void IEnemyBehaviour.StunCheck()
         {
             InvokeAction(StunCheck);
+        }
+
+        void IEnemyBehaviour.ObjectFinish()
+        {
+            InvokeAction(ObjectFinishNotice);
         }
     }
 }
