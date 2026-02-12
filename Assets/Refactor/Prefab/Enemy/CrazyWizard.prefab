@@ -15069,6 +15069,11 @@ MonoBehaviour:
   moveAnimName: Move
   attackAnimName: Attack
   stunAnimName: Stun
+  pullbackAnimName: Move
+  fallAnimName: Fall
+  pullbackJumpAnimName: PullBackJump
+  controllAmmoAnimName: Controll
+  selfExplodeAnimName: Explode
 --- !u!114 &7328973714567024191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15196,7 +15201,7 @@ GameObject:
   - component: {fileID: 5795175619184034306}
   - component: {fileID: 1726240150170420908}
   m_Layer: 7
-  m_Name: Skeleton 1
+  m_Name: CrazyWizard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15322,6 +15327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344c89c5a62185d4db442559375d25a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rg: {fileID: 0}
+  isFacingLeft: 0
+  facingDir: 1
+  defaultGravity: 0
+  isInitFacingLeft: 0
   groundCheckDistance: 1
   groundCheck: {fileID: 360178717252980873}
   wallCheckDistance: 0.24
@@ -15335,6 +15345,8 @@ MonoBehaviour:
   knockBackDir: {x: 10, y: 10}
   knockBackDirMapK: 0.5
   knockBackDuration: 0.07
+  isKnocked: 0
+  isVelocityLockUp: 0
   moveSpeed: 2
   maxIdleDuration: 5
   minIdleDuration: 0.2

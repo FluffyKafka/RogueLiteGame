@@ -1,4 +1,7 @@
 
+
+using UnityEngine;
+
 namespace EnemyBehaviour
 {
     internal class SSkeletonAttack : SSkeletonState
@@ -28,6 +31,7 @@ namespace EnemyBehaviour
 
         protected void OnAttackFinish()
         {
+            Debug.Log("AttackFinish");
             enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
         }
 
