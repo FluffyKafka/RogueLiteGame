@@ -179,7 +179,7 @@ namespace EnemyBehaviour
                 if (enemy.InvokeFunc(enemy.IsPlayer, hit.gameObject) && enemy.InvokeFunc(enemy.IsThisPlayerAlive, hit.gameObject))
                 {
                     WReadOnlyDamageData damage = enemy.InvokeFunc(enemy.GetPrimaryAttackDamage);                    
-                    WReadOnlyDamageData realDamage = enemy.InvokeFunc(enemy.DamageTo, hit.gameObject, damage);
+                    WReadOnlyDamageData realDamage = enemy.InvokeFunc(enemy.DamageToPlayer, hit.gameObject, damage);
                 }
             }
         }

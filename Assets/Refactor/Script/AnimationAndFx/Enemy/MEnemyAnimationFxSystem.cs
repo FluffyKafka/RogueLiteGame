@@ -17,6 +17,8 @@ namespace AnimationAndFx
         public Action PullBackJump;
         public Action Fall;
         public Action Controll;
+        public Action SelfExplode;
+        public Action SelfExplodeHolding;
         #endregion
 
         #region Func
@@ -37,6 +39,16 @@ namespace AnimationAndFx
         public void OnAttackDamageTrigger()
         {
             enemy.AttackDamageTrigger();
+        }
+
+        public void OnSelfExplodeDamageTrigger()
+        {
+            enemy.OnSelfExplodeDamageTrigger();
+        }
+
+        public void OnSelfExplodefinish()
+        {
+            enemy.OnSelfExplodeFinish();
         }
 
         public void OnStunOpen()
@@ -84,6 +96,16 @@ namespace AnimationAndFx
         void IEnemyAnimation.Controll()
         {
             InvokeAction(Controll);
+        }
+
+        void IEnemyAnimation.ToSelfExplode()
+        {
+            InvokeAction(SelfExplode);
+        }
+
+        void IEnemyAnimation.ToSelfExplodeHolding()
+        {
+            InvokeAction(SelfExplodeHolding);
         }
     }
 }

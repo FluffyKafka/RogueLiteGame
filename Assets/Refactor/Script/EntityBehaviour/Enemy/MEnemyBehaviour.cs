@@ -34,7 +34,7 @@ namespace EnemyBehaviour
         public Action ToFall;
         public Action ToControll;
         public Action GenerateSubEnemyNotice;//通知内部组件
-        public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部
+        public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部        
 
         #region Arrow
         public Action<DProjectileData, Vector3> GenerateArrowAt;
@@ -45,7 +45,18 @@ namespace EnemyBehaviour
         public Action<DAmmoData, Vector3> GenerateSkullAmmo;
         #endregion
 
+        #region Object
         public Action ObjectFinishNotice;
+        #endregion
+
+        #region SelfExplode
+        public Func<float> CheckSelfExplodeHoldingDurationNotice;
+        public Action<bool> SelfExplodeNotice_isReflect;
+        public Action ToSelfExplode;
+        public Action ToSelfExplodeHolding;
+        public Action OnSelfExplodeDamageTrigger;
+        public Action OnSelfExplodeFinish;
+        #endregion
 
         #region PullBack
         public Func<bool> CanPullBack;
@@ -64,7 +75,8 @@ namespace EnemyBehaviour
         public Func<Vector3> CheckPlayerVelocity;
         public Func<float> CheckPlayerGravityScale;
         public Func<Transform> CheckPlayerTransform;
-        public Func<GameObject, WReadOnlyDamageData, WReadOnlyDamageData> DamageTo;
+        public Func<GameObject, WReadOnlyDamageData, WReadOnlyDamageData> DamageToPlayer;
+        public Func<GameObject, WReadOnlyDamageData, WReadOnlyDamageData> DamageToEnemy;
         public Func<bool> IsPlayerAlive;
         public Func<GameObject, bool> IsThisPlayerAlive;
 
@@ -75,7 +87,7 @@ namespace EnemyBehaviour
             CheckPlayerPosition += enemySystem.CheckPlayerPosition;
             CheckPlayerVelocity += enemySystem.CheckPlayerVelocity;
             CheckPlayerGravityScale += enemySystem.CheckPlayerGravityScale;
-            DamageTo += enemySystem.DamageTo;
+            DamageToPlayer += enemySystem.DamageToPlayer;
             IsPlayerAlive += enemySystem.IsPlayerAlive;
             IsThisPlayerAlive += enemySystem.IsPlayerAlive;
             ToIdle += enemySystem.ToIdle;
@@ -92,6 +104,9 @@ namespace EnemyBehaviour
             CheckPlayerTransform += enemySystem.CheckPlayerTransform;
             ToControll += enemySystem.ToControll;
             ToGenerateSubEnemy += enemySystem.GenerateEnemyByTypeAt;
+            DamageToEnemy += enemySystem.DamageToEnemy;
+            ToSelfExplode += enemySystem.ToSelfExplode;
+            ToSelfExplodeHolding += enemySystem.ToSelfExplodeHolding;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)
@@ -107,6 +122,15 @@ namespace EnemyBehaviour
         void IEnemyBehaviour.ObjectFinish()
         {
             InvokeAction(ObjectFinishNotice);
+        }
+        void IEnemyBehaviour.OnSelfExplodeFinish()
+        {
+            InvokeAction(OnSelfExplodeFinish);
+        }
+
+        void IEnemyBehaviour.OnSelfExplodeDamageTrigger()
+        {
+            InvokeAction(OnSelfExplodeDamageTrigger);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace AnimationAndFx
         [SerializeField] protected string fallAnimName = "Fall";
         [SerializeField] protected string pullbackJumpAnimName = "PullBackJump";
         [SerializeField] protected string controllAmmoAnimName = "Controll";
+        [SerializeField] protected string selfExplodeAnimName = "Explode";
 
         protected override void Awake()
         {
@@ -29,6 +30,8 @@ namespace AnimationAndFx
             enemyAnimFxSystem.PullBackJump += PullBackJump;
             enemyAnimFxSystem.Fall += Fall;
             enemyAnimFxSystem.Controll += Controll;
+            enemyAnimFxSystem.SelfExplode += SelfExplode;
+            enemyAnimFxSystem.SelfExplodeHolding += SelfExplodeHolding;
         }
 
         protected void Idle()
@@ -75,6 +78,15 @@ namespace AnimationAndFx
         {
             anim.SetBool(currentAnimName, true);
             anim.speed = 0;
+        }
+
+        protected void SelfExplodeHolding()
+        {
+            ChangeAnimationTo(selfExplodeAnimName);
+        }
+        protected void SelfExplode()
+        {
+            anim.SetBool(selfExplodeAnimName, false);
         }
     }
 }

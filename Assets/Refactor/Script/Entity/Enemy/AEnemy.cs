@@ -33,18 +33,25 @@ namespace EnemySystem
         public Vector3 CheckPlayerVelocity();
         public float CheckPlayerGravityScale();
         public Transform CheckPlayerTransform();
-        public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage);
+        public WReadOnlyDamageData DamageToPlayer(GameObject _player, WReadOnlyDamageData _damage);
         public bool IsPlayerAlive();
         public bool IsPlayerAlive(GameObject _player);
         public float CheckArrowGravity();
         public void GenerateArrowAt(DProjectileData _data, Vector3 _position);
         public void GenerateSkullAmmoAt(DAmmoData _data, Vector3 _position);
         public GameObject GenerateEnemyByTypeAt(EEnemyType _enemyType, Vector3 _position);
+
+        public WReadOnlyDamageData DamageToEnemy(GameObject _enemy, WReadOnlyDamageData _damage);
+
+        public void ToSelfExplode();
+        public void ToSelfExplodeHolding();
     }
 
     public interface IAnimEnemy : IAnimEntity
     {
-        public abstract void OpenStun(bool _isOpen);       
+        public abstract void OpenStun(bool _isOpen);
+        public abstract void OnSelfExplodeDamageTrigger();
+        public abstract void OnSelfExplodeFinish();
     }
 
     public interface IObjectEnemy : IObjectEntity
@@ -161,7 +168,7 @@ namespace EnemySystem
             return player.CheckTransform();
         }
 
-        public WReadOnlyDamageData DamageTo(GameObject _player, WReadOnlyDamageData _damage)
+        public WReadOnlyDamageData DamageToPlayer(GameObject _player, WReadOnlyDamageData _damage)
         {
             return _player.GetComponent<IEnemyPlayer>().TakeDamage(_damage);
         }
@@ -194,6 +201,21 @@ namespace EnemySystem
             return factory.GenerateEnemyByTypeAt(_type, _position);
         }
 
+        public WReadOnlyDamageData DamageToEnemy(GameObject _enemy, WReadOnlyDamageData _damage)
+        {
+            return _enemy.GetComponent<IPlayerEnemy>().TakeDamage(_damage);
+        }
+
+        public void ToSelfExplode()
+        {
+            enemyAnim.ToSelfExplode();
+        }
+
+        public void ToSelfExplodeHolding()
+        {
+            enemyAnim.ToSelfExplodeHolding();
+        }
+
         #endregion
 
         #region Animation
@@ -210,6 +232,16 @@ namespace EnemySystem
         void IAnimEntity.AttackFinish()
         {
             InvokeAction(AttackFinish);
+        }
+
+        void IAnimEnemy.OnSelfExplodeDamageTrigger()
+        {
+            behaviour.OnSelfExplodeDamageTrigger();
+        }
+
+        void IAnimEnemy.OnSelfExplodeFinish()
+        {
+            behaviour.OnSelfExplodeFinish();
         }
         #endregion
 
@@ -256,6 +288,8 @@ namespace EnemySystem
         public void OpenStun(bool _isOpen);
         public void StunCheck();
         public void ObjectFinish();
+        public void OnSelfExplodeDamageTrigger();
+        public void OnSelfExplodeFinish();
     }
 
     public interface IEnemyAnimation : IEntityAnimation
@@ -267,6 +301,8 @@ namespace EnemySystem
         public void PullBackJump();
         public void Fall();
         public void Controll();
+        public void ToSelfExplode();
+        public void ToSelfExplodeHolding();
     }
 
     public interface IEnemyObjectFactory: IEntityObjectFactory
