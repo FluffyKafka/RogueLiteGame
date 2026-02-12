@@ -33,6 +33,8 @@ namespace EnemyBehaviour
         public Action ToMove;
         public Action ToFall;
         public Action ToControll;
+        public Action GenerateSubEnemyNotice;//通知内部组件
+        public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部
 
         #region Arrow
         public Action<DProjectileData, Vector3> GenerateArrowAt;
@@ -89,6 +91,7 @@ namespace EnemyBehaviour
             GenerateSkullAmmo += enemySystem.GenerateSkullAmmoAt;
             CheckPlayerTransform += enemySystem.CheckPlayerTransform;
             ToControll += enemySystem.ToControll;
+            ToGenerateSubEnemy += enemySystem.GenerateEnemyByTypeAt;
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)

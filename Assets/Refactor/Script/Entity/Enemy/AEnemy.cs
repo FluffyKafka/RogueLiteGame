@@ -7,6 +7,15 @@ using UnityEngine.Assertions;
 
 namespace EnemySystem
 {
+    public enum EEnemyType
+    {
+        Skeleton,
+        Archer,
+        Necromancer,
+        Slime,
+        SubSlime,
+        MinSlime
+    }
     public interface IBehaviourEnemy: IBehaviourEntity
     {
         public void ToAttack();
@@ -30,6 +39,7 @@ namespace EnemySystem
         public float CheckArrowGravity();
         public void GenerateArrowAt(DProjectileData _data, Vector3 _position);
         public void GenerateSkullAmmoAt(DAmmoData _data, Vector3 _position);
+        public GameObject GenerateEnemyByTypeAt(EEnemyType _enemyType, Vector3 _position);
     }
 
     public interface IAnimEnemy : IAnimEntity
@@ -47,6 +57,7 @@ namespace EnemySystem
         protected IEnemyPlayer player;
         protected IEnemyAnimation enemyAnim;
         protected IEnemyBehaviour behaviour;
+        protected IEnemyFactory factory;
 
         protected override void Awake()
         {
@@ -70,11 +81,12 @@ namespace EnemySystem
         }
 
         #region Init
-        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory)
+        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory, IEnemyFactory _factory)
         {
             player = _player;
             objectFactory = _objectFactory;
             enemyObjectFactory = _objectFactory;
+            factory = _factory;
         }
         #endregion
 
@@ -177,6 +189,11 @@ namespace EnemySystem
             enemyObjectFactory.GenerateSkullAmmo(_data, _position);
         }
 
+        public GameObject GenerateEnemyByTypeAt(EEnemyType _type, Vector3 _position)
+        {
+            return factory.GenerateEnemyByTypeAt(_type, _position);
+        }
+
         #endregion
 
         #region Animation
@@ -258,6 +275,11 @@ namespace EnemySystem
         public float CheckArrowGravityScale();
 
         public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position);
+    }
+
+    public interface IEnemyFactory
+    {
+        public GameObject GenerateEnemyByTypeAt(EEnemyType _type, Vector3 _position);
     }
 }
 

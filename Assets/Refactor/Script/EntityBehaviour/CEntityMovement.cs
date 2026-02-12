@@ -11,6 +11,9 @@ namespace EntityBehaviour
         [HideInInspector] public int facingDir = 1;
         [HideInInspector] public float defaultGravity = 0;
 
+        [Header("Entity Init Facing Dir")]
+        [SerializeField] protected bool isInitFacingLeft = false;
+
         [Header("Entity Movement Collision Info")]
         [SerializeField] public float groundCheckDistance;
         [SerializeField] public Transform groundCheck;
@@ -39,6 +42,12 @@ namespace EntityBehaviour
             entity.IsGroundedOrPlatForm += IsGroundedOrPlatForm;
             entity.IsTouchWall += IsTouchWall;
             entity.TakeDamage += KnockBack;
+
+            if(isInitFacingLeft)
+            {
+                isFacingLeft = true;
+                facingDir = -1;
+            }
         }
 
         public virtual void KnockBack(WReadOnlyDamageData _damage)

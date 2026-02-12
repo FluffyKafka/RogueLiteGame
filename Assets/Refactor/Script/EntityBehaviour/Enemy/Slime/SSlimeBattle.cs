@@ -1,9 +1,13 @@
+using EntityBehaviour;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace EnemyBehaviour
 {
-    internal class SSkeletonBattle : SSkeletonState
+    internal class SSlimeBattle : SSlimeState
     {
-        public SSkeletonBattle(CEnemyStateMachine _stateMachine, MEnemyBehaviour _entity) : base(_stateMachine, _entity)
+        public SSlimeBattle(CEntityStateMachine _stateMachine, MEntityBehaviour _entity) : base(_stateMachine, _entity)
         {
         }
 

@@ -83,28 +83,28 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.14285715
-    functionName: OpenCounterAttackWindowTrigger
+    functionName: OnStunOpen
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5714286
-    functionName: AttackTrigger
+    functionName: OnAttackDamageTrigger
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5714286
-    functionName: CloseCounterAttackWindowTrigger
+    functionName: OnStunClose
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.85714287
-    functionName: AnimFinishTrigger
+    functionName: OnAttackFinish
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
