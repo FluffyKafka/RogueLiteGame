@@ -10,25 +10,26 @@ namespace ObjectController
 {
     internal class FMObjectFactory : ComponentManagerBase, IPlayerObjectFactory, IEnemyObjectFactory
     {
-        public Action<IItem, Vector3> GenerateDropItemAt;
-        public Action<DAfterImageData> GenerateAfterImageAt;
-        public Action<DProjectileData, Vector3> GenerateArrowAt;
+        public Action<IItem, Vector3> GenerateDropItemAtNotice;
+        public Action<DAfterImageData> GenerateAfterImageAtNotice;
+        public Action<DProjectileData, Vector3> GenerateArrowAtNotice;
         public Func<float> CheckArrowGravityNotice;
-        public Action<DAmmoData, Vector3> GenerateSkullAmmoAt; 
+        public Action<DAmmoData, Vector3> GenerateSkullAmmoAtNotice;
+        public Func<DProjectileData, Vector3, GameObject> GenerateSwordAtNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
-            InvokeAction(GenerateAfterImageAt, _data);
+            InvokeAction(GenerateAfterImageAtNotice, _data);
         }
 
         public void GenerateDropItemObject(IItem _data, Vector3 _position)
         {
-            InvokeAction(GenerateDropItemAt, _data, _position);
+            InvokeAction(GenerateDropItemAtNotice, _data, _position);
         }
 
         public void GenerateArrow(DProjectileData _data, Vector3 _position)
         {
-            InvokeAction(GenerateArrowAt, _data, _position);
+            InvokeAction(GenerateArrowAtNotice, _data, _position);
         }
 
         public float CheckArrowGravityScale()
@@ -38,7 +39,11 @@ namespace ObjectController
         
         public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position)
         {
-            InvokeAction(GenerateSkullAmmoAt, _data, _position);
+            InvokeAction(GenerateSkullAmmoAtNotice, _data, _position);
+        }
+        public GameObject GenerateSword(DProjectileData _data, Vector3 _position)
+        {
+            return InvokeFunc(GenerateSwordAtNotice, _data, _position);
         }
     }
 

@@ -28,6 +28,13 @@ namespace InputManager
             player = _player;
         }
 
+        public Vector3 CheckMousePosition()
+        {
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+            return worldPos;
+        }
+
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件
         private void Update()
         {
@@ -41,9 +48,22 @@ namespace InputManager
                 player.JumpInput();
             }
 
-            if(Input.GetKeyDown(KeyCode.LeftShift))
+            if(Input.GetKeyDown(KeyCode.Mouse1))
             {
-                player.SkillInput(0);
+                player.SkillInputBegin(1);                
+            }
+            else if(Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                player.SkillInputEnd(1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                player.SkillInputBegin(0);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                player.SkillInputEnd(0);
             }
 
             float xInput = Input.GetAxisRaw("Horizontal");

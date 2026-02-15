@@ -1,6 +1,7 @@
 using PlayerSystem;
 using System;
 using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace AnimationAndFx
@@ -17,7 +18,11 @@ namespace AnimationAndFx
         public Action WallSlide;
         public Action<float> UpdateYVelocity;
         public Action DashBeginNotice;
-        public Action DashEndNotice; 
+        public Action DashEndNotice;
+        public Action AimmingBeginNotice;
+        public Action<DProjectileAimmingData> AimmingUpdateNotice;
+        public Action AimmingFinishNotice;
+        public Action CatchNotice;
         #endregion
 
         protected override void Awake()
@@ -78,6 +83,28 @@ namespace AnimationAndFx
             player.AttackDamageTrigger();
         }
 
-        
+        public void AimmingBegin()
+        {
+            InvokeAction(AimmingBeginNotice);
+        }
+        public void AimmingUpdate(DProjectileAimmingData _data)
+        {
+            InvokeAction(AimmingUpdateNotice, _data);
+        }
+
+        public void AimmingFinish()
+        {
+            InvokeAction(AimmingFinishNotice);
+        }
+
+        public void CatchSwordBegin()
+        {
+            
+        }
+
+        public void CatchSwordFinish()
+        {
+            InvokeAction(CatchNotice);
+        }
     }
 }

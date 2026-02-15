@@ -14,14 +14,22 @@ namespace SkillSystem
         {
             input = TryGetModel<SMInput>(_modelManager);
 
-            input.SkillInput += SkillInputHandle;
+            input.SkillInputEndNotice += SkillInputEndHandle;
+            input.SkillInputBeginNotice += SkillInoutBeginHandle;
         }
 
-        protected void SkillInputHandle(int _input)
+        protected void SkillInputEndHandle(int _input)
         {
             if(_input == skillEffectInput)
             {
-                Effect.Invoke();
+                EffectEnd?.Invoke();
+            }
+        }
+        protected void SkillInoutBeginHandle(int _input)
+        {
+            if (_input == skillEffectInput)
+            {
+                EffectBegin?.Invoke();
             }
         }
     }

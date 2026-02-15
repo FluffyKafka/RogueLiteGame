@@ -17,7 +17,8 @@ namespace AnimationAndFx
         public Action ClearNotice;
         public Action<bool> ShowTrailNotice;
         public Action FadeAwayFinishNotice;
-        public Action ToExplodeNotice;
+        public Action ToEffectNotice;
+        public Action ShowHitFxNotice;
         #endregion
 
         protected void Awake()
@@ -46,9 +47,9 @@ namespace AnimationAndFx
         {
             InvokeAction(ShowTrailNotice, _isShow);
         }
-        public void ToExplode()
+        public void ToEffect()
         {
-            InvokeAction(ToExplodeNotice);
+            InvokeAction(ToEffectNotice);
         }
 
         public void AnimDamageTrigger()
@@ -58,6 +59,11 @@ namespace AnimationAndFx
         public void AnimDamageFinish()
         {
             controller.DamageFinish();
+        }
+
+        public void ShowHitFx()
+        {
+            InvokeAction(ShowHitFxNotice);
         }
     }
 

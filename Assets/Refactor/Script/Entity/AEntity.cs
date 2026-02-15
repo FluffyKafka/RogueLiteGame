@@ -29,11 +29,13 @@ namespace EntitySystem
         public WReadOnlyDamageData damage;
         public EEntityType targetType;
         public Vector2 velocity;
-        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity)
+        public float gravity;
+        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity, float _gravity = -1)
         {
             damage = _damage;
             targetType = _targetType;
             velocity = _velocity;
+            gravity = _gravity;
         }
     }
     public struct DAmmoData

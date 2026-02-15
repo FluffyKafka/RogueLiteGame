@@ -17,6 +17,7 @@ namespace PlayerBebaviour
         public SEntityState wallJump { get; protected set; }
         public SEntityState primaryAttack { get; protected set; }
         public SEntityState dead { get; protected set; }
+        public SEntityState aim { get; protected set; }
         #endregion
 
         #region SkillStates
@@ -50,6 +51,7 @@ namespace PlayerBebaviour
 
             //SkillStats
             dash = new SPlayerDash(this, entity);
+            aim = new SPlayerAimming(this, entity);
 
             player.CanEffectBehaviourSkillNotice += () => { return currentState is SPlayerRegularState; };
         }

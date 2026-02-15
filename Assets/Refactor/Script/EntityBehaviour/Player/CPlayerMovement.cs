@@ -1,4 +1,5 @@
 using EntityBehaviour;
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -58,9 +59,11 @@ namespace PlayerBebaviour
             player.IsGroundedOrPlatform_Strict += IsGroundedOrPlatform_Strict;
             player.SlowEntityBy += SlowBy;
             player.RecoverEntitySpeed += RecoverSpeed;
-            player.DashBeginNotice += SetDashSpeed;
-            player.DashMovementUpdate += DashVelocityUpdate;
+            player.OnDashBegin += SetDashSpeed;
+            player.OnDashMovementUpdate += DashVelocityUpdate;
             player.ToIdle += StandStill;
+            player.StandStillNotice += StandStill;
+            player.OnAimmingUpdate += AimmingUpdate;
         }
 
         protected override void Update()
@@ -84,6 +87,19 @@ namespace PlayerBebaviour
                     }
                 }
             }
+        }
+
+        protected void AimmingUpdate(DProjectileAimmingData _data)
+        {
+            if(isFacingLeft && _data.dir.x > 0)
+            {
+                Flip();
+            }
+            else if(!isFacingLeft && _data.dir.x < 0)
+            {
+                Flip();
+            }
+
         }
 
         protected void StandStill()

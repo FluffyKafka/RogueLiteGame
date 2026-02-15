@@ -20,6 +20,7 @@ namespace PlayerBebaviour
         public Action ToIdle;
         public Action ToMove;
         public Action ToWallSlide;
+        public Action StandStillNotice;
 
         //Input
         public Action<float> HorizonInput;
@@ -30,9 +31,12 @@ namespace PlayerBebaviour
         public Action<GameObject> StunCheck;
 
         //Skill
-        public Action<float> DashBeginNotice;
-        public Action DashEndNotice;
-        public Action DashMovementUpdate;
+        public Action<float> OnDashBegin;
+        public Action OnDashEnd;
+        public Action OnDashMovementUpdate;
+        public Action OnAimmingBegin;
+        public Action OnAimmingFinish;
+        public Action<DProjectileAimmingData> OnAimmingUpdate;
         #endregion
 
         #region Func
@@ -88,17 +92,42 @@ namespace PlayerBebaviour
 
         public void DashBegin(float _speed)
         {
-            InvokeAction(DashBeginNotice, _speed);//状态组件进入dash，移动组件dash
+            InvokeAction(OnDashBegin, _speed);//状态组件进入dash，移动组件dash
         }
 
         public void DashEnd()
         {
-            InvokeAction(DashEndNotice);
+            InvokeAction(OnDashEnd);
         }
 
         public bool CanEffectBehaviourSkill()
         {
             return InvokeFunc(CanEffectBehaviourSkillNotice);
+        }
+
+        public void AimmingBegin()
+        {
+            InvokeAction(OnAimmingBegin);
+        }
+
+        public void AimmingUpdate(DProjectileAimmingData _data)
+        {
+            InvokeAction(OnAimmingUpdate, _data);
+        }
+
+        public void AimmingFinish()
+        {
+            InvokeAction(OnAimmingFinish);
+        }
+
+        public void CatchSwordBegin()
+        {
+            InvokeAction(OnAimmingBegin);
+        }
+
+        public void CatchSwordFinish()
+        {
+            InvokeAction(OnAimmingFinish);
         }
     }
 }

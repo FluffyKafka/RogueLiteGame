@@ -11,7 +11,7 @@ namespace ObjectController
         protected override void Awake()
         {
             base.Awake();
-            factory.GenerateAfterImageAt += GenerateAfterImage;
+            factory.GenerateAfterImageAtNotice += GenerateAfterImage;
         }
 
         protected void GenerateAfterImage(DAfterImageData _data)

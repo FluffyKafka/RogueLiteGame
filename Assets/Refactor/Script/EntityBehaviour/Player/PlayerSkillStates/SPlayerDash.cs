@@ -14,19 +14,19 @@ namespace PlayerBebaviour
         public override void Enter()
         {
             base.Enter();
-            player.DashEndNotice += DashFinish;
+            player.OnDashEnd += DashFinish;
         }
 
         public override void Exit()
         {
             base.Exit();
-            player.DashEndNotice -= DashFinish;
+            player.OnDashEnd -= DashFinish;
         }
 
         public override void Update()
         {
             base.Update();
-            player.InvokeAction(player.DashMovementUpdate);
+            player.InvokeAction(player.OnDashMovementUpdate);
         }
 
         protected void DashFinish()

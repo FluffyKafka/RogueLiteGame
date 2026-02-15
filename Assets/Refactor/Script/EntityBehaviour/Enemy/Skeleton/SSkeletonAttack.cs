@@ -31,7 +31,6 @@ namespace EnemyBehaviour
 
         protected void OnAttackFinish()
         {
-            Debug.Log("AttackFinish");
             enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
         }
 

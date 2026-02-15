@@ -30,7 +30,7 @@ namespace SkillSystem
             }
             else
             {                
-                return 0;
+                return -1;
             }
         }
     }

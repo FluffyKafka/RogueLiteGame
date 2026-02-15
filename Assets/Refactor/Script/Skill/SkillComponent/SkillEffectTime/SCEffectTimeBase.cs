@@ -7,7 +7,8 @@ namespace SkillSystem
 {
     internal class SCEffectTimeBase : SCBase
     {
-        public Action Effect;
+        public Action EffectBegin;
+        public Action EffectEnd;
         public override void Init(SMSkillModel[] _modelManager)
         {
             

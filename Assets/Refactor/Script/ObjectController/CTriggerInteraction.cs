@@ -76,7 +76,7 @@ namespace ObjectController
             if (isGroundTrigger && (whatIsGround.value & (1 << _collision.gameObject.layer)) != 0)
             {
                 controller.InvokeAction(controller.HitGround, _collision.transform);
-                Debug.Log("HitDround");
+                Debug.Log("HitGround");
                 canTrigger = false;
             }
         }

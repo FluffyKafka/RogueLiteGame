@@ -7,10 +7,11 @@ namespace AnimationAndFx
     internal class CAnimatorDisplay : CObjectAnimationComponentBase
     {
         [SerializeField] protected string idleAnimName = "Idle";
-        [SerializeField] protected string explodeAnimName = "Explode";
+        [SerializeField] protected string effectAnimName = "Effect";
 
+        [Header("Test")]
         protected Animator animator;
-        protected string currentAnimName;
+        [SerializeField] protected string currentAnimName;
 
         protected override void Awake()
         {
@@ -19,12 +20,13 @@ namespace AnimationAndFx
             animator.SetBool(idleAnimName, true);
             currentAnimName = idleAnimName;
 
-            anim.ToExplodeNotice += ToExplode;
+            anim.ToEffectNotice += ToEffect;
+            anim.ClearNotice += Clear;
         }
 
-        protected void ToExplode()
+        protected void ToEffect()
         {
-            ChangeAnimTo(explodeAnimName);
+            ChangeAnimTo(effectAnimName);
         }
 
         protected void ChangeAnimTo(string _animName)
@@ -32,6 +34,13 @@ namespace AnimationAndFx
             animator.SetBool(currentAnimName, false);
             currentAnimName = _animName;
             animator.SetBool(_animName, true);
+        }
+
+        protected void Clear()
+        {
+            animator.SetBool(currentAnimName, false);
+            currentAnimName = idleAnimName;
+            animator.SetBool(idleAnimName, true);
         }
     }
 }

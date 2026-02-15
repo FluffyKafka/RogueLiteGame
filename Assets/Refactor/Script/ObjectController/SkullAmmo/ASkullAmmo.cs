@@ -62,7 +62,7 @@ namespace ObjectController
         protected void Expolde()
         {
             anim.ShowTrail(false);
-            anim.ToExplode();
+            anim.ToEffect();
             InvokeAction(SetLookAtMovement, false);
             InvokeAction(SetMoveToTarget, null, 0);
             DamageTriggerNotice += ExplodeDamage;

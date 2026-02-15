@@ -20,7 +20,11 @@ namespace SkillSystem
         public override bool CanEffect(string _id)
         {
             float effectTime = timer.CheckTimer(_id);
-            if(Time.time - effectTime > duration)
+            if(effectTime < 0)
+            {
+                return true;
+            }
+            else if(Time.time - effectTime > duration)
             {
                 return true;
             }

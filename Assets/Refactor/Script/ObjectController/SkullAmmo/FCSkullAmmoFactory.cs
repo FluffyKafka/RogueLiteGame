@@ -10,11 +10,7 @@ namespace ObjectController
         protected override void Awake()
         {
             base.Awake();
-            factory.GenerateSkullAmmoAt += GenerateSkullAmmo;
-
-            GameObject newObject = pool.GetObject();
-            ASkullAmmo newArrow = newObject.GetComponent<ASkullAmmo>();
-            RecycleObject(newArrow);
+            factory.GenerateSkullAmmoAtNotice += GenerateSkullAmmo;
         }
 
         protected void GenerateSkullAmmo(DAmmoData _data, Vector3 _position)

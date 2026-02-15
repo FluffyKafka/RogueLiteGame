@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f421d058ba3b44684660ae9fea6ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 0
 --- !u!114 &1682056676099047126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5166,6 +5167,7 @@ GameObject:
   - component: {fileID: 4359732620572540997}
   - component: {fileID: 660011548234098203}
   - component: {fileID: 2526688193127423817}
+  - component: {fileID: 990485481570971600}
   m_Layer: 6
   m_Name: AnimationAndFx
   m_TagString: Untagged
@@ -5296,6 +5298,7 @@ MonoBehaviour:
   attackAnimName: Attack
   comboCounterName: ComboCounter
   wallSlideName: WallSlide
+  dashName: Dash
 --- !u!114 &8919615146132893122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5366,6 +5369,21 @@ MonoBehaviour:
   hitCritFXPrefab: {fileID: 6476683805674293482, guid: f49b38e3a8904a74eaefff995980fed2, type: 3}
   maxXYRandomPositionOffset_CritHit: {x: 0.1, y: 0.5}
   rotateAngle_CritHit: 45
+--- !u!114 &990485481570971600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4034974489755399979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb7c3f65f22b6409b7ca053d27d190, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dotNum: 20
+  betweenDotSpace: 1
+  dotPrefab: {fileID: 9065066984525940770, guid: 4b522b03c4d343945951d34b7d909161, type: 3}
 --- !u!1 &4982497174444371175
 GameObject:
   m_ObjectHideFlags: 0
@@ -15215,6 +15233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532274ffbbca24f45bc31d60dd5cf409, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rg: {fileID: 0}
+  isFacingLeft: 0
+  facingDir: 1
+  defaultGravity: 0
+  isInitFacingLeft: 0
   groundCheckDistance: 0.22
   groundCheck: {fileID: 695346754692897693}
   wallCheckDistance: 0.24
@@ -15228,6 +15251,8 @@ MonoBehaviour:
   knockBackDir: {x: 10, y: 10}
   knockBackDirMapK: 0.5
   knockBackDuration: 0.07
+  isKnocked: 0
+  isVelocityLockUp: 0
   moveSpeed: 8
   wallSlideSpeed: 1
   wallSlideUpAdjustSpeed: 0.9

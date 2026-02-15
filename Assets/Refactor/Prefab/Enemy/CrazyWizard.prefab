@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 215880088166435082}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: -0.7810046}
+  m_LocalPosition: {x: 0, y: -0.61, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9950,7 +9950,7 @@ Transform:
   m_GameObject: {fileID: 4232710814098859380}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -1.16, z: -0.7810046}
+  m_LocalPosition: {x: 1.23, y: -1.39, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10087,7 +10087,7 @@ Transform:
   m_GameObject: {fileID: 5156264586147683410}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.717, y: -0.134, z: -0.7810046}
+  m_LocalPosition: {x: 1.83, y: -0.72, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14960,7 +14960,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.31, y: 0.1, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6051086501396260412}
@@ -14988,7 +14988,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15009,12 +15009,12 @@ SpriteRenderer:
   m_SortingLayerID: -742685397
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -85727878, guid: 687df074731fbf744b668d2275dbb675, type: 3}
+  m_Sprite: {fileID: 999201562, guid: 7b5ea95406c0ca541b2f23710ee9ccb9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 7.8125, y: 7.8125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -15030,7 +15030,7 @@ Animator:
   m_GameObject: {fileID: 7043626284195687476}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 64a996d1c1b32bb4a9e8cefad47bc80e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 233bfa5d762e69647b03b71977b0fdfc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -15068,7 +15068,7 @@ MonoBehaviour:
   idleAnimName: Idle
   moveAnimName: Move
   attackAnimName: Attack
-  stunAnimName: Stun
+  stunAnimName: Idle
   pullbackAnimName: Move
   fallAnimName: Fall
   pullbackJumpAnimName: PullBackJump
@@ -15240,7 +15240,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 15
+  m_GravityScale: 12
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -15248,9 +15248,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!70 &7539953808030495049
 CapsuleCollider2D:
@@ -15284,8 +15284,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.061422348, y: -0.09969282}
-  m_Size: {x: 1.3243675, y: 2.167747}
+  m_Offset: {x: 0.07758331, y: -0.6015334}
+  m_Size: {x: 2.1583405, y: 2.8227825}
   m_Direction: 0
 --- !u!114 &2537011703980150255
 MonoBehaviour:
@@ -15367,21 +15367,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackValidCheck: {fileID: 1126312933940364104}
-  attackValidCheckRadius: 1
+  attackValidCheckRadius: 2.77
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   playerCheck: {fileID: 7939972714041247598}
-  playerCheckDistance: 10
+  playerCheckDistance: 15
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  playerDetectRadius: 3.19
-  toAttackRadius: 2.68
-  minAttackCooldown: 1
-  maxAttackCooldown: 2
+  playerDetectRadius: 10
+  toAttackRadius: 5.6
+  minAttackCooldown: 2
+  maxAttackCooldown: 3
   battleDuration: 7
-  battleIdleRadius: 1
+  battleIdleRadius: 4.23
   stunDuration: 0.7
 --- !u!114 &1726240150170420908
 MonoBehaviour:
@@ -15420,7 +15420,7 @@ Transform:
   m_GameObject: {fileID: 8042559632614643839}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.33, y: -0.09, z: -0.7810046}
+  m_LocalPosition: {x: 3.29, y: 0.08, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15637,7 +15637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63852048c2ba87044bf3d313c2deedd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
+  currentHealth: 100
 --- !u!114 &2190081257760847175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15679,7 +15679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage:
-    baseValue: 0
+    baseValue: 5
     adders: []
     multiplyers: []
   critChance:

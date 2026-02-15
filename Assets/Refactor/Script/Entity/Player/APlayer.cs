@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Rendering;
 
 namespace PlayerSystem
 {
@@ -20,7 +21,8 @@ namespace PlayerSystem
         public void VerticalInput(float _input);
         public void JumpInput();
         public void AttackInput();
-        public void SkillInput(int _input);
+        public void SkillInputEnd(int _input);
+        public void SkillInputBegin(int _input);
     }
 
     public interface IEnemyPlayer
@@ -97,12 +99,35 @@ namespace PlayerSystem
         public void StunCheck(GameObject _enemy);
     }
 
+    public struct DProjectileAimmingData
+    {
+        public Vector3 dir;
+        public Vector3 launchSpeed;
+        public float gravity;
+        public DProjectileAimmingData(Vector3 _dir, Vector3 _launchSpeed, float _gravity)
+        {
+            dir = _dir;
+            launchSpeed = _launchSpeed;
+            gravity = _gravity;
+        }
+    }
     public interface ISkillManagerPlayer
     {
         public void DashBegin(float _speed);
         public void DashEnd();
 
         public bool CanEffectBehaviourSkill();
+
+        public Vector3 CheckMousePosition();
+        public Transform CheckPlayerTransform();
+
+        public void AimmingBegin();
+        public void AimmingUpdate(DProjectileAimmingData _data);
+        public void AimmingFinish();
+        public GameObject ThrowSword(DProjectileData _data);
+        public void CatchSwordBegin();
+        public void CatchSwordFinish();
+        public WReadOnlyDamageData CheckPlayerDamage();
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
@@ -215,9 +240,13 @@ namespace PlayerSystem
         {
             behaviour.AttackInput();
         }
-        void IInputPlayer.SkillInput(int _input)
+        void IInputPlayer.SkillInputEnd(int _input)
         {
-            skillManager.SkillInput(_input);
+            skillManager.SkillInputEnd(_input);
+        }
+        void IInputPlayer.SkillInputBegin(int _input)
+        {
+            skillManager.SkillInputBegin(_input);
         }
         #endregion
 
@@ -379,13 +408,13 @@ namespace PlayerSystem
         }
         #endregion
 
+        //暂时直接转发，若有需要再引入事件机制
         #region Skill
         public void DashBegin(float _speed)
         {
             behaviour.DashBegin(_speed);
             playerAnim.DashBegin();
         }
-
         public void DashEnd()
         {
             behaviour.DashEnd();
@@ -395,6 +424,52 @@ namespace PlayerSystem
         public bool CanEffectBehaviourSkill()
         {
             return behaviour.CanEffectBehaviourSkill();
+        }
+
+        public Vector3 CheckMousePosition()
+        {
+            return input.CheckMousePosition();
+        }
+
+        public Transform CheckPlayerTransform()
+        {
+            return transform;
+        }
+
+        public void CatchSwordBegin()
+        {
+            behaviour.CatchSwordBegin();
+            playerAnim.CatchSwordBegin();
+        }
+        public void CatchSwordFinish()
+        {
+            behaviour.CatchSwordFinish();
+            playerAnim.CatchSwordFinish();
+        }
+        public void AimmingBegin()
+        {
+            behaviour.AimmingBegin();
+            playerAnim.AimmingBegin();
+        }
+        public void AimmingUpdate(DProjectileAimmingData _data)
+        {
+            behaviour.AimmingUpdate(_data);
+            playerAnim.AimmingUpdate(_data);
+        }
+        public void AimmingFinish()
+        {
+            behaviour.AimmingFinish();
+            playerAnim.AimmingFinish();
+        }
+
+        public GameObject ThrowSword(DProjectileData _data)
+        {
+            return playerObjectFactory.GenerateSword(_data, transform.position);
+        }
+
+        public WReadOnlyDamageData CheckPlayerDamage()
+        {
+            return stats.GetPrimaryAttackData();
         }
         #endregion
 
@@ -419,7 +494,9 @@ namespace PlayerSystem
 
     public interface IPlayerSkillManager
     {
-        public void SkillInput(int _input);
+        public void SkillInputEnd(int _input);
+
+        public void SkillInputBegin(int _input);
     }
 
     public interface IPlayerBehaviour : IEntityBehaviour
@@ -431,6 +508,12 @@ namespace PlayerSystem
         public void DashBegin(float _speed);
         public void DashEnd();
         public bool CanEffectBehaviourSkill();
+
+        public void AimmingBegin();
+        public void AimmingUpdate(DProjectileAimmingData _data);
+        public void AimmingFinish();
+        public void CatchSwordBegin();
+        public void CatchSwordFinish();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -447,7 +530,8 @@ namespace PlayerSystem
     }
     public interface IPlayerObjectFactory: IEntityObjectFactory
     {
-        public void GenerateDropItemObject(IItem _data, Vector3 position);
+        public void GenerateDropItemObject(IItem _data, Vector3 _position);
+        public GameObject GenerateSword(DProjectileData _data, Vector3 _position);
     }
 
     public interface IPlayerAnimation : IEntityAnimation
@@ -460,12 +544,20 @@ namespace PlayerSystem
         public abstract void WallSlide();
         public abstract void DashBegin();
         public abstract void DashEnd();
+
+        public abstract void AimmingBegin();
+        public abstract void AimmingUpdate(DProjectileAimmingData _data);
+        public abstract void AimmingFinish();
+        public abstract void CatchSwordBegin();
+        public abstract void CatchSwordFinish();
     }
 
     public interface IPlayerInput
     {
         public float CheckHorizonInput();
         public float CheckVerticalInput();
+
+        public Vector3 CheckMousePosition();
     }
 
     public interface IPlayerEnemy

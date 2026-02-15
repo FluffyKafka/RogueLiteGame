@@ -7,16 +7,28 @@ namespace SkillSystem
 {
     internal class SMInput : SMSkillModel
     {
-        public Action<int> SkillInput;
+        public Action<int> SkillInputEndNotice;
+        public Action<int> SkillInputBeginNotice;
         protected override void Awake()
         {
             base.Awake();
-            manager.SkillInputNotice += SkillInputNotice;
+            manager.SkillInputEndNotice += SkillInputEnd;
+            manager.SkillInputBeginNotice += SkillInputBegin;
         }
 
-        protected void SkillInputNotice(int _input)
+        protected void SkillInputEnd(int _input)
         {
-            InvokeAction(SkillInput, _input);
+            InvokeAction(SkillInputEndNotice, _input);
+        }
+
+        protected void SkillInputBegin(int _input)
+        {
+            InvokeAction(SkillInputBeginNotice, _input);
+        }
+
+        public Vector3 CheckMousePosition()
+        {
+            return manager.CheckMousePosition();
         }
     }
 }

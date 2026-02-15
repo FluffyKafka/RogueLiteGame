@@ -14,13 +14,15 @@ namespace PlayerBebaviour
         public override void Enter()
         {
             base.Enter();
-            player.DashBeginNotice += ToDash;
+            player.OnDashBegin += ToDash;
+            player.OnAimmingBegin += ToAimming;
         }
 
         public override void Exit()
         {
             base.Exit();
-            player.DashBeginNotice -= ToDash;
+            player.OnDashBegin -= ToDash;
+            player.OnAimmingBegin -= ToAimming; 
         }
 
         public override void Update()
@@ -31,6 +33,11 @@ namespace PlayerBebaviour
         protected void ToDash(float _speed)
         {
             playerStateMachine.ChangeState(playerStateMachine.dash);
+        }
+        protected void ToAimming()
+        {
+            playerStateMachine.ChangeState(playerStateMachine.aim);
+            Debug.Log("Aimming");
         }
     }
 }

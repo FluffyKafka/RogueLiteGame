@@ -15,7 +15,10 @@ namespace AnimationAndFx
         [SerializeField] protected string comboCounterName = "ComboCounter";
         [SerializeField] protected string wallSlideName = "WallSlide";
         [SerializeField] protected string dashName = "Dash";
- 
+        [SerializeField] protected string aimAnimName = "AimSword";
+        [SerializeField] protected string catchAnimNAme = "CatchSword";
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -28,6 +31,8 @@ namespace AnimationAndFx
             playerAnimFxSystem.WallSlide += WallSlide;
             playerAnimFxSystem.UpdateYVelocity += UpdateYVelocity;
             playerAnimFxSystem.DashBeginNotice += Dash;
+            playerAnimFxSystem.AimmingBeginNotice += Aimming;
+            playerAnimFxSystem.CatchNotice += Catch;
         }
 
         protected void Idle()
@@ -64,6 +69,16 @@ namespace AnimationAndFx
         protected void Dash()
         {
             ChangeAnimationTo(dashName);
+        }
+
+        protected void Aimming()
+        {
+            ChangeAnimationTo(aimAnimName);
+        }
+
+        protected void Catch()
+        {
+            ChangeAnimationTo(catchAnimNAme);
         }
     }
 }

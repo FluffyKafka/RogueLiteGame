@@ -12,7 +12,7 @@ namespace ObjectController
         protected override void Awake()
         {
             base.Awake();
-            factory.GenerateArrowAt += GenerateArrow;
+            factory.GenerateArrowAtNotice += GenerateArrow;
             factory.CheckArrowGravityNotice += CheckArrowGravity;
 
             GameObject newObject = pool.GetObject();

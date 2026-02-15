@@ -20,6 +20,12 @@ namespace ObjectController
 
         protected void StuckInto(Transform _target)
         {
+            if(_target == null)
+            {
+                transform.SetParent(null, true);
+                isStuck = false;
+            }
+
             col.enabled = false;
             rg.isKinematic = true;
             rg.constraints = RigidbodyConstraints2D.FreezeAll;

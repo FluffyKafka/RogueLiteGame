@@ -33,6 +33,7 @@ namespace SkillSystem
         [SerializeField] protected List<SCUnlockConditionBase> unlockConditions;
         [SerializeField] protected List<SCEffectConditionBase> effectConditions;
         [SerializeField] protected List<SCUnlockEffectBase> unlockEffects;
+        [SerializeField] protected List<SCAimmingEffectBase> aimmingEffects;
         [SerializeField] protected List<SCEffectBase> effects;
         [SerializeField] protected List<SCEffectTimeBase> effectTimes;
 
@@ -51,15 +52,7 @@ namespace SkillSystem
             isUnlock = _isUnlock;
             if(isUnlock)
             {
-                foreach (var effect in unlockEffects)
-                {
-                    effect.Effect();
-                }
-
-                foreach (var time in effectTimes)
-                {
-                    time.Effect += TryEffect;
-                }
+                UnlockSkill();
             }
         }
 
@@ -85,18 +78,59 @@ namespace SkillSystem
                 }
             }
 
+            UnlockSkill();
+
+            return true;
+        }
+        protected void UnlockSkill()
+        {
             foreach (var effect in unlockEffects)
             {
                 effect.Effect();
             }
 
-            foreach(var time in effectTimes)
+            if (aimmingEffects.Count == 0)
             {
-                time.Effect += TryEffect;
+                foreach (var time in effectTimes)
+                {
+                    time.EffectBegin += TryEffect;
+                }
+            }
+            else
+            {
+                foreach (var time in effectTimes)
+                {
+                    time.EffectBegin += TryAimmingBegin;
+                    time.EffectEnd += AimmingEnd;
+                    time.EffectEnd += TryEffect;
+                }
+            }
+        }
+
+        protected void TryAimmingBegin()
+        {            
+            foreach (var condition in effectConditions)
+            {
+                if (!condition.CanEffect(skillId))
+                {
+                    return;
+                }
             }
 
-            return true;
+            foreach (var aim in aimmingEffects)
+            {
+                aim.AimmingStart(skillId);
+            }
         }
+
+        protected void AimmingEnd()
+        {
+            foreach (var aim in aimmingEffects)
+            {
+                aim.AimmingFinish(skillId);
+            }
+        }
+
         protected void TryEffect()
         {
             foreach(var condition in effectConditions)

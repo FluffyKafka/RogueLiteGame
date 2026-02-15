@@ -1,4 +1,6 @@
+using EntitySystem;
 using PlayerSystem;
+using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +17,8 @@ namespace SkillSystem
     {
         protected ISkillManagerPlayer player;
 
-        public Action<int> SkillInputNotice;
+        public Action<int> SkillInputEndNotice;
+        public Action<int> SkillInputBeginNotice;
 
         #region Dash
         public Action DashEnd;
@@ -33,14 +36,71 @@ namespace SkillSystem
             player = _player;
         }
 
-        public void SkillInput(int _input)
+        public void SkillInputEnd(int _input)
         {
-            InvokeAction(SkillInputNotice, _input);
+            InvokeAction(SkillInputEndNotice, _input);
+        }
+
+        public void SkillInputBegin(int _input)
+        {
+            InvokeAction(SkillInputBeginNotice, _input);
+        }
+
+        public Vector3 CheckMousePosition()
+        {
+            return player.CheckMousePosition();
+        }
+
+        public Transform CheckPlayerTransform()
+        {
+            return player.CheckPlayerTransform();
         }
 
         public bool CanEffectBehaviourSkill()
         {
             return player.CanEffectBehaviourSkill();
         }
+
+        public void AimmingBegin()
+        {
+            player.AimmingBegin();
+        }
+        public void AimmingUpdate(DProjectileAimmingData _data)
+        {
+            player.AimmingUpdate(_data);
+        }
+
+        public void AimmingFinish()
+        {
+            player.AimmingFinish();
+        }
+
+        public void CatchSwordBegin()
+        {
+            player.CatchSwordBegin();
+        }
+
+        public void CatchSwordEnd()
+        {
+            player.CatchSwordFinish();
+        }
+
+        public ISkillObject ThrowSword(DProjectileData _data)
+        {
+            return player.ThrowSword(_data).GetComponent<ISkillObject>();
+        }
+
+        public WReadOnlyDamageData CheckPlayerPrimaryDamage()
+        {
+            return player.CheckPlayerDamage();
+        }
+    }
+
+    public interface ISkillObject
+    {
+        public Transform GetTransform();
+        public void RecycleObject();
+
+        public void TakeBack();
     }
 }

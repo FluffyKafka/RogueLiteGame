@@ -2,6 +2,7 @@ using EnemySystem;
 using EntitySystem;
 using Item;
 using PlayerSystem;
+using SkillSystem;
 using StatsData;
 using System;
 using System.Collections;
@@ -17,7 +18,7 @@ namespace ObjectController
         public void DamageFinish();
     }
 
-    internal abstract class AObjectController : ComponentManagerBase, IPlayerEnterable, IPlayerInteractable, IPlayerReflectable, IAnimObject
+    internal abstract class AObjectController : ComponentManagerBase, IPlayerEnterable, IPlayerInteractable, IPlayerReflectable, IAnimObject, ISkillObject
     {
         #region Action
         public Action<IObjectPlayer> PlayerEnter;
@@ -100,6 +101,21 @@ namespace ObjectController
         {
             InvokeAction(DamageFinishNotice);
         }
+
+        Transform ISkillObject.GetTransform()
+        {
+            return transform;
+        }
+
+        void ISkillObject.RecycleObject()
+        {
+            SelfRecycle();
+        }
+
+        public virtual void TakeBack()
+        {
+            
+        }
     }
 
     public interface IObjectAnim
@@ -109,6 +125,8 @@ namespace ObjectController
         public void FadeAway();
         public void Clear();
         public void ShowTrail(bool _isShow);
-        public void ToExplode();
+        public void ToEffect();
+        public void ShowHitFx();
+
     }
 }

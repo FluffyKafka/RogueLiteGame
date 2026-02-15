@@ -14,7 +14,7 @@ namespace ObjectController
         protected override void Awake()
         {
             base.Awake();
-            factory.GenerateDropItemAt += GenerateDropItem;
+            factory.GenerateDropItemAtNotice += GenerateDropItem;
         }
 
         protected void GenerateDropItem(IItem _data, Vector3 _position)
