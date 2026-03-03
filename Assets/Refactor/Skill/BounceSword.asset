@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
+  m_Name: BounceSword
+  m_EditorClassIdentifier: 
+  skillId: 
+  skillName: 
+  icon: {fileID: 0}
+  description: 
+  unlockConditions:
+  - {fileID: 11400000, guid: 6d3132b0b06aeed43bd9c137063c40c3, type: 2}
+  - {fileID: 11400000, guid: b2ba98a7f41ef7c4b99c8ed90de87d84, type: 2}
+  effectConditions: []
+  unlockEffects:
+  - {fileID: 11400000, guid: 967f435666a5bc2498d33e89beecb28a, type: 2}
+  aimmingEffects: []
+  effects: []
+  effectTimes: []

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de70fbf65b219d743ab316d8ed5660e7, type: 3}
   m_Name: DashCooldownCheck
   m_EditorClassIdentifier: 
-  duration: 0
+  duration: 0.5

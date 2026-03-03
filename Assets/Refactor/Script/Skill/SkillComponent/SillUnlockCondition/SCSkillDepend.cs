@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCSkillDepend : MonoBehaviour
+namespace SkillSystem
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu(fileName = "New Skill Component", menuName = "Skill System/Skill Component/Unlock Condition/HaveDependSkill")]
+    internal class SCSkillDepend : SCUnlockConditionBase
     {
-        
-    }
+        [SerializeField] List<SESkillEntity> dependSkills;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override bool CanUnlock()
+        {
+            foreach(var skill in dependSkills)
+            {
+                if(!skill.IsUnlock())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
+

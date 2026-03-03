@@ -1,5 +1,6 @@
 using EnemySystem;
 using EntitySystem;
+using ObjectGenerateData;
 using PlayerSystem;
 using StatsData;
 using System.Collections;
@@ -32,10 +33,10 @@ namespace ObjectController
 
             PlayerReflect += BeReflect;
             HitPlayer += HitEntityHandle;
-            HitEnemy += HitEntityHandle;
-            HitGround += HitGroundHandle;
+            HitEnemyNotice += HitEntityHandle;
+            HitGroundNotice += HitGroundHandle;
             InvokeAction(SetLookAtMovement, true);
-            InvokeAction(SetMoveToTarget, _data.target, moveSpeed);
+            InvokeAction(SetMoveToTargetNotice, _data.target, moveSpeed);
             DamageFinishNotice += SelfRecycle;
             origin = _data.originEntity;
 
@@ -55,7 +56,7 @@ namespace ObjectController
                 damage.physical *= reflectPhysicalDamageMultiplier;
                 target = EEntityType.Enemy;
                 InvokeAction(SwitchTargetTo, EEntityType.Enemy);
-                InvokeAction(SetMoveToTarget, origin.CheckTransform(), reflectMoveSpeed);
+                InvokeAction(SetMoveToTargetNotice, origin.CheckTransform(), reflectMoveSpeed);
             }
         }
 
@@ -64,7 +65,7 @@ namespace ObjectController
             anim.ShowTrail(false);
             anim.ToEffect();
             InvokeAction(SetLookAtMovement, false);
-            InvokeAction(SetMoveToTarget, null, 0);
+            InvokeAction(SetMoveToTargetNotice, null, 0);
             DamageTriggerNotice += ExplodeDamage;
             origin.ObjectFinish();
         }
@@ -92,8 +93,8 @@ namespace ObjectController
             FadeFinish -= SelfRecycle;
             PlayerReflect -= BeReflect;
             HitPlayer -= HitEntityHandle;
-            HitEnemy -= HitEntityHandle;
-            HitGround -= HitGroundHandle;
+            HitEnemyNotice -= HitEntityHandle;
+            HitGroundNotice -= HitGroundHandle;
             StopAllCoroutines();
         }
     }

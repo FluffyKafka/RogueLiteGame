@@ -1,6 +1,7 @@
 using EnemySystem;
 using EntitySystem;
 using ObjectController;
+using ObjectGenerateData;
 using PlayerSystem;
 using StatsData;
 using System.Collections;
@@ -29,8 +30,8 @@ namespace ObjectController
             FadeFinish += SelfRecycle;
             PlayerReflect += BeReflect;
             HitPlayer += DamageToPlayer;
-            HitEnemy += DamageToEnemy;
-            HitGround += HitEffect;
+            HitEnemyNotice += DamageToEnemy;
+            HitGroundNotice += HitEffect;
             InvokeAction(SetLookAtMovement, true);
 
             StartCoroutine(SelfRecycleAfter(lifeTime));
@@ -77,8 +78,8 @@ namespace ObjectController
             FadeFinish -= SelfRecycle;
             PlayerReflect -= BeReflect;
             HitPlayer -= DamageToPlayer;
-            HitEnemy -= DamageToEnemy;
-            HitGround -= HitEffect;
+            HitEnemyNotice -= DamageToEnemy;
+            HitGroundNotice -= HitEffect;
             StopAllCoroutines();
         }
 

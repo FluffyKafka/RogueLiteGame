@@ -1,5 +1,6 @@
 using EntitySystem;
 using Item;
+using ObjectGenerateData;
 using StatsData;
 using System;
 using System.Collections;
@@ -125,6 +126,9 @@ namespace PlayerSystem
         public void AimmingUpdate(DProjectileAimmingData _data);
         public void AimmingFinish();
         public GameObject ThrowSword(DProjectileData _data);
+        public GameObject ThrowSpinSword(DSpinSwordData _data);
+        public GameObject ThrowPierceSword(DProjectileData _data);
+        public GameObject ThrowBounceSword(DBounceSwordData _data);
         public void CatchSwordBegin();
         public void CatchSwordFinish();
         public WReadOnlyDamageData CheckPlayerDamage();
@@ -466,6 +470,18 @@ namespace PlayerSystem
         {
             return playerObjectFactory.GenerateSword(_data, transform.position);
         }
+        public GameObject ThrowSpinSword(DSpinSwordData _data)
+        {
+            return playerObjectFactory.GenerateSpinSword(_data, transform.position);
+        }
+        public GameObject ThrowPierceSword(DProjectileData _data)
+        {
+            return playerObjectFactory.GeneratePierceSword(_data, transform.position);
+        }
+        public GameObject ThrowBounceSword(DBounceSwordData _data)
+        {
+            return playerObjectFactory.GenerateBounceSword(_data, transform.position);
+        }
 
         public WReadOnlyDamageData CheckPlayerDamage()
         {
@@ -532,6 +548,9 @@ namespace PlayerSystem
     {
         public void GenerateDropItemObject(IItem _data, Vector3 _position);
         public GameObject GenerateSword(DProjectileData _data, Vector3 _position);
+        public GameObject GenerateSpinSword(DSpinSwordData _data, Vector3 _position);
+        public GameObject GeneratePierceSword(DProjectileData _data, Vector3 _position);
+        public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position);
     }
 
     public interface IPlayerAnimation : IEntityAnimation

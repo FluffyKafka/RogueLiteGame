@@ -1,5 +1,6 @@
 using EntitySystem;
 using Item;
+using ObjectGenerateData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

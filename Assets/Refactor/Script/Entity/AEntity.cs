@@ -4,55 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using ObjectGenerateData;
 using UnityEngine.EventSystems;
 
 namespace EntitySystem
 {
-    public struct DAfterImageData
-    {
-        public Sprite image;
-        public Vector3 position;
-        public float duration;
-        public int facingDir;
-        public float fadeSpeed;
-        public DAfterImageData(Sprite _image, Vector3 _position, float _duration, int _dir, float _fadeSpeed)
-        {
-            image = _image;
-            position = _position;
-            duration = _duration;
-            facingDir = _dir;
-            fadeSpeed = _fadeSpeed;
-        }
-    }
-    public struct DProjectileData
-    {
-        public WReadOnlyDamageData damage;
-        public EEntityType targetType;
-        public Vector2 velocity;
-        public float gravity;
-        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity, float _gravity = -1)
-        {
-            damage = _damage;
-            targetType = _targetType;
-            velocity = _velocity;
-            gravity = _gravity;
-        }
-    }
-    public struct DAmmoData
-    {
-        public WReadOnlyDamageData damage;
-        public Transform target;
-        public EEntityType targetType;
-        public IObjectEntity originEntity;
-        public DAmmoData(WReadOnlyDamageData _damage, EEntityType _targetType, Transform _target, IObjectEntity _origin)
-        {
-            damage = _damage;
-            targetType = _targetType;
-            target = _target;
-            originEntity = _origin;
-        }
-    }
-
     public enum EEntityType
     {
         Player,

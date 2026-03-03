@@ -130,7 +130,7 @@ namespace EntityBehaviour
         {
             isFacingLeft = !isFacingLeft;
             facingDir *= -1;
-            transform.Rotate(new Vector3(0, 180, 0));           
+            transform.Rotate(new Vector3(0, 180, 0));
         }
 
         public virtual bool IsFall()

@@ -1,13 +1,23 @@
 using EntitySystem;
+using ObjectGenerateData;
 using PlayerSystem;
 using StatsData;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 namespace SkillSystem
 {
+    internal enum ESwordType
+    {
+        Regular,
+        Spin,
+        Bounce,
+        Pierce
+    }
+
     internal class SMSword : SMSkillModel
     {
         [Header("SwordSkill Info")]
@@ -38,12 +48,9 @@ namespace SkillSystem
         [SerializeField] protected float pierceGravity;
 
         [Header("SpinSword Info")]
-        [SerializeField] protected float maxTravelDistance;
+        [SerializeField] protected float spinDamageCooldown;
         [SerializeField] protected float spinDuration;
         [SerializeField] protected float spinGravity;
-        [SerializeField] protected float spinDamageCooldown;
-        [SerializeField] protected float spinMoveForwardSpeed;
-        [SerializeField] protected float spinMoveForwardDistance;
 
         [Header("Aimming Line")]
         [SerializeField] protected int dotNum;
@@ -53,6 +60,8 @@ namespace SkillSystem
         [SerializeField] protected bool isUnlocked_swordCluster;
         [SerializeField] protected float swordClusterCooldown;
 
+        [Header("Test")]
+        [SerializeField] protected ESwordType swordType = ESwordType.Regular;
         protected Vector3 aimDir;
         protected bool isAimming = false;
         protected DDamageData damage;
@@ -121,13 +130,103 @@ namespace SkillSystem
             manager.AimmingFinish();
         }
 
+        public void SetSwordType(ESwordType _type)
+        {
+            Assert.IsTrue(swordType == ESwordType.Regular);
+            switch(_type)
+            {
+                case ESwordType.Spin: SetSpinSword(); return;
+                case ESwordType.Pierce: SetPierceSword(); return;
+                case ESwordType.Bounce: SetBounceSword(); return;
+            }
+        }
+        protected void SetSpinSword()
+        {           
+            swordType = ESwordType.Spin;
+            swordGravity = spinGravity;
+        }
+        protected void SetPierceSword()
+        {
+            swordType = ESwordType.Pierce;
+            swordGravity = pierceGravity;
+        }
+        protected void SetBounceSword()
+        {
+            swordType = ESwordType.Bounce;
+            swordGravity = bouncingGravity;
+        }
+
         public void ThrowSword()
+        {
+            switch(swordType)
+            {
+                case ESwordType.Regular: ThrowRegularSword(); return;
+                case ESwordType.Spin:    ThrowSpinSword();    return;
+                case ESwordType.Pierce:  ThrowPierceSword();  return;
+                case ESwordType.Bounce:  ThrowBounceSword();  return;
+            }
+        }
+
+        protected void ThrowRegularSword()
         {
             damage = manager.CheckPlayerPrimaryDamage().Clone();
             damage.physical *= minDamageRate;
             damage.magical *= minDamageRate;
 
-            swordObject = manager.ThrowSword(new DProjectileData(new WReadOnlyDamageData(damage), EEntityType.Enemy, aimDir.normalized * launchSpeed, swordGravity));
+            swordObject =
+                manager.ThrowSword(
+                    new DProjectileData(
+                        new WReadOnlyDamageData(damage),
+                        EEntityType.Enemy, aimDir.normalized * launchSpeed,
+                        swordGravity
+                        )
+                    );
+        }
+        protected void ThrowSpinSword()
+        {
+            damage = manager.CheckPlayerPrimaryDamage().Clone();
+            damage.physical *= minDamageRate;
+            damage.magical *= minDamageRate;
+
+            swordObject =
+                manager.ThrowSpinSword(
+                    new DSpinSwordData(
+                        new WReadOnlyDamageData(damage),
+                        aimDir.normalized * launchSpeed, swordGravity,
+                        spinDuration,
+                        spinDamageCooldown
+                        )
+                    );
+        }
+        protected void ThrowPierceSword()
+        {
+            damage = manager.CheckPlayerPrimaryDamage().Clone();
+            damage.physical *= minDamageRate;
+            damage.magical *= minDamageRate;
+
+            swordObject =
+                manager.ThrowPierceSword(
+                    new DProjectileData(
+                        new WReadOnlyDamageData(damage),
+                        EEntityType.Enemy, aimDir.normalized * launchSpeed,
+                        swordGravity
+                        )
+                    );
+        }
+        protected void ThrowBounceSword()
+        {
+            damage = manager.CheckPlayerPrimaryDamage().Clone();
+            damage.physical *= minDamageRate;
+            damage.magical *= minDamageRate;
+
+            swordObject =
+                manager.ThrowBounceSword(
+                    new DBounceSwordData(
+                        new WReadOnlyDamageData(damage),
+                        EEntityType.Enemy, aimDir.normalized * launchSpeed, swordGravity,
+                        bounceTime, bouncingSpeed, bouncingRadius
+                        )
+                    );
         }
 
         public void TakeSword()

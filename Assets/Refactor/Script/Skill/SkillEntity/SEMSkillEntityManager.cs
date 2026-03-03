@@ -30,6 +30,7 @@ namespace SkillSystem
                 se.entity.Init(se.isUnlock);
             }
         }
+
 #if UNITY_EDITOR
         [ContextMenu("Update Skill Components")]
         protected void UpdateSCDatabase()

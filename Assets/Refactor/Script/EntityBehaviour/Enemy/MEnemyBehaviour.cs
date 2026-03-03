@@ -1,6 +1,7 @@
 using EnemySystem;
 using EntityBehaviour;
 using EntitySystem;
+using ObjectGenerateData;
 using StatsData;
 using System;
 using System.Collections;

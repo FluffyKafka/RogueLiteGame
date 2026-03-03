@@ -1,6 +1,7 @@
 using EnemySystem;
 using EntitySystem;
 using Item;
+using ObjectGenerateData;
 using PlayerSystem;
 using System;
 using Tool;
@@ -16,6 +17,9 @@ namespace ObjectController
         public Func<float> CheckArrowGravityNotice;
         public Action<DAmmoData, Vector3> GenerateSkullAmmoAtNotice;
         public Func<DProjectileData, Vector3, GameObject> GenerateSwordAtNotice;
+        public Func<DSpinSwordData, Vector3, GameObject> GenerateSpinSwordAtNotice;
+        public Func<DProjectileData, Vector3, GameObject> GeneratePierceSwordAtNotice;
+        public Func<DBounceSwordData, Vector3, GameObject> GenerateBounceSwordAtNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -44,6 +48,20 @@ namespace ObjectController
         public GameObject GenerateSword(DProjectileData _data, Vector3 _position)
         {
             return InvokeFunc(GenerateSwordAtNotice, _data, _position);
+        }
+
+        public GameObject GenerateSpinSword(DSpinSwordData _data, Vector3 _position)
+        {
+            return InvokeFunc(GenerateSpinSwordAtNotice, _data, _position);
+        }
+
+        public GameObject GeneratePierceSword(DProjectileData _data, Vector3 _position)
+        {
+            return InvokeFunc(GeneratePierceSwordAtNotice, _data, _position);
+        }
+        public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position)
+        {
+            return InvokeFunc(GenerateBounceSwordAtNotice, _data, _position);
         }
     }
 

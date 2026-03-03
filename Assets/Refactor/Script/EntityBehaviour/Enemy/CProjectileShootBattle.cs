@@ -1,5 +1,6 @@
 
 using EntitySystem;
+using ObjectGenerateData;
 using StatsData;
 using UnityEngine;
 

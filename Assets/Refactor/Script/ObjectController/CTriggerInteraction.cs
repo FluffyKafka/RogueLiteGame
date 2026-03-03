@@ -16,6 +16,7 @@ namespace ObjectController
         [SerializeField] protected bool isGroundTrigger = false;
         [SerializeField] protected LayerMask whatIsGround;
         [SerializeField] EEntityType targetType;
+        [SerializeField] bool CanMultipleTrigger = false;
         protected bool canTrigger = false;
         protected override void Awake()
         {
@@ -62,22 +63,22 @@ namespace ObjectController
             {
                 controller.InvokeAction(controller.HitPlayer, _collision.GetComponent<IObjectPlayer>());
                 Debug.Log("HitPlayer");
-                canTrigger = false;
+                canTrigger = CanMultipleTrigger;
             }
 
             if(targetType == EEntityType.Enemy && _collision.GetComponent<IObjectEnemy>() != null)
             {
-                controller.InvokeAction(controller.HitEnemy, _collision.GetComponent<IObjectEnemy>());
-                canTrigger = false;
+                controller.InvokeAction(controller.HitEnemyNotice, _collision.GetComponent<IObjectEnemy>());
+                canTrigger = CanMultipleTrigger;
             }
 
             //LayerMask的value为掩码（3 => 1000 => 8）
             //1 << _collision.gameObject.layer将1左移3位（0001 -> 1000）最后或运算
             if (isGroundTrigger && (whatIsGround.value & (1 << _collision.gameObject.layer)) != 0)
             {
-                controller.InvokeAction(controller.HitGround, _collision.transform);
+                controller.InvokeAction(controller.HitGroundNotice, _collision.transform);
                 Debug.Log("HitGround");
-                canTrigger = false;
+                canTrigger = CanMultipleTrigger;
             }
         }
 

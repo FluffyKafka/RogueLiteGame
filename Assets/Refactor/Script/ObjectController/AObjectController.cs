@@ -28,8 +28,8 @@ namespace ObjectController
         public Action<int> SecondaryProjectToward;
         public Action<Vector2> Project;
         public Action<IObjectPlayer> HitPlayer;
-        public Action<IObjectEnemy> HitEnemy;
-        public Action<Transform> HitGround;
+        public Action<IObjectEnemy> HitEnemyNotice;
+        public Action<Transform> HitGroundNotice;
         public Action ResetTrigger;
         public Action SelfRecycleNotice;
         public Action<EEntityType> SwitchTargetTo;
@@ -38,10 +38,15 @@ namespace ObjectController
         public Action<Transform> StuckInto;
         public Action<bool> SetLookAtMovement;
         public Action Launch;
-        public Action<Transform, float> SetMoveToTarget;
+        public Action<Transform, float> SetMoveToTargetNotice;
+        public Action<Vector2, float> SetMoveToTargetRawNotice;
         public Action DamageTriggerNotice;
         public Action<WReadOnlyDamageData, EEntityType> EffectAreaDamageTo;
         public Action DamageFinishNotice;
+        public Action<float> SetStayTriggerCooldownNotice;
+        #endregion
+        #region Func
+        public Func<float, Transform> TryGetRandomEnemyInRadiusNotice;
         #endregion
 
         protected FCObjectFactoryComponentBase factory;

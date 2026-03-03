@@ -1,9 +1,11 @@
 using EntitySystem;
+using ObjectGenerateData;
 using PlayerSystem;
 using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SkillSystem
@@ -88,6 +90,21 @@ namespace SkillSystem
         public ISkillObject ThrowSword(DProjectileData _data)
         {
             return player.ThrowSword(_data).GetComponent<ISkillObject>();
+        }
+
+        public ISkillObject ThrowSpinSword(DSpinSwordData _data)
+        {
+            return player.ThrowSpinSword(_data).GetComponent<ISkillObject>();
+        }
+
+        public ISkillObject ThrowPierceSword(DProjectileData _data)
+        {
+            return player.ThrowPierceSword(_data).GetComponent<ISkillObject>();
+        }
+
+        public ISkillObject ThrowBounceSword(DBounceSwordData _data)
+        {
+            return player.ThrowBounceSword(_data).GetComponent<ISkillObject>();
         }
 
         public WReadOnlyDamageData CheckPlayerPrimaryDamage()

@@ -37,7 +37,8 @@ namespace SkillSystem
         [SerializeField] protected List<SCEffectBase> effects;
         [SerializeField] protected List<SCEffectTimeBase> effectTimes;
 
-        protected bool isUnlock = false;
+        [Header("Test")]
+        [SerializeField] protected bool isUnlock = false;
 
 #if UNITY_EDITOR
         [ContextMenu("Generate SkillId")]

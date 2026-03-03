@@ -1,5 +1,6 @@
 using EnemySystem;
 using EntitySystem;
+using ObjectGenerateData;
 using StatsData;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,8 +22,8 @@ namespace ObjectController
             InvokeAction(Project, _data.velocity);
             InvokeAction(SetLookAtMovement, true);
 
-            HitEnemy += DamageToEnemy;
-            HitGround += HitEffect;
+            HitEnemyNotice += DamageToEnemy;
+            HitGroundNotice += HitEffect;
         }
 
         protected IEnumerator SelfRecycleAfter(float _time)
@@ -53,8 +54,8 @@ namespace ObjectController
         public override void Clear()
         {
             base.Clear();
-            HitEnemy -= DamageToEnemy;
-            HitGround -= HitEffect;
+            HitEnemyNotice -= DamageToEnemy;
+            HitGroundNotice -= HitEffect;
             StopAllCoroutines();            
         }
     }

@@ -45,7 +45,6 @@ namespace EnemyBehaviour
             enemy.SlowEntityBy += SlowBy;
 
             enemy.ToDead += Die;
-            enemy.Flip += Flip;
         }
 
         protected override void Update()

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94eb898192cba0c4296f6f0255a6c6d9, type: 3}
+  m_Name: NoConflictBounce
+  m_EditorClassIdentifier: 
+  conflictSkills:
+  - {fileID: 11400000, guid: 1429ccde295332f4d84f96a6351466db, type: 2}
+  - {fileID: 11400000, guid: 9ec22053024e75c409e843dc25ab1582, type: 2}
