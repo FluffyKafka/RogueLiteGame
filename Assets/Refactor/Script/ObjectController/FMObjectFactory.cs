@@ -20,6 +20,7 @@ namespace ObjectController
         public Func<DSpinSwordData, Vector3, GameObject> GenerateSpinSwordAtNotice;
         public Func<DProjectileData, Vector3, GameObject> GeneratePierceSwordAtNotice;
         public Func<DBounceSwordData, Vector3, GameObject> GenerateBounceSwordAtNotice;
+        public Func<DPlayerCloneData, Vector3, GameObject> GeneratePlayerCloneAtNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {

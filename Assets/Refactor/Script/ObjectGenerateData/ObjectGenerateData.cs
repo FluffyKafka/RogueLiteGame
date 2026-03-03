@@ -101,5 +101,18 @@ namespace ObjectGenerateData
             this.bounceRadius = bounceRadius;
         }
     }
+
+    public struct DPlayerCloneData
+    {
+        public WReadOnlyDamageData damage;
+        public bool canAttack;
+        public int attackTypeCount;
+        public DPlayerCloneData(WReadOnlyDamageData _damage, bool _canAttack, int _attackTypeCount)
+        {
+            damage = _damage;
+            canAttack = _canAttack;
+            attackTypeCount = _attackTypeCount;
+        }
+    }
 }
 

@@ -16,6 +16,7 @@ namespace ObjectController
         {
             base.Awake();
             controller.TryGetRandomEnemyInRadiusNotice += TrySearchRandomEnemyInRadius;
+            controller.TryGeyNearestEnemyInRadiusNotice += TrySearchNearestEnemyInRadius;
         }
 
         protected Transform TrySearchRandomEnemyInRadius(float _radius = -1)
@@ -40,6 +41,30 @@ namespace ObjectController
                 return null;
             }
             return realHits[Random.Range(0, realHits.Count)].transform;
+        }
+        protected Transform TrySearchNearestEnemyInRadius(float _radius = -1)
+        {
+            if (_radius < 0)
+            {
+                _radius = searchRadius;
+            }
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _radius, whatIsEnemy);
+            if(hits.Length <= 0)
+            {
+                return null;
+            }
+
+            Collider2D nearestHit = hits[0];
+            float dis = Vector2.Distance(transform.position, nearestHit.transform.position);
+            foreach (var hit in hits)
+            {
+                if (Vector2.Distance(hit.transform.position, transform.position) < dis)
+                {
+                    nearestHit = hit;
+                }
+            }
+            return nearestHit.transform;
         }
     }
 }

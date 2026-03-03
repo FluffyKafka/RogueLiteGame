@@ -8,6 +8,7 @@ namespace AnimationAndFx
     {
         [SerializeField] protected string idleAnimName = "Idle";
         [SerializeField] protected string effectAnimName = "Effect";
+        [SerializeField] protected string effectTypeAnimName = "EffectType";
 
         [Header("Test")]
         protected Animator animator;
@@ -27,6 +28,12 @@ namespace AnimationAndFx
         protected void ToEffect()
         {
             ChangeAnimTo(effectAnimName);
+        }
+
+        protected void ToEffectByType(int _type)
+        {
+            ChangeAnimTo(effectAnimName);
+            animator.SetInteger(effectTypeAnimName, _type);
         }
 
         protected void ChangeAnimTo(string _animName)

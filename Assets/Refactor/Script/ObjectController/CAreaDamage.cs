@@ -13,6 +13,7 @@ namespace ObjectController
         [SerializeField] protected float damageRadius;
         [SerializeField] protected LayerMask whatIsPlayer;
         [SerializeField] protected LayerMask whatIsEnemy;
+        [SerializeField] protected Transform damageTransform;
 
 
         protected override void Awake()
@@ -22,13 +23,18 @@ namespace ObjectController
         }
         protected void EffectDamage(WReadOnlyDamageData _damage, EEntityType _targetType)
         {
+            if(damageTransform == null)
+            {
+                damageTransform = transform;
+            }
+
             LayerMask targetMask = whatIsPlayer;
             if(_targetType == EEntityType.Enemy)
             {
                 targetMask = whatIsEnemy;
             }
 
-            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, damageRadius, targetMask);
+            Collider2D[] hits = Physics2D.OverlapCircleAll(damageTransform.position, damageRadius, targetMask);
             foreach(var hit in hits)
             {
                 if(_targetType == EEntityType.Player)
@@ -46,7 +52,14 @@ namespace ObjectController
         protected void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, damageRadius);
+            if(damageTransform == null)
+            {
+                Gizmos.DrawWireSphere(transform.position, damageRadius);
+            }
+            else
+            {
+                Gizmos.DrawWireSphere(damageTransform.position, damageRadius);
+            }
         }
     }
 }

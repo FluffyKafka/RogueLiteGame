@@ -18,6 +18,7 @@ namespace AnimationAndFx
         public Action<bool> ShowTrailNotice;
         public Action FadeAwayFinishNotice;
         public Action ToEffectNotice;
+        public Action<int> ToEffectByTypeNotice;
         public Action ShowHitFxNotice;
         #endregion
 
@@ -50,6 +51,10 @@ namespace AnimationAndFx
         public void ToEffect()
         {
             InvokeAction(ToEffectNotice);
+        }
+        public void ToEffect(int _type)
+        {
+            InvokeAction(ToEffectByTypeNotice, _type);
         }
 
         public void AnimDamageTrigger()

@@ -47,6 +47,7 @@ namespace ObjectController
         #endregion
         #region Func
         public Func<float, Transform> TryGetRandomEnemyInRadiusNotice;
+        public Func<float, Transform> TryGeyNearestEnemyInRadiusNotice;
         #endregion
 
         protected FCObjectFactoryComponentBase factory;
@@ -132,6 +133,6 @@ namespace ObjectController
         public void ShowTrail(bool _isShow);
         public void ToEffect();
         public void ShowHitFx();
-
+        public void ToEffect(int _type);
     }
 }
