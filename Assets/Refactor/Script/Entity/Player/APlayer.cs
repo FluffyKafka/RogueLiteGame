@@ -121,6 +121,7 @@ namespace PlayerSystem
 
         public Vector3 CheckMousePosition();
         public Transform CheckPlayerTransform();
+        public int CheckPlayerFacingDir();
 
         public void AimmingBegin();
         public void AimmingUpdate(DProjectileAimmingData _data);
@@ -132,6 +133,8 @@ namespace PlayerSystem
         public void CatchSwordBegin();
         public void CatchSwordFinish();
         public WReadOnlyDamageData CheckPlayerDamage();
+
+        public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
@@ -439,6 +442,10 @@ namespace PlayerSystem
         {
             return transform;
         }
+        public int CheckPlayerFacingDir()
+        {
+            return behaviour.CheckFacingDir();
+        }
 
         public void CatchSwordBegin()
         {
@@ -486,6 +493,11 @@ namespace PlayerSystem
         public WReadOnlyDamageData CheckPlayerDamage()
         {
             return stats.GetPrimaryAttackData();
+        }
+
+        public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position)
+        {
+            playerObjectFactory.GeneratePlayerClone(_data, _position);
         }
         #endregion
 
@@ -551,6 +563,7 @@ namespace PlayerSystem
         public GameObject GenerateSpinSword(DSpinSwordData _data, Vector3 _position);
         public GameObject GeneratePierceSword(DProjectileData _data, Vector3 _position);
         public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position);
+        public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
     }
 
     public interface IPlayerAnimation : IEntityAnimation

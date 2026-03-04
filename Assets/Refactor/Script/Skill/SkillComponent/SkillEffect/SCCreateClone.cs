@@ -4,20 +4,21 @@ using UnityEngine;
 
 namespace SkillSystem
 {
-    [CreateAssetMenu(fileName = "New Skill Component", menuName = "Skill System/Skill Component/Effects/CooldownSet")]
-    internal class SCCoolDownSet : SCEffectBase
+    [CreateAssetMenu(fileName = "New Skill Component", menuName = "Skill System/Skill Component/Effects/CreateClone")]
+    internal class SCCreateClone : SCEffectBase
     {
-        protected SMTimer timer;
+        protected SMClone clone;
         public override void Init(SMSkillModel[] _modelManager)
         {
             base.Init(_modelManager);
-            timer = TryGetModel<SMTimer>(_modelManager);
+            clone = TryGetModel<SMClone>(_modelManager);
         }
 
         public override void Effect(string _id)
         {
             base.Effect(_id);
-            timer.SetTimer(_id);
+            clone.GeneratePlayerClone();            
         }
     }
 }
+

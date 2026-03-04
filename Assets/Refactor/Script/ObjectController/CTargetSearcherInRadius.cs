@@ -16,7 +16,7 @@ namespace ObjectController
         {
             base.Awake();
             controller.TryGetRandomEnemyInRadiusNotice += TrySearchRandomEnemyInRadius;
-            controller.TryGeyNearestEnemyInRadiusNotice += TrySearchNearestEnemyInRadius;
+            controller.TryGetNearestEnemyInRadiusNotice += TrySearchNearestEnemyInRadius;
         }
 
         protected Transform TrySearchRandomEnemyInRadius(float _radius = -1)

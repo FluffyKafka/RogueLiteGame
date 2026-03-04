@@ -57,6 +57,10 @@ namespace SkillSystem
         {
             return player.CheckPlayerTransform();
         }
+        public int CheckPlayerFacingDir()
+        {
+            return player.CheckPlayerFacingDir();
+        }
 
         public bool CanEffectBehaviourSkill()
         {
@@ -91,17 +95,14 @@ namespace SkillSystem
         {
             return player.ThrowSword(_data).GetComponent<ISkillObject>();
         }
-
         public ISkillObject ThrowSpinSword(DSpinSwordData _data)
         {
             return player.ThrowSpinSword(_data).GetComponent<ISkillObject>();
         }
-
         public ISkillObject ThrowPierceSword(DProjectileData _data)
         {
             return player.ThrowPierceSword(_data).GetComponent<ISkillObject>();
         }
-
         public ISkillObject ThrowBounceSword(DBounceSwordData _data)
         {
             return player.ThrowBounceSword(_data).GetComponent<ISkillObject>();
@@ -110,6 +111,11 @@ namespace SkillSystem
         public WReadOnlyDamageData CheckPlayerPrimaryDamage()
         {
             return player.CheckPlayerDamage();
+        }
+
+        public void GeneratePlayerCloneAt(DPlayerCloneData _data, Vector3 _position)
+        {
+            player.GeneratePlayerClone(_data, _position);
         }
     }
 

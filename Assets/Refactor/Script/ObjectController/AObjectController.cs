@@ -47,7 +47,7 @@ namespace ObjectController
         #endregion
         #region Func
         public Func<float, Transform> TryGetRandomEnemyInRadiusNotice;
-        public Func<float, Transform> TryGeyNearestEnemyInRadiusNotice;
+        public Func<float, Transform> TryGetNearestEnemyInRadiusNotice;
         #endregion
 
         protected FCObjectFactoryComponentBase factory;

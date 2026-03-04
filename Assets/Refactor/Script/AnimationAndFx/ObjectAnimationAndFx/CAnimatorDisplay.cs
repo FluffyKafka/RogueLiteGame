@@ -22,6 +22,7 @@ namespace AnimationAndFx
             currentAnimName = idleAnimName;
 
             anim.ToEffectNotice += ToEffect;
+            anim.ToEffectByTypeNotice += ToEffectByType;
             anim.ClearNotice += Clear;
         }
 

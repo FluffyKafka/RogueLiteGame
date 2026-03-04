@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
+  m_Name: DashEndClone
+  m_EditorClassIdentifier: 
+  skillId: 
+  skillName: 
+  icon: {fileID: 0}
+  description: 
+  unlockConditions:
+  - {fileID: 11400000, guid: ac80696d4cada064a83ed90167008a4f, type: 2}
+  effectConditions: []
+  unlockEffects: []
+  aimmingEffects: []
+  effects:
+  - {fileID: 11400000, guid: ce49448bdcd01bf408358e13a6612954, type: 2}
+  effectTimes:
+  - {fileID: 11400000, guid: fe722c4129bcd3e42bf28b3b42fab13c, type: 2}
+  isUnlock: 0

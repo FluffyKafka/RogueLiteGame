@@ -46,16 +46,15 @@ namespace ObjectController
         {
             InvokeAction(GenerateSkullAmmoAtNotice, _data, _position);
         }
+
         public GameObject GenerateSword(DProjectileData _data, Vector3 _position)
         {
             return InvokeFunc(GenerateSwordAtNotice, _data, _position);
         }
-
         public GameObject GenerateSpinSword(DSpinSwordData _data, Vector3 _position)
         {
             return InvokeFunc(GenerateSpinSwordAtNotice, _data, _position);
         }
-
         public GameObject GeneratePierceSword(DProjectileData _data, Vector3 _position)
         {
             return InvokeFunc(GeneratePierceSwordAtNotice, _data, _position);
@@ -63,6 +62,11 @@ namespace ObjectController
         public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position)
         {
             return InvokeFunc(GenerateBounceSwordAtNotice, _data, _position);
+        }
+
+        public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position)
+        {
+            InvokeFunc(GeneratePlayerCloneAtNotice, _data, _position);
         }
     }
 
