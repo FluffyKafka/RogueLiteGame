@@ -98,6 +98,8 @@ namespace PlayerSystem
         public bool IsEnemyAlive(GameObject _enemy);
         public WReadOnlyDamageData DamageTo(GameObject _enemy, WReadOnlyDamageData _damage);
         public void StunCheck(GameObject _enemy);
+
+        public void CounterAttackSuccess();
     }
 
     public struct DProjectileAimmingData
@@ -135,6 +137,9 @@ namespace PlayerSystem
         public WReadOnlyDamageData CheckPlayerDamage();
 
         public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
+
+        public void CounterAttackBegin();
+        public void CounterAttackEnd();
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
@@ -213,6 +218,11 @@ namespace PlayerSystem
         public void StunCheck(GameObject _enemy)
         {
             _enemy.GetComponent<IPlayerEnemy>().StunCheck();
+        }
+
+        public void CounterAttackSuccess()
+        {
+            skillManager.CounterAttackSuccess();
         }
         #endregion
 
@@ -499,6 +509,15 @@ namespace PlayerSystem
         {
             playerObjectFactory.GeneratePlayerClone(_data, _position);
         }
+
+        public void CounterAttackBegin()
+        {
+            behaviour.CounterAttackBegin();
+        }
+        public void CounterAttackEnd()
+        {
+            behaviour.CounterAttackEnd();
+        }
         #endregion
 
         protected override void Awake()
@@ -523,8 +542,9 @@ namespace PlayerSystem
     public interface IPlayerSkillManager
     {
         public void SkillInputEnd(int _input);
-
         public void SkillInputBegin(int _input);
+
+        public void CounterAttackSuccess();
     }
 
     public interface IPlayerBehaviour : IEntityBehaviour
@@ -542,6 +562,10 @@ namespace PlayerSystem
         public void AimmingFinish();
         public void CatchSwordBegin();
         public void CatchSwordFinish();
+
+        public void CounterAttackBegin();
+        public void CounterAttackEnd();
+
     }
 
     public interface IPlayerEnterable : IEntityObject

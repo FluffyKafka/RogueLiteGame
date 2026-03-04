@@ -27,6 +27,10 @@ namespace SkillSystem
         public Action<float> DashBegin;
         #endregion
 
+        #region CounterAttack
+        public Action CounterAttackSuccessNotice;
+        #endregion
+
         protected void Awake()
         {
             DashBegin += player.DashBegin;
@@ -116,6 +120,19 @@ namespace SkillSystem
         public void GeneratePlayerCloneAt(DPlayerCloneData _data, Vector3 _position)
         {
             player.GeneratePlayerClone(_data, _position);
+        }
+
+        public void CounterAttackSuccess()
+        {
+            InvokeAction(CounterAttackSuccessNotice);
+        }
+        public void CounterAttackBegin()
+        {
+            player.CounterAttackBegin();
+        }
+        public void CounterAttackEnd()
+        {
+            player.CounterAttackEnd();
         }
     }
 
