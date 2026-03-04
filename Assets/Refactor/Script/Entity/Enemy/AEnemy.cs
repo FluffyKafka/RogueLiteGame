@@ -257,9 +257,9 @@ namespace EnemySystem
             InvokeAction(TakeDamage, damage);
             return damage;
         }
-        void IPlayerEnemy.StunCheck()
+        bool IPlayerEnemy.StunCheck()
         {
-            behaviour.StunCheck();
+            return behaviour.StunCheck();
         }
         #endregion
 
@@ -287,7 +287,7 @@ namespace EnemySystem
     public interface IEnemyBehaviour : IEntityBehaviour
     {
         public void OpenStun(bool _isOpen);
-        public void StunCheck();
+        public bool StunCheck();
         public void ObjectFinish();
         public void OnSelfExplodeDamageTrigger();
         public void OnSelfExplodeFinish();

@@ -10,7 +10,7 @@ namespace AnimationAndFx
         [SerializeField] protected string idleAnimName = "Idle";
         [SerializeField] protected string moveAnimName = "Move";
         [SerializeField] protected string attackAnimName = "Attack";
-        [SerializeField] protected string stunAnimName = "Stun";
+        [SerializeField] protected string stunAnimName = "Stunned";
         [SerializeField] protected string pullbackAnimName = "Move";
         [SerializeField] protected string fallAnimName = "Fall";
         [SerializeField] protected string pullbackJumpAnimName = "PullBackJump";

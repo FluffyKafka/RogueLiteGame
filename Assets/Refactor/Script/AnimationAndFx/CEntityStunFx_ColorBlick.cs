@@ -11,6 +11,7 @@ namespace AnimationAndFx
         [SerializeField] protected Color stunBlickColor;
         protected SpriteRenderer sr;
         protected bool isBlink;
+        protected Coroutine blinkCoro;
         protected override void Awake()
         {
             base.Awake();
@@ -23,10 +24,16 @@ namespace AnimationAndFx
 
         protected void Stun(bool _isStun)
         {
+            Debug.Log("Stun");
             isBlink = _isStun;
             if(_isStun)
             {
-                StartCoroutine(ColorBlinkInRate());
+                blinkCoro = StartCoroutine(ColorBlinkInRate());
+            }
+            else
+            {
+                StopCoroutine(blinkCoro);
+                sr.color = Color.white;
             }
         }
         protected IEnumerator ColorBlinkInRate()

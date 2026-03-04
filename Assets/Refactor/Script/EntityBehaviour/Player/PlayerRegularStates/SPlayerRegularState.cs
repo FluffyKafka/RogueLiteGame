@@ -16,13 +16,15 @@ namespace PlayerBebaviour
             base.Enter();
             player.OnDashBegin += ToDash;
             player.OnAimmingBegin += ToAimming;
+            player.OnCounterAttackBegin += ToCounterAttack;
         }
 
         public override void Exit()
         {
             base.Exit();
             player.OnDashBegin -= ToDash;
-            player.OnAimmingBegin -= ToAimming; 
+            player.OnAimmingBegin -= ToAimming;
+            player.OnCounterAttackBegin -= ToCounterAttack;
         }
 
         public override void Update()
@@ -37,7 +39,10 @@ namespace PlayerBebaviour
         protected void ToAimming()
         {
             playerStateMachine.ChangeState(playerStateMachine.aim);
-            Debug.Log("Aimming");
+        }
+        protected void ToCounterAttack()
+        {
+            playerStateMachine.ChangeState(playerStateMachine.counterAttack);
         }
     }
 }

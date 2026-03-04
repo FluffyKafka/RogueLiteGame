@@ -39,7 +39,7 @@ namespace PlayerSystem
 
     public interface IAnimPlayer : IAnimEntity
     {
-
+        public void CounterAttackFinish();
     }
 
     //Inventory似乎不应该使用这两个接口：
@@ -97,9 +97,10 @@ namespace PlayerSystem
         public bool IsEnemy(GameObject _enemy);
         public bool IsEnemyAlive(GameObject _enemy);
         public WReadOnlyDamageData DamageTo(GameObject _enemy, WReadOnlyDamageData _damage);
-        public void StunCheck(GameObject _enemy);
+        public bool StunCheck(GameObject _enemy);
 
-        public void CounterAttackSuccess();
+        public void ToCounterAttackSuccess();
+        public void ToCounterAttack();
     }
 
     public struct DProjectileAimmingData
@@ -215,14 +216,24 @@ namespace PlayerSystem
             return _enemy.GetComponent<IPlayerEnemy>().TakeDamage(_damage);
         }
 
-        public void StunCheck(GameObject _enemy)
+        public bool StunCheck(GameObject _enemy)
         {
-            _enemy.GetComponent<IPlayerEnemy>().StunCheck();
+            return _enemy.GetComponent<IPlayerEnemy>().StunCheck();
         }
 
-        public void CounterAttackSuccess()
+        public void ToCounterAttack()
+        {
+            playerAnim.CounterAttack();
+        }
+
+        public void ToCounterAttackSuccess()
         {
             skillManager.CounterAttackSuccess();
+            playerAnim.CounterAttackSuccess();
+        }
+        public void CounterAttackFinish()
+        {
+            behaviour.CounterAttackSuccessFinish();
         }
         #endregion
 
@@ -565,7 +576,7 @@ namespace PlayerSystem
 
         public void CounterAttackBegin();
         public void CounterAttackEnd();
-
+        public void CounterAttackSuccessFinish();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -606,6 +617,9 @@ namespace PlayerSystem
         public abstract void AimmingFinish();
         public abstract void CatchSwordBegin();
         public abstract void CatchSwordFinish();
+
+        public abstract void CounterAttack();
+        public abstract void CounterAttackSuccess();
     }
 
     public interface IPlayerInput
@@ -622,7 +636,7 @@ namespace PlayerSystem
 
         public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
 
-        public void StunCheck();
+        public bool StunCheck();
     }
 
     public interface IPlayerInventory

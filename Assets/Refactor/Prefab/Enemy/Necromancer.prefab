@@ -178,6 +178,7 @@ MonoBehaviour:
   isFacingLeft: 0
   facingDir: 1
   defaultGravity: 0
+  isInitFacingLeft: 0
   groundCheckDistance: 3.16
   groundCheck: {fileID: 2595882536397516850}
   wallCheckDistance: 0.24
@@ -230,6 +231,7 @@ MonoBehaviour:
   battleIdleRadius: 6
   stunDuration: 0
   ammoGenerateTransform: {fileID: 2484983962667720097}
+  bulletType: 0
 --- !u!114 &652139523549249035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15436,11 +15438,12 @@ MonoBehaviour:
   idleAnimName: Idle
   moveAnimName: Move
   attackAnimName: Attack
-  stunAnimName: Stun
+  stunAnimName: Stunned
   pullbackAnimName: Move
   fallAnimName: Fall
   pullbackJumpAnimName: PullBackJump
   controllAmmoAnimName: Controll
+  selfExplodeAnimName: Explode
 --- !u!114 &4401505738760177536
 MonoBehaviour:
   m_ObjectHideFlags: 0

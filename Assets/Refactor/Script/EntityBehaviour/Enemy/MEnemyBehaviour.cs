@@ -21,11 +21,11 @@ namespace EnemyBehaviour
         public Action FacingToPlayer;
         public Action BeStunned;
         public Action<bool> OpenStun;
-        public Action StunFinish;
+        public Action StunFinishNotice;
         public Action StandStill;
         public Func<bool> IsDetectPlayer;
         public Action UpdateBattle;
-        public Action StunCheck;
+        public Func<bool> StunCheck;
         public Func<int> CheckBattleMoveDir;
         public Action AttackCheck;
         public Action StopBattle;
@@ -95,6 +95,7 @@ namespace EnemyBehaviour
             ToMove += enemySystem.ToMove;
             Attack += enemySystem.ToAttack;
             BeStunned += enemySystem.BeStunned;
+            StunFinishNotice += enemySystem.StunnedFinish;
             GetPrimaryAttackDamage += enemySystem.GetPrimaryAttackDamage;
             ToDead += enemySystem.ToDead;
             ToPullBack += enemySystem.ToPullBack;
@@ -115,9 +116,9 @@ namespace EnemyBehaviour
             InvokeAction(OpenStun, _isOpen);
         }
 
-        void IEnemyBehaviour.StunCheck()
+        bool IEnemyBehaviour.StunCheck()
         {
-            InvokeAction(StunCheck);
+            return InvokeFunc(StunCheck);
         }
 
         void IEnemyBehaviour.ObjectFinish()

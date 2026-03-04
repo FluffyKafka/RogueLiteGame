@@ -14,13 +14,13 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
-            enemy.StunFinish += StunFinish;
+            enemy.StunFinishNotice += StunFinish;
         }
 
         public override void Exit()
         {
             base.Exit();
-            enemy.StunFinish -= StunFinish;
+            enemy.StunFinishNotice -= StunFinish;
         }
 
         public override void Update()

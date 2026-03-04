@@ -28,7 +28,7 @@ namespace PlayerBebaviour
         public Action JumpInput;
         public Action AttackInput;
         public Action<float> UpdateYVelocity;
-        public Action<GameObject> StunCheck;
+        public Func<GameObject, bool> StunCheck;
 
         //Skill
         public Action<float> OnDashBegin;
@@ -37,6 +37,10 @@ namespace PlayerBebaviour
         public Action OnAimmingBegin;
         public Action OnAimmingFinish;
         public Action<DProjectileAimmingData> OnAimmingUpdate;
+        public Action OnCounterAttackBegin;
+        public Action OnCounterAttackEnd;
+        public Action OnCounterAttackSuccessFinish;
+        public Func<bool> CounterAttackCheckNotice;
         #endregion
 
         #region Func
@@ -68,6 +72,15 @@ namespace PlayerBebaviour
             UpdateYVelocity += playerSystem.UpdateYVelocity;
             GetPrimaryAttackDamage += playerSystem.GetPrimaryAttackDamage;
             ToDead += playerSystem.ToDead;
+        }
+
+        public void ToCounterAttack()
+        {
+            playerSystem.ToCounterAttack();
+        }
+        public void ToCounterAttackSuccess()
+        {
+            playerSystem.ToCounterAttackSuccess();
         }
 
         void IPlayerBehaviour.AttackInput()
@@ -132,12 +145,16 @@ namespace PlayerBebaviour
 
         public void CounterAttackBegin()
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////////////
+            InvokeAction(OnCounterAttackBegin);
         }
 
         public void CounterAttackEnd()
         {
-            /////////////////////////////////////////////////////////////////////////////////////////////////////
+            InvokeAction(OnCounterAttackEnd);
+        }
+        public void CounterAttackSuccessFinish()
+        {
+            InvokeAction(OnCounterAttackSuccessFinish);
         }
     }
 }

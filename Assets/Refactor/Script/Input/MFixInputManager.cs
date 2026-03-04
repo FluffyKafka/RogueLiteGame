@@ -66,6 +66,15 @@ namespace InputManager
                 player.SkillInputEnd(0);
             }
 
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                player.SkillInputBegin(2);
+            }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                player.SkillInputEnd(2);
+            }
+
             float xInput = Input.GetAxisRaw("Horizontal");
             if (xInput != 0)
             {

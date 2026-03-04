@@ -23,6 +23,8 @@ namespace AnimationAndFx
         public Action<DProjectileAimmingData> AimmingUpdateNotice;
         public Action AimmingFinishNotice;
         public Action CatchNotice;
+        public Action CounterAttackNotice;
+        public Action CounterAttackSuccessNotice;
         #endregion
 
         protected override void Awake()
@@ -83,6 +85,11 @@ namespace AnimationAndFx
             player.AttackDamageTrigger();
         }
 
+        public void OnCounterAttackFinish()
+        {
+            player.CounterAttackFinish();
+        }
+
         public void AimmingBegin()
         {
             InvokeAction(AimmingBeginNotice);
@@ -105,6 +112,15 @@ namespace AnimationAndFx
         public void CatchSwordFinish()
         {
             InvokeAction(CatchNotice);
+        }
+
+        public void CounterAttack()
+        {
+            InvokeAction(CounterAttackNotice);
+        }
+        public void CounterAttackSuccess()
+        {
+            InvokeAction(CounterAttackSuccessNotice);
         }
     }
 }

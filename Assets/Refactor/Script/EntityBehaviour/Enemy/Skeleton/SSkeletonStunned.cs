@@ -1,4 +1,7 @@
 
+
+using UnityEngine;
+
 namespace EnemyBehaviour
 {
     internal class SSkeletonStunned : SSkeletonState
@@ -10,13 +13,13 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
-            enemy.StunFinish += StunFinish;
+            enemy.StunFinishNotice += StunFinish;
         }
 
         public override void Exit()
         {
             base.Exit();
-            enemy.StunFinish -= StunFinish;
+            enemy.StunFinishNotice -= StunFinish;
         }
 
         public override void Update()
@@ -26,7 +29,7 @@ namespace EnemyBehaviour
 
         protected void StunFinish()
         {
-            enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
+            enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);            
         }
     }
 }

@@ -15307,11 +15307,12 @@ MonoBehaviour:
   idleAnimName: Idle
   moveAnimName: Move
   attackAnimName: Attack
-  stunAnimName: Stun
+  stunAnimName: Stunned
   pullbackAnimName: Move
   fallAnimName: Fall
   pullbackJumpAnimName: PullBackJump
   controllAmmoAnimName: Controll
+  selfExplodeAnimName: Explode
 --- !u!114 &3897492768697071637
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15817,7 +15817,7 @@ MonoBehaviour:
   idleAnimName: Idle
   moveAnimName: Move
   attackAnimName: Attack
-  stunAnimName: Stun
+  stunAnimName: Stunned
   pullbackAnimName: Move
   fallAnimName: Fall
   pullbackJumpAnimName: PullBackJump

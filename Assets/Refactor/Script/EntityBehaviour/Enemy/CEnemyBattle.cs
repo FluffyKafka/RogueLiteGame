@@ -157,17 +157,21 @@ namespace EnemyBehaviour
             canBeStunned = _isOpen;
         }
 
-        protected void StunCheck()
+        protected bool StunCheck()
         {
             if (canBeStunned)
             {
                 enemy.InvokeAction(enemy.BeStunned);
+                StartCoroutine(StunFinishHelper());
+                OpenStun(false);
+                return true;
             }
+            return false;
         }
         protected IEnumerator StunFinishHelper()
         {
             yield return new WaitForSeconds(stunDuration);
-            enemy.InvokeAction(enemy.StunFinish);
+            enemy.InvokeAction(enemy.StunFinishNotice);
         }
 
         protected virtual void DamageTrigger()

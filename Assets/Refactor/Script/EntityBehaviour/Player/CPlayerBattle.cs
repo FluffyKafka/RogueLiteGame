@@ -16,7 +16,6 @@ namespace PlayerBebaviour
         [SerializeField] public int comboAmount = 3;
         [SerializeField] public LayerMask whatIsEnemy;
 
-
         protected int comboCounter = 0;
         protected float lastAttackTime;
 
@@ -27,6 +26,7 @@ namespace PlayerBebaviour
             player = entity as MPlayerBeviour;
             player.AttackRaw += Attack;
             player.AttackDamageTrigger += DamageTrigger;
+            player.CounterAttackCheckNotice += CounterAttackCheck;
         }
 
         protected void Attack()
@@ -57,6 +57,23 @@ namespace PlayerBebaviour
                     WReadOnlyDamageData realDamage = player.InvokeFunc(player.DamageTo, hit.gameObject, damage);
                 }
             }
+        }
+
+        protected bool CounterAttackCheck()
+        {
+            bool isCounterSuccess = false;
+            Collider2D[] allHitEnemy = Physics2D.OverlapCircleAll(attackValidCheck.position, attackValidCheckRadius, whatIsEnemy);
+            foreach (var hit in allHitEnemy)
+            {
+                if (player.InvokeFunc(player.IsEnemy, hit.gameObject) && player.InvokeFunc(player.IsEnemyAlive, hit.gameObject))
+                {
+                    if(player.InvokeFunc(player.StunCheck, hit.gameObject))
+                    {
+                        isCounterSuccess = true;
+                    }
+                }
+            }
+            return isCounterSuccess;
         }
     }
 }

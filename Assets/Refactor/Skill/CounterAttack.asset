@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
+  m_Name: CounterAttack
+  m_EditorClassIdentifier: 
+  skillId: 
+  skillName: 
+  icon: {fileID: 0}
+  description: 
+  unlockConditions: []
+  effectConditions:
+  - {fileID: 11400000, guid: 8966db18edb56a7458c50c2203752533, type: 2}
+  - {fileID: 11400000, guid: 2499e57c048c35e44a78d4f0853ea275, type: 2}
+  unlockEffects: []
+  aimmingEffects: []
+  effects:
+  - {fileID: 11400000, guid: 1766c2da50fd7894fb3d13627dd00287, type: 2}
+  - {fileID: 11400000, guid: c1112b17211225f43b0044c288aaa6d2, type: 2}
+  effectTimes:
+  - {fileID: 11400000, guid: 91bcc550cb0dbab4e95526e06404c68c, type: 2}
+  isUnlock: 0

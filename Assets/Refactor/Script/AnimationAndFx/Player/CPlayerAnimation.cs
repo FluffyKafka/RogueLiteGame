@@ -17,6 +17,8 @@ namespace AnimationAndFx
         [SerializeField] protected string dashName = "Dash";
         [SerializeField] protected string aimAnimName = "AimSword";
         [SerializeField] protected string catchAnimNAme = "CatchSword";
+        [SerializeField] protected string counterAttackAnimName = "CounterAttack";
+        [SerializeField] protected string counterAttackSuccessAnimName = "SuccessfulCounterAttack";
 
 
         protected override void Awake()
@@ -33,6 +35,8 @@ namespace AnimationAndFx
             playerAnimFxSystem.DashBeginNotice += Dash;
             playerAnimFxSystem.AimmingBeginNotice += Aimming;
             playerAnimFxSystem.CatchNotice += Catch;
+            playerAnimFxSystem.CounterAttackNotice += CounterAttack;
+            playerAnimFxSystem.CounterAttackSuccessNotice += CounterAttackSuccess;
         }
 
         protected void Idle()
@@ -79,6 +83,16 @@ namespace AnimationAndFx
         protected void Catch()
         {
             ChangeAnimationTo(catchAnimNAme);
+        }
+
+        protected void CounterAttack()
+        {
+            ChangeAnimationTo(counterAttackAnimName);
+        }
+
+        protected void CounterAttackSuccess()
+        {
+            ChangeAnimationTo(counterAttackSuccessAnimName);
         }
     }
 }

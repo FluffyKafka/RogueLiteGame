@@ -9414,7 +9414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8390749318965843712, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9458,11 +9458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9116795071843987971, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116795071843987971, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10748,7 +10748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8390749318965843712, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10792,11 +10792,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9116795071843987971, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9116795071843987971, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11047,6 +11047,7 @@ GameObject:
   - component: {fileID: 2063493207}
   - component: {fileID: 2063493216}
   - component: {fileID: 2063493217}
+  - component: {fileID: 2063493218}
   - component: {fileID: 2063493215}
   - component: {fileID: 2063493214}
   m_Layer: 0
@@ -11163,6 +11164,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6d3132b0b06aeed43bd9c137063c40c3, type: 2}
   - {fileID: 11400000, guid: b2ba98a7f41ef7c4b99c8ed90de87d84, type: 2}
   - {fileID: 11400000, guid: 967f435666a5bc2498d33e89beecb28a, type: 2}
+  - {fileID: 11400000, guid: 1766c2da50fd7894fb3d13627dd00287, type: 2}
+  - {fileID: 11400000, guid: 8966db18edb56a7458c50c2203752533, type: 2}
+  - {fileID: 11400000, guid: 2499e57c048c35e44a78d4f0853ea275, type: 2}
+  - {fileID: 11400000, guid: c1112b17211225f43b0044c288aaa6d2, type: 2}
+  - {fileID: 11400000, guid: 91bcc550cb0dbab4e95526e06404c68c, type: 2}
   - {fileID: 11400000, guid: 374d3b708b452ea4a977dee8dee07c16, type: 2}
   - {fileID: 11400000, guid: 2769f9579683a494e8837e58ebf82885, type: 2}
   - {fileID: 11400000, guid: 40e0324bc850949429915a305246bc07, type: 2}
@@ -11171,6 +11177,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 723deff88e2281448b8b7b1b37257c34, type: 2}
   - {fileID: 11400000, guid: bcc2699a9abcb0c41bffbbe51fe6247d, type: 2}
   - {fileID: 11400000, guid: 82a5febe50a8d194390f5dbb98de0066, type: 2}
+  - {fileID: 11400000, guid: ce49448bdcd01bf408358e13a6612954, type: 2}
+  - {fileID: 11400000, guid: fe722c4129bcd3e42bf28b3b42fab13c, type: 2}
+  - {fileID: 11400000, guid: ac80696d4cada064a83ed90167008a4f, type: 2}
   - {fileID: 11400000, guid: 1d9c58ed384f97845a8ee5127674ebe9, type: 2}
   - {fileID: 11400000, guid: a76ae11cbf8d81d4dadda90b15e0a3fd, type: 2}
   - {fileID: 11400000, guid: bb9ca249d04c30b478a76406ffed076b, type: 2}
@@ -11204,11 +11213,13 @@ MonoBehaviour:
   assetDirectorPath: Assets/Refactor/Skill
   skillEnetities:
   - entity: {fileID: 11400000, guid: 66d685558c11adf4fa165be9669af2cf, type: 2}
-    isUnlock: 1
+    isUnlock: 0
   - entity: {fileID: 11400000, guid: 0b1d516fdec0f1e47ad360883a20512e, type: 2}
     isUnlock: 0
-  - entity: {fileID: 11400000, guid: c7e995c6bce2b6648b00560688e3810f, type: 2}
+  - entity: {fileID: 11400000, guid: 2ca50eb5840854a4d871f96a70bdf1d2, type: 2}
     isUnlock: 1
+  - entity: {fileID: 11400000, guid: c7e995c6bce2b6648b00560688e3810f, type: 2}
+    isUnlock: 0
   - entity: {fileID: 11400000, guid: 8a3a8ed377dbbba4ab673b290e836e97, type: 2}
     isUnlock: 0
   - entity: {fileID: 11400000, guid: e38e8a9ca6ad7f440a50ba3229677cb1, type: 2}
@@ -11273,6 +11284,19 @@ MonoBehaviour:
   attackTypeCount: 3
   xPositionOffset: 2
   minDamageTransfer: 0.5
+--- !u!114 &2063493218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063493206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db8bb8a0422238a448d9bb9aea6e0c67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counterDuration: 0.2
 --- !u!1 &2101405044
 GameObject:
   m_ObjectHideFlags: 0

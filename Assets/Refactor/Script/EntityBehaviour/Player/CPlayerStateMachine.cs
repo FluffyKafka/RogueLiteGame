@@ -18,6 +18,8 @@ namespace PlayerBebaviour
         public SEntityState primaryAttack { get; protected set; }
         public SEntityState dead { get; protected set; }
         public SEntityState aim { get; protected set; }
+        public SEntityState counterAttack { get; protected set; }
+        public SEntityState counterAttackSuccess { get; protected set; }
         #endregion
 
         #region SkillStates
@@ -52,6 +54,8 @@ namespace PlayerBebaviour
             //SkillStats
             dash = new SPlayerDash(this, entity);
             aim = new SPlayerAimming(this, entity);
+            counterAttack = new SPlayerCounterAttack(this, entity);
+            counterAttackSuccess = new SPlayerCounterAttackSuccess(this, entity);
 
             player.CanEffectBehaviourSkillNotice += () => { return currentState is SPlayerRegularState; };
         }
