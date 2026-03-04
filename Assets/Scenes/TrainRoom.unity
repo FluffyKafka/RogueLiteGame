@@ -11169,6 +11169,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2499e57c048c35e44a78d4f0853ea275, type: 2}
   - {fileID: 11400000, guid: c1112b17211225f43b0044c288aaa6d2, type: 2}
   - {fileID: 11400000, guid: 91bcc550cb0dbab4e95526e06404c68c, type: 2}
+  - {fileID: 11400000, guid: 124b83ad48b01c54fbb2a5b7012875f9, type: 2}
+  - {fileID: 11400000, guid: bd3880f19f5255a499e3fd220266cdbf, type: 2}
+  - {fileID: 11400000, guid: 2aad164a79a8bcb439270f8e9c11fe69, type: 2}
+  - {fileID: 11400000, guid: d3aa4c855aa88b048840a790dfc3e653, type: 2}
+  - {fileID: 11400000, guid: 0a5db4b443c16b947ae993aef9c50bf2, type: 2}
   - {fileID: 11400000, guid: 374d3b708b452ea4a977dee8dee07c16, type: 2}
   - {fileID: 11400000, guid: 2769f9579683a494e8837e58ebf82885, type: 2}
   - {fileID: 11400000, guid: 40e0324bc850949429915a305246bc07, type: 2}
@@ -11218,6 +11223,10 @@ MonoBehaviour:
     isUnlock: 0
   - entity: {fileID: 11400000, guid: 2ca50eb5840854a4d871f96a70bdf1d2, type: 2}
     isUnlock: 1
+  - entity: {fileID: 11400000, guid: 6d97cca734f164141a2a328d107f7496, type: 2}
+    isUnlock: 1
+  - entity: {fileID: 11400000, guid: fdcc86a27fd691b4ab604795ab677bc9, type: 2}
+    isUnlock: 0
   - entity: {fileID: 11400000, guid: c7e995c6bce2b6648b00560688e3810f, type: 2}
     isUnlock: 0
   - entity: {fileID: 11400000, guid: 8a3a8ed377dbbba4ab673b290e836e97, type: 2}
@@ -11297,6 +11306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   counterDuration: 0.2
+  counterSuccessHealPercent: 0.1
+  isCounterSuccessHeal: 0
 --- !u!1 &2101405044
 GameObject:
   m_ObjectHideFlags: 0

@@ -240,6 +240,7 @@ namespace EntitySystem
         public abstract void RemoveStatModifier(WReadOnlyStatsData _data);
 
         public abstract float TryCheckStat(EStatType _type);
+        public abstract void SelfHealByPercent(float _per);
     }
 
     public interface IEntityObject

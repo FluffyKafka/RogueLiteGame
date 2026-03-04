@@ -193,17 +193,26 @@ namespace StatsSystem
         
         protected void UpdateCurrentHealth(float _current)
         {
+            float maxHealth = InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth);
+            if (_current > maxHealth)
+            {
+                _current = maxHealth;
+            }
             if(currentHealth == _current)
             {
                 return;
             }
             currentHealth = _current;
-            entity.CurrentHealthUpdate(_current/InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth));
+            entity.CurrentHealthUpdate(_current / maxHealth);
             if(currentHealth <= 0)
             {
                 entity.Die();
             }
         }
 
+        public void SelfHealByPercent(float _rate)
+        {
+            UpdateCurrentHealth(currentHealth + InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth) * _rate);
+        }
     }
 }

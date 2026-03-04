@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de70fbf65b219d743ab316d8ed5660e7, type: 3}
-  m_Name: Cooldown
+  m_Script: {fileID: 11500000, guid: 8bd22d01e45eed2438c4d3c3eae07eb2, type: 3}
+  m_Name: SetHeal
   m_EditorClassIdentifier: 
-  duration: 2

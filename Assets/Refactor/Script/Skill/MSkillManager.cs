@@ -134,6 +134,19 @@ namespace SkillSystem
         {
             player.CounterAttackEnd();
         }
+
+        public void SelfHealByPercent(float _percent)
+        {
+            player.SelfHealByPercent(_percent);
+        }
+        public void AddStatsModifier(WReadOnlyStatsData _data)
+        {
+            player.AddStatsModifier(_data);
+        }
+        public void RemoveStatsModifier(WReadOnlyStatsData _data)
+        {
+            player.RemoveStatsModifier(_data);
+        }
     }
 
     public interface ISkillObject

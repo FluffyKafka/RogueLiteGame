@@ -24,7 +24,6 @@ namespace AnimationAndFx
 
         protected void Stun(bool _isStun)
         {
-            Debug.Log("Stun");
             isBlink = _isStun;
             if(_isStun)
             {

@@ -11,26 +11,45 @@ namespace PlayerBebaviour
         {
         }
 
+        protected bool isSuccess = false;
+
         public override void Enter()
         {
             base.Enter();
             player.ToCounterAttack();
             player.OnCounterAttackEnd += OnCounterEnd;
+            isSuccess = false;
         }
 
         public override void Exit()
         {
             base.Exit();
             player.OnCounterAttackEnd -= OnCounterEnd;
+            if(isSuccess)
+            {
+                player.OnCounterAttackSuccessFinish -= OnCounterEnd;
+            }
         }
 
         public override void Update()
         {
             base.Update();
             player.InvokeAction(player.StandStillNotice);
-            if(player.InvokeFunc(player.CounterAttackCheckNotice))
+            TryCounterAttack();
+        }
+
+        protected void TryCounterAttack()
+        {
+            if(isSuccess)
             {
-                playerStateMachine.ChangeState(playerStateMachine.counterAttackSuccess);
+                return;
+            }
+
+            isSuccess = player.InvokeFunc(player.CounterAttackCheckNotice);
+            if (isSuccess)
+            {
+                player.ToCounterAttackSuccess();
+                player.OnCounterAttackSuccessFinish += OnCounterEnd;
             }
         }
 

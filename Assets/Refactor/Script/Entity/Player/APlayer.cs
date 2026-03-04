@@ -141,6 +141,9 @@ namespace PlayerSystem
 
         public void CounterAttackBegin();
         public void CounterAttackEnd();
+        public void SelfHealByPercent(float _per);
+        public void AddStatsModifier(WReadOnlyStatsData _data);
+        public void RemoveStatsModifier(WReadOnlyStatsData _data);
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
@@ -234,6 +237,19 @@ namespace PlayerSystem
         public void CounterAttackFinish()
         {
             behaviour.CounterAttackSuccessFinish();
+        }
+
+        public void SelfHealByPercent(float _per)
+        {
+            stats.SelfHealByPercent(_per);
+        }
+        public void AddStatsModifier(WReadOnlyStatsData _data)
+        {
+            stats.AddStatModifier(_data);
+        }
+        public void RemoveStatsModifier(WReadOnlyStatsData _data)
+        {
+            stats.RemoveStatModifier(_data);
         }
         #endregion
 
