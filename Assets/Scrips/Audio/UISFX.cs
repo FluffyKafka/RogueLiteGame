@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+namespace AudioSystem
+{
+
+}
 public class UISFX : SoundManagerBase
 {
     [Header("Sounds")]

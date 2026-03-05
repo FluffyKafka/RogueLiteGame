@@ -186,7 +186,12 @@ namespace PlayerSystem
         public void RemoveStatsModifier(WReadOnlyStatsData _data);
     }
 
-    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer
+    public interface IAudioPlayer
+    {
+        public Transform CheckTransform();
+    }
+
+    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer
     {
         protected IPlayerInput input;
         protected IPlayerInventory inventory;
@@ -729,5 +734,25 @@ namespace PlayerSystem
         public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
         public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
         public void StashFullNotice(IItem _itemToFull);
+    }
+
+    public interface IPlayerAudio
+    {
+        public void Attack(int _count, Transform _sourceTransform);
+        public void Ground(Transform _sourceTransform);
+        public void Jump(Transform _sourceTransform);
+        public void Dash(Transform _sourceTransform);
+        public void SwordThrow(Transform _sourceTransform);
+        public void SwordGround(Transform _sourceTransform);
+        public void SwordCatch(Transform _sourceTransform);
+        public void CounterAttack(Transform _sourceTransform);
+        public void CounterAttackSuccess(Transform _sourceTransform);
+        public void BlackHoleLoop(Transform _sourceTransform);
+        public void CrystalPlace(Transform _sourceTransform);
+        public void CrystalFlashBack(Transform _sourceTransform);
+        public void CrystalExplode(Transform _sourceTransform);
+        public void EvasionSuccess(Transform _sourceTransform);
+        public void PlayerHit(Transform _sourceTransform);
+        public void SwordHit(Transform _sourceTransform);
     }
 }

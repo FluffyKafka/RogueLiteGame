@@ -32,7 +32,6 @@ namespace UISystem
         protected override void OnEnable()
         {
             base.OnEnable();
-            Debug.Log("Init");
             if (!isInit)
             {
                 systemSkillData = ui.CheckAllSkillEntity();
