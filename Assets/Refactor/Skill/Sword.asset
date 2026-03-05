@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  skillId: 
-  skillName: 
-  icon: {fileID: 0}
-  description: 
+  skillId: 3f5e848b96849be4eadb1b7793244de0
+  skillName: "\u6295\u5251"
+  icon: {fileID: 1285305529, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  description: "\u7528\u529B\u5C06\u5251\u4E22\u51FA\u53BB"
   unlockConditions: []
   effectConditions:
   - {fileID: 11400000, guid: a291a9ec001da1e4fae3498cad10f472, type: 2}
@@ -30,3 +30,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f000b6ca18ece7549bed3cd1903e308f, type: 2}
   effectTimes:
   - {fileID: 11400000, guid: 85f6d3a666fea3f4ea3f4a91820a93fb, type: 2}
+  isUnlock: 0

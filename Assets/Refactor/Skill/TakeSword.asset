@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
   m_Name: TakeSword
   m_EditorClassIdentifier: 
-  skillId: 
-  skillName: 
-  icon: {fileID: 0}
-  description: 
+  skillId: 0ef28b8a3aa442940bd3db9cbdaae458
+  skillName: "\u539F\u529B\u89C9\u9192"
+  icon: {fileID: -1470902421, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  description: "\u80FD\u9694\u7A7A\u5C06\u5251\u6536\u56DE\u5230\u624B\u4E2D"
   unlockConditions: []
   effectConditions:
   - {fileID: 11400000, guid: bc45d474a035401409f8ea4efc938041, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 91293f9af6e94da4fb167ffb29c69a8c, type: 2}
   effectTimes:
   - {fileID: 11400000, guid: 25fcee9d39544f243b5d408da0a48d21, type: 2}
+  isUnlock: 0

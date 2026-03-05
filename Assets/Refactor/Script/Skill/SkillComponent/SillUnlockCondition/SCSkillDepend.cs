@@ -20,6 +20,16 @@ namespace SkillSystem
             }
             return true;
         }
+
+        public List<string> CheckDependIds()
+        {
+            List<string> res = new();
+            foreach(SESkillEntity skill in dependSkills)
+            {
+                res.Add(skill.CheckId());
+            }
+            return res;
+        }
     }
 }
 

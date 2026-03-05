@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
   m_Name: CounterSuccessHeal
   m_EditorClassIdentifier: 
-  skillId: 
-  skillName: 
-  icon: {fileID: 0}
-  description: 
+  skillId: fdcc86a27fd691b4ab604795ab677bc9
+  skillName: "\u4EE5\u9038\u5F85\u52B3"
+  icon: {fileID: 497711233, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  description: "\u53CD\u51FB\u6210\u529F\u5C06\u6062\u590D\u81EA\u5DF1\u7684\u4F53\u529B"
   unlockConditions:
   - {fileID: 11400000, guid: d3aa4c855aa88b048840a790dfc3e653, type: 2}
   effectConditions: []

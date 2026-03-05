@@ -20,6 +20,16 @@ namespace SkillSystem
             }
             return true;
         }
+
+        public List<string> checkConflictIds()
+        {
+            List<string> res = new();
+            foreach(var skill in conflictSkills)
+            {
+                res.Add(skill.CheckId());
+            }
+            return res;
+        }
     }
 }
 

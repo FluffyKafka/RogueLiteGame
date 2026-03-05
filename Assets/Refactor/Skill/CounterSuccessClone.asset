@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
   m_Name: CounterSuccessClone
   m_EditorClassIdentifier: 
-  skillId: 
-  skillName: 
-  icon: {fileID: 0}
-  description: 
+  skillId: 6d97cca734f164141a2a328d107f7496
+  skillName: "\u53CD\u51FB\u4E4B\u5F71"
+  icon: {fileID: -1470902421, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  description: "\u53CD\u51FB\u6210\u529F\u540E\u4F1A\u751F\u6210\u4E00\u4E2A\u6B8B\u5F71"
   unlockConditions:
   - {fileID: 11400000, guid: 2aad164a79a8bcb439270f8e9c11fe69, type: 2}
   effectConditions: []

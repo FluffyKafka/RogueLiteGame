@@ -31,6 +31,9 @@ namespace SkillSystem
         public Action CounterAttackSuccessNotice;
         #endregion
 
+        public Func<List<DSkillEntityUIData>> ShowAllSkillEntityToUINotice;
+        public Func<List<DSkillUnlockData>> CheckAllSkillUnlockStateNotice;
+
         protected void Awake()
         {
             DashBegin += player.DashBegin;
@@ -146,6 +149,15 @@ namespace SkillSystem
         public void RemoveStatsModifier(WReadOnlyStatsData _data)
         {
             player.RemoveStatsModifier(_data);
+        }
+
+        public List<DSkillEntityUIData> ShowAllSkillEntityToUi()
+        {
+            return InvokeFunc(ShowAllSkillEntityToUINotice);
+        }
+        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        {
+            return InvokeFunc(CheckAllSkillUnlockStateNotice);
         }
     }
 

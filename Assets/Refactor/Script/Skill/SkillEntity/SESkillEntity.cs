@@ -7,27 +7,15 @@ using UnityEngine.Assertions;
 
 namespace SkillSystem
 {
-    public interface ISkill
-    {
-        public string CheckName();
-        public Sprite CheckIcon();
-        public string CheckDescription();
-        public float TryCheckCooldownPer();
-        public float TryCheckCooldownRest();
-        public bool CanUnlock();
-        public bool TryUnlock();
-
-        public bool IsUnlock();
-    }
-
     [CreateAssetMenu(fileName = "New Skill Entity", menuName = "Skill System/Skill Entity")]
-    internal class SESkillEntity : ScriptableObject, ISkill
+    internal class SESkillEntity : ScriptableObject
     {
         [Header("Skill Detail")]
         [SerializeField] protected string skillId;
         [SerializeField] protected string skillName;
         [SerializeField] protected Sprite icon;
         [SerializeField][TextArea] protected string description;
+        [SerializeField] protected float price;
 
         [Header("Skill Effect ")]
         [SerializeField] protected List<SCUnlockConditionBase> unlockConditions;
@@ -148,14 +136,21 @@ namespace SkillSystem
             }
         }
 
+        public string CheckId()
+        {
+            return skillId;
+        }
         public string CheckName()
         {
             return skillName;
         }
-
         public Sprite CheckIcon()
         {
             return icon;
+        }
+        public float CheckPrice()
+        {
+            return price;
         }
 
         public string CheckDescription()
@@ -193,6 +188,25 @@ namespace SkillSystem
         public bool IsUnlock()
         {
             return isUnlock;
+        }
+
+        public List<string> CheckDependSkillIds()
+        {
+            SCSkillDepend dp = TryGetSkillComponenet<SCSkillDepend, SCUnlockConditionBase>(unlockConditions);
+            if(dp == null)
+            {
+                return new List<string>();
+            }
+            return dp.CheckDependIds();
+        }
+        public List<string> CheckConflictSkillIds()
+        {
+            SCSkillConflict cf = TryGetSkillComponenet<SCSkillConflict, SCUnlockConditionBase>(unlockConditions);
+            if(cf == null)
+            {
+                return new List<string>();
+            }
+            return cf.checkConflictIds();
         }
     }
 }

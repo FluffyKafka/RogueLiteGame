@@ -33,6 +33,7 @@ namespace UISystem
         public Action<IEquipmentData> ShowCraftWindow;
         public Action<string> ShowWarning;
         public Action HideTooltip;
+        public Action<DSkillDetail> ShowSkillDetailNotice;
         #endregion
 
         #region Func
@@ -134,6 +135,15 @@ namespace UISystem
         public void StatsChangeNotice()
         {
             InvokeAction(UpdateStats);
+        }
+
+        public List<DSkillEntityUIData> CheckAllSkillEntity()
+        {
+            return player.CheckAllSkillEntity();
+        }
+        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        {
+            return player.CheckAllSkillUnlockState();
         }
     }
 }

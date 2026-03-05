@@ -57,6 +57,44 @@ namespace PlayerSystem
         public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
     }
 
+    public struct DSkillEntityUIData
+    {
+        public string id;
+        public string name;
+        public Sprite icon;
+        public string description;
+        public float price;
+        public List<string> dependIds;
+        public List<string> conflictIds;
+
+        public DSkillEntityUIData(
+            string id,
+            string name,
+            Sprite icon,
+            string description,
+            float price,
+            List<string> dependIds,
+            List<string> conflictIds)
+        {
+            this.id = id;
+            this.name = name;
+            this.icon = icon;
+            this.description = description;
+            this.price = price;
+            this.dependIds = dependIds ?? new List<string>();
+            this.conflictIds = conflictIds ?? new List<string>();
+        }
+    }
+    public struct DSkillUnlockData
+    {
+        public string skillId;
+        public bool isUnlock;
+        public DSkillUnlockData(string _id, bool _isUnlock)
+        {
+            skillId = _id;
+            isUnlock = _isUnlock;
+        }
+    }
     public interface IUIPlayer
     {
         public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
@@ -70,6 +108,8 @@ namespace PlayerSystem
         public int CheckMaterialStashMaxSize();
         public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
         public float TryCheckStat(EStatType _type);
+        public List<DSkillEntityUIData> CheckAllSkillEntity();
+        public List<DSkillUnlockData> CheckAllSkillUnlockState();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -427,6 +467,14 @@ namespace PlayerSystem
         {
             return stats.TryCheckStat(_type);
         }
+        List<DSkillEntityUIData> IUIPlayer.CheckAllSkillEntity()
+        {
+            return skillManager.ShowAllSkillEntityToUi();
+        }
+        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        {
+            return skillManager.CheckAllSkillUnlockState();
+        }
         #endregion
 
         //暂时直接转发，若有需要再引入事件机制
@@ -572,6 +620,9 @@ namespace PlayerSystem
         public void SkillInputBegin(int _input);
 
         public void CounterAttackSuccess();
+
+        public List<DSkillEntityUIData> ShowAllSkillEntityToUi();
+        public List<DSkillUnlockData> CheckAllSkillUnlockState();
     }
 
     public interface IPlayerBehaviour : IEntityBehaviour

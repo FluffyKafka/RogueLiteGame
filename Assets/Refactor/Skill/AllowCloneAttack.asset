@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd0847c2d4397d445aae4c9dd2f504c5, type: 3}
   m_Name: AllowCloneAttack
   m_EditorClassIdentifier: 
-  skillId: 
-  skillName: 
-  icon: {fileID: 0}
-  description: 
+  skillId: 66d685558c11adf4fa165be9669af2cf
+  skillName: "\u653B\u51FB\u578B\u6B8B\u5F71"
+  icon: {fileID: -1111427956, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
+  description: "\u6B8B\u5F71\u73B0\u5728\u4F1A\u8FDB\u884C\u653B\u51FB"
   unlockConditions: []
   effectConditions: []
   unlockEffects:

@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 7018489416528168776}
   - component: {fileID: 3925766471319817360}
   - component: {fileID: 1075577509573252313}
-  - component: {fileID: 3997946324100652085}
+  - component: {fileID: 2464569005707067380}
   m_Layer: 5
   m_Name: SLCraftMaterialSlot
   m_TagString: Untagged
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3997946324100652085
+--- !u!114 &2464569005707067380
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

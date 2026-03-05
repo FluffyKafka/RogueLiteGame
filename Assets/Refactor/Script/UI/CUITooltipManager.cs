@@ -13,6 +13,7 @@ namespace UISystem
         [SerializeField] protected CStatsDetailUI statsDetailTooltip;
         [SerializeField] protected CWarningToolTip warningToolTip;
         [SerializeField] protected CCraftWindowUI craftWindow;
+        [SerializeField] protected CSkillDetailToolTip skillDetail;
 
         protected override void OnEnable()
         {
@@ -37,6 +38,10 @@ namespace UISystem
             {
                 ui.ShowCraftWindow += ShowCraftWindow;
             }
+            if(skillDetail != null)
+            {
+                ui.ShowSkillDetailNotice += ShowSkillDetail;
+            }
 
             ui.HideTooltip += HideTooltip;
         }
@@ -55,6 +60,10 @@ namespace UISystem
             if (statsDetailTooltip != null)
             {
                 ui.ShowStatsDetail -= ShowStatTooltip;
+            }
+            if(skillDetail != null)
+            {
+                ui.ShowSkillDetailNotice -= ShowSkillDetail;
             }
             ui.HideTooltip -= HideTooltip;
         }
@@ -84,6 +93,11 @@ namespace UISystem
             craftWindow.Setup(_data);
         }
 
+        protected void ShowSkillDetail(DSkillDetail _data)
+        {
+            skillDetail.ShowDetail(_data);
+        }
+
         protected void HideTooltip()
         {
             if(equipmentDetailTootip!=null && equipmentDetailTootip.gameObject.activeSelf)
@@ -101,7 +115,11 @@ namespace UISystem
             if(warningToolTip != null && warningToolTip.gameObject.activeSelf)
             {
                 warningToolTip.Hide();
-    }
+            }
+            if(skillDetail != null && skillDetail.gameObject.activeSelf)
+            {
+                skillDetail.HideToolTip();
+            }
         }
     }
 }

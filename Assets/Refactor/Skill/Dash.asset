@@ -21,8 +21,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2769f9579683a494e8837e58ebf82885, type: 2}
   - {fileID: 11400000, guid: 374d3b708b452ea4a977dee8dee07c16, type: 2}
   unlockEffects: []
+  aimmingEffects: []
   effects:
   - {fileID: 11400000, guid: 40e0324bc850949429915a305246bc07, type: 2}
   - {fileID: 11400000, guid: 12c4240cc63642f42bca550e68402dc4, type: 2}
   effectTimes:
   - {fileID: 11400000, guid: fabae989344468341b81b4bd55987c93, type: 2}
+  isUnlock: 0
