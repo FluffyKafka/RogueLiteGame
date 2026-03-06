@@ -17,6 +17,7 @@ namespace PlayerBebaviour
         public override void Exit()
         {
             base.Exit();
+            player.InvokeAction(player.ToExitMove);
         }
 
         public override void Update()

@@ -82,22 +82,18 @@ namespace SkillSystem
         {
             player.AimmingUpdate(_data);
         }
-
         public void AimmingFinish()
         {
             player.AimmingFinish();
         }
-
         public void CatchSwordBegin()
         {
             player.CatchSwordBegin();
         }
-
         public void CatchSwordEnd()
         {
             player.CatchSwordFinish();
         }
-
         public ISkillObject ThrowSword(DProjectileData _data)
         {
             return player.ThrowSword(_data).GetComponent<ISkillObject>();
@@ -113,6 +109,14 @@ namespace SkillSystem
         public ISkillObject ThrowBounceSword(DBounceSwordData _data)
         {
             return player.ThrowBounceSword(_data).GetComponent<ISkillObject>();
+        }
+        public void SwordHitGround(Transform _sword)
+        {
+            player.SwordHitGround(_sword);
+        }
+        public void SwordHitEnemy(Transform _sword)
+        {
+            player.SwordHitEnemy(_sword);
         }
 
         public WReadOnlyDamageData CheckPlayerPrimaryDamage()

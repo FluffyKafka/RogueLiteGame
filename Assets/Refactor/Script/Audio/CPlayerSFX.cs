@@ -40,7 +40,7 @@ namespace AudioSystem
         private TSound crystalFlashBack;
         private TSound crystalExplode;
         private TSound evasionSuccess;
-        private TSound playerHit;
+        private TSound playerTakeHit;
         private TSound swordHit;
 
 
@@ -69,88 +69,201 @@ namespace AudioSystem
             crystalFlashBack = GetSound(crystalFlashBack_SS, true);
             crystalExplode = GetSound(crystalExplode_SS, true);
             evasionSuccess = GetSound(evasionSuccess_SS, true);
-            playerHit = GetSound(playerHit_SS, true);
+            playerTakeHit = GetSound(playerHit_SS, true);
             swordHit = GetSound(swordHit_SS, true);
         }
 
-        public void Attack(int _count, Transform _source = null)
+        public void Attack(int _count, Transform _source, bool _isPlay)
         {
-            attack[_count].Stop();
-            attack[_count].Play(_source);
+            if(_isPlay)
+            {
+                attack[_count].Stop();
+                attack[_count].Play(_source);
+            }
+            else
+            {
+                attack[_count].Stop();
+            }
         }
 
-        public void Ground(Transform _sourceTransform)
+        public void Ground(Transform _sourceTransform, bool _isPlay)
         {
-            ground.Play(_sourceTransform);
-        }
-        public void Jump(Transform _sourceTransform)
-        {
-            jump.Play(_sourceTransform);
-        }
-
-        public void Dash(Transform _sourceTransform)
-        {
-            dash.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                ground.Play(_sourceTransform);
+            }
+            else
+            {
+                ground.Stop();
+            }
         }
 
-        public void SwordThrow(Transform _sourceTransform)
+        public void Jump(Transform _sourceTransform, bool _isPlay)
         {
-            swordThrow.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                jump.Play(_sourceTransform);
+            }
+            else
+            {
+                jump.Stop();
+            }
         }
 
-        public void SwordGround(Transform _sourceTransform)
+        public void Dash(Transform _sourceTransform, bool _isPlay)
         {
-            swordGround.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                dash.Play(_sourceTransform);
+            }
+            else
+            {
+                dash.Stop();
+            }
         }
 
-        public void SwordCatch(Transform _sourceTransform)
+        public void SwordThrow(Transform _sourceTransform, bool _isPlay)
         {
-            swordCatch.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                swordThrow.Play(_sourceTransform);
+            }
+            else
+            {
+                swordThrow.Stop();
+            }
         }
 
-        public void CounterAttack(Transform _sourceTransform)
+        public void SwordGround(Transform _sourceTransform, bool _isPlay)
         {
-            counterAttack.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                swordGround.Play(_sourceTransform);
+            }
+            else
+            {
+                swordGround.Stop();
+            }
         }
 
-        public void CounterAttackSuccess(Transform _sourceTransform)
+        public void SwordCatch(Transform _sourceTransform, bool _isPlay)
         {
-            counterAttackSuccess.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                swordCatch.Play(_sourceTransform);
+            }
+            else
+            {
+                swordCatch.Stop();
+            }
         }
 
-        public void BlackHoleLoop(Transform _sourceTransform)
+        public void CounterAttack(Transform _sourceTransform, bool _isPlay)
         {
-            blackHoleLoop.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                counterAttack.Play(_sourceTransform);
+            }
+            else
+            {
+                counterAttack.Stop();
+            }
         }
 
-        public void CrystalPlace(Transform _sourceTransform)
+        public void CounterAttackSuccess(Transform _sourceTransform, bool _isPlay)
         {
-            crystalPlace.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                counterAttackSuccess.Play(_sourceTransform);
+            }
+            else
+            {
+                counterAttackSuccess.Stop();
+            }
         }
 
-        public void CrystalFlashBack(Transform _sourceTransform)
+        public void BlackHoleLoop(Transform _sourceTransform, bool _isPlay)
         {
-            crystalFlashBack.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                blackHoleLoop.Play(_sourceTransform);
+            }
+            else
+            {
+                blackHoleLoop.Stop();
+            }
         }
 
-        public void CrystalExplode(Transform _sourceTransform)
+        public void CrystalPlace(Transform _sourceTransform, bool _isPlay)
         {
-            crystalExplode.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                crystalPlace.Play(_sourceTransform);
+            }
+            else
+            {
+                crystalPlace.Stop();
+            }
         }
 
-        public void EvasionSuccess(Transform _sourceTransform)
+        public void CrystalFlashBack(Transform _sourceTransform, bool _isPlay)
         {
-            evasionSuccess.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                crystalFlashBack.Play(_sourceTransform);
+            }
+            else
+            {
+                crystalFlashBack.Stop();
+            }
         }
 
-        public void PlayerHit(Transform _sourceTransform)
+        public void CrystalExplode(Transform _sourceTransform, bool _isPlay)
         {
-            playerHit.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                crystalExplode.Play(_sourceTransform);
+            }
+            else
+            {
+                crystalExplode.Stop();
+            }
         }
 
-        public void SwordHit(Transform _sourceTransform)
+        public void EvasionSuccess(Transform _sourceTransform, bool _isPlay)
         {
-            swordHit.Play(_sourceTransform);
+            if (_isPlay)
+            {
+                evasionSuccess.Play(_sourceTransform);
+            }
+            else
+            {
+                evasionSuccess.Stop();
+            }
+        }
+
+        public void PlayerTakeHit(Transform _sourceTransform, bool _isPlay)
+        {
+            if (_isPlay)
+            {
+                playerTakeHit.Play(_sourceTransform);
+            }
+            else
+            {
+                playerTakeHit.Stop();
+            }
+        }
+
+        public void SwordHit(Transform _sourceTransform, bool _isPlay)
+        {
+            if (_isPlay)
+            {
+                swordHit.Play(_sourceTransform);
+            }
+            else
+            {
+                swordHit.Stop();
+            }
         }
     }
 }

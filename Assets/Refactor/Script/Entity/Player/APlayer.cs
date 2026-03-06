@@ -13,7 +13,7 @@ namespace PlayerSystem
 {
     public interface IInitPlayer
     {
-        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager);
+        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio);
     }
 
     public interface IInputPlayer
@@ -130,6 +130,7 @@ namespace PlayerSystem
         public void UpdateYVelocity(float _yVelocity);
         public void ToIdle();
         public void ToMove();
+        public void ToExitMove();
         public void ToWallSlide();
         public float CheckHorizonInput();
         public float CheckVerticalInput();
@@ -175,6 +176,9 @@ namespace PlayerSystem
         public GameObject ThrowBounceSword(DBounceSwordData _data);
         public void CatchSwordBegin();
         public void CatchSwordFinish();
+        public void SwordHitGround(Transform _sword);
+        public void SwordHitEnemy(Transform _sword);
+
         public WReadOnlyDamageData CheckPlayerDamage();
 
         public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
@@ -200,6 +204,7 @@ namespace PlayerSystem
         protected IPlayerAnimation playerAnim;
         protected IPlayerBehaviour behaviour;
         protected IPlayerSkillManager skillManager;
+        protected IPlayerAudio audioManager;
 
         //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
         //暂时直接转发，若有需要再引入事件机制
@@ -207,16 +212,19 @@ namespace PlayerSystem
         void IBehaviourPlayer.ToJump()
         {
             playerAnim.Air();
+            audioManager.Jump(transform);
         }
 
         void IBehaviourPlayer.ToWallJump()
         {
             playerAnim.Air();
+            audioManager.Jump(transform);
         }
 
         void IBehaviourPlayer.ToAttack(int _count)
         {
             playerAnim.Attack(_count);
+            audioManager.Attack(_count, transform);
         }
 
         void IBehaviourPlayer.UpdateYVelocity(float _yVelocity)
@@ -232,6 +240,11 @@ namespace PlayerSystem
         void IBehaviourPlayer.ToMove()
         {
             playerAnim.Move();
+            audioManager.Ground(transform);
+        }
+        void IBehaviourPlayer.ToExitMove()
+        {
+            audioManager.Ground(transform, false);
         }
 
         void IBehaviourPlayer.ToWallSlide()
@@ -278,6 +291,7 @@ namespace PlayerSystem
         {
             skillManager.CounterAttackSuccess();
             playerAnim.CounterAttackSuccess();
+            audioManager.CounterAttackSuccess(transform);
         }
         public void CounterAttackFinish()
         {
@@ -300,7 +314,7 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region Init
-        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager)
+        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio)
         {
             input = _inputSource;
             inventory = _inventory;
@@ -308,6 +322,7 @@ namespace PlayerSystem
             playerObjectFactory = _factory;
             objectFactory = _factory;
             skillManager = _skillManager;
+            audioManager = _audio;
         }
         #endregion
 
@@ -353,6 +368,10 @@ namespace PlayerSystem
         {
             WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
             InvokeAction(TakeDamage, damage);
+            if(damage.data.physical > 0 || damage.data.magical > 0)
+            {
+                audioManager.PlayerTakeHit(transform);
+            }
             return damage;
         }
 
@@ -511,6 +530,7 @@ namespace PlayerSystem
         {
             behaviour.DashBegin(_speed);
             playerAnim.DashBegin();
+            audioManager.Dash(transform);
         }
         public void DashEnd()
         {
@@ -541,6 +561,7 @@ namespace PlayerSystem
         {
             behaviour.CatchSwordBegin();
             playerAnim.CatchSwordBegin();
+            audioManager.SwordCatch(transform);
         }
         public void CatchSwordFinish()
         {
@@ -560,24 +581,36 @@ namespace PlayerSystem
         public void AimmingFinish()
         {
             behaviour.AimmingFinish();
-            playerAnim.AimmingFinish();
+            playerAnim.AimmingFinish();            
         }
 
         public GameObject ThrowSword(DProjectileData _data)
         {
+            audioManager.SwordThrow(transform);
             return playerObjectFactory.GenerateSword(_data, transform.position);
         }
         public GameObject ThrowSpinSword(DSpinSwordData _data)
         {
+            audioManager.SwordThrow(transform);
             return playerObjectFactory.GenerateSpinSword(_data, transform.position);
         }
         public GameObject ThrowPierceSword(DProjectileData _data)
         {
+            audioManager.SwordThrow(transform);
             return playerObjectFactory.GeneratePierceSword(_data, transform.position);
         }
         public GameObject ThrowBounceSword(DBounceSwordData _data)
         {
+            audioManager.SwordThrow(transform);
             return playerObjectFactory.GenerateBounceSword(_data, transform.position);
+        }
+        public void SwordHitGround(Transform _sword)
+        {
+            audioManager.SwordGround(_sword);
+        }
+        public void SwordHitEnemy(Transform _sword)
+        {
+            audioManager.SwordHit(_sword);
         }
 
         public WReadOnlyDamageData CheckPlayerDamage()
@@ -592,6 +625,7 @@ namespace PlayerSystem
 
         public void CounterAttackBegin()
         {
+            audioManager.CounterAttack(transform);
             behaviour.CounterAttackBegin();
         }
         public void CounterAttackEnd()
@@ -738,21 +772,21 @@ namespace PlayerSystem
 
     public interface IPlayerAudio
     {
-        public void Attack(int _count, Transform _sourceTransform);
-        public void Ground(Transform _sourceTransform);
-        public void Jump(Transform _sourceTransform);
-        public void Dash(Transform _sourceTransform);
-        public void SwordThrow(Transform _sourceTransform);
-        public void SwordGround(Transform _sourceTransform);
-        public void SwordCatch(Transform _sourceTransform);
-        public void CounterAttack(Transform _sourceTransform);
-        public void CounterAttackSuccess(Transform _sourceTransform);
-        public void BlackHoleLoop(Transform _sourceTransform);
-        public void CrystalPlace(Transform _sourceTransform);
-        public void CrystalFlashBack(Transform _sourceTransform);
-        public void CrystalExplode(Transform _sourceTransform);
-        public void EvasionSuccess(Transform _sourceTransform);
-        public void PlayerHit(Transform _sourceTransform);
-        public void SwordHit(Transform _sourceTransform);
+        public void Attack(int _count, Transform _sourceTransform, bool _play = true);
+        public void Ground(Transform _sourceTransform, bool _play = true);
+        public void Jump(Transform _sourceTransform, bool _play = true);
+        public void Dash(Transform _sourceTransform, bool _play = true);
+        public void SwordThrow(Transform _sourceTransform, bool _play = true);
+        public void SwordGround(Transform _sourceTransform, bool _play = true);
+        public void SwordCatch(Transform _sourceTransform, bool _play = true);
+        public void CounterAttack(Transform _sourceTransform, bool _play = true);
+        public void CounterAttackSuccess(Transform _sourceTransform, bool _play = true);
+        public void BlackHoleLoop(Transform _sourceTransform, bool _play = true);
+        public void CrystalPlace(Transform _sourceTransform, bool _play = true);
+        public void CrystalFlashBack(Transform _sourceTransform, bool _play = true);
+        public void CrystalExplode(Transform _sourceTransform, bool _play = true);
+        public void EvasionSuccess(Transform _sourceTransform, bool _play = true);
+        public void PlayerTakeHit(Transform _sourceTransform, bool _play = true);
+        public void SwordHit(Transform _sourceTransform, bool _play = true);
     }
 }

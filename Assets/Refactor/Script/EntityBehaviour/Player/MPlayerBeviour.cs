@@ -19,6 +19,7 @@ namespace PlayerBebaviour
         public Action WallJump;
         public Action ToIdle;
         public Action ToMove;
+        public Action ToExitMove;
         public Action ToWallSlide;
         public Action StandStillNotice;
 
@@ -72,6 +73,7 @@ namespace PlayerBebaviour
             UpdateYVelocity += playerSystem.UpdateYVelocity;
             GetPrimaryAttackDamage += playerSystem.GetPrimaryAttackDamage;
             ToDead += playerSystem.ToDead;
+            ToExitMove += playerSystem.ToExitMove;
         }
 
         public void ToCounterAttack()

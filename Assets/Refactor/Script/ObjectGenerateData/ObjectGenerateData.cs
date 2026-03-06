@@ -28,12 +28,16 @@ namespace ObjectGenerateData
         public EEntityType targetType;
         public Vector2 velocity;
         public float gravity;
-        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity, float _gravity = -1)
+
+        public GameObject manager;
+
+        public DProjectileData(WReadOnlyDamageData _damage, EEntityType _targetType, Vector2 _velocity, float _gravity = -1, GameObject _manager = null)
         {
             damage = _damage;
             targetType = _targetType;
             velocity = _velocity;
             gravity = _gravity;
+            manager = _manager;
         }
     }
     public struct DAmmoData
@@ -42,12 +46,16 @@ namespace ObjectGenerateData
         public Transform target;
         public EEntityType targetType;
         public IObjectEntity originEntity;
-        public DAmmoData(WReadOnlyDamageData _damage, EEntityType _targetType, Transform _target, IObjectEntity _origin)
+
+        public GameObject manager;
+
+        public DAmmoData(WReadOnlyDamageData _damage, EEntityType _targetType, Transform _target, IObjectEntity _origin, GameObject _manager = null)
         {
             damage = _damage;
             targetType = _targetType;
             target = _target;
             originEntity = _origin;
+            manager = _manager;
         }
     }
     public struct DSpinSwordData
@@ -58,18 +66,23 @@ namespace ObjectGenerateData
         public float spinDuration;
         public float damageCooldown;
 
+        public GameObject manager;
+
         public DSpinSwordData(
             WReadOnlyDamageData damage,
             Vector2 velocity,
             float gravity,
             float spinDuration,
-            float damageCooldown)
+            float damageCooldown,
+            GameObject _manager = null
+            )
         {
             this.damage = damage;
             this.velocity = velocity;
             this.gravity = gravity;
             this.spinDuration = spinDuration;
             this.damageCooldown = damageCooldown;
+            manager = _manager;
         }
     }
 
@@ -83,6 +96,8 @@ namespace ObjectGenerateData
         public float bounceSpeed;
         public float bounceRadius;
 
+        public GameObject manager;
+
         public DBounceSwordData(
             WReadOnlyDamageData damage,
             EEntityType targetType,
@@ -90,7 +105,9 @@ namespace ObjectGenerateData
             float gravity,
             int bounceCount,
             float bounceSpeed,
-            float bounceRadius)
+            float bounceRadius,
+            GameObject _manager = null
+            )
         {
             this.damage = damage;
             this.targetType = targetType;
@@ -99,6 +116,7 @@ namespace ObjectGenerateData
             this.bounceCount = bounceCount;
             this.bounceSpeed = bounceSpeed;
             this.bounceRadius = bounceRadius;
+            manager = _manager;
         }
     }
 

@@ -1,6 +1,7 @@
 using EnemySystem;
 using EntitySystem;
 using ObjectGenerateData;
+using SkillSystem;
 using StatsData;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace ObjectController
         protected float bounceRadius;
         protected float bounceSpeed;
         protected int bounceCount;
+
+        protected ISwordObjectModel swordModel;
+
         public void Setup(FCBounceSwordFactory _factory, DBounceSwordData _data)
         {
             factory = _factory;
@@ -23,6 +27,7 @@ namespace ObjectController
             bounceCount = _data.bounceCount;
             bounceRadius = _data.bounceRadius;
             bounceSpeed = _data.bounceSpeed;
+            swordModel = _data.manager.GetComponent<ISwordObjectModel>();
             GetComponent<Rigidbody2D>().gravityScale = _data.gravity;
             InvokeAction(SwitchTargetTo, EEntityType.Enemy);
             InvokeAction(Project, _data.velocity);
@@ -65,6 +70,7 @@ namespace ObjectController
         protected void HitGround(Transform _ground)
         {
             InvokeAction(StuckInto, _ground);
+            swordModel.HitGround();
             anim.ToEffect();
             HitEffect(_ground);
             InvokeAction(SetLookAtMovement, false);

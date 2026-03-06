@@ -11,7 +11,8 @@ namespace AudioSystem
 
         protected virtual void Awake()
         {
-            soundPrefab = GetComponent<MAudioManager>().soundPrfab;
+            manager = GetComponent<MAudioManager>();
+            soundPrefab = manager.soundPrfab;           
         }
         protected virtual TSound GetSound(AudioSource _ss, bool _isRandomPitch)
         {

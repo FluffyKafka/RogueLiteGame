@@ -24611,7 +24611,7 @@ PrefabInstance:
     - target: {fileID: 7501001986646670639, guid: 7f2522510aa3d3745b6976dc5633cad4, type: 3}
       propertyPath: displaySlotPrefab
       value: 
-      objectReference: {fileID: 3997946324100652085, guid: 62da478ed0398a74eb74d56f62479be9, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7629641579422812002, guid: 7f2522510aa3d3745b6976dc5633cad4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

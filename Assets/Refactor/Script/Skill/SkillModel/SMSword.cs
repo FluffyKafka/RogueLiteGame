@@ -10,6 +10,12 @@ using UnityEngine.UIElements;
 
 namespace SkillSystem
 {
+    public interface ISwordObjectModel
+    {
+        public void HitGround();
+        public void HitEnemy();
+    }
+
     internal enum ESwordType
     {
         Regular,
@@ -18,7 +24,7 @@ namespace SkillSystem
         Pierce
     }
 
-    internal class SMSword : SMSkillModel
+    internal class SMSword : SMSkillModel, ISwordObjectModel
     {
         [Header("SwordSkill Info")]
         [SerializeField] protected Vector2 launchSpeed;
@@ -178,7 +184,7 @@ namespace SkillSystem
                     new DProjectileData(
                         new WReadOnlyDamageData(damage),
                         EEntityType.Enemy, aimDir.normalized * launchSpeed,
-                        swordGravity
+                        swordGravity, gameObject                        
                         )
                     );
         }
@@ -194,7 +200,7 @@ namespace SkillSystem
                         new WReadOnlyDamageData(damage),
                         aimDir.normalized * launchSpeed, swordGravity,
                         spinDuration,
-                        spinDamageCooldown
+                        spinDamageCooldown, gameObject
                         )
                     );
         }
@@ -209,7 +215,7 @@ namespace SkillSystem
                     new DProjectileData(
                         new WReadOnlyDamageData(damage),
                         EEntityType.Enemy, aimDir.normalized * launchSpeed,
-                        swordGravity
+                        swordGravity, gameObject
                         )
                     );
         }
@@ -224,7 +230,8 @@ namespace SkillSystem
                     new DBounceSwordData(
                         new WReadOnlyDamageData(damage),
                         EEntityType.Enemy, aimDir.normalized * launchSpeed, swordGravity,
-                        bounceTime, bouncingSpeed, bouncingRadius
+                        bounceTime, bouncingSpeed, bouncingRadius, 
+                        gameObject
                         )
                     );
         }
@@ -239,6 +246,16 @@ namespace SkillSystem
         public bool IsSwordThrown()
         {
             return swordObject == null;
+        }
+
+        void ISwordObjectModel.HitGround()
+        {
+            manager.SwordHitGround(swordObject.GetTransform());
+        }
+
+        void ISwordObjectModel.HitEnemy()
+        {
+            manager.SwordHitEnemy(swordObject.GetTransform());
         }
     }
 }

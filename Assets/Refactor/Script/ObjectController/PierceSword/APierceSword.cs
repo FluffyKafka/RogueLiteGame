@@ -1,6 +1,7 @@
 using EnemySystem;
 using EntitySystem;
 using ObjectGenerateData;
+using SkillSystem;
 using StatsData;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,12 +12,14 @@ namespace ObjectController
     internal class APierceSword : AObjectController
     {
         protected WReadOnlyDamageData damage;
+        protected ISwordObjectModel swordModel;
 
         public void Setup(FCPierceSwordFactory _factory, DProjectileData _data)
         {
             factory = _factory;
 
             damage = _data.damage;
+            swordModel = _data.manager.GetComponent<ISwordObjectModel>();
             GetComponent<Rigidbody2D>().gravityScale = _data.gravity;
             InvokeAction(SwitchTargetTo, EEntityType.Enemy);
             InvokeAction(Project, _data.velocity);
@@ -40,6 +43,7 @@ namespace ObjectController
         }
         protected void HitGround(Transform _target)
         {
+            swordModel.HitGround();
             InvokeAction(StuckInto, _target);
             InvokeAction(SetLookAtMovement, false);
             HitEffect(_target);
