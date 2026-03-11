@@ -16,6 +16,7 @@ namespace EnemyBehaviour
             base.Enter();
             enemy.StopBattle += StopBattle;
             enemy.Attack += Attack;
+            enemy.InvokeAction(enemy.ToBattle, true);
         }
 
         public override void Exit()
@@ -23,6 +24,7 @@ namespace EnemyBehaviour
             base.Exit();
             enemy.StopBattle -= StopBattle;
             enemy.Attack -= Attack;
+            enemy.InvokeAction(enemy.ToBattle, false);
         }
 
         public override void Update()

@@ -1,6 +1,7 @@
 using EntityBehaviour;
 using StatsData;
 using System.Collections;
+using Unity.Burst.CompilerServices;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -68,7 +69,8 @@ namespace EnemyBehaviour
 
         protected virtual bool IsDetectPlayer()
         {
-            return IsPlayerDetectedInRadius() || IsDetectPlayerFront();
+            bool isDetect = IsPlayerDetectedInRadius() || IsDetectPlayerFront();
+            return isDetect;
         }
 
         protected virtual RaycastHit2D IsDetectPlayerFront()
@@ -98,7 +100,7 @@ namespace EnemyBehaviour
         {
             bool isDetect =
                 enemy.InvokeFunc(enemy.IsPlayerAlive) &&
-                Vector2.Distance(enemy.InvokeFunc(enemy.CheckPlayerPosition), transform.position) < playerDetectRadius && CanSeePlayer();
+                Vector2.Distance(enemy.InvokeFunc(enemy.CheckPlayerPosition), transform.position) < playerDetectRadius && CanSeePlayer();     
             return isDetect;
         }
 

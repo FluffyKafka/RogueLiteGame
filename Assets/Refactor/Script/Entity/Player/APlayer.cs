@@ -35,6 +35,7 @@ namespace PlayerSystem
 
         public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
         public Transform CheckTransform();
+        public void SetPlayerToBattle(bool _isBattle);
     }
 
     public interface IAnimPlayer : IAnimEntity
@@ -193,6 +194,7 @@ namespace PlayerSystem
     public interface IAudioPlayer
     {
         public Transform CheckTransform();
+        public bool CheckIsPlayerInBattle();
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer
@@ -388,6 +390,11 @@ namespace PlayerSystem
         Transform IEnemyPlayer.CheckTransform()
         {
             return transform;
+        }
+
+        public void SetPlayerToBattle(bool _isBattle)
+        {
+            behaviour.SetPlayerToBattle(_isBattle);
         }
         #endregion
 
@@ -634,6 +641,13 @@ namespace PlayerSystem
         }
         #endregion
 
+        #region Audio
+        public bool CheckIsPlayerInBattle()
+        {
+            return behaviour.CheckIsPlayerInBattle();
+        }
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();
@@ -683,6 +697,9 @@ namespace PlayerSystem
         public void CounterAttackBegin();
         public void CounterAttackEnd();
         public void CounterAttackSuccessFinish();
+
+        public void SetPlayerToBattle(bool _isBattle);
+        public bool CheckIsPlayerInBattle();
     }
 
     public interface IPlayerEnterable : IEntityObject

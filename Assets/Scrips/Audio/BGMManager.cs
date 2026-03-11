@@ -102,7 +102,7 @@ public class BGMManager : SoundManagerBase
         }
     }
 
-    public void StopAllBGM()
+    protected void StopAllBGM()
     {
         foreach (var bgm in normalBGMList)
         {

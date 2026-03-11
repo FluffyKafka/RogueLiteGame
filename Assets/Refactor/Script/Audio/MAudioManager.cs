@@ -28,6 +28,11 @@ namespace AudioSystem
         {
             return player.CheckTransform();
         }
+
+        public bool CheckIsPlayerInBattle()
+        {
+            return player.CheckIsPlayerInBattle();
+        }
     }
 
     internal class DAudioSourceDefault

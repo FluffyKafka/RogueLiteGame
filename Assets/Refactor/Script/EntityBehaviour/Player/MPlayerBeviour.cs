@@ -3,6 +3,7 @@ using PlayerSystem;
 using StatsData;
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace PlayerBebaviour
 {
@@ -42,6 +43,9 @@ namespace PlayerBebaviour
         public Action OnCounterAttackEnd;
         public Action OnCounterAttackSuccessFinish;
         public Func<bool> CounterAttackCheckNotice;
+
+        //BattleCheck
+        public Action<bool> SetPlayerToBattleNotice;
         #endregion
 
         #region Func
@@ -53,6 +57,7 @@ namespace PlayerBebaviour
         public Func<GameObject, bool> IsEnemyAlive;
         public Func<GameObject, WReadOnlyDamageData,  WReadOnlyDamageData> DamageTo;
         public Func<bool> CanEffectBehaviourSkillNotice;
+        public Func<bool> CheckIsPlayerInBattleNotice;
         #endregion
 
         protected void Awake()
@@ -157,6 +162,20 @@ namespace PlayerBebaviour
         public void CounterAttackSuccessFinish()
         {
             InvokeAction(OnCounterAttackSuccessFinish);
+        }
+
+        public void SetPlayerToBattle(bool _isBattle)
+        {
+            InvokeAction(SetPlayerToBattleNotice, _isBattle);
+        }
+        public bool CheckIsPlayerInBattle()
+        {
+            if(CheckIsPlayerInBattleNotice == null)
+            {
+                return false;
+            }    
+
+            return InvokeFunc(CheckIsPlayerInBattleNotice);
         }
     }
 }

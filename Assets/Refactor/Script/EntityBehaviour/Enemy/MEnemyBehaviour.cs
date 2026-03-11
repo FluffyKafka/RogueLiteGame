@@ -35,7 +35,8 @@ namespace EnemyBehaviour
         public Action ToFall;
         public Action ToControll;
         public Action GenerateSubEnemyNotice;//通知内部组件
-        public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部        
+        public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部
+        public Action<bool> ToBattle;
 
         #region Arrow
         public Action<DProjectileData, Vector3> GenerateArrowAt;
@@ -109,6 +110,7 @@ namespace EnemyBehaviour
             DamageToEnemy += enemySystem.DamageToEnemy;
             ToSelfExplode += enemySystem.ToSelfExplode;
             ToSelfExplodeHolding += enemySystem.ToSelfExplodeHolding;
+            ToBattle += (bool _isbattle) => enemySystem.SetPlayerToBattle(_isbattle);
         }
 
         void IEnemyBehaviour.OpenStun(bool _isOpen)

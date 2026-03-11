@@ -30,8 +30,9 @@ namespace EnemySystem
         public void ToPullBackJump();
         public void ToFall();
         public void ToControll();
-
         public bool IsPlayer(GameObject _object);
+        public void SetPlayerToBattle(GameObject _player, bool _isBattle);
+        public void SetPlayerToBattle(bool _isBattle);
         public Vector3 CheckPlayerPosition();
         public Vector3 CheckPlayerVelocity();
         public float CheckPlayerGravityScale();
@@ -234,6 +235,15 @@ namespace EnemySystem
         {
             enemyAnim.ToSelfExplodeHolding();
         }
+
+        public void SetPlayerToBattle(bool _isBattle)
+        {
+            player.SetPlayerToBattle(_isBattle);
+        }
+        public void SetPlayerToBattle(GameObject _player, bool _isBattle)
+        {
+            _player.GetComponent<IEnemyPlayer>().SetPlayerToBattle(_isBattle);
+        }    
 
         #endregion
 
