@@ -135,4 +135,15 @@ namespace ObjectController
         public void ShowHitFx();
         public void ToEffect(int _type);
     }
+
+    public enum EObjectAudioType
+    {
+        Wind,
+        LightTorch,
+        TorchFire
+    }
+    public interface IObjectAudio
+    {
+        public void PlayObjectAudioByType(EObjectAudioType _type, Transform _object, bool _isPlay);
+    }
 }
