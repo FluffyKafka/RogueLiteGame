@@ -368,7 +368,7 @@ namespace PlayerSystem
         {
             WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
             InvokeAction(TakeDamage, damage);
-            if(damage.data.physical > 0 || damage.data.magical > 0)
+            if (damage.data.physical > 0 || damage.data.magical > 0)
             {
                 audioManager.PlayerTakeHit(transform);
             }
@@ -518,7 +518,7 @@ namespace PlayerSystem
             return transform;
         }
 
-        public void ObjectFinish()
+        public void ObjectFinish(Transform _object)
         {
             //‘› ±ø’÷√
         }

@@ -119,6 +119,7 @@ MonoBehaviour:
   entityIcon: {fileID: 0}
   selfDestroyAfterDead: 10
   isDead: 0
+  enemyType: 6
 --- !u!114 &6251426602813312290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15294,6 +15295,7 @@ MonoBehaviour:
   fallAnimName: Fall
   pullbackJumpAnimName: PullBackJump
   controllAmmoAnimName: Controll
+  selfExplodeAnimName: Explode
 --- !u!114 &3897492768697071637
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -40,7 +40,8 @@ namespace Main
 
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(
                 player.GetComponent<IEnemyPlayer>(), 
-                ObjectFactory.GetComponent<IEnemyObjectFactory>()
+                ObjectFactory.GetComponent<IEnemyObjectFactory>(),
+                audioManager.GetComponents<IEnemyAduio>()
                 );
 
             inventory.GetComponent<IInitInventory>().Init(

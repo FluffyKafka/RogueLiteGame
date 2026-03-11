@@ -67,7 +67,7 @@ namespace ObjectController
             InvokeAction(SetLookAtMovement, false);
             InvokeAction(SetMoveToTargetNotice, null, 0);
             DamageTriggerNotice += ExplodeDamage;
-            origin.ObjectFinish();
+            origin.ObjectFinish(transform);
         }
         protected void ExplodeDamage()
         {

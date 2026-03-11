@@ -150,6 +150,7 @@ MonoBehaviour:
   entityIcon: {fileID: 0}
   selfDestroyAfterDead: 10
   isDead: 0
+  enemyType: 2
 --- !u!114 &5126970950463015884
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -214,6 +214,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
+  damageTransform: {fileID: 0}
 --- !u!114 &8155155526462883265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  rawTransformTarget: {fileID: 0}
 --- !u!114 &8547384752215357175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +247,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   targetType: 0
+  CanMultipleTrigger: 0
 --- !u!114 &4838230968334803401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +298,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleAnimName: Idle
-  explodeAnimName: Explode
+  effectAnimName: Explode
+  effectTypeAnimName: EffectType
+  currentAnimName: 
 --- !u!1 &7523716066884021418
 GameObject:
   m_ObjectHideFlags: 0

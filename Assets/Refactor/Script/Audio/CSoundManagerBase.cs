@@ -16,6 +16,10 @@ namespace AudioSystem
         }
         protected virtual TSound GetSound(AudioSource _ss, bool _isRandomPitch)
         {
+            if(_ss == null)
+            {
+                return null;
+            }
             TSound sound = Instantiate(soundPrefab, transform).GetComponent<TSound>();
             sound.Setup(_ss, _isRandomPitch, manager);
             return sound;

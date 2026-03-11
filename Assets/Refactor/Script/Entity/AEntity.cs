@@ -19,7 +19,12 @@ namespace EntitySystem
     {
         public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
         public Transform CheckTransform();
-        public void ObjectFinish();
+        public void ObjectFinish(Transform _object);
+    }
+
+    public interface IObjectSourceEntity
+    {
+        public void ObjectEffect(Transform _object);
     }
 
     public interface IBehaviourEntity
@@ -45,7 +50,7 @@ namespace EntitySystem
         public void CurrentHealthUpdate(float _hpPercent);
     }
 
-    internal abstract class AEntity : ComponentManagerBase, IAnimEntity, IStatEntity, IBehaviourEntity
+    internal abstract class AEntity : ComponentManagerBase, IAnimEntity, IStatEntity, IBehaviourEntity, IObjectSourceEntity
     {
         #region Actions
         public Action Flip;
@@ -139,6 +144,10 @@ namespace EntitySystem
 
         #region Object
         protected IEntityObjectFactory objectFactory;
+        public virtual void ObjectEffect(Transform _object)
+        {
+
+        }
         #endregion
 
         #region Entity Base Info

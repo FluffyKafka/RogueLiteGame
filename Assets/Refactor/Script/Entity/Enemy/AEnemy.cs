@@ -13,6 +13,8 @@ namespace EnemySystem
         Skeleton,
         Archer,
         Necromancer,
+        BombMan,
+        CrazyWizard,
         Slime,
         SubSlime,
         MinSlime
@@ -62,10 +64,13 @@ namespace EnemySystem
 
     internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy
     {
+        [SerializeField] protected EEnemyType enemyType;
+
         protected IEnemyPlayer player;
         protected IEnemyAnimation enemyAnim;
         protected IEnemyBehaviour behaviour;
         protected IEnemyFactory factory;
+        protected IEnemyAduio audioManager;
 
         protected override void Awake()
         {
@@ -83,18 +88,24 @@ namespace EnemySystem
         {
             if (player == null)
             {
-                FEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this);
+                FEnemyFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this, enemyType);
             }
 
         }
 
         #region Init
-        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory, IEnemyFactory _factory)
+        public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory, IEnemyFactory _factory, IEnemyAduio _audio)
         {
             player = _player;
             objectFactory = _objectFactory;
             enemyObjectFactory = _objectFactory;
             factory = _factory;
+            audioManager = _audio;
+        }
+
+        public EEnemyType CheckEnemyType()
+        {
+            return enemyType;
         }
         #endregion
 
@@ -122,16 +133,19 @@ namespace EnemySystem
         void IBehaviourEnemy.ToMove()
         {
             enemyAnim.Move();
+            audioManager?.Roar(transform, true);
         }
 
         void IBehaviourEnemy.ToPullBack()
         {
             enemyAnim.PullBack();
+            audioManager?.Roar(transform, true);
         }
 
         void IBehaviourEnemy.ToPullBackJump()
         {
             enemyAnim.PullBackJump();
+            audioManager?.Roar(transform, true);
         }
 
         void IBehaviourEnemy.ToFall()
@@ -189,12 +203,15 @@ namespace EnemySystem
         public void GenerateArrowAt(DProjectileData _data, Vector3 _position)
         {
             enemyObjectFactory.GenerateArrow(_data, _position);
+            audioManager.Attack(transform, true);
         }
 
         public void GenerateSkullAmmoAt(DAmmoData _data, Vector3 _position)
         {
-            _data.originEntity = this; 
+            _data.manager = gameObject;
+            _data.originEntity = this;
             enemyObjectFactory.GenerateSkullAmmo(_data, _position);
+            audioManager.Attack(transform, true);
         }
 
         public GameObject GenerateEnemyByTypeAt(EEnemyType _type, Vector3 _position)
@@ -210,6 +227,7 @@ namespace EnemySystem
         public void ToSelfExplode()
         {
             enemyAnim.ToSelfExplode();
+            audioManager.Effect(transform, true);
         }
 
         public void ToSelfExplodeHolding()
@@ -223,6 +241,7 @@ namespace EnemySystem
         void IAnimEntity.AttackDamageTrigger()
         {
             InvokeAction(AttackDamageTrigger);
+            audioManager.Attack(transform, true);
         }
 
         void IAnimEnemy.OpenStun(bool _isOpen)
@@ -254,6 +273,10 @@ namespace EnemySystem
         WReadOnlyDamageData IPlayerEnemy.TakeDamage(WReadOnlyDamageData _damageData)
         {
             WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damageData);
+            if (damage.data.physical > 0 || damage.data.magical > 0)
+            {
+                audioManager.TakeHit(transform, true);
+            }
             InvokeAction(TakeDamage, damage);
             return damage;
         }
@@ -266,19 +289,29 @@ namespace EnemySystem
         #region Object
         protected IEnemyObjectFactory enemyObjectFactory;
 
-        public void ObjectFinish()
+        public void ObjectFinish(Transform _object)
         {
             behaviour.ObjectFinish();
+            audioManager.BulletEffect(_object, true);
         }
         public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage)
         {
             WReadOnlyDamageData damage = InvokeFunc(CalculateDamageTaken, _damage);
+            if(damage.data.physical > 0 || damage.data.magical > 0)
+            {
+                audioManager.TakeHit(transform, true);
+            }         
             InvokeAction(TakeDamage, damage);
             return damage;
         }
         public Transform CheckTransform()
         {
             return transform;
+        }
+        public override void ObjectEffect(Transform _object)
+        {
+            base.ObjectEffect(_object);
+            audioManager.BulletEffect(_object, true);
         }
         #endregion
 
@@ -317,6 +350,16 @@ namespace EnemySystem
     public interface IEnemyFactory
     {
         public GameObject GenerateEnemyByTypeAt(EEnemyType _type, Vector3 _position);
+    }
+
+    public interface IEnemyAduio
+    {
+        public EEnemyType CheckEnemyType();
+        public void Roar(Transform _enemy, bool _isPlay);
+        public void Attack(Transform _enemy, bool _isPlay);
+        public void Effect(Transform _enemy, bool _isPlay);
+        public void BulletEffect(Transform _bullet, bool _isPlay);
+        public void TakeHit(Transform _enemy, bool _isPlay);
     }
 }
 

@@ -8,6 +8,7 @@ public class SkeletonSFX : SoundManagerBase
     [SerializeField] protected AudioSource roar_SS;
     [SerializeField] protected AudioSource attack_SS;
 
+
     public Sound roar { get; private set; }
     public Sound attack { get; private set; }
 
