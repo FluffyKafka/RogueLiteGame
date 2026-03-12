@@ -30,6 +30,7 @@ namespace StatsSystem
         #endregion       
 
         #region RunTimeStats
+        [Header("Test")]
         [SerializeField] protected float currentHealth;//必须使用UpdateCurrentHealth进行修改
         protected bool isIgnite;
         protected bool isChill;

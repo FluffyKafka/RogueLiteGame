@@ -6,7 +6,7 @@ namespace Item
 {
     public interface IEquipmentFactory
     {
-        public IEquipment GenerateEquipment(IItemData _equipment);
+        public IEquipment GenerateEquipment(IItemData _equipment, float initCooldown = 0);
         public IItem GenerateItem(IItemData _equipment);
     }
 
@@ -22,10 +22,11 @@ namespace Item
             return newItem;
         }
 
-        IEquipment IEquipmentFactory.GenerateEquipment(IItemData _equipment)
+        public IEquipment GenerateEquipment(IItemData _equipment, float _initCooldown = 0)
         {
             WEquipment newEquipment = new();
             newEquipment.Init(_equipment);
+            newEquipment.SetCoolDownRaw(_initCooldown);
             items.Add(newEquipment);
             return newEquipment;
         }

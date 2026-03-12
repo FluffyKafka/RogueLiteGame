@@ -34,6 +34,7 @@ namespace UISystem
         public Action<string> ShowWarning;
         public Action HideTooltip;
         public Action<DSkillDetail> ShowSkillDetailNotice;
+        public Action<EAudioType, float> AudioVolumeUpdateNotice;
         #endregion
 
         #region Func
@@ -144,6 +145,16 @@ namespace UISystem
         public List<DSkillUnlockData> CheckAllSkillUnlockState()
         {
             return player.CheckAllSkillUnlockState();
+        }
+
+        public void UpdateAudioVolumeByType(EAudioType _type, float _volume)
+        {
+            player.UpdateAudioVolumeByType(_type, _volume);
+        }
+
+        public void AudioVolumeUpdate(EAudioType _type, float _volume)
+        {
+            InvokeAction(AudioVolumeUpdateNotice, _type, _volume);
         }
     }
 }

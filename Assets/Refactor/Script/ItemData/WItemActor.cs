@@ -40,7 +40,8 @@ namespace Item
         public void Update();
         public void TryUseEffect(DEffectExcuteData _executeData);
         public bool CheckIsCoolDown();
-        public float CheckCoolDownRestPer();        
+        public float CheckCoolDownRestPer();
+        public float CheckCoolDownRaw();
     }
 
     public interface IUIEquipment : IEquipment
@@ -97,6 +98,23 @@ namespace Item
         {
             IEquipmentData equipmentData = data as IEquipmentData;
             return equipmentData;
+        }
+
+        public float CheckCoolDownRaw()
+        {
+            if(coolDownTimer <= 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return coolDownTimer;
+            }
+        }
+
+        public void SetCoolDownRaw(float _cooldown)
+        {
+            coolDownTimer = _cooldown;
         }
     }
 }

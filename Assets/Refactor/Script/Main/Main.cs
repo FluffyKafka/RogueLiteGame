@@ -4,7 +4,9 @@ using InputManager;
 using InventorySystem;
 using Item;
 using PlayerSystem;
+using SaveSystem;
 using SkillSystem;
+using StatsSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UISystem;
@@ -24,6 +26,7 @@ namespace Main
         [SerializeField] protected GameObject ObjectFactory;
         [SerializeField] protected GameObject skillManager;
         [SerializeField] protected GameObject audioManager;
+        [SerializeField] protected GameObject saveManager;
 
         private void Awake()
         {
@@ -35,7 +38,8 @@ namespace Main
                 ui.GetComponent<IPlayerUI>(), 
                 ObjectFactory.GetComponent<IPlayerObjectFactory>(), 
                 skillManager.GetComponent<IPlayerSkillManager>(),
-                audioManager.GetComponent<IPlayerAudio>()
+                audioManager.GetComponent<IPlayerAudio>(),
+                audioManager.GetComponent<IPlayerAudioManager>()
                 );
 
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(
@@ -55,6 +59,13 @@ namespace Main
             skillManager.GetComponent<IInitSkillManager>().Init(player.GetComponent<ISkillManagerPlayer>());
 
             audioManager.GetComponent<IInitAudio>().Init(player.GetComponent<IAudioPlayer>());
+
+            saveManager.GetComponent<IInitSaveManager>().Init(
+                player.GetComponentInChildren<ISaveStats>(),
+                inventory.GetComponent<ISaveInventory>(),
+                skillManager.GetComponent<ISaveSkill>(),
+                audioManager.GetComponent<ISaveAduio>()
+                );
         }
     }
 }

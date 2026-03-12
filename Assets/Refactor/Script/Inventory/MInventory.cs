@@ -3,6 +3,7 @@ using PlayerSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace InventorySystem
@@ -12,7 +13,20 @@ namespace InventorySystem
         public abstract void Init(IEquipmentFactory _factory, IInventoryPlayer _player, IItemDataBase _itemDatabase);
     }
 
-    internal class MInventory : ComponentManagerBase, IInitInventory, IPlayerInventory
+    public interface ISaveInventory
+    {
+        public class DInventoryData
+        {
+            public List<string> itemStash = new();
+            public Dictionary<string, float> equipmentStash = new();
+            public Dictionary<string, float> equipment = new();
+        }
+
+        public void Save(ref DInventoryData _data);
+        public void Load(DInventoryData _data);
+    }
+
+    internal class MInventory : ComponentManagerBase, IInitInventory, IPlayerInventory, ISaveInventory
     {
         protected IInventoryPlayer player;
         protected IItemDataBase itemDataBase;
@@ -208,7 +222,6 @@ namespace InventorySystem
         }
         #endregion
 
-        //未完成
         #region Self
         protected void UnEquipEquipment(IEquipment _oldEquipment)
         {
@@ -220,13 +233,82 @@ namespace InventorySystem
             }
             player.RemoveModifier(_oldEquipment.CheckEquipmentData().CheckStatsModifierData());
         }
-
-        //未实现
         protected void StashFull(IItem _data)
         {
             player.StashFullNotice(_data);
         }
         #endregion
+
+        public void Save(ref ISaveInventory.DInventoryData _data)
+        {
+            _data.equipment.Clear();
+
+            SaveEquipment(ref _data, EEquipmentType.Weapon);
+            SaveEquipment(ref _data, EEquipmentType.Amulet);
+            SaveEquipment(ref _data, EEquipmentType.Armor);
+            SaveEquipment(ref _data, EEquipmentType.Flask);
+
+            IReadOnlyList<IEquipment> equipmentStash = InvokeFunc(CheckEquipmentStash);
+            foreach (var equip in equipmentStash)
+            {
+                _data.equipmentStash.Add(
+                    equip.CheckData().ChechItemId(), 
+                    (equip as IInventoryEquipment).CheckCoolDownRaw()
+                    );
+            }
+
+            IReadOnlyList<IItem> itemStash = InvokeFunc(CheckItemStash);
+            foreach(var item in itemStash)
+            {
+                _data.itemStash.Add(item.CheckData().ChechItemId());
+            }
+        }
+        protected void SaveEquipment(ref ISaveInventory.DInventoryData _data, EEquipmentType _type)
+        {
+            IEquipment equipment = InvokeFunc(CheckEquipment, _type);
+            if(equipment == null)
+            {
+                return;
+            }
+            _data.equipment.Add(
+                equipment.CheckData().ChechItemId(), 
+                (equipment as IInventoryEquipment).CheckCoolDownRaw()
+                );
+        }
+
+        public void Load(ISaveInventory.DInventoryData _data)
+        {
+            foreach(var equipData in _data.equipment)
+            {
+                IEquipmentData equip = itemDataBase.TryCheckItemDataById(equipData.Key) as IEquipmentData;
+                Assert.IsNotNull(equip, "id：" + equipData.Key + "不是装备");
+                IEquipment equipment = itemFactory.GenerateEquipment(equip, equipData.Value);
+                InvokeAction(Equip, equipment);
+            }
+
+            foreach(var equipData in _data.equipmentStash)
+            {
+                IEquipmentData equip = itemDataBase.TryCheckItemDataById(equipData.Key) as IEquipmentData;
+                Assert.IsNotNull(equip, "id：" + equipData.Key + "不是装备");
+                IEquipment equipment = itemFactory.GenerateEquipment(equip, equipData.Value);
+                bool isFull = !InvokeFunc(TryAddEquipment, equipment);
+                if(isFull)
+                {
+                    Debug.LogWarning("装备仓库已经满了，原有装备无法附加");
+                }
+            }
+
+            foreach(var itemData in _data.itemStash)
+            {
+                IItemData item = itemDataBase.TryCheckItemDataById(itemData);
+                IItem itemActor = itemFactory.GenerateItem(item);
+                bool isFull = !InvokeFunc(TryAddItem, itemActor);
+                if (isFull)
+                {
+                    Debug.LogWarning("物品仓库已经满了，原有物品无法附加");
+                }
+            }
+        }
     }
 }
 

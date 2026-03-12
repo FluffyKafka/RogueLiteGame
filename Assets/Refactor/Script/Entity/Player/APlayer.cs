@@ -13,7 +13,7 @@ namespace PlayerSystem
 {
     public interface IInitPlayer
     {
-        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio);
+        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager);
     }
 
     public interface IInputPlayer
@@ -96,6 +96,12 @@ namespace PlayerSystem
             isUnlock = _isUnlock;
         }
     }
+    public enum EAudioType
+    {
+        SFX,
+        BGM,
+        ENV
+    }
     public interface IUIPlayer
     {
         public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
@@ -111,6 +117,7 @@ namespace PlayerSystem
         public float TryCheckStat(EStatType _type);
         public List<DSkillEntityUIData> CheckAllSkillEntity();
         public List<DSkillUnlockData> CheckAllSkillUnlockState();
+        public void UpdateAudioVolumeByType(EAudioType _type, float volume);
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -195,6 +202,7 @@ namespace PlayerSystem
     {
         public Transform CheckTransform();
         public bool CheckIsPlayerInBattle();
+        public void UpdateAduioVolumeByTypeToUi(EAudioType _type, float _volume);
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer
@@ -206,7 +214,8 @@ namespace PlayerSystem
         protected IPlayerAnimation playerAnim;
         protected IPlayerBehaviour behaviour;
         protected IPlayerSkillManager skillManager;
-        protected IPlayerAudio audioManager;
+        protected IPlayerAudio playerAduio;
+        protected IPlayerAudioManager audioManager;
 
         //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
         //暂时直接转发，若有需要再引入事件机制
@@ -214,19 +223,19 @@ namespace PlayerSystem
         void IBehaviourPlayer.ToJump()
         {
             playerAnim.Air();
-            audioManager.Jump(transform);
+            playerAduio.Jump(transform);
         }
 
         void IBehaviourPlayer.ToWallJump()
         {
             playerAnim.Air();
-            audioManager.Jump(transform);
+            playerAduio.Jump(transform);
         }
 
         void IBehaviourPlayer.ToAttack(int _count)
         {
             playerAnim.Attack(_count);
-            audioManager.Attack(_count, transform);
+            playerAduio.Attack(_count, transform);
         }
 
         void IBehaviourPlayer.UpdateYVelocity(float _yVelocity)
@@ -242,11 +251,11 @@ namespace PlayerSystem
         void IBehaviourPlayer.ToMove()
         {
             playerAnim.Move();
-            audioManager.Ground(transform);
+            playerAduio.Ground(transform);
         }
         void IBehaviourPlayer.ToExitMove()
         {
-            audioManager.Ground(transform, false);
+            playerAduio.Ground(transform, false);
         }
 
         void IBehaviourPlayer.ToWallSlide()
@@ -293,7 +302,7 @@ namespace PlayerSystem
         {
             skillManager.CounterAttackSuccess();
             playerAnim.CounterAttackSuccess();
-            audioManager.CounterAttackSuccess(transform);
+            playerAduio.CounterAttackSuccess(transform);
         }
         public void CounterAttackFinish()
         {
@@ -316,7 +325,7 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region Init
-        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio)
+        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager)
         {
             input = _inputSource;
             inventory = _inventory;
@@ -324,7 +333,8 @@ namespace PlayerSystem
             playerObjectFactory = _factory;
             objectFactory = _factory;
             skillManager = _skillManager;
-            audioManager = _audio;
+            playerAduio = _audio;
+            audioManager = _audioManager;
         }
         #endregion
 
@@ -372,7 +382,7 @@ namespace PlayerSystem
             InvokeAction(TakeDamage, damage);
             if (damage.data.physical > 0 || damage.data.magical > 0)
             {
-                audioManager.PlayerTakeHit(transform);
+                playerAduio.PlayerTakeHit(transform);
             }
             return damage;
         }
@@ -506,6 +516,11 @@ namespace PlayerSystem
         {
             return skillManager.CheckAllSkillUnlockState();
         }
+
+        public void UpdateAudioVolumeByType(EAudioType _type, float _volume)
+        {
+            audioManager.UpdateAudioVolumeByType(_type, _volume);
+        }
         #endregion
 
         //暂时直接转发，若有需要再引入事件机制
@@ -537,7 +552,7 @@ namespace PlayerSystem
         {
             behaviour.DashBegin(_speed);
             playerAnim.DashBegin();
-            audioManager.Dash(transform);
+            playerAduio.Dash(transform);
         }
         public void DashEnd()
         {
@@ -568,7 +583,7 @@ namespace PlayerSystem
         {
             behaviour.CatchSwordBegin();
             playerAnim.CatchSwordBegin();
-            audioManager.SwordCatch(transform);
+            playerAduio.SwordCatch(transform);
         }
         public void CatchSwordFinish()
         {
@@ -593,31 +608,31 @@ namespace PlayerSystem
 
         public GameObject ThrowSword(DProjectileData _data)
         {
-            audioManager.SwordThrow(transform);
+            playerAduio.SwordThrow(transform);
             return playerObjectFactory.GenerateSword(_data, transform.position);
         }
         public GameObject ThrowSpinSword(DSpinSwordData _data)
         {
-            audioManager.SwordThrow(transform);
+            playerAduio.SwordThrow(transform);
             return playerObjectFactory.GenerateSpinSword(_data, transform.position);
         }
         public GameObject ThrowPierceSword(DProjectileData _data)
         {
-            audioManager.SwordThrow(transform);
+            playerAduio.SwordThrow(transform);
             return playerObjectFactory.GeneratePierceSword(_data, transform.position);
         }
         public GameObject ThrowBounceSword(DBounceSwordData _data)
         {
-            audioManager.SwordThrow(transform);
+            playerAduio.SwordThrow(transform);
             return playerObjectFactory.GenerateBounceSword(_data, transform.position);
         }
         public void SwordHitGround(Transform _sword)
         {
-            audioManager.SwordGround(_sword);
+            playerAduio.SwordGround(_sword);
         }
         public void SwordHitEnemy(Transform _sword)
         {
-            audioManager.SwordHit(_sword);
+            playerAduio.SwordHit(_sword);
         }
 
         public WReadOnlyDamageData CheckPlayerDamage()
@@ -632,7 +647,7 @@ namespace PlayerSystem
 
         public void CounterAttackBegin()
         {
-            audioManager.CounterAttack(transform);
+            playerAduio.CounterAttack(transform);
             behaviour.CounterAttackBegin();
         }
         public void CounterAttackEnd()
@@ -645,6 +660,10 @@ namespace PlayerSystem
         public bool CheckIsPlayerInBattle()
         {
             return behaviour.CheckIsPlayerInBattle();
+        }
+        public void UpdateAduioVolumeByTypeToUi(EAudioType _type, float _volume)
+        {
+            ui.AudioVolumeUpdate(_type, _volume);
         }
         #endregion
 
@@ -785,6 +804,8 @@ namespace PlayerSystem
         public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
         public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
         public void StashFullNotice(IItem _itemToFull);
+
+        public void AudioVolumeUpdate(EAudioType _type, float _volume);
     }
 
     public interface IPlayerAudio
@@ -805,5 +826,10 @@ namespace PlayerSystem
         public void EvasionSuccess(Transform _sourceTransform, bool _play = true);
         public void PlayerTakeHit(Transform _sourceTransform, bool _play = true);
         public void SwordHit(Transform _sourceTransform, bool _play = true);
+    }
+
+    public interface IPlayerAudioManager
+    {
+        public void UpdateAudioVolumeByType(EAudioType _type, float _volume);
     }
 }

@@ -1,3 +1,4 @@
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +10,29 @@ namespace UISystem
     internal class CVolumeSlider : CUIComponentBase
     {
         [SerializeField] protected Slider slider;
-        [SerializeField] protected string paramter;
-        [SerializeField] protected AudioMixer audioMixer;
-        [SerializeField] protected float multiplier;
+        [SerializeField] protected EAudioType type;
 
         protected override void Awake()
         {
             base.Awake();
+
+            ui.AudioVolumeUpdateNotice += SliderUpdate; 
+
             slider.onValueChanged.AddListener(SliderValue);
+            SliderValue(slider.value);
         }
 
-        public void SliderValue(float _value)
+        protected void SliderValue(float _value)
         {
-            audioMixer.SetFloat(paramter, (1 + Mathf.Log(_value + 0.00000001f)) * multiplier);
+            ui.UpdateAudioVolumeByType(type, _value);
+        }
+
+        protected void SliderUpdate(EAudioType _type, float _value)
+        {
+            if(_type == type)
+            {
+                slider.value = _value;
+            }
         }
     }
 }

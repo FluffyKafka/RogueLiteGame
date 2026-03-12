@@ -31,5 +31,4 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
             this.Add(keys[i], values[i]);
         }
     }
-
 }

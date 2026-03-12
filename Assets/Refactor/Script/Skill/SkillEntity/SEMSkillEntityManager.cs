@@ -23,6 +23,7 @@ namespace SkillSystem
             }
         }
         [SerializeField] protected List<DSkillEntityState> skillEnetities;
+        protected Dictionary<string, DSkillEntityState> skillDictionary;
 
         protected void Awake()
         {            
@@ -30,9 +31,17 @@ namespace SkillSystem
             {
                 se.entity.Init(se.isUnlock);
             }
+
             MSkillManager manager = GetComponent<MSkillManager>();
             manager.ShowAllSkillEntityToUINotice += ShowAllSkillEntityToUi;
             manager.CheckAllSkillUnlockStateNotice += CheckAllSkillUnlockState;
+            manager.InitSkillNotice += InitSkillById;
+
+            skillDictionary = new();
+            foreach (var skill in skillEnetities)
+            {
+                skillDictionary.Add(skill.entity.CheckId(), skill);
+            }
         }
 
         protected List<DSkillEntityUIData> ShowAllSkillEntityToUi()
@@ -55,6 +64,11 @@ namespace SkillSystem
                 res.Add(new DSkillUnlockData(se.CheckId(), se.IsUnlock()));
             }
             return res;
+        }
+
+        protected void InitSkillById(string _id, bool _isUnlock)
+        {
+            skillDictionary[_id].entity.Init(_isUnlock);
         }
 
 #if UNITY_EDITOR

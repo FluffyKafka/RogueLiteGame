@@ -15,7 +15,17 @@ namespace SkillSystem
         public void Init(ISkillManagerPlayer _player);
     }
 
-    internal class MSkillManager : ComponentManagerBase, IInitSkillManager, IPlayerSkillManager
+    public interface ISaveSkill
+    {
+        public class DSkillSaveData
+        {
+            public Dictionary<string, bool> skillUnlock = new();
+        }
+        public void Save(ref DSkillSaveData _data);
+        public void Load(DSkillSaveData _data);
+    }
+
+    internal class MSkillManager : ComponentManagerBase, IInitSkillManager, IPlayerSkillManager, ISaveSkill
     {
         protected ISkillManagerPlayer player;
 
@@ -31,8 +41,12 @@ namespace SkillSystem
         public Action CounterAttackSuccessNotice;
         #endregion
 
+        #region SkillEntityManager
+        public Action<string, bool> InitSkillNotice;
         public Func<List<DSkillEntityUIData>> ShowAllSkillEntityToUINotice;
         public Func<List<DSkillUnlockData>> CheckAllSkillUnlockStateNotice;
+        #endregion
+
 
         protected void Awake()
         {
@@ -162,6 +176,23 @@ namespace SkillSystem
         public List<DSkillUnlockData> CheckAllSkillUnlockState()
         {
             return InvokeFunc(CheckAllSkillUnlockStateNotice);
+        }
+
+        public void Save(ref ISaveSkill.DSkillSaveData _data)
+        {
+            List<DSkillUnlockData> skills = CheckAllSkillUnlockState();
+            _data.skillUnlock.Clear();
+            foreach(var skill in skills)
+            {
+                _data.skillUnlock.Add(skill.skillId, skill.isUnlock);
+            }
+        }
+        public void Load(ISaveSkill.DSkillSaveData _data)
+        {
+            foreach(var skill in _data.skillUnlock)
+            {
+                InvokeAction(InitSkillNotice, skill.Key, skill.Value);
+            }
         }
     }
 

@@ -8,7 +8,17 @@ using UnityEngine.Assertions;
 
 namespace StatsSystem
 {
-    internal class MPlayerStatsManager : MEntityStatsManager
+    public interface ISaveStats
+    {
+        public class DStatsData
+        {
+            public float hp = -1;
+        }
+        public void Save(ref DStatsData _data);
+        public void Load(DStatsData _data);
+    }
+
+    internal class MPlayerStatsManager : MEntityStatsManager, ISaveStats
     {
         protected IStatsPlayer player;
 
@@ -43,6 +53,16 @@ namespace StatsSystem
             stat = InvokeFunc(CheckFlaskStat, _type);
             if (!float.IsNaN(stat)) return stat;
             return float.NaN;
+        }
+
+        public void Save(ref ISaveStats.DStatsData _data)
+        {
+            _data.hp = currentHealth;
+        }
+
+        public void Load(ISaveStats.DStatsData _data)
+        {
+            currentHealth = _data.hp;
         }
     }
 }
