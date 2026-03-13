@@ -69,10 +69,5 @@ namespace Item
             sb.Append(detail);
             return sb.ToString();
         }
-
-        public float CheckCoolDown()
-        {
-            return cooldown;
-        }
     }
 }

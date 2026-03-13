@@ -8,7 +8,7 @@ namespace StatsSystem
 {
     internal class CCurrency : CEntityStatsComponentBase
     {
-        [Header("Text")]
+        [Header("Test")]
         [SerializeField] protected float coin;
         [SerializeField] protected float soul;
 

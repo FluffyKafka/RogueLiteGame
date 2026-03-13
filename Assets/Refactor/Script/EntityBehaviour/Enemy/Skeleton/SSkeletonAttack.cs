@@ -15,6 +15,7 @@ namespace EnemyBehaviour
             base.Enter();
             enemy.AttackFinish += OnAttackFinish;
             enemy.BeStunned += OnStun;
+            enemy.InvokeAction(enemy.ToBattle, true);
         }
 
         public override void Exit()
@@ -22,6 +23,7 @@ namespace EnemyBehaviour
             base.Exit();
             enemy.AttackFinish -= OnAttackFinish;
             enemy.BeStunned -= OnStun;
+            enemy.InvokeAction(enemy.ToBattle, false);
         }
 
         public override void Update()

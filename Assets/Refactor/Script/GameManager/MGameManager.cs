@@ -17,7 +17,7 @@ namespace GameManagerSystem
             }
             else
             {
-                Time.timeScale /= pauseTimeSlowRate;
+                Time.timeScale = 1;
             }
         }
 

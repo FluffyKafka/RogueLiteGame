@@ -45,6 +45,7 @@ namespace SkillSystem
         public Action<string, bool> InitSkillNotice;
         public Func<List<DSkillEntityUIData>> ShowAllSkillEntityToUINotice;
         public Func<List<DSkillUnlockData>> CheckAllSkillUnlockStateNotice;
+        public Func<List<IUISkill>> CheckSkillsHaveCooldownToUiNotice;
         #endregion
 
 
@@ -193,6 +194,16 @@ namespace SkillSystem
             {
                 InvokeAction(InitSkillNotice, skill.Key, skill.Value);
             }
+        }
+
+        public List<IUISkill> CheckSkillsHaveCooldownToUi()
+        {
+            return InvokeFunc(CheckSkillsHaveCooldownToUiNotice);
+        }
+
+        public void SkillUnlock(SESkillEntity _skill)
+        {
+            player.SkillUnlockToUi(_skill);
         }
     }
 

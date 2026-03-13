@@ -5,6 +5,7 @@ using StatsData;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering;
@@ -102,6 +103,18 @@ namespace PlayerSystem
         BGM,
         ENV
     }
+    public interface IUISkill
+    {
+        public Sprite CheckIcon();
+        public bool IsSkillHaveCooldown();
+        public float CheckCooldownPercent();
+        public int CheckInputIndex();
+    }
+    public interface IUIEnemy
+    {
+        public float CheckHealthPercent();
+        public string CheckName();
+    }
     public interface IUIPlayer
     {
         public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
@@ -119,11 +132,16 @@ namespace PlayerSystem
         public List<DSkillUnlockData> CheckAllSkillUnlockState();
         public void UpdateAudioVolumeByType(EAudioType _type, float volume);
         public void PauseGame(bool _isPause);
+        public List<IUISkill> CheckSkillsHaveCooldownToUi();
+        public KeyCode CheckSkillInputSlotKey(int _index);
     }
 
     public interface IStatsPlayer : IStatEntity
     {
         public void StatsChangeNotice();
+        public void CurrentHealthChange(float _cur);
+        public void CoinChange(float _cur);
+        public void SoulChange(float _cur);
     }
 
     public interface IObjectPlayer : IObjectEntity
@@ -197,6 +215,7 @@ namespace PlayerSystem
         public void SelfHealByPercent(float _per);
         public void AddStatsModifier(WReadOnlyStatsData _data);
         public void RemoveStatsModifier(WReadOnlyStatsData _data);
+        public void SkillUnlockToUi(IUISkill _skill);
     }
 
     public interface IAudioPlayer
@@ -453,10 +472,34 @@ namespace PlayerSystem
         {
             ui.StatsChangeNotice();
         }
+
+        public void CurrentHealthChange(float _cur)
+        {
+            ui.CurrentHealthChange(_cur);
+        }
+        public void CoinChange(float _cur)
+        {
+            ui.CoinChange(_cur);
+        }
+        public void SoulChange(float _cur)
+        {
+            ui.SoulChange(_cur);
+        }
         #endregion
 
         //暂时直接转发，若有需要再引入事件机制
         #region UI
+
+        public KeyCode CheckSkillInputSlotKey(int _index)
+        {
+            return input.CheckSkillInputSlotKey(_index);
+        }
+
+        public List<IUISkill> CheckSkillsHaveCooldownToUi()
+        {
+            return skillManager.CheckSkillsHaveCooldownToUi();
+        }
+
         public void PauseGame(bool _isPause)
         {
             gameManager.Pause(_isPause);
@@ -556,6 +599,12 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region Skill
+
+        public void SkillUnlockToUi(IUISkill _skill)
+        {
+            ui.SkillUnlock(_skill);
+        }
+
         public void DashBegin(float _speed)
         {
             behaviour.DashBegin(_speed);
@@ -704,6 +753,7 @@ namespace PlayerSystem
 
         public List<DSkillEntityUIData> ShowAllSkillEntityToUi();
         public List<DSkillUnlockData> CheckAllSkillUnlockState();
+        public List<IUISkill> CheckSkillsHaveCooldownToUi();
     }
 
     public interface IPlayerBehaviour : IEntityBehaviour
@@ -779,6 +829,8 @@ namespace PlayerSystem
         public float CheckVerticalInput();
 
         public Vector3 CheckMousePosition();
+
+        public KeyCode CheckSkillInputSlotKey(int _index);
     }
 
     public interface IPlayerEnemy
@@ -815,6 +867,13 @@ namespace PlayerSystem
         public void StashFullNotice(IItem _itemToFull);
 
         public void AudioVolumeUpdate(EAudioType _type, float _volume);
+
+        public void CurrentHealthChange(float _cur);
+        public void CoinChange(float _cur);
+        public void SoulChange(float _cur);
+
+        public void SkillUnlock(IUISkill _skill);
+        public void SetCurrentEnemy(IUIEnemy _enemy);
     }
 
     public interface IPlayerAudio

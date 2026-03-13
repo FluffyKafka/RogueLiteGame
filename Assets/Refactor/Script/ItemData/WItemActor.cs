@@ -33,6 +33,7 @@ namespace Item
     public interface IEquipment : IItem
     {
         public IEquipmentData CheckEquipmentData();
+        public float CheckCoolDownRestPer();
     }
 
     public interface IInventoryEquipment : IEquipment
@@ -40,7 +41,6 @@ namespace Item
         public void Update();
         public void TryUseEffect(DEffectExcuteData _executeData);
         public bool CheckIsCoolDown();
-        public float CheckCoolDownRestPer();
         public float CheckCoolDownRaw();
     }
 

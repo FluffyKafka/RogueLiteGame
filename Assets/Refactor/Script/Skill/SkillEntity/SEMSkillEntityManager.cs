@@ -29,13 +29,14 @@ namespace SkillSystem
         {            
             foreach (var se in skillEnetities)
             {
-                se.entity.Init(se.isUnlock);
+                se.entity.Init(se.isUnlock, GetComponent<MSkillManager>());
             }
 
             MSkillManager manager = GetComponent<MSkillManager>();
             manager.ShowAllSkillEntityToUINotice += ShowAllSkillEntityToUi;
             manager.CheckAllSkillUnlockStateNotice += CheckAllSkillUnlockState;
             manager.InitSkillNotice += InitSkillById;
+            manager.CheckSkillsHaveCooldownToUiNotice += CheckSkillsHaveCooldownToUi;
 
             skillDictionary = new();
             foreach (var skill in skillEnetities)
@@ -68,7 +69,20 @@ namespace SkillSystem
 
         protected void InitSkillById(string _id, bool _isUnlock)
         {
-            skillDictionary[_id].entity.Init(_isUnlock);
+            skillDictionary[_id].entity.Init(_isUnlock, GetComponent<MSkillManager>());
+        }
+
+        protected List<IUISkill> CheckSkillsHaveCooldownToUi()
+        {
+            List<IUISkill> res = new();
+            foreach(var skill in skillEnetities)
+            {
+                if(skill.entity.IsSkillHaveCooldown() && skill.isUnlock)
+                {
+                    res.Add(skill.entity);
+                }
+            }
+            return res;
         }
 
 #if UNITY_EDITOR

@@ -192,7 +192,7 @@ namespace StatsSystem
             return float.NaN;
         }
         
-        protected void UpdateCurrentHealth(float _current)
+        protected virtual void UpdateCurrentHealth(float _current)
         {
             float maxHealth = InvokeFunc(CheckDefensiveStat, EStatType.MaxHealth);
             if (_current > maxHealth)

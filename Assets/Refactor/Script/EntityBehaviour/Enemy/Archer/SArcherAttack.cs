@@ -11,12 +11,14 @@ namespace EnemyBehaviour
         {
             base.Enter();
             enemy.AttackFinish += OnAttackFinish;
+            enemy.InvokeAction(enemy.ToBattle, true);
         }
 
         public override void Exit()
         {
             base.Exit();
             enemy.AttackFinish -= OnAttackFinish;
+            enemy.InvokeAction(enemy.ToBattle, false);
         }
 
         public override void Update()

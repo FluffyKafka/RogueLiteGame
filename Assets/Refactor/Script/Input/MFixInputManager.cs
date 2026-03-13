@@ -11,7 +11,7 @@ namespace InputManager
 
     internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput
     {
-        [SerializeField] protected IInputPlayer player;
+        protected IInputPlayer player;
 
         public float CheckHorizonInput()
         {
@@ -33,6 +33,23 @@ namespace InputManager
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             return worldPos;
+        }
+
+        public KeyCode CheckSkillInputSlotKey(int _index)
+        {
+            if(_index == 0)
+            {
+                return KeyCode.LeftShift;
+            }
+            else if(_index == 1)
+            {
+                return KeyCode.Mouse1;
+            }
+            else if(_index == 2)
+            {
+                return KeyCode.Q;
+            }
+            return KeyCode.None;
         }
 
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件

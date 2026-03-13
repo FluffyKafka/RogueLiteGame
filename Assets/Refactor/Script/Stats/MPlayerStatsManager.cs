@@ -73,18 +73,23 @@ namespace StatsSystem
 
         public void Load(ISaveStats.DStatsData _data)
         {
-            currentHealth = _data.hp;
+            UpdateCurrentHealth(_data.hp);
             InvokeAction(SetCoinNotice, _data.coin);
             InvokeAction(SetSoulNotice, _data.soul);
         }
 
         public void ToCoinChange(float _coin)
         {
-
+            player.CoinChange(_coin);
         }
         public void ToSoulChange(float _soul)
         {
-
+            player.SoulChange(_soul);
+        }
+        protected override void UpdateCurrentHealth(float _current)
+        {
+            player.CurrentHealthChange(_current);
+            base.UpdateCurrentHealth(_current);
         }
     }
 }

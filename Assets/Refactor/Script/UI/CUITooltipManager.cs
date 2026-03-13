@@ -1,4 +1,5 @@
 using Item;
+using PlayerSystem;
 using StatsData;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace UISystem
         [SerializeField] protected CWarningToolTip warningToolTip;
         [SerializeField] protected CCraftWindowUI craftWindow;
         [SerializeField] protected CSkillDetailToolTip skillDetail;
+        [SerializeField] protected CEnemyHealthBarTooltip enemyHealthBar;
 
         protected override void OnEnable()
         {
@@ -42,6 +44,10 @@ namespace UISystem
             {
                 ui.ShowSkillDetailNotice += ShowSkillDetail;
             }
+            if(enemyHealthBar != null)
+            {
+                ui.SetCurrentEnemyNotice += ShowEnemyHealthBar;
+            }
 
             ui.HideTooltip += HideTooltip;
         }
@@ -64,6 +70,10 @@ namespace UISystem
             if(skillDetail != null)
             {
                 ui.ShowSkillDetailNotice -= ShowSkillDetail;
+            }
+            if(enemyHealthBar != null)
+            {
+                ui.SetCurrentEnemyNotice -= ShowEnemyHealthBar;
             }
             ui.HideTooltip -= HideTooltip;
         }
@@ -98,6 +108,11 @@ namespace UISystem
             skillDetail.ShowDetail(_data);
         }
 
+        protected void ShowEnemyHealthBar(IUIEnemy _enemy)
+        {
+            enemyHealthBar.SetEnemy(_enemy);
+        }
+
         protected void HideTooltip()
         {
             if(equipmentDetailTootip!=null && equipmentDetailTootip.gameObject.activeSelf)
@@ -119,6 +134,10 @@ namespace UISystem
             if(skillDetail != null && skillDetail.gameObject.activeSelf)
             {
                 skillDetail.HideToolTip();
+            }
+            if(enemyHealthBar != null && enemyHealthBar.gameObject.activeSelf)
+            {
+                enemyHealthBar.SetEnemy(null);
             }
         }
     }

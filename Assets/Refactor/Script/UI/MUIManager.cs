@@ -35,6 +35,11 @@ namespace UISystem
         public Action HideTooltip;
         public Action<DSkillDetail> ShowSkillDetailNotice;
         public Action<EAudioType, float> AudioVolumeUpdateNotice;
+        public Action<float> CurrentHealthChangeNotice;
+        public Action<float> CoinChangeNotice;
+        public Action<float> SoulChangeNotice;
+        public Action<IUISkill> SkillUnlockNotice;
+        public Action<IUIEnemy> SetCurrentEnemyNotice;
         #endregion
 
         #region Func
@@ -164,6 +169,38 @@ namespace UISystem
         public void AudioVolumeUpdate(EAudioType _type, float _volume)
         {
             InvokeAction(AudioVolumeUpdateNotice, _type, _volume);
+        }
+
+        public void CurrentHealthChange(float _cur)
+        {
+            InvokeAction(CurrentHealthChangeNotice, _cur);
+        }
+        public void CoinChange(float _cur)
+        {
+            InvokeAction(CoinChangeNotice, _cur);
+        }
+        public void SoulChange(float _cur)
+        {
+            InvokeAction(SoulChangeNotice, _cur);
+        }
+
+        public List<IUISkill> CheckSkillsUnlockedHaveCooldown()
+        {
+            return player.CheckSkillsHaveCooldownToUi();
+        }
+        public void SkillUnlock(IUISkill _skill)
+        {
+            InvokeAction(SkillUnlockNotice, _skill);
+        }
+        
+        public KeyCode CheckSkillInputSlotKey(int _index)
+        {
+            return player.CheckSkillInputSlotKey(_index);
+        }
+
+        public void SetCurrentEnemy(IUIEnemy _enemy)
+        {
+            InvokeAction(SetCurrentEnemyNotice, _enemy);
         }
     }
 }

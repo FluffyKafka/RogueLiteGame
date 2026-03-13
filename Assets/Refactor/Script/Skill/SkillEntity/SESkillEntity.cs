@@ -1,3 +1,4 @@
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,7 +9,7 @@ using UnityEngine.Assertions;
 namespace SkillSystem
 {
     [CreateAssetMenu(fileName = "New Skill Entity", menuName = "Skill System/Skill Entity")]
-    internal class SESkillEntity : ScriptableObject
+    internal class SESkillEntity : ScriptableObject, IUISkill
     {
         [Header("Skill Detail")]
         [SerializeField] protected string skillId;
@@ -27,6 +28,7 @@ namespace SkillSystem
 
         [Header("Test")]
         [SerializeField] protected bool isUnlock = false;
+        protected MSkillManager skillManager;
 
 #if UNITY_EDITOR
         [ContextMenu("Generate SkillId")]
@@ -36,8 +38,9 @@ namespace SkillSystem
             skillId = AssetDatabase.AssetPathToGUID(path);
         }
 #endif
-        public void Init(bool _isUnlock)
+        public void Init(bool _isUnlock, MSkillManager _manager)
         {
+            skillManager = _manager;
             isUnlock = _isUnlock;
             if(isUnlock)
             {
@@ -73,6 +76,8 @@ namespace SkillSystem
         }
         protected void UnlockSkill()
         {
+            skillManager.SkillUnlock(this);
+
             foreach (var effect in unlockEffects)
             {
                 effect.Effect();
@@ -207,6 +212,30 @@ namespace SkillSystem
                 return new List<string>();
             }
             return cf.checkConflictIds();
+        }
+
+        public bool IsSkillHaveCooldown()
+        {
+            SCCooldown cooldown = TryGetSkillComponenet<SCCooldown, SCEffectConditionBase>(effectConditions);
+            return cooldown != null;
+        }
+        public float CheckCooldownPercent()
+        {
+            SCCooldown cooldown = TryGetSkillComponenet<SCCooldown, SCEffectConditionBase>(effectConditions);
+            if(cooldown == null)
+            {
+                return 0;
+            }
+            return cooldown.CheckCooldownPer(skillId);
+        }    
+        public int CheckInputIndex()
+        {
+            SCInputTime time = TryGetSkillComponenet<SCInputTime, SCEffectTimeBase>(effectTimes);
+            if(time == null)
+            {
+                return -1;
+            }
+            return time.CheckInputIndex();
         }
     }
 }

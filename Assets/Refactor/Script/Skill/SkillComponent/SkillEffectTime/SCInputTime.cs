@@ -32,5 +32,10 @@ namespace SkillSystem
                 EffectBegin?.Invoke();
             }
         }
+
+        public int CheckInputIndex()
+        {
+            return skillEffectInput;
+        }
     }
 }
