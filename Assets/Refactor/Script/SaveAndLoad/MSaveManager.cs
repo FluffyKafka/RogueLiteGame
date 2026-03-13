@@ -96,6 +96,8 @@ namespace SaveSystem
         protected void GenerateGameData()
         {
             gameData.HP = statsData.hp;
+            gameData.coin = statsData.coin;
+            gameData.soul = statsData.soul;
 
             gameData.equipment.CopyFrom(inventoryData.equipment);
             gameData.equipmentStash.CopyFrom(inventoryData.equipmentStash);
@@ -110,6 +112,8 @@ namespace SaveSystem
         protected void SeperateGameData()
         {
             statsData.hp = gameData.HP;
+            statsData.coin = gameData.coin;
+            statsData.soul = gameData.soul;
 
             inventoryData.equipment = gameData.equipment.ToDictionary();
             inventoryData.equipmentStash = gameData.equipmentStash.ToDictionary();
@@ -136,8 +140,8 @@ namespace SaveSystem
     public class DGameData
     {
         public float HP;
-        public int currency;
-        public int coin;
+        public float soul;
+        public float coin;
         public bool isNewGame;
 
         public List<string> itemStash;
@@ -164,7 +168,7 @@ namespace SaveSystem
 
             HP = -1;
 
-            currency = 0;
+            soul = 0;
             coin = 0;
 
             itemStash = new List<string>();

@@ -13,6 +13,8 @@ namespace StatsSystem
         public class DStatsData
         {
             public float hp = -1;
+            public float coin;
+            public float soul;
         }
         public void Save(ref DStatsData _data);
         public void Load(DStatsData _data);
@@ -23,6 +25,13 @@ namespace StatsSystem
         protected IStatsPlayer player;
 
         public Func<EStatType, float> CheckFlaskStat;
+
+        #region Currency
+        public Action<float> SetCoinNotice;
+        public Func<float> CheckCoinNotice;
+        public Action<float> SetSoulNotice;
+        public Func<float> CheckSoulNotice;
+        #endregion
 
         protected override void Awake()
         {
@@ -58,11 +67,24 @@ namespace StatsSystem
         public void Save(ref ISaveStats.DStatsData _data)
         {
             _data.hp = currentHealth;
+            _data.coin = InvokeFunc(CheckCoinNotice);
+            _data.soul = InvokeFunc(CheckSoulNotice);
         }
 
         public void Load(ISaveStats.DStatsData _data)
         {
             currentHealth = _data.hp;
+            InvokeAction(SetCoinNotice, _data.coin);
+            InvokeAction(SetSoulNotice, _data.soul);
+        }
+
+        public void ToCoinChange(float _coin)
+        {
+
+        }
+        public void ToSoulChange(float _soul)
+        {
+
         }
     }
 }
