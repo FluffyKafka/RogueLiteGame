@@ -104,6 +104,15 @@ namespace UISystem
                     page.gameObject.SetActive(true);
                 }
             }
+
+            if(_type != EUIPageType.InGame)
+            {
+                player.PauseGame(true);
+            }
+            else
+            {
+                player.PauseGame(false);
+            }
         }
         #endregion
 

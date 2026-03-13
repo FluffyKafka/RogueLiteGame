@@ -27,6 +27,7 @@ namespace Main
         [SerializeField] protected GameObject skillManager;
         [SerializeField] protected GameObject audioManager;
         [SerializeField] protected GameObject saveManager;
+        [SerializeField] protected GameObject gameManager;
 
         private void Awake()
         {
@@ -39,7 +40,8 @@ namespace Main
                 ObjectFactory.GetComponent<IPlayerObjectFactory>(), 
                 skillManager.GetComponent<IPlayerSkillManager>(),
                 audioManager.GetComponent<IPlayerAudio>(),
-                audioManager.GetComponent<IPlayerAudioManager>()
+                audioManager.GetComponent<IPlayerAudioManager>(),
+                gameManager.GetComponent<IPlayerGameManager>()
                 );
 
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(

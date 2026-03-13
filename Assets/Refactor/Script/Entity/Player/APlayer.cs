@@ -13,7 +13,7 @@ namespace PlayerSystem
 {
     public interface IInitPlayer
     {
-        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager);
+        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager, IPlayerGameManager _gameManager);
     }
 
     public interface IInputPlayer
@@ -118,6 +118,7 @@ namespace PlayerSystem
         public List<DSkillEntityUIData> CheckAllSkillEntity();
         public List<DSkillUnlockData> CheckAllSkillUnlockState();
         public void UpdateAudioVolumeByType(EAudioType _type, float volume);
+        public void PauseGame(bool _isPause);
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -216,6 +217,7 @@ namespace PlayerSystem
         protected IPlayerSkillManager skillManager;
         protected IPlayerAudio playerAduio;
         protected IPlayerAudioManager audioManager;
+        protected IPlayerGameManager gameManager;
 
         //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
         //暂时直接转发，若有需要再引入事件机制
@@ -325,7 +327,7 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region Init
-        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager)
+        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager, IPlayerGameManager _gameManager)
         {
             input = _inputSource;
             inventory = _inventory;
@@ -335,6 +337,7 @@ namespace PlayerSystem
             skillManager = _skillManager;
             playerAduio = _audio;
             audioManager = _audioManager;
+            gameManager = _gameManager;
         }
         #endregion
 
@@ -454,6 +457,11 @@ namespace PlayerSystem
 
         //暂时直接转发，若有需要再引入事件机制
         #region UI
+        public void PauseGame(bool _isPause)
+        {
+            gameManager.Pause(_isPause);
+        }
+
         IReadOnlyList<IItemData> IUIPlayer.TryCraft(IEquipmentData _data)
         {
             return inventory.TryCraft(_data);
@@ -656,6 +664,7 @@ namespace PlayerSystem
         }
         #endregion
 
+        //暂时直接转发，若有需要再引入事件机制
         #region Audio
         public bool CheckIsPlayerInBattle()
         {
@@ -831,5 +840,11 @@ namespace PlayerSystem
     public interface IPlayerAudioManager
     {
         public void UpdateAudioVolumeByType(EAudioType _type, float _volume);
+    }
+
+    public interface IPlayerGameManager
+    {
+        public void Pause(bool _isPause);
+        public void PauseRaw(bool _isPause);
     }
 }

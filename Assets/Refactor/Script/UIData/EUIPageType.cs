@@ -10,6 +10,7 @@ namespace UIData
         Craft,
         Skill,
         Map,
-        Option
+        Option,
+        InGame
     }
 }
