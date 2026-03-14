@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1163226987575481774, guid: c40b693f4346c28448d4e302d41f8686, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -372.16028
       objectReference: {fileID: 0}
     - target: {fileID: 1558185231341140543, guid: c40b693f4346c28448d4e302d41f8686, type: 3}
       propertyPath: m_AnchorMax.y
@@ -565,7 +565,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6930289097443599781, guid: c40b693f4346c28448d4e302d41f8686, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7341298464954031489, guid: c40b693f4346c28448d4e302d41f8686, type: 3}
       propertyPath: displaySlotPrefab

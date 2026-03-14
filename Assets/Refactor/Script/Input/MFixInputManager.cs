@@ -1,4 +1,7 @@
 using PlayerSystem;
+using System;
+using System.Collections.Generic;
+using UIData;
 using UnityEngine;
 
 //需要被第一个Update
@@ -12,6 +15,14 @@ namespace InputManager
     internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput
     {
         protected IInputPlayer player;
+
+        [Serializable]
+        protected class KeyUIPagePair
+        {
+            public KeyCode key;
+            public EUIPageType uiPage;
+        }
+        [SerializeField] protected List<KeyUIPagePair> uiPageInput;
 
         public float CheckHorizonInput()
         {
@@ -107,6 +118,14 @@ namespace InputManager
             if(Input.GetKeyDown(KeyCode.G))
             {
                 player.InteractToNPCInput();
+            }
+
+            foreach(var pair in uiPageInput)
+            {
+                if(Input.GetKeyDown(pair.key))
+                {
+                    player.UIPageSwitchInput(pair.uiPage);
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using UIData;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering;
@@ -26,6 +27,7 @@ namespace PlayerSystem
         public void SkillInputEnd(int _input);
         public void SkillInputBegin(int _input);
         public void InteractToNPCInput();
+        public void UIPageSwitchInput(EUIPageType _type);
     }
 
     public interface IEnemyPlayer
@@ -415,6 +417,10 @@ namespace PlayerSystem
         void IInputPlayer.SkillInputBegin(int _input)
         {
             skillManager.SkillInputBegin(_input);
+        }
+        public void UIPageSwitchInput(EUIPageType _type)
+        {
+            ui.UIPageSwitchTo(_type);
         }
         #endregion
 
@@ -948,6 +954,7 @@ namespace PlayerSystem
 
         public void ShowCraftPage();
         public void ShowCommunicateWindow(IDialog _dialog);
+        public void UIPageSwitchTo(EUIPageType _type);
     }
 
     public interface IPlayerAudio

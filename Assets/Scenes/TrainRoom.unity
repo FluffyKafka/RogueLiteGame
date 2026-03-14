@@ -14701,6 +14701,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efee8bd7e24d0b34b8d67c3703b4ed97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiPageInput:
+  - key: 117
+    uiPage: 0
+  - key: 105
+    uiPage: 1
+  - key: 111
+    uiPage: 2
+  - key: 112
+    uiPage: 4
+  - key: 109
+    uiPage: 3
+  - key: 9
+    uiPage: 5
 --- !u!4 &1626718995
 Transform:
   m_ObjectHideFlags: 0

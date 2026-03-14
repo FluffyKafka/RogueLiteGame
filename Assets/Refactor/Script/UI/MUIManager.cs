@@ -237,6 +237,11 @@ namespace UISystem
         {
             return player.CheckIsPause();
         }
+
+        public void UIPageSwitchTo(EUIPageType _type)
+        {
+            ChangePageToByType(_type);
+        }
     }
 }
 
