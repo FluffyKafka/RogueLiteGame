@@ -15,6 +15,7 @@ namespace UISystem
         [SerializeField] protected string craftSuccessText = "制造成功";
         [SerializeField] protected string craftFailText = "制造失败，缺少材料：";
         [SerializeField] protected string craftFailText_separator = "、";
+        [SerializeField] protected string CannotDetachBlacksmithText = "无法在附近没有铁匠的情况下制作物品";
 
         protected IEquipmentData data;
         protected CEquipmentDetailUI detail;
@@ -53,6 +54,12 @@ namespace UISystem
 
         protected void TryCraft()
         {
+            if(!ui.CheckCanCraft_BlackSmith())
+            {
+                ui.InvokeAction(ui.ShowWarning, CannotDetachBlacksmithText);
+                return;
+            }
+
             IReadOnlyList<IItemData> lackList = ui.InvokeFunc(ui.TryCraft, data);
             if (lackList == null)
             {

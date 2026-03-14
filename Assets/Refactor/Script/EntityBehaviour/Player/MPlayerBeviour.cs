@@ -31,6 +31,7 @@ namespace PlayerBebaviour
         public Action AttackInput;
         public Action<float> UpdateYVelocity;
         public Func<GameObject, bool> StunCheck;
+        public Action InteractToNPCInputNotice;
 
         //Skill
         public Action<float> OnDashBegin;
@@ -46,6 +47,13 @@ namespace PlayerBebaviour
 
         //BattleCheck
         public Action<bool> SetPlayerToBattleNotice;
+
+        //NPCInteract
+        public Action InteractToNPCNotice;
+        public Action InteractFinishNotice;
+
+        //UI
+        public Action CommunicateFinishNotice;
         #endregion
 
         #region Func
@@ -176,6 +184,24 @@ namespace PlayerBebaviour
             }    
 
             return InvokeFunc(CheckIsPlayerInBattleNotice);
+        }
+
+        public void InteractToNPC(IPlayerNPC _npc)
+        {
+            playerSystem.InteractToNPC(_npc);
+        }
+
+        public void InteractToNPCInput()
+        {
+            InvokeAction(InteractToNPCInputNotice);
+        }
+        public void CommunicateFinish()
+        {
+            InvokeAction(CommunicateFinishNotice);
+        }
+        public void InteractFinish()
+        {
+            InvokeAction(InteractFinishNotice);
         }
     }
 }

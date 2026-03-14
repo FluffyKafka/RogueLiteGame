@@ -50,6 +50,7 @@ namespace InventorySystem
         public Func<EEquipmentType, IEquipment> CheckEquipment;
         public Func<IReadOnlyList<IEquipment>> CheckEquipmentStash;
         public Func<IReadOnlyList<IItem>> CheckItemStash;
+        public Func<bool> CanCraftNotice_BlackSmith;
         #endregion
 
         protected IEquipmentFactory itemFactory;
@@ -151,6 +152,7 @@ namespace InventorySystem
             player.DiscardItem(_data);        
         }
 
+
         IReadOnlyList<IItemData> IPlayerInventory.TryCraft(IEquipmentData _data)
         {
             IReadOnlyList<IEquipmentData> equipmentLack = InvokeFunc(CheckCraft_EquipLack, _data);
@@ -219,6 +221,11 @@ namespace InventorySystem
                 }
             }
             return false;
+        }
+
+        public bool CheckCanCraft_Blacksmith()
+        {
+            return InvokeFunc(CanCraftNotice_BlackSmith);
         }
         #endregion
 
@@ -308,6 +315,11 @@ namespace InventorySystem
                     Debug.LogWarning("物品仓库已经满了，原有物品无法附加");
                 }
             }
+        }
+
+        public Transform CheckPlayerTransform()
+        {
+            return player.CheckTransform();
         }
     }
 }

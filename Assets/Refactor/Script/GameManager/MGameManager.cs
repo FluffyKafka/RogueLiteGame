@@ -8,9 +8,11 @@ namespace GameManagerSystem
     internal class MGameManager : MonoBehaviour, IPlayerGameManager
     {
         [SerializeField] protected float pauseTimeSlowRate;
+        protected bool isPause = false;
          
         public void Pause(bool _isPause)
         {
+            isPause = _isPause;
             if(_isPause)
             {
                 Time.timeScale *= pauseTimeSlowRate;
@@ -23,6 +25,7 @@ namespace GameManagerSystem
 
         public void PauseRaw(bool _isPause)
         {
+            isPause = _isPause;
             if (_isPause)
             {
                 Time.timeScale = 0;
@@ -32,7 +35,11 @@ namespace GameManagerSystem
                 Time.timeScale = 1;
             }
         }
-
+        
+        public bool CheckIsPause()
+        {
+            return isPause;
+        }
     }
 }
 

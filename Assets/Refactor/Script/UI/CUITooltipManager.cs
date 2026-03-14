@@ -16,6 +16,7 @@ namespace UISystem
         [SerializeField] protected CCraftWindowUI craftWindow;
         [SerializeField] protected CSkillDetailToolTip skillDetail;
         [SerializeField] protected CEnemyHealthBarTooltip enemyHealthBar;
+        [SerializeField] protected CCommunicateWindow communicateWindow;
 
         protected override void OnEnable()
         {
@@ -48,6 +49,10 @@ namespace UISystem
             {
                 ui.SetCurrentEnemyNotice += ShowEnemyHealthBar;
             }
+            if(communicateWindow != null)
+            {
+                ui.ShowCommunicateWindowNotice += ShowCommunicateWindow;
+            }
 
             ui.HideTooltip += HideTooltip;
         }
@@ -74,6 +79,10 @@ namespace UISystem
             if(enemyHealthBar != null)
             {
                 ui.SetCurrentEnemyNotice -= ShowEnemyHealthBar;
+            }
+            if (communicateWindow != null)
+            {
+                ui.ShowCommunicateWindowNotice -= ShowCommunicateWindow;
             }
             ui.HideTooltip -= HideTooltip;
         }
@@ -113,6 +122,11 @@ namespace UISystem
             enemyHealthBar.SetEnemy(_enemy);
         }
 
+        protected void ShowCommunicateWindow(IDialog _dialog)
+        {
+            communicateWindow.ShowCommunicate(_dialog);
+        }
+
         protected void HideTooltip()
         {
             if(equipmentDetailTootip!=null && equipmentDetailTootip.gameObject.activeSelf)
@@ -138,6 +152,10 @@ namespace UISystem
             if(enemyHealthBar != null && enemyHealthBar.gameObject.activeSelf)
             {
                 enemyHealthBar.SetEnemy(null);
+            }
+            if(communicateWindow != null && communicateWindow.gameObject.activeSelf)
+            {
+                communicateWindow.ShowCommunicate(null);
             }
         }
     }

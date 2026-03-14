@@ -25,6 +25,7 @@ namespace PlayerSystem
         public void AttackInput();
         public void SkillInputEnd(int _input);
         public void SkillInputBegin(int _input);
+        public void InteractToNPCInput();
     }
 
     public interface IEnemyPlayer
@@ -57,6 +58,8 @@ namespace PlayerSystem
         public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip);
         public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
         public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
+
+        public Transform CheckTransform();
     }
 
     public struct DSkillEntityUIData
@@ -115,6 +118,11 @@ namespace PlayerSystem
         public float CheckHealthPercent();
         public string CheckName();
     }
+    public interface IUIDialogEntity
+    {
+        public string CheckName();
+        public Sprite CheckIcon();
+    }
     public interface IUIPlayer
     {
         public IReadOnlyList<IItemData> TryCraft(IEquipmentData _data);
@@ -134,6 +142,12 @@ namespace PlayerSystem
         public void PauseGame(bool _isPause);
         public List<IUISkill> CheckSkillsHaveCooldownToUi();
         public KeyCode CheckSkillInputSlotKey(int _index);
+
+        public void CommunicateFinish();
+
+        public bool CheckCanCraft_Blacksmith();
+
+        public bool CheckIsPause();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -169,6 +183,8 @@ namespace PlayerSystem
 
         public void ToCounterAttackSuccess();
         public void ToCounterAttack();
+
+        public void InteractToNPC(IPlayerNPC _npc);
     }
 
     public struct DProjectileAimmingData
@@ -225,7 +241,15 @@ namespace PlayerSystem
         public void UpdateAduioVolumeByTypeToUi(EAudioType _type, float _volume);
     }
 
-    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer
+    public interface INPCPlayer
+    {
+        public void ShowCraftPage();
+        public void Communicate(IDialog _dialog);
+        public GameObject GetGameObject();
+        public void InteractFinish();
+    }
+
+    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer
     {
         protected IPlayerInput input;
         protected IPlayerInventory inventory;
@@ -238,8 +262,6 @@ namespace PlayerSystem
         protected IPlayerAudioManager audioManager;
         protected IPlayerGameManager gameManager;
 
-        //将Behaviour的每个行为对应到具体的Animation的工作目前由Entity完成，这是错误的，Entity只应该进行信息转发，而不应该处理逻辑
-        //暂时直接转发，若有需要再引入事件机制
         #region Behaviour
         void IBehaviourPlayer.ToJump()
         {
@@ -342,9 +364,18 @@ namespace PlayerSystem
         {
             stats.RemoveStatModifier(_data);
         }
+
+        public void InteractToNPC(IPlayerNPC _npc)
+        {
+            _npc.Interact(this);
+        }
+
+        public void InteractToNPCInput()
+        {
+            behaviour.InteractToNPCInput();
+        }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Init
         void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager, IPlayerGameManager _gameManager)
         {
@@ -360,7 +391,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Input
         void IInputPlayer.HorizonInput(float _input)
         {
@@ -388,7 +418,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Enemy
         bool IEnemyPlayer.IsDead()
         {
@@ -430,7 +459,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Inventory
         public Action<IItem> StashFullNotice;
         public Action<IItem> DiscardItemNotice;
@@ -466,7 +494,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Stats
         void IStatsPlayer.StatsChangeNotice()
         {
@@ -487,8 +514,21 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region UI
+
+        public void CommunicateFinish()
+        {
+            behaviour.CommunicateFinish();
+        }
+
+        public string CheckName()
+        {
+            return entityName;
+        }
+        public Sprite CheckIcon()
+        {
+            return entityIcon;
+        }
 
         public KeyCode CheckSkillInputSlotKey(int _index)
         {
@@ -572,9 +612,18 @@ namespace PlayerSystem
         {
             audioManager.UpdateAudioVolumeByType(_type, _volume);
         }
+
+        public bool CheckCanCraft_Blacksmith()
+        {
+            return inventory.CheckCanCraft_Blacksmith();
+        }
+
+        public bool CheckIsPause()
+        {
+            return gameManager.CheckIsPause();
+        }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region ObjectController
         public bool TryTakeItem(IItem _item)
         {
@@ -597,7 +646,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Skill
 
         public void SkillUnlockToUi(IUISkill _skill)
@@ -713,7 +761,6 @@ namespace PlayerSystem
         }
         #endregion
 
-        //暂时直接转发，若有需要再引入事件机制
         #region Audio
         public bool CheckIsPlayerInBattle()
         {
@@ -722,6 +769,25 @@ namespace PlayerSystem
         public void UpdateAduioVolumeByTypeToUi(EAudioType _type, float _volume)
         {
             ui.AudioVolumeUpdate(_type, _volume);
+        }
+        #endregion
+
+        #region NPC
+        public GameObject GetGameObject()
+        {
+            return gameObject;
+        }
+        public void ShowCraftPage()
+        {
+            ui.ShowCraftPage();
+        }
+        public void Communicate(IDialog _dialog)
+        {
+            ui.ShowCommunicateWindow(_dialog);
+        }
+        public void InteractFinish()
+        {
+            behaviour.InteractFinish();
         }
         #endregion
 
@@ -778,6 +844,10 @@ namespace PlayerSystem
 
         public void SetPlayerToBattle(bool _isBattle);
         public bool CheckIsPlayerInBattle();
+
+        public void InteractToNPCInput();
+        public void CommunicateFinish();
+        public void InteractFinish();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -856,6 +926,7 @@ namespace PlayerSystem
         public void EffectEquipmentByType(EEquipmentType _type, DEffectExcuteData _data);
         public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
         public bool TryTakeItem(IItem _item);
+        public bool CheckCanCraft_Blacksmith();
     }
 
     public interface IPlayerUI
@@ -874,6 +945,9 @@ namespace PlayerSystem
 
         public void SkillUnlock(IUISkill _skill);
         public void SetCurrentEnemy(IUIEnemy _enemy);
+
+        public void ShowCraftPage();
+        public void ShowCommunicateWindow(IDialog _dialog);
     }
 
     public interface IPlayerAudio
@@ -905,5 +979,33 @@ namespace PlayerSystem
     {
         public void Pause(bool _isPause);
         public void PauseRaw(bool _isPause);
+        public bool CheckIsPause();
+    }
+
+    public enum ENPCType
+    {
+        BlackSmith,
+        Trader,
+        Witch
+    }
+    public interface IPlayerNPC
+    {
+        public ENPCType CheckType();
+        public void Interact(INPCPlayer _player);
+        public void CommunicateFinish();
+        public void EffectFinish();
+    }
+
+    public interface IDialog
+    {
+        [Serializable]
+        public class DSentence
+        {
+            public int dialogEntityIndex;
+            public string text;
+        }
+
+        public GameObject CheckEntityByIndex(int _index);
+        public List<DSentence> CheckDialog();
     }
 }

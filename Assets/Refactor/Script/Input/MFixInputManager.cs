@@ -103,6 +103,11 @@ namespace InputManager
             {
                 player.VerticalInput(yInput);
             }
+
+            if(Input.GetKeyDown(KeyCode.G))
+            {
+                player.InteractToNPCInput();
+            }
         }
     }
 }

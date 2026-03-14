@@ -13,6 +13,7 @@ namespace PlayerBebaviour
             base.Enter();
             player.JumpInput += Jump;
             player.AttackInput += Attack;
+            player.InteractToNPCInputNotice += TryInteractToNPC;
         }
 
         public override void Exit()
@@ -20,6 +21,7 @@ namespace PlayerBebaviour
             base.Exit();
             player.JumpInput -= Jump;
             player.AttackInput -= Attack;
+            player.InteractToNPCInputNotice -= TryInteractToNPC;
         }
 
         public override void Update()
@@ -34,6 +36,14 @@ namespace PlayerBebaviour
         protected void Attack()
         {
             playerStateMachine.ChangeState(playerStateMachine.primaryAttack);
+        }
+        protected void TryInteractToNPC()
+        {
+            bool isInBattle = player.InvokeFunc(player.CheckIsPlayerInBattleNotice);
+            if(!isInBattle)
+            {
+                player.InvokeAction(player.InteractToNPCNotice);
+            }
         }
     }
 }

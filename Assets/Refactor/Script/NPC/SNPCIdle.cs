@@ -1,0 +1,36 @@
+using PlayerSystem;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace NPCSystem
+{
+    internal class SNPCIdle : SNPCStateBase
+    {
+        public override void Enter()
+        {
+            base.Enter();
+            npc.PlayerInteractNotice += PlayerInteract;
+            npc.InvokeAction(npc.ToIdle, true);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            npc.PlayerInteractNotice -= PlayerInteract;
+            npc.InvokeAction(npc.ToIdle, false);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+        }
+
+        protected void PlayerInteract(INPCPlayer _player)
+        {
+            stateMachine.ChangeState(ENPCStateType.BeforeEffectCommunicate);
+        }
+    }
+}
+

@@ -40,6 +40,7 @@ namespace UISystem
         public Action<float> SoulChangeNotice;
         public Action<IUISkill> SkillUnlockNotice;
         public Action<IUIEnemy> SetCurrentEnemyNotice;
+        public Action<IDialog> ShowCommunicateWindowNotice;
         #endregion
 
         #region Func
@@ -63,9 +64,10 @@ namespace UISystem
             public GameObject gameObject;
         }
         [SerializeField] protected List<DPage> pages;
+        [SerializeField] protected EUIPageType initPage;
+        protected EUIPageType currentPageType;
         #endregion
 
-        [SerializeField] protected EUIPageType initPage;
 
         protected void Awake()
         {
@@ -88,6 +90,14 @@ namespace UISystem
             ChangePageTo(initPage);
         }
 
+        protected void Update()
+        {
+            if(currentPageType != EUIPageType.InGame && !CheckIsPause())
+            {
+                PauseGame(true);
+            }
+        }
+
         #region Init
         public void Init(IUIPlayer _player)
         {
@@ -98,6 +108,7 @@ namespace UISystem
         #region Self
         protected void ChangePageToByType(EUIPageType _type)
         {
+            currentPageType = _type;
             foreach(var page in pages)
             {
                 if(page.type != _type)
@@ -110,17 +121,12 @@ namespace UISystem
                 }
             }
 
-            if(_type != EUIPageType.InGame)
+            if(currentPageType == EUIPageType.InGame)
             {
-                player.PauseGame(true);
-            }
-            else
-            {
-                player.PauseGame(false);
+                PauseGame(false);
             }
         }
         #endregion
-
 
         public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack)
         {
@@ -201,6 +207,35 @@ namespace UISystem
         public void SetCurrentEnemy(IUIEnemy _enemy)
         {
             InvokeAction(SetCurrentEnemyNotice, _enemy);
+        }
+
+        public void ShowCraftPage()
+        {
+            ChangePageToByType(EUIPageType.Craft);
+        }
+
+        public void PauseGame(bool _isPause)
+        {
+            player.PauseGame(_isPause);
+        }
+
+        public void ShowCommunicateWindow(IDialog _dialog)
+        {
+            InvokeAction(ShowCommunicateWindowNotice, _dialog);
+        }
+        public void CommunicateFinish()
+        {
+            player.CommunicateFinish();
+        }
+
+        public bool CheckCanCraft_BlackSmith()
+        {
+            return player.CheckCanCraft_Blacksmith();
+        }
+
+        public bool CheckIsPause()
+        {
+            return player.CheckIsPause();
         }
     }
 }
