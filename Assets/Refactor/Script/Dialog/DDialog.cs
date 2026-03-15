@@ -15,6 +15,10 @@ namespace DialogSystem
 
         public void SetDialogIndex(int _index, GameObject _entity)
         {
+            if(dialogIndexToEntityMap.ContainsKey(_index))
+            {
+                return;
+            }
             dialogIndexToEntityMap.Add(_index, _entity);
         }
 

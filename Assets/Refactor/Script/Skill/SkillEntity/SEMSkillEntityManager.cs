@@ -37,6 +37,7 @@ namespace SkillSystem
             manager.CheckAllSkillUnlockStateNotice += CheckAllSkillUnlockState;
             manager.InitSkillNotice += InitSkillById;
             manager.CheckSkillsHaveCooldownToUiNotice += CheckSkillsHaveCooldownToUi;
+            manager.CheckCanUnlockSkillListNotice += CheckCanUnlockSkillList;
 
             skillDictionary = new();
             foreach (var skill in skillEnetities)
@@ -56,13 +57,13 @@ namespace SkillSystem
             return res;
         }
 
-        protected List<DSkillUnlockData> CheckAllSkillUnlockState()
+        protected List<DSkillUnlockDataToUi> CheckAllSkillUnlockState()
         {
-            List<DSkillUnlockData> res = new();
+            List<DSkillUnlockDataToUi> res = new();
             foreach(var skill in skillEnetities)
             {
                 SESkillEntity se = skill.entity;
-                res.Add(new DSkillUnlockData(se.CheckId(), se.IsUnlock()));
+                res.Add(new DSkillUnlockDataToUi(se.CheckId(), se.IsUnlock()));
             }
             return res;
         }
@@ -77,7 +78,20 @@ namespace SkillSystem
             List<IUISkill> res = new();
             foreach(var skill in skillEnetities)
             {
-                if(skill.entity.IsSkillHaveCooldown() && skill.isUnlock)
+                if(skill.entity.IsSkillHaveCooldown() && skill.entity.IsUnlock())
+                {
+                    res.Add(skill.entity);
+                }
+            }
+            return res;
+        }
+
+        protected List<ScriptableObject> CheckCanUnlockSkillList(float _soul)
+        {
+            List<ScriptableObject> res = new();
+            foreach(var skill in skillEnetities)
+            {
+                if(!skill.entity.IsUnlock() && skill.entity.CanUnlock() && skill.entity.CheckPrice() < _soul)
                 {
                     res.Add(skill.entity);
                 }

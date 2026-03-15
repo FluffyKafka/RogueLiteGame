@@ -285,7 +285,7 @@ namespace UISystem
         // 批量更新技能解锁状态
         public void UpdateSkillsUnlockStatus()
         {
-            List<DSkillUnlockData> skillUnlockData = ui.CheckAllSkillUnlockState();
+            List<DSkillUnlockDataToUi> skillUnlockData = ui.CheckAllSkillUnlockState();
             foreach (var kvp in skillUnlockData)
             {
                 if (uiSkillData.ContainsKey(kvp.skillId))

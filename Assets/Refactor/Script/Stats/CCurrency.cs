@@ -24,6 +24,7 @@ namespace StatsSystem
             playerStats.CheckCoinNotice += CheckCoin;
             playerStats.SetSoulNotice += SetSoul;
             playerStats.CheckSoulNotice += CheckSoul;
+            playerStats.ConsumeSoulNotice += ConsumeSoul;
         }
 
         protected void SetCoin(float _coin)
@@ -44,6 +45,11 @@ namespace StatsSystem
         protected float CheckSoul()
         {
             return soul;
+        }
+
+        protected void ConsumeSoul(float _soul)
+        {
+            soul -= _soul;
         }
     }
 }

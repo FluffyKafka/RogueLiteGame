@@ -29,7 +29,10 @@ namespace NPCSystem
 
         protected void PlayerInteract(INPCPlayer _player)
         {
-            stateMachine.ChangeState(ENPCStateType.BeforeEffectCommunicate);
+            if(npc.InvokeFunc(npc.CanInteractNotice))
+            {
+                stateMachine.ChangeState(ENPCStateType.BeforeEffectCommunicate);
+            }          
         }
     }
 }

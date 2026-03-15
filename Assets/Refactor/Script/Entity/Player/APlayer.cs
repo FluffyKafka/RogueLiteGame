@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UIData;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering;
@@ -92,14 +93,25 @@ namespace PlayerSystem
             this.conflictIds = conflictIds ?? new List<string>();
         }
     }
-    public struct DSkillUnlockData
+    public struct DSkillUnlockDataToUi
     {
         public string skillId;
         public bool isUnlock;
-        public DSkillUnlockData(string _id, bool _isUnlock)
+        public DSkillUnlockDataToUi(string _id, bool _isUnlock)
         {
             skillId = _id;
             isUnlock = _isUnlock;
+        }
+    }
+    public struct DSkillForSaleToUi
+    {
+        public IUISkill skill;
+        public float price;
+
+        public DSkillForSaleToUi(IUISkill _skill, float _price)
+        {
+            skill = _skill;
+            price = _price;
         }
     }
     public enum EAudioType
@@ -114,6 +126,10 @@ namespace PlayerSystem
         public bool IsSkillHaveCooldown();
         public float CheckCooldownPercent();
         public int CheckInputIndex();
+        public bool TryUnlock();
+        public float CheckPrice();
+        public string CheckName();
+        public string CheckDescription();
     }
     public interface IUIEnemy
     {
@@ -139,7 +155,7 @@ namespace PlayerSystem
         public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
         public float TryCheckStat(EStatType _type);
         public List<DSkillEntityUIData> CheckAllSkillEntity();
-        public List<DSkillUnlockData> CheckAllSkillUnlockState();
+        public List<DSkillUnlockDataToUi> CheckAllSkillUnlockState();
         public void UpdateAudioVolumeByType(EAudioType _type, float volume);
         public void PauseGame(bool _isPause);
         public List<IUISkill> CheckSkillsHaveCooldownToUi();
@@ -150,6 +166,9 @@ namespace PlayerSystem
         public bool CheckCanCraft_Blacksmith();
 
         public bool CheckIsPause();
+        public void ConsumeSoul(float _soul);
+
+        public void NPCEffectFinish();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -249,6 +268,9 @@ namespace PlayerSystem
         public void Communicate(IDialog _dialog);
         public GameObject GetGameObject();
         public void InteractFinish();
+        public List<ScriptableObject> CheckCanUnlockSkillList(float _soul);
+        public float CheckSoulAmount();
+        public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skills);
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer
@@ -263,6 +285,7 @@ namespace PlayerSystem
         protected IPlayerAudio playerAduio;
         protected IPlayerAudioManager audioManager;
         protected IPlayerGameManager gameManager;
+        protected IPlayerStats playerStats;
 
         #region Behaviour
         void IBehaviourPlayer.ToJump()
@@ -390,6 +413,7 @@ namespace PlayerSystem
             playerAduio = _audio;
             audioManager = _audioManager;
             gameManager = _gameManager;
+            playerStats = GetComponentInChildren<IPlayerStats>();
         }
         #endregion
 
@@ -609,7 +633,7 @@ namespace PlayerSystem
         {
             return skillManager.ShowAllSkillEntityToUi();
         }
-        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        public List<DSkillUnlockDataToUi> CheckAllSkillUnlockState()
         {
             return skillManager.CheckAllSkillUnlockState();
         }
@@ -627,6 +651,16 @@ namespace PlayerSystem
         public bool CheckIsPause()
         {
             return gameManager.CheckIsPause();
+        }
+
+        public void ConsumeSoul(float _soul)
+        {
+            playerStats.ConsumeSoul(_soul);
+        }
+
+        public void NPCEffectFinish()
+        {
+            behaviour.NPCEffectFinish();
         }
         #endregion
 
@@ -795,6 +829,20 @@ namespace PlayerSystem
         {
             behaviour.InteractFinish();
         }
+        public float CheckSoulAmount()
+        {
+            return playerStats.CheckSoulAmount();
+        }
+
+        public List<ScriptableObject> CheckCanUnlockSkillList(float _soul)
+        {
+            return skillManager.CheckCanUnlockSkillList(_soul);
+        }
+
+        public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skills)
+        {
+            ui.ShowSkillForSaleWindow(_skills);
+        }
         #endregion
 
         protected override void Awake()
@@ -824,8 +872,10 @@ namespace PlayerSystem
         public void CounterAttackSuccess();
 
         public List<DSkillEntityUIData> ShowAllSkillEntityToUi();
-        public List<DSkillUnlockData> CheckAllSkillUnlockState();
+        public List<DSkillUnlockDataToUi> CheckAllSkillUnlockState();
         public List<IUISkill> CheckSkillsHaveCooldownToUi();
+
+        public List<ScriptableObject> CheckCanUnlockSkillList(float _soul);
     }
 
     public interface IPlayerBehaviour : IEntityBehaviour
@@ -854,6 +904,7 @@ namespace PlayerSystem
         public void InteractToNPCInput();
         public void CommunicateFinish();
         public void InteractFinish();
+        public void NPCEffectFinish();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -955,6 +1006,8 @@ namespace PlayerSystem
         public void ShowCraftPage();
         public void ShowCommunicateWindow(IDialog _dialog);
         public void UIPageSwitchTo(EUIPageType _type);
+
+        public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skill);
     }
 
     public interface IPlayerAudio
@@ -989,6 +1042,12 @@ namespace PlayerSystem
         public bool CheckIsPause();
     }
 
+    public interface IPlayerStats: IEntityStats
+    {
+        public float CheckSoulAmount();
+        public void ConsumeSoul(float _soul);
+    }
+
     public enum ENPCType
     {
         BlackSmith,
@@ -1014,5 +1073,6 @@ namespace PlayerSystem
 
         public GameObject CheckEntityByIndex(int _index);
         public List<DSentence> CheckDialog();
+        public void SetDialogIndex(int _index, GameObject _entity);
     }
 }

@@ -76,6 +76,7 @@ namespace SkillSystem
         }
         protected void UnlockSkill()
         {
+            isUnlock = true;
             skillManager.SkillUnlock(this);
 
             foreach (var effect in unlockEffects)

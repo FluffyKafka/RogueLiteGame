@@ -13,6 +13,7 @@ namespace NPCSystem
 
         protected override void Effect()
         {
+            base.Effect();
             npc.PlayerShowCraftPage();
             npc.InteractFinish();
         }

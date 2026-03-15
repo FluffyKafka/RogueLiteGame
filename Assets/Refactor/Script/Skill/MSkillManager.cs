@@ -44,8 +44,9 @@ namespace SkillSystem
         #region SkillEntityManager
         public Action<string, bool> InitSkillNotice;
         public Func<List<DSkillEntityUIData>> ShowAllSkillEntityToUINotice;
-        public Func<List<DSkillUnlockData>> CheckAllSkillUnlockStateNotice;
+        public Func<List<DSkillUnlockDataToUi>> CheckAllSkillUnlockStateNotice;
         public Func<List<IUISkill>> CheckSkillsHaveCooldownToUiNotice;
+        public Func<float, List<ScriptableObject>> CheckCanUnlockSkillListNotice;
         #endregion
 
 
@@ -174,14 +175,14 @@ namespace SkillSystem
         {
             return InvokeFunc(ShowAllSkillEntityToUINotice);
         }
-        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        public List<DSkillUnlockDataToUi> CheckAllSkillUnlockState()
         {
             return InvokeFunc(CheckAllSkillUnlockStateNotice);
         }
 
         public void Save(ref ISaveSkill.DSkillSaveData _data)
         {
-            List<DSkillUnlockData> skills = CheckAllSkillUnlockState();
+            List<DSkillUnlockDataToUi> skills = CheckAllSkillUnlockState();
             _data.skillUnlock.Clear();
             foreach(var skill in skills)
             {
@@ -204,6 +205,11 @@ namespace SkillSystem
         public void SkillUnlock(SESkillEntity _skill)
         {
             player.SkillUnlockToUi(_skill);
+        }
+
+        public List<ScriptableObject> CheckCanUnlockSkillList(float _soul)
+        {
+            return InvokeFunc(CheckCanUnlockSkillListNotice, _soul);
         }
     }
 

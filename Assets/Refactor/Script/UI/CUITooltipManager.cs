@@ -17,6 +17,7 @@ namespace UISystem
         [SerializeField] protected CSkillDetailToolTip skillDetail;
         [SerializeField] protected CEnemyHealthBarTooltip enemyHealthBar;
         [SerializeField] protected CCommunicateWindow communicateWindow;
+        [SerializeField] protected CSkillLearningWindow skillLearningWindow;
 
         protected override void OnEnable()
         {
@@ -53,6 +54,10 @@ namespace UISystem
             {
                 ui.ShowCommunicateWindowNotice += ShowCommunicateWindow;
             }
+            if(skillLearningWindow != null)
+            {
+                ui.ShowSkillForSaleWindowNotice += ShowSkillLearningWindow;
+            }
 
             ui.HideTooltip += HideTooltip;
         }
@@ -83,6 +88,10 @@ namespace UISystem
             if (communicateWindow != null)
             {
                 ui.ShowCommunicateWindowNotice -= ShowCommunicateWindow;
+            }
+            if(skillLearningWindow != null)
+            {
+                ui.ShowSkillForSaleWindowNotice -= ShowSkillLearningWindow;
             }
             ui.HideTooltip -= HideTooltip;
         }
@@ -127,6 +136,10 @@ namespace UISystem
             communicateWindow.ShowCommunicate(_dialog);
         }
 
+        protected void ShowSkillLearningWindow(List<DSkillForSaleToUi> _skills)
+        {
+            skillLearningWindow.SetSkillLearningWindow(_skills);
+        }
         protected void HideTooltip()
         {
             if(equipmentDetailTootip!=null && equipmentDetailTootip.gameObject.activeSelf)
@@ -156,6 +169,10 @@ namespace UISystem
             if(communicateWindow != null && communicateWindow.gameObject.activeSelf)
             {
                 communicateWindow.ShowCommunicate(null);
+            }
+            if(skillLearningWindow != null && skillLearningWindow.gameObject.activeSelf)
+            {
+                skillLearningWindow.SetSkillLearningWindow(null);
             }
         }
     }

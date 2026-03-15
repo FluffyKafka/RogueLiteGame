@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a622f60822ae46a449f696a6be6aae81, type: 3}
+  m_Name: BeforeEffect_0
+  m_EditorClassIdentifier: 
+  dialog:
+  - dialogEntityIndex: 1
+    text: "\u4F60\u53C8\u6765\u4E86"
+  - dialogEntityIndex: 1
+    text: "\u771F\u662F\u65E0\u804A\u7684\u5C1D\u8BD5"
+  - dialogEntityIndex: 1
+    text: "\u968F\u4FBF\u4F60\u5427"
+  - dialogEntityIndex: 1
+    text: "\u9009\u4E00\u4E2A\u80FD\u529B\u5427"

@@ -41,6 +41,7 @@ namespace UISystem
         public Action<IUISkill> SkillUnlockNotice;
         public Action<IUIEnemy> SetCurrentEnemyNotice;
         public Action<IDialog> ShowCommunicateWindowNotice;
+        public Action<List<DSkillForSaleToUi>> ShowSkillForSaleWindowNotice;
         #endregion
 
         #region Func
@@ -162,7 +163,7 @@ namespace UISystem
         {
             return player.CheckAllSkillEntity();
         }
-        public List<DSkillUnlockData> CheckAllSkillUnlockState()
+        public List<DSkillUnlockDataToUi> CheckAllSkillUnlockState()
         {
             return player.CheckAllSkillUnlockState();
         }
@@ -241,6 +242,21 @@ namespace UISystem
         public void UIPageSwitchTo(EUIPageType _type)
         {
             ChangePageToByType(_type);
+        }
+
+        public void ConsumeSoul(float _soul)
+        {
+            player.ConsumeSoul(_soul);
+        }
+
+        public void NPCEffectFinish()
+        {
+            player.NPCEffectFinish();
+        }
+
+        public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skills)
+        {
+            InvokeAction(ShowSkillForSaleWindowNotice, _skills);
         }
     }
 }

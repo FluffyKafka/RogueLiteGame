@@ -1,22 +1,23 @@
-using DialogSystem;
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace NPCSystem
 {
     internal class SNPCCommunicate : SNPCStateBase
     {
-        [SerializeField] List<DDialog> dialogs;
+        [SerializeField] List<ScriptableObject> dialogs;
         [SerializeField] ENPCStateType nextType;
         [SerializeField] bool isInteractFinishAfterThisState = false;
 
-        protected DDialog dialog;
+        protected IDialog dialog;
 
         public override void Init(CNPCStateMachine _stateMachine, ANPC _npc)
         {
             base.Init(_stateMachine, _npc);
-            dialog = dialogs[Random.Range(0, dialogs.Count)];
+            dialog = dialogs[Random.Range(0, dialogs.Count)] as IDialog;
             
         }
 

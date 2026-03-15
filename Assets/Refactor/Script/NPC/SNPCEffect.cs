@@ -16,8 +16,7 @@ namespace NPCSystem
         public override void Enter()
         {
             base.Enter();
-            npc.InvokeAction(npc.EffectNotice);
-            if(haveAfterEffectDialog)
+            if (haveAfterEffectDialog)
             {
                 npc.EffectFinishNotice += EffectFinish;
                 npc.EffectFailNotice += EffectFail;
@@ -27,6 +26,12 @@ namespace NPCSystem
                 npc.EffectFinishNotice += NoAfterEffectDialogFinish;
                 npc.EffectFailNotice += NoAfterEffectDialogFinish;
             }
+            StartCoroutine(EffectDelay());
+        }
+        protected IEnumerator EffectDelay()
+        {
+            yield return null;
+            npc.InvokeAction(npc.EffectNotice);
         }
 
         public override void Exit()

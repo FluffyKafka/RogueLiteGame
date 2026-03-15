@@ -1,4 +1,3 @@
-using DialogSystem;
 using PlayerSystem;
 using System;
 using System.Collections;
@@ -16,11 +15,12 @@ namespace NPCSystem
         #region ActionAndFunc
         public Action<INPCPlayer> PlayerInteractNotice;
         public Action<bool> ToIdle;
-        public Action<DDialog> SetDialogIndexNotice;
+        public Action<IDialog> SetDialogIndexNotice;
         public Action CommunicateFinishNotice;
         public Action EffectNotice;
         public Action EffectFinishNotice;
         public Action EffectFailNotice;
+        public Func<bool> CanInteractNotice;
         #endregion
 
         protected INPCPlayer currentInteractPlayer;
@@ -74,6 +74,19 @@ namespace NPCSystem
         {
             currentInteractPlayer?.InteractFinish();
             currentInteractPlayer = null;
+        }
+
+        public float CheckPlayerSoulAmount()
+        {
+            return currentInteractPlayer.CheckSoulAmount();
+        }
+        public List<ScriptableObject> CheckPlayerCanUnlockSkillList(float _soul)
+        {
+            return currentInteractPlayer.CheckCanUnlockSkillList(_soul);
+        }
+        public void ShowSkillForSaleListToPlayer(List<DSkillForSaleToUi> _skills)
+        {
+            currentInteractPlayer.ShowSkillForSaleWindow(_skills);
         }
     }
 }

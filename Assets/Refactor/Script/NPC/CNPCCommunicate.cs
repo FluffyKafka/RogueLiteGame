@@ -1,4 +1,4 @@
-using DialogSystem;
+using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +16,7 @@ namespace NPCSystem
             npc.SetDialogIndexNotice += SetDialogIndex;
         }
 
-        protected void SetDialogIndex(DDialog _dialog)
+        protected void SetDialogIndex(IDialog _dialog)
         {
             _dialog.SetDialogIndex(playerDialogIndex, npc.CheckCurrentInteractPlayer().GetGameObject());
             _dialog.SetDialogIndex(npcDialogIndex, npc.gameObject);

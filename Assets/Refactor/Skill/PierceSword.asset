@@ -16,6 +16,7 @@ MonoBehaviour:
   skillName: "\u7A7F\u523A\u5251"
   icon: {fileID: -1138557387, guid: be55291aae08d434db3da3b59db3ab4a, type: 3}
   description: "\u6295\u51FA\u7684\u5251\u73B0\u5728\u80FD\u7A7F\u8FC7\u6570\u4E2A\u654C\u4EBA"
+  price: 10
   unlockConditions:
   - {fileID: 11400000, guid: 1d9c58ed384f97845a8ee5127674ebe9, type: 2}
   - {fileID: 11400000, guid: a76ae11cbf8d81d4dadda90b15e0a3fd, type: 2}

@@ -20,7 +20,7 @@ namespace StatsSystem
         public void Load(DStatsData _data);
     }
 
-    internal class MPlayerStatsManager : MEntityStatsManager, ISaveStats
+    internal class MPlayerStatsManager : MEntityStatsManager, ISaveStats, IPlayerStats
     {
         protected IStatsPlayer player;
 
@@ -31,6 +31,7 @@ namespace StatsSystem
         public Func<float> CheckCoinNotice;
         public Action<float> SetSoulNotice;
         public Func<float> CheckSoulNotice;
+        public Action<float> ConsumeSoulNotice;
         #endregion
 
         protected override void Awake()
@@ -90,6 +91,15 @@ namespace StatsSystem
         {
             player.CurrentHealthChange(_current);
             base.UpdateCurrentHealth(_current);
+        }
+
+        public float CheckSoulAmount()
+        {
+            return InvokeFunc(CheckSoulNotice);
+        }
+        public void ConsumeSoul(float _soul)
+        {
+            InvokeAction(ConsumeSoulNotice, _soul);
         }
     }
 }
