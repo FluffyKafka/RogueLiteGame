@@ -1,18 +1,34 @@
+using NPCSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MNPCAnimationFx : MonoBehaviour
+namespace AnimationAndFx
 {
-    // Start is called before the first frame update
-    void Start()
+    internal class MNPCAnimationFx : ComponentManagerBase, INPCAnimationFx
     {
-        
+        public Action IdleNotice;
+        public Action EffectNotice;
+
+        public void Idle()
+        {
+            InvokeAction(IdleNotice);
+        }
+        public void Effect()
+        {
+            InvokeAction(EffectNotice);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    internal class CNPCComponentBase: MonoBehaviour
     {
-        
+        protected MNPCAnimationFx npc;
+
+        protected virtual void Awake()
+        {
+            npc = GetComponent<MNPCAnimationFx>();
+        }
     }
 }
+

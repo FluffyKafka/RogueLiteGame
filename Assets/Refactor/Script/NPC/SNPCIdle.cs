@@ -11,14 +11,13 @@ namespace NPCSystem
         {
             base.Enter();
             npc.PlayerInteractNotice += PlayerInteract;
-            npc.InvokeAction(npc.ToIdle, true);
+            npc.AnimToIdle();
         }
 
         public override void Exit()
         {
             base.Exit();
             npc.PlayerInteractNotice -= PlayerInteract;
-            npc.InvokeAction(npc.ToIdle, false);
         }
 
         public override void Update()

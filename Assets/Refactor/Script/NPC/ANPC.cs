@@ -14,7 +14,6 @@ namespace NPCSystem
 
         #region ActionAndFunc
         public Action<INPCPlayer> PlayerInteractNotice;
-        public Action<bool> ToIdle;
         public Action<IDialog> SetDialogIndexNotice;
         public Action CommunicateFinishNotice;
         public Action EffectNotice;
@@ -88,6 +87,21 @@ namespace NPCSystem
         {
             currentInteractPlayer.ShowSkillForSaleWindow(_skills);
         }
+
+        public void AnimToIdle()
+        {
+            GetComponentInChildren<INPCAnimationFx>().Idle();
+        }
+        public void AnimToEffect()
+        {
+            GetComponentInChildren<INPCAnimationFx>().Effect();
+        }
+    }
+
+    public interface INPCAnimationFx
+    {
+        public void Idle();
+        public void Effect();
     }
 }
 

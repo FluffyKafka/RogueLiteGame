@@ -27,6 +27,7 @@ namespace NPCSystem
                 npc.EffectFailNotice += NoAfterEffectDialogFinish;
             }
             StartCoroutine(EffectDelay());
+            npc.AnimToEffect();
         }
         protected IEnumerator EffectDelay()
         {
