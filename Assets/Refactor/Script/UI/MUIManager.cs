@@ -42,6 +42,7 @@ namespace UISystem
         public Action<IUIEnemy> SetCurrentEnemyNotice;
         public Action<IDialog> ShowCommunicateWindowNotice;
         public Action<List<DSkillForSaleToUi>> ShowSkillForSaleWindowNotice;
+        public Action<List<DItemForSaleToUi>> ShowItemForSaleWindowNotice;
         #endregion
 
         #region Func
@@ -257,6 +258,30 @@ namespace UISystem
         public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skills)
         {
             InvokeAction(ShowSkillForSaleWindowNotice, _skills);
+        }
+
+        public bool CanPurchase_coin(float _coin)
+        {
+            return player.CanPurchase_coin(_coin);
+        }
+        public void ConsumeCoin(float _coin)
+        {
+            player.ConsumeCoin(_coin);
+        }
+
+        public void AddItemRaw(IItemData _item)
+        {
+            player.AddItemRaw(_item);
+        }
+
+        public void ShowItemForSaleWindow(List<DItemForSaleToUi> _itemList)
+        {
+            InvokeAction(ShowItemForSaleWindowNotice, _itemList);
+        }
+
+        public void NPCEffectFail()
+        {
+            player.NPCEffectFail();
         }
     }
 }

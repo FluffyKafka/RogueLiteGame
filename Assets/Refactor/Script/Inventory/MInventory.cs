@@ -321,6 +321,25 @@ namespace InventorySystem
         {
             return player.CheckTransform();
         }
+
+        public List<IItemData> CheckAllItemsCanBeSale()
+        {
+            return itemDataBase.CheckAllItemsCanBeSale();
+        }
+
+        public void AddItemRaw(IItemData _item)
+        {
+            if(_item.CheckItemType() == EItemType.Material)
+            {
+                IItem newItem = itemFactory.GenerateItem(_item);
+                InvokeFunc(TryAddItem, newItem);
+            }
+            else
+            {
+                IEquipment newEquipment = itemFactory.GenerateEquipment(_item);
+                InvokeFunc(TryAddEquipment, newEquipment);
+            }
+        }
     }
 }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3636431078350645884}
   - component: {fileID: 385045626168772751}
   - component: {fileID: 8210383531844117530}
-  - component: {fileID: 7422929527803361420}
+  - component: {fileID: 6103632125658238545}
   m_Layer: 5
   m_Name: TraderSlot
   m_TagString: Untagged
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
---- !u!114 &7422929527803361420
+--- !u!114 &6103632125658238545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4059390790735707934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14c2bdfbd6bced4383b3447950243d4, type: 3}
+  m_Script: {fileID: 11500000, guid: b3e3eff51ad03334a9eb3a069d674380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 7216676255404890676}

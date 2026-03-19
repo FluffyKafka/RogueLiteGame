@@ -52,6 +52,7 @@ namespace PlayerBebaviour
         public Action InteractToNPCNotice;
         public Action InteractFinishNotice;
         public Action NPCEffectFinishNotice;
+        public Action NPCEffectFailNotice;
 
         //UI
         public Action CommunicateFinishNotice;
@@ -207,6 +208,10 @@ namespace PlayerBebaviour
         public void NPCEffectFinish()
         {
             InvokeAction(NPCEffectFinishNotice);
+        }
+        public void NPCEffectFail()
+        {
+            InvokeAction(NPCEffectFailNotice);
         }
     }
 }

@@ -127,6 +127,11 @@ namespace InputManager
                     player.UIPageSwitchInput(pair.uiPage);
                 }
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                player.EndNPCEffectInput();
+            }
         }
     }
 }

@@ -18,6 +18,7 @@ namespace UISystem
         [SerializeField] protected CEnemyHealthBarTooltip enemyHealthBar;
         [SerializeField] protected CCommunicateWindow communicateWindow;
         [SerializeField] protected CSkillLearningWindow skillLearningWindow;
+        [SerializeField] protected CItemSaleWindow itemSaleWindow;
 
         protected override void OnEnable()
         {
@@ -58,6 +59,10 @@ namespace UISystem
             {
                 ui.ShowSkillForSaleWindowNotice += ShowSkillLearningWindow;
             }
+            if(itemSaleWindow != null)
+            {
+                ui.ShowItemForSaleWindowNotice += ShowItemForSaleWindow;
+            }
 
             ui.HideTooltip += HideTooltip;
         }
@@ -92,6 +97,10 @@ namespace UISystem
             if(skillLearningWindow != null)
             {
                 ui.ShowSkillForSaleWindowNotice -= ShowSkillLearningWindow;
+            }
+            if (itemSaleWindow != null)
+            {
+                ui.ShowItemForSaleWindowNotice -= ShowItemForSaleWindow;
             }
             ui.HideTooltip -= HideTooltip;
         }
@@ -140,6 +149,10 @@ namespace UISystem
         {
             skillLearningWindow.SetSkillLearningWindow(_skills);
         }
+        protected void ShowItemForSaleWindow(List<DItemForSaleToUi> _items)
+        {
+            itemSaleWindow.SetItemsForSale(_items);
+        }
         protected void HideTooltip()
         {
             if(equipmentDetailTootip!=null && equipmentDetailTootip.gameObject.activeSelf)
@@ -165,14 +178,6 @@ namespace UISystem
             if(enemyHealthBar != null && enemyHealthBar.gameObject.activeSelf)
             {
                 enemyHealthBar.SetEnemy(null);
-            }
-            if(communicateWindow != null && communicateWindow.gameObject.activeSelf)
-            {
-                communicateWindow.ShowCommunicate(null);
-            }
-            if(skillLearningWindow != null && skillLearningWindow.gameObject.activeSelf)
-            {
-                skillLearningWindow.SetSkillLearningWindow(null);
             }
         }
     }

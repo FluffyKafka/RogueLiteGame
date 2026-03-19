@@ -38,6 +38,10 @@ namespace UISystem
                 ShowSkillDetailNotice -= ShowSkillDetail;
                 HideSkillDetailNotice -= HideSkillDetail;
                 SkillUnlockFinishNotice -= SkillUnlockFinish;
+                foreach(var slot in slots)
+                {
+                    slot.Hide();
+                }
                 gameObject.SetActive(false);
             }
         }

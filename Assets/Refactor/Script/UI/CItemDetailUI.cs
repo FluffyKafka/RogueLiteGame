@@ -37,6 +37,11 @@ namespace UISystem
             }
         }
 
+        public virtual void SetPriceRaw(float _price)
+        {
+            itemPriceText.text = _price.ToString();
+        }
+
         public void HideToolTip()
         {
             gameObject.SetActive(false);

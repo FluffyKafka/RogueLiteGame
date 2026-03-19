@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace Item
         public IReadOnlyList<IEquipmentData> CheckCraftableAmulet();
         public IReadOnlyList<IEquipmentData> CheckCraftableFlask();
         public IItemData TryCheckItemDataById(string _id);
+        public List<IItemData> CheckAllItemsCanBeSale();
     }
     internal class DBItemDataBase : MonoBehaviour, IItemDataBase
     {
@@ -27,6 +29,7 @@ namespace Item
         [SerializeField] protected List<SOEquipmentData> armorList = new();
         [SerializeField] protected List<SOEquipmentData> amuletList = new();
         [SerializeField] protected List<SOEquipmentData> flaskList = new();
+        protected List<IItemData> itemsCanBeSale = null;
 
         public IReadOnlyList<IEquipmentData> CheckCraftableWeapon()
         {
@@ -61,6 +64,22 @@ namespace Item
                 Debug.LogWarning("ŒÔ∆∑≤È’“ ß∞‹, id: " + _id);
                 return null;
             }
+        }
+
+        public List<IItemData> CheckAllItemsCanBeSale()
+        {
+            if (itemsCanBeSale == null)
+            {
+                itemsCanBeSale = new();
+                foreach (var item in itemDatabase.Values)
+                {
+                    if (item.price > 0)
+                    {
+                        itemsCanBeSale.Add(item);
+                    }
+                }
+            }
+            return itemsCanBeSale;
         }
 
 #if UNITY_EDITOR

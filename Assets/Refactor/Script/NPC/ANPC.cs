@@ -1,3 +1,4 @@
+using Item;
 using PlayerSystem;
 using System;
 using System.Collections;
@@ -90,11 +91,26 @@ namespace NPCSystem
 
         public void AnimToIdle()
         {
-            GetComponentInChildren<INPCAnimationFx>().Idle();
+            GetComponentInChildren<INPCAnimationFx>()?.Idle();
         }
         public void AnimToEffect()
         {
-            GetComponentInChildren<INPCAnimationFx>().Effect();
+            GetComponentInChildren<INPCAnimationFx>()?.Effect();
+        }
+
+        public List<IItemData> CheckAllItemCanBeSale()
+        {
+            return currentInteractPlayer.CheckAllItemCanBeSale();
+        }
+
+        public void ShowItemForSaleToPlayerUi(List<DItemForSaleToUi> _items)
+        {
+            currentInteractPlayer.ShowItemForSaleToUi(_items);
+        }
+
+        public void EffectFail()
+        {
+            InvokeAction(EffectFailNotice);
         }
     }
 

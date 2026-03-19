@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3410a0ef495f5ee4caa8a354893e9ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displaySlotPrefab: {fileID: 446740265628002955, guid: 62da478ed0398a74eb74d56f62479be9, type: 3}
+  displaySlotPrefab: {fileID: 2464569005707067380, guid: 62da478ed0398a74eb74d56f62479be9, type: 3}
   slotContainer: {fileID: 395540319055995442}
 --- !u!1 &2646985079801973796
 GameObject:

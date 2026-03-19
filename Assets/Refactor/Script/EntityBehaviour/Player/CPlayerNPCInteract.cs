@@ -22,6 +22,7 @@ namespace PlayerBebaviour
             player.CommunicateFinishNotice += CommunicateFinish;
             player.InteractFinishNotice += InteractFinish;
             player.NPCEffectFinishNotice += NPCEffectFinish;
+            player.NPCEffectFailNotice += NPCEffectFail;
         }
 
         protected void Interact()
@@ -45,6 +46,11 @@ namespace PlayerBebaviour
         protected void NPCEffectFinish()
         {
             currentInteractNPC.EffectFinish();
+        }
+
+        protected void NPCEffectFail()
+        {
+            currentInteractNPC.EffectFail();
         }
 
         protected void InteractFinish()

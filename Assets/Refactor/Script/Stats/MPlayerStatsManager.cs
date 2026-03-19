@@ -101,5 +101,14 @@ namespace StatsSystem
         {
             InvokeAction(ConsumeSoulNotice, _soul);
         }
+
+        public bool CanPurchase_coin(float _coin)
+        {
+            return InvokeFunc(CheckCoinNotice) >= _coin;
+        }
+        public void ConsumeCoin(float _coin)
+        {
+            InvokeAction(SetCoinNotice, InvokeFunc(CheckCoinNotice) - _coin);
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace PlayerSystem
         public void SkillInputBegin(int _input);
         public void InteractToNPCInput();
         public void UIPageSwitchInput(EUIPageType _type);
+        public void EndNPCEffectInput();
     }
 
     public interface IEnemyPlayer
@@ -114,6 +115,16 @@ namespace PlayerSystem
             price = _price;
         }
     }
+    public struct DItemForSaleToUi
+    {
+        public IItemData item;
+        public float price;
+        public DItemForSaleToUi(IItemData _item, float _price)
+        {
+            item = _item;
+            price = _price;
+        }
+    }
     public enum EAudioType
     {
         SFX,
@@ -169,6 +180,11 @@ namespace PlayerSystem
         public void ConsumeSoul(float _soul);
 
         public void NPCEffectFinish();
+
+        public bool CanPurchase_coin(float _coin);
+        public void ConsumeCoin(float _coin);
+        public void AddItemRaw(IItemData _item);
+        public void NPCEffectFail();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -271,6 +287,8 @@ namespace PlayerSystem
         public List<ScriptableObject> CheckCanUnlockSkillList(float _soul);
         public float CheckSoulAmount();
         public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skills);
+        public List<IItemData> CheckAllItemCanBeSale();
+        public void ShowItemForSaleToUi(List<DItemForSaleToUi> _items);
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer
@@ -445,6 +463,11 @@ namespace PlayerSystem
         public void UIPageSwitchInput(EUIPageType _type)
         {
             ui.UIPageSwitchTo(_type);
+        }
+
+        public void EndNPCEffectInput()
+        {
+            behaviour.NPCEffectFinish();
         }
         #endregion
 
@@ -662,6 +685,25 @@ namespace PlayerSystem
         {
             behaviour.NPCEffectFinish();
         }
+
+        public bool CanPurchase_coin(float _coin)
+        {
+            return playerStats.CanPurchase_coin(_coin);
+        }
+        public void ConsumeCoin(float _coin)
+        {
+            playerStats.ConsumeCoin(_coin);
+        }
+
+        public void AddItemRaw(IItemData _item)
+        {
+            inventory.AddItemRaw(_item);
+        }
+
+        public void NPCEffectFail()
+        {
+            behaviour.NPCEffectFail();
+        }
         #endregion
 
         #region ObjectController
@@ -843,6 +885,16 @@ namespace PlayerSystem
         {
             ui.ShowSkillForSaleWindow(_skills);
         }
+
+        public List<IItemData> CheckAllItemCanBeSale()
+        {
+            return inventory.CheckAllItemsCanBeSale();
+        }
+
+        public void ShowItemForSaleToUi(List<DItemForSaleToUi> _items)
+        {
+            ui.ShowItemForSaleWindow(_items);
+        }
         #endregion
 
         protected override void Awake()
@@ -905,6 +957,7 @@ namespace PlayerSystem
         public void CommunicateFinish();
         public void InteractFinish();
         public void NPCEffectFinish();
+        public void NPCEffectFail();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -984,6 +1037,8 @@ namespace PlayerSystem
         public IReadOnlyList<IEquipmentData> CheckCraftableEquipmentByType(EEquipmentType _type);
         public bool TryTakeItem(IItem _item);
         public bool CheckCanCraft_Blacksmith();
+        public List<IItemData> CheckAllItemsCanBeSale();
+        public void AddItemRaw(IItemData _item);
     }
 
     public interface IPlayerUI
@@ -1008,6 +1063,7 @@ namespace PlayerSystem
         public void UIPageSwitchTo(EUIPageType _type);
 
         public void ShowSkillForSaleWindow(List<DSkillForSaleToUi> _skill);
+        public void ShowItemForSaleWindow(List<DItemForSaleToUi> _item);
     }
 
     public interface IPlayerAudio
@@ -1046,6 +1102,8 @@ namespace PlayerSystem
     {
         public float CheckSoulAmount();
         public void ConsumeSoul(float _soul);
+        public bool CanPurchase_coin(float _coin);
+        public void ConsumeCoin(float _coin);
     }
 
     public enum ENPCType
@@ -1060,6 +1118,7 @@ namespace PlayerSystem
         public void Interact(INPCPlayer _player);
         public void CommunicateFinish();
         public void EffectFinish();
+        public void EffectFail();
     }
 
     public interface IDialog

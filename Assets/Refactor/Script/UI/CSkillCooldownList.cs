@@ -37,7 +37,6 @@ namespace UISystem
         protected void UpdateSkillCooldownList()
         {
             List<IUISkill> skills = ui.CheckSkillsUnlockedHaveCooldown();
-            Debug.Log(skills.Count);
             for (int i = 0; i < skills.Count; ++i)
             {
                 skillSlots[i].SetSkill(skills[i]);

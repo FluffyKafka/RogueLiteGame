@@ -33,6 +33,11 @@ namespace UISystem
             skillDetail.price = _skill.price;
         }
 
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
         public void OnPointerEnter(PointerEventData eventData)
         {
             ShowSkillDetail.Invoke(skillDetail);
