@@ -980,6 +980,7 @@ namespace PlayerSystem
         public GameObject GeneratePierceSword(DProjectileData _data, Vector3 _position);
         public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position);
         public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
+        public void GeneratePopUpText(string _data, Vector3 _position);
     }
 
     public interface IPlayerAnimation : IEntityAnimation

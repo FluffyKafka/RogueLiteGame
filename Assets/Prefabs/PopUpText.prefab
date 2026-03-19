@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2567213385123987620}
   - component: {fileID: 4990235260466515314}
   - component: {fileID: 733028387858049070}
-  - component: {fileID: 2200289756868310686}
+  - component: {fileID: 7300753914227595052}
   m_Layer: 0
   m_Name: PopUpText
   m_TagString: Untagged
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3085066179410023080, guid: 6f3a74fb5bcb51d44a0c0df7ee36fa74, type: 2}
+  - {fileID: -3085066179410023080, guid: bd99fc5dc55270048a0df0e158690ee4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_text: "\u51B7\u5374\u4E2D\u3002\u3002\u3002"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bd99fc5dc55270048a0df0e158690ee4, type: 2}
-  m_sharedMaterial: {fileID: -3085066179410023080, guid: 6f3a74fb5bcb51d44a0c0df7ee36fa74, type: 2}
+  m_sharedMaterial: {fileID: -3085066179410023080, guid: bd99fc5dc55270048a0df0e158690ee4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -169,10 +169,10 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4990235260466515314}
   m_maskType: 0
---- !u!114 &2200289756868310686
+--- !u!114 &7300753914227595052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,10 +181,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2848268551794184684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65525c1dddad7349a73ce52f1a4a063, type: 3}
+  m_Script: {fileID: 11500000, guid: c82fc4676bac0604a9c0deb75ef5ffad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myText: {fileID: 733028387858049070}
+  textMesh: {fileID: 733028387858049070}
   popInSpeed: 0.5
   popOutSpeed: 5
   popOutBeginAlpha: 50

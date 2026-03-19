@@ -24,6 +24,20 @@ namespace NPCSystem
         #endregion
 
         protected INPCPlayer currentInteractPlayer;
+        protected INPCObjectFactory objectFactory;
+
+        protected virtual void Awake()
+        {
+            if(objectFactory == null)
+            {
+                FNPCFactory.GetInstance_TestMode().InitEnemyNotGenerateByFactory_TestMode(this, type);
+            }
+        }
+
+        public void Init(INPCObjectFactory _objectFactory)
+        {
+            objectFactory = _objectFactory;
+        }
 
         public ENPCType CheckType()
         {
@@ -118,6 +132,11 @@ namespace NPCSystem
     {
         public void Idle();
         public void Effect();
+    }
+
+    public interface INPCObjectFactory
+    {
+        public void GeneratePopUpText(string _data, Vector3 _position);
     }
 }
 
