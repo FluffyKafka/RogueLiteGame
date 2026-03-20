@@ -43,6 +43,7 @@ namespace PlayerSystem
         public WReadOnlyDamageData TakeDamage(WReadOnlyDamageData _damageData);
         public Transform CheckTransform();
         public void SetPlayerToBattle(bool _isBattle);
+        public void GenerateDropItemAt(ScriptableObject _itemData, Vector3 _postion);
     }
 
     public interface IAnimPlayer : IAnimEntity
@@ -529,6 +530,12 @@ namespace PlayerSystem
         public void SetPlayerToBattle(bool _isBattle)
         {
             behaviour.SetPlayerToBattle(_isBattle);
+        }
+
+        public void GenerateDropItemAt(ScriptableObject _itemData, Vector3 _position)
+        {
+            IItem item = inventory.GenerateItemByData(_itemData as IItemData);
+            playerObjectFactory.GenerateDropItemObject(item, _position);
         }
         #endregion
 
@@ -1061,6 +1068,7 @@ namespace PlayerSystem
         public bool CheckCanCraft_Blacksmith();
         public List<IItemData> CheckAllItemsCanBeSale();
         public void AddItemRaw(IItemData _item);
+        public IItem GenerateItemByData(IItemData _data);
     }
 
     public interface IPlayerUI

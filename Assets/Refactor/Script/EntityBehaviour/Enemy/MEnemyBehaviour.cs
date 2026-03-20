@@ -136,5 +136,10 @@ namespace EnemyBehaviour
         {
             InvokeAction(OnSelfExplodeDamageTrigger);
         }
+
+        public void GenerateDropItemByDataAt(ScriptableObject _data, Vector3 _position)
+        {
+            enemySystem.GenerateDropItemByDataAt(_data, _position);
+        }
     }
 }

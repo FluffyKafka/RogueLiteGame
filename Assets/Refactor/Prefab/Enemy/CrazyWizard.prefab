@@ -15200,6 +15200,7 @@ GameObject:
   - component: {fileID: 3181625562766382665}
   - component: {fileID: 5795175619184034306}
   - component: {fileID: 1726240150170420908}
+  - component: {fileID: 7032391012038039367}
   m_Layer: 7
   m_Name: CrazyWizard
   m_TagString: Untagged
@@ -15396,6 +15397,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d114349c084b2a4ca8055d4933b539d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7032391012038039367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8020982647346613071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee92797e0b0b0945bc12613887deea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsRateList:
+  - item: {fileID: 11400000, guid: 87148b962dea46446bab89bd6a894988, type: 2}
+    rate: 0.05
+  - item: {fileID: 11400000, guid: bc6add853fba40e4db6d36f674241bb0, type: 2}
+    rate: 0.05
+  - item: {fileID: 11400000, guid: a54743c3429926649a30f2ed9bf0b5bc, type: 2}
+    rate: 0.3
+  - item: {fileID: 11400000, guid: 913b57acf546ce3488a15aefc6f0c447, type: 2}
+    rate: 0.1
+  - item: {fileID: 11400000, guid: 20e31b27a7f17c949b7575ef13b7172f, type: 2}
+    rate: 0.2
 --- !u!1 &8042559632614643839
 GameObject:
   m_ObjectHideFlags: 0

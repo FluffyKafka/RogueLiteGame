@@ -340,6 +340,18 @@ namespace InventorySystem
                 InvokeFunc(TryAddEquipment, newEquipment);
             }
         }
+
+        public IItem GenerateItemByData(IItemData _data)
+        {
+            if(_data.CheckItemType() == EItemType.Material)
+            {
+                return itemFactory.GenerateItem(_data);
+            }
+            else
+            {
+                return itemFactory.GenerateEquipment(_data);
+            }
+        }
     }
 }
 

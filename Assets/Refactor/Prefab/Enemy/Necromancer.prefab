@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 7276554944862041868}
   - component: {fileID: 1697473043027123627}
   - component: {fileID: 652139523549249035}
+  - component: {fileID: 9118724836177683452}
   m_Layer: 7
   m_Name: Necromancer
   m_TagString: Untagged
@@ -245,6 +246,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b476e44d84e0f41b75ad1452457a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9118724836177683452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088322172915007269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee92797e0b0b0945bc12613887deea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsRateList:
+  - item: {fileID: 11400000, guid: b5c680ba2972d9240b323436f01d7cf8, type: 2}
+    rate: 0.1
+  - item: {fileID: 11400000, guid: c15d2f7666ef49745a134a4524d88eea, type: 2}
+    rate: 0.2
+  - item: {fileID: 11400000, guid: cc6cd18e4c4bf3346a2e1a08274feaa7, type: 2}
+    rate: 0.3
 --- !u!1 &2384874791090543219
 GameObject:
   m_ObjectHideFlags: 0

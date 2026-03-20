@@ -1609,7 +1609,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   assetDirectorPath: Assets/Refactor/ItemData/ItemsData
-  startItems: []
+  startItems:
+  - {fileID: 11400000, guid: b5c680ba2972d9240b323436f01d7cf8, type: 2}
+  - {fileID: 11400000, guid: 3b883b11604c6b24db235a7e26e6d5b8, type: 2}
+  - {fileID: 11400000, guid: 71de5ead4881c0b4d8b317efa58f9e4a, type: 2}
   itemDatabase:
     keys:
     - 5
@@ -11516,6 +11519,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1093887856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
+  m_PrefabInstance: {fileID: 1935807630587513299}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1093887865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093887856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee92797e0b0b0945bc12613887deea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsRateList:
+  - item: {fileID: 11400000, guid: 05272c516e3c6ea44b7f0e2aefde9cb5, type: 2}
+    rate: 0.6
+  - item: {fileID: 11400000, guid: 203cf4409822ae144be86819517d711f, type: 2}
+    rate: 0.4
+  - item: {fileID: 11400000, guid: 42aa26d8e7a012b428694284c241983c, type: 2}
+    rate: 0.1
 --- !u!1 &1102934947
 GameObject:
   m_ObjectHideFlags: 0
@@ -19321,7 +19348,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1093887865}
   m_SourcePrefab: {fileID: 100100000, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
 --- !u!1001 &2159602927338985126
 PrefabInstance:

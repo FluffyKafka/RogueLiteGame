@@ -49,6 +49,8 @@ namespace EnemySystem
 
         public void ToSelfExplode();
         public void ToSelfExplodeHolding();
+
+        public void GenerateDropItemByDataAt(ScriptableObject _data, Vector3 _position);
     }
 
     public interface IAnimEnemy : IAnimEntity
@@ -250,6 +252,10 @@ namespace EnemySystem
             enemyObjectFactory.GeneratePopUpText(_text, transform.position);
         }
 
+        public void GenerateDropItemByDataAt(ScriptableObject _data, Vector3 _position)
+        {
+            player.GenerateDropItemAt(_data, _position);
+        }
         #endregion
 
         #region Animation
