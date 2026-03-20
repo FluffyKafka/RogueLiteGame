@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c82fc4676bac0604a9c0deb75ef5ffad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isNoAnimation: 1
   textMesh: {fileID: 733028387858049070}
   popInSpeed: 0.5
   popOutSpeed: 5

@@ -20,6 +20,8 @@ namespace ObjectController
 
     internal abstract class AObjectController : ComponentManagerBase, IPlayerEnterable, IPlayerInteractable, IPlayerReflectable, IAnimObject, ISkillObject
     {
+        [SerializeField] protected bool isNoAnimation = false; 
+
         #region Action
         public Action<IObjectPlayer> PlayerEnter;
         public Action<IObjectPlayer> PlayerInteract;
@@ -56,15 +58,18 @@ namespace ObjectController
 
         protected virtual void Awake()
         {
-            anim = GetComponentInChildren<IObjectAnim>();
-            if(anim == null)
+            if(!isNoAnimation)
             {
-                Debug.LogWarning("对象控制器: " + GetType().Name + "没有动画组件");
-            }
-            else
-            {
-                ClearNotice += anim.Clear;
-            }
+                anim = GetComponentInChildren<IObjectAnim>();
+                if (anim == null)
+                {
+                    Debug.LogWarning("对象控制器: " + GetType().Name + "没有动画组件");
+                }
+                else
+                {
+                    ClearNotice += anim.Clear;
+                }
+            }    
         }
 
         protected void SelfRecycle()

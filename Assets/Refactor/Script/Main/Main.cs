@@ -1,5 +1,6 @@
 using AudioSystem;
 using EnemySystem;
+using GameManagerSystem;
 using InputManager;
 using InventorySystem;
 using Item;
@@ -72,6 +73,8 @@ namespace Main
                 );
 
             npcFactory.GetComponent<IInitNPCFactory>().Init(ObjectFactory.GetComponent<INPCObjectFactory>());
+
+            gameManager.GetComponent<IInitGameManager>().AddComponentsToPause(inputManager.GetComponent<IGameManager>());
         }
     }
 }
