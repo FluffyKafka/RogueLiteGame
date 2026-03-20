@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 namespace SkillSystem
 {
     internal class SMTimer : SMSkillModel
-    {
+    {   
         protected Dictionary<string, float> timers = new();
 
         public void SetTimer(string _id)

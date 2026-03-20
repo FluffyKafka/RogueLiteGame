@@ -1,3 +1,4 @@
+using EnemySystem;
 using EntitySystem;
 using Item;
 using ObjectGenerateData;
@@ -222,6 +223,9 @@ namespace PlayerSystem
         public void ToCounterAttack();
 
         public void InteractToNPC(IPlayerNPC _npc);
+        public KeyCode CheckNPCInteractInputKey();
+
+        public void GeneratePopUpText(string _text);
     }
 
     public struct DProjectileAimmingData
@@ -269,6 +273,8 @@ namespace PlayerSystem
         public void AddStatsModifier(WReadOnlyStatsData _data);
         public void RemoveStatsModifier(WReadOnlyStatsData _data);
         public void SkillUnlockToUi(IUISkill _skill);
+
+        public void GeneratePopUpText(string _text);
     }
 
     public interface IAudioPlayer
@@ -417,6 +423,16 @@ namespace PlayerSystem
         {
             behaviour.InteractToNPCInput();
         }
+
+        public KeyCode CheckNPCInteractInputKey()
+        {
+            return input.CheckNPCInteractInputKey();
+        }
+
+        public void GeneratePopUpText(string _text)
+        {
+            playerObjectFactory.GeneratePopUpText(_text, transform.position);
+        }
         #endregion
 
         #region Init
@@ -487,6 +503,9 @@ namespace PlayerSystem
             if (damage.data.physical > 0 || damage.data.magical > 0)
             {
                 playerAduio.PlayerTakeHit(transform);
+                float physcis = damage.data.physical < 0 ? 0 : damage.data.physical;
+                float magical = damage.data.magical < 0 ? 0 : damage.data.magical;
+                playerObjectFactory.GeneratePopUpText((physcis + magical).ToString(), transform.position);
             }
             return damage;
         }
@@ -1012,6 +1031,7 @@ namespace PlayerSystem
         public Vector3 CheckMousePosition();
 
         public KeyCode CheckSkillInputSlotKey(int _index);
+        public KeyCode CheckNPCInteractInputKey();
     }
 
     public interface IPlayerEnemy

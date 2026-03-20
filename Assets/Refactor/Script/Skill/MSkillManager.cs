@@ -211,6 +211,11 @@ namespace SkillSystem
         {
             return InvokeFunc(CheckCanUnlockSkillListNotice, _soul);
         }
+
+        public void GeneratePopUpText(string _text)
+        {
+            player.GeneratePopUpText(_text);
+        }
     }
 
     public interface ISkillObject

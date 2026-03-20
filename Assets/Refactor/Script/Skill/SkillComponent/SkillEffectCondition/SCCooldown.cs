@@ -8,6 +8,7 @@ namespace SkillSystem
     [CreateAssetMenu(fileName = "New Skill Entity", menuName = "Skill System/Skill Component/EffectCondition/Cooldown")]
     internal class SCCooldown : SCEffectConditionBase
     {
+        [SerializeField] protected string cooldownText = "ººƒ‹¿‰»¥÷–...";
         [SerializeField] protected float duration;
 
         protected SMTimer timer;
@@ -17,7 +18,7 @@ namespace SkillSystem
             timer = TryGetModel<SMTimer>(_modelManager);
         }
 
-        public override bool CanEffect(string _id)
+        public override bool CanEffect(string _id, bool _isShowPopUpText = false)
         {
             float effectTime = timer.CheckTimer(_id);
             if(effectTime < 0)
@@ -30,6 +31,10 @@ namespace SkillSystem
             }
             else
             {
+                if(_isShowPopUpText)
+                {
+                    timer.GeneratePopUpText(cooldownText);
+                }             
                 return false;
             }
         }

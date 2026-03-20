@@ -76,6 +76,11 @@ namespace SkillSystem
         }
         protected void UnlockSkill()
         {
+            if(isUnlock)
+            {
+                return;
+            }
+
             isUnlock = true;
             skillManager.SkillUnlock(this);
 
@@ -106,7 +111,7 @@ namespace SkillSystem
         {            
             foreach (var condition in effectConditions)
             {
-                if (!condition.CanEffect(skillId))
+                if (!condition.CanEffect(skillId, true))
                 {
                     return;
                 }
@@ -130,7 +135,7 @@ namespace SkillSystem
         {
             foreach(var condition in effectConditions)
             {
-                if(!condition.CanEffect(skillId))
+                if(!condition.CanEffect(skillId, true))
                 {
                     return;
                 }

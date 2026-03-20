@@ -3,6 +3,7 @@ using EnemySystem;
 using InputManager;
 using InventorySystem;
 using Item;
+using NPCSystem;
 using PlayerSystem;
 using SaveSystem;
 using SkillSystem;
@@ -28,6 +29,7 @@ namespace Main
         [SerializeField] protected GameObject audioManager;
         [SerializeField] protected GameObject saveManager;
         [SerializeField] protected GameObject gameManager;
+        [SerializeField] protected GameObject npcFactory;
 
         private void Awake()
         {
@@ -68,6 +70,8 @@ namespace Main
                 skillManager.GetComponent<ISaveSkill>(),
                 audioManager.GetComponent<ISaveAduio>()
                 );
+
+            npcFactory.GetComponent<IInitNPCFactory>().Init(ObjectFactory.GetComponent<INPCObjectFactory>());
         }
     }
 }

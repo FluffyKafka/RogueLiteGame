@@ -63,6 +63,11 @@ namespace InputManager
             return KeyCode.None;
         }
 
+        public KeyCode CheckNPCInteractInputKey()
+        {
+            return KeyCode.G;
+        }
+
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件
         private void Update()
         {

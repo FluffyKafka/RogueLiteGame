@@ -213,6 +213,15 @@ namespace PlayerBebaviour
         {
             InvokeAction(NPCEffectFailNotice);
         }
+        public KeyCode CheckNPCInteractInputKey()
+        {
+            return playerSystem.CheckNPCInteractInputKey();
+        }
+
+        public void GeneratePopUpText(string _text)
+        {
+            playerSystem.GeneratePopUpText(_text);
+        }
     }
 }
 

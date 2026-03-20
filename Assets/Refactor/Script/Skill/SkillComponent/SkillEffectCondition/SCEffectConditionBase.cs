@@ -12,7 +12,7 @@ namespace SkillSystem
             
         }
 
-        public virtual bool CanEffect(string _id)
+        public virtual bool CanEffect(string _id, bool _isShowPopUpText = false)
         {
             return true;
         }

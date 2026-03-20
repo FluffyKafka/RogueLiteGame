@@ -10,9 +10,12 @@ namespace PlayerBebaviour
     {
         [SerializeField] protected float interactRadius;
         [SerializeField] protected LayerMask whatIsNPC;
+        [SerializeField] protected string npcInteractClickText = "点击";
+        [SerializeField] protected string npcInteractText = "进行交互";
 
         protected MPlayerBeviour player;
         protected IPlayerNPC currentInteractNPC;
+        protected bool isEnterNPC = false;
 
         protected override void Awake()
         {
@@ -23,6 +26,43 @@ namespace PlayerBebaviour
             player.InteractFinishNotice += InteractFinish;
             player.NPCEffectFinishNotice += NPCEffectFinish;
             player.NPCEffectFailNotice += NPCEffectFail;
+            isEnterNPC = false;
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            if(isEnterNPC)
+            {
+                if(!IsHitNPC())
+                {
+                    isEnterNPC = false;
+                }
+            }
+            else
+            {
+                if (IsHitNPC())
+                {
+                    isEnterNPC = true;
+                    player.GeneratePopUpText(npcInteractClickText + player.CheckNPCInteractInputKey() + npcInteractText);
+                }
+            }
+            return;
+            
+        }
+
+        protected bool IsHitNPC()
+        {
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, whatIsNPC);
+            foreach (var hit in hits)
+            {
+                currentInteractNPC = hit.GetComponent<IPlayerNPC>();
+                if (currentInteractNPC != null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected void Interact()

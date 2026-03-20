@@ -8,6 +8,8 @@ namespace SkillSystem
     internal class SCCheckIsSwordThrown : SCEffectConditionBase
     {
         [SerializeField] protected bool CanEffectIfNotThrow = true;
+        [SerializeField] protected string swordThrownText = "剑已经被投出...";
+        [SerializeField] protected string swordNoThrowText = "剑尚未被投出...";
 
         protected SMSword sword;
 
@@ -17,15 +19,37 @@ namespace SkillSystem
             sword = TryGetModel<SMSword>(_modelManager);
         }
 
-        public override bool CanEffect(string _id)
+        public override bool CanEffect(string _id, bool _isShowPopUpText = false)
         {
             if(CanEffectIfNotThrow)
             {
-                return sword.IsSwordThrown();
+                if(sword.IsSwordThrown())
+                {
+                    return true;
+                }
+                else
+                {
+                    if(_isShowPopUpText)
+                    {
+                        sword.GeneratePopUpText(swordThrownText);
+                    }
+                    return false;
+                }
             }
             else
             {
-                return !sword.IsSwordThrown();
+                if(!sword.IsSwordThrown())
+                {
+                    return true;
+                }
+                else
+                {
+                    if(_isShowPopUpText)
+                    {
+                        sword.GeneratePopUpText(swordNoThrowText);
+                    }
+                    return false;
+                }
             }
         }
     }

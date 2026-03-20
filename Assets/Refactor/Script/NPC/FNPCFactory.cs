@@ -21,10 +21,6 @@ namespace NPCSystem
         protected static bool isTestMode_Class;
 
         protected INPCObjectFactory objectFactory;
-        public void Init(INPCObjectFactory _objectFactory)
-        {
-            objectFactory = _objectFactory;
-        }
 
         [Serializable]
         public class DNPCPrefabData
@@ -33,7 +29,7 @@ namespace NPCSystem
             public GameObject prefab;
         }
         [Header("NPCPrefab")]
-        protected List<DNPCPrefabData> npcPrefabs;
+        [SerializeField] protected List<DNPCPrefabData> npcPrefabs;
 
         protected virtual void Awake()
         {
@@ -45,6 +41,15 @@ namespace NPCSystem
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        public void Init(INPCObjectFactory _objectFactory)
+        {
+            objectFactory = _objectFactory;
+            foreach(var npc in npcPrefabs)
+            {
+                npc.prefab.GetComponent<ANPC>().Init(objectFactory);
             }
         }
 
@@ -70,6 +75,11 @@ namespace NPCSystem
         {
             Assert.IsTrue(isTestMode, "此方法只能在测试时执行，运行时所有NPC都由工厂生产而不是直接摆放入场景");
             _npc.Init(objectFactory);
+        }
+
+        public GameObject GenerateNPCByTypeAt(ENPCType _type, Vector3 _position)
+        {
+            return Instantiate(GetPrefabByType(_type), _position, Quaternion.identity);
         }
     }
 }

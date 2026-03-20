@@ -245,6 +245,11 @@ namespace EnemySystem
             _player.GetComponent<IEnemyPlayer>().SetPlayerToBattle(_isBattle);
         }    
 
+        public void GeneratePopUpText(string _text)
+        {
+            enemyObjectFactory.GeneratePopUpText(_text, transform.position);
+        }
+
         #endregion
 
         #region Animation
@@ -286,6 +291,9 @@ namespace EnemySystem
             if (damage.data.physical > 0 || damage.data.magical > 0)
             {
                 audioManager.TakeHit(transform, true);
+                float physcis = damage.data.physical < 0 ? 0 : damage.data.physical;
+                float magical = damage.data.magical < 0 ? 0 : damage.data.magical;
+                enemyObjectFactory.GeneratePopUpText((physcis + magical).ToString(), transform.position);
             }
             InvokeAction(TakeDamage, damage);
             return damage;
@@ -355,6 +363,7 @@ namespace EnemySystem
         public float CheckArrowGravityScale();
 
         public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position);
+        public void GeneratePopUpText(string _text, Vector3 _position);
     }
 
     public interface IEnemyFactory

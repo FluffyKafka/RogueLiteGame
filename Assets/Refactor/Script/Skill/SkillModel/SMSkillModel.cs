@@ -13,6 +13,11 @@ namespace SkillSystem
         {
             manager = GetComponent<MSkillManager>();
         }
+
+        public void GeneratePopUpText(string _text)
+        {
+            manager.GeneratePopUpText(_text);
+        }
     }
 }
 
