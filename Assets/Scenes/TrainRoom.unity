@@ -4280,8 +4280,8 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 1
-  m_GenerationType: 0
+  m_GeometryType: 0
+  m_GenerationType: 1
   m_EdgeRadius: 0
   m_ColliderPaths:
   - m_Collider: {fileID: 962576273}
@@ -4428,78 +4428,28 @@ CompositeCollider2D:
         Y: -40000000
   m_CompositePaths:
     m_Paths:
-    - - {x: -13.00003, y: -13}
-      - {x: -13.00003, y: -3}
-      - {x: -17, y: -2.9999707}
-      - {x: -17.000029, y: 5}
-      - {x: -25.406258, y: 4.9999905}
-      - {x: -26, y: 4.281241}
-      - {x: -26.000029, y: 4}
-      - {x: -26.406258, y: 3.9999905}
-      - {x: -27, y: 3.281241}
-      - {x: -27.000029, y: 3}
-      - {x: -27.406256, y: 2.9999905}
-      - {x: -28, y: 2.281241}
-      - {x: -28.000029, y: 2}
-      - {x: -28.406256, y: 1.9999905}
-      - {x: -29, y: 1.2812407}
-      - {x: -29.000029, y: 1}
-      - {x: -29.406256, y: 0.9999905}
-      - {x: -30, y: 0.2812407}
-      - {x: -30.000029, y: 0}
-      - {x: -30.406256, y: -0.0000095000005}
-      - {x: -31, y: -0.7187593}
-      - {x: -31.000029, y: -1}
-      - {x: -31.406256, y: -1.0000095}
-      - {x: -32, y: -1.7187592}
-      - {x: -32.00003, y: -2}
-      - {x: -32.406258, y: -2.0000095}
-      - {x: -33, y: -2.7187593}
-      - {x: -33.00003, y: -3}
-      - {x: -39.15625, y: -2.9999707}
-      - {x: -39.156246, y: 4.000005}
-      - {x: -39.09375, y: 4.156255}
-      - {x: -39.09375, y: 4.781254}
-      - {x: -39.12502, y: 4.875}
-      - {x: -39.937508, y: 4.874997}
-      - {x: -40.000008, y: 4.8437505}
-      - {x: -40.468754, y: 4.875}
-      - {x: -40.90625, y: 4.874971}
-      - {x: -40.90625, y: 4.2499986}
-      - {x: -40.874977, y: 4}
-      - {x: -40.78131, y: 3.9999385}
-      - {x: -40.8125, y: 3.9687397}
-      - {x: -40.843723, y: 3}
-      - {x: -40.78131, y: 2.9999385}
-      - {x: -40.8125, y: 2.9687397}
-      - {x: -40.843723, y: 2}
-      - {x: -40.78131, y: 1.9999384}
-      - {x: -40.8125, y: 1.9687396}
-      - {x: -40.843723, y: 1}
-      - {x: -40.78131, y: 0.9999383}
-      - {x: -40.8125, y: 0.9687397}
-      - {x: -40.843723, y: 0}
-      - {x: -40.78131, y: -0.000061700004}
-      - {x: -40.8125, y: -0.0312603}
-      - {x: -40.843723, y: -1}
-      - {x: -40.78131, y: -1.0000618}
-      - {x: -40.8125, y: -1.0312604}
-      - {x: -40.843723, y: -2}
-      - {x: -40.78131, y: -2.0000615}
-      - {x: -40.8125, y: -2.0312605}
-      - {x: -40.84378, y: -3}
-      - {x: -53, y: -3.0000293}
-      - {x: -52.999973, y: -13}
-    - - {x: 38.999973, y: -4}
-      - {x: 38.999973, y: -3}
-      - {x: -7, y: -3.0000293}
-      - {x: -6.9999704, y: -4}
-    - - {x: -57.000034, y: -4}
-      - {x: -57.000034, y: -3}
-      - {x: -93, y: -3.0000293}
-      - {x: -92.99997, y: -4}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+    - - {x: -13.0585785, y: -13}
+      - {x: -13.0585785, y: -3}
+      - {x: -17, y: -2.9414213}
+      - {x: -17.058578, y: 5}
+      - {x: -25.421661, y: 4.9837637}
+      - {x: -33.02239, y: -3}
+      - {x: -39.156017, y: -2.9411404}
+      - {x: -39.18386, y: 4.875}
+      - {x: -40.90578, y: 4.8158593}
+      - {x: -40.902893, y: -3}
+      - {x: -53, y: -3.0585787}
+      - {x: -52.94142, y: -13}
+    - - {x: 38.94142, y: -4}
+      - {x: 38.94142, y: -3}
+      - {x: -7, y: -3.0585787}
+      - {x: -6.9414215, y: -4}
+    - - {x: -57.05858, y: -4}
+      - {x: -57.05858, y: -3}
+      - {x: -93, y: -3.0585787}
+      - {x: -92.94142, y: -4}
+  m_VertexDistance: 0.5
+  m_OffsetDistance: 0.1
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 962576269}
 --- !u!50 &962576272
@@ -18516,9 +18466,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 695346754692897693, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.631
+      objectReference: {fileID: 0}
+    - target: {fileID: 695346754692897693, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.249
+      objectReference: {fileID: 0}
     - target: {fileID: 990485481570971600, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: betweenDotSpace
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611604412029903720, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: groundCheckDistance
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 2591024580080212276, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: m_Layer
@@ -18535,6 +18497,22 @@ PrefabInstance:
     - target: {fileID: 3470177004669374660, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: fireDamage.baseValue
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786068016421193762, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_Size.x
+      value: 0.7926216
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786068016421193762, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0502825
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786068016421193762, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.041578293
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786068016421193762, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.032736033
       objectReference: {fileID: 0}
     - target: {fileID: 4982497174444371175, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: m_Layer
@@ -18559,6 +18537,18 @@ PrefabInstance:
     - target: {fileID: 7128826403821977553, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: maxHealth.baseValue
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191395473268616537, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191395473268616537, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191395473268616537, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
+      propertyPath: m_GravityScale
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7234228554644553370, guid: d2bf7b12a5e509d45886cec4178d83ed, type: 3}
       propertyPath: entityIcon

@@ -27,6 +27,10 @@ namespace PlayerBebaviour
         public override void Update()
         {
             base.Update();
+            if(!player.InvokeFunc(player.IsGroundedOrPlatform_Strict) && !player.InvokeFunc(player.IsGroundedOrPlatForm))
+            {
+                playerStateMachine.ChangeState(playerStateMachine.fall);
+            }
         }
 
         protected void Jump()

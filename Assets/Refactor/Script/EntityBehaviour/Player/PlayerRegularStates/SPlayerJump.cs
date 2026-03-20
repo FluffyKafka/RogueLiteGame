@@ -1,4 +1,5 @@
 using EntityBehaviour;
+using UnityEngine;
 
 namespace PlayerBebaviour
 {
@@ -30,7 +31,7 @@ namespace PlayerBebaviour
                 return;
             }
 
-            if (player.InvokeFunc(player.IsGroundedOrPlatForm))
+            if (player.InvokeFunc(player.IsGroundedOrPlatform_Strict) || player.InvokeFunc(player.IsGroundedOrPlatForm))
             {
                 if (isFinishJump)
                 {

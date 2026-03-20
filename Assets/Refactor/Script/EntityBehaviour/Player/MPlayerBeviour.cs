@@ -23,6 +23,7 @@ namespace PlayerBebaviour
         public Action ToExitMove;
         public Action ToWallSlide;
         public Action StandStillNotice;
+        public Action<bool> SetGravityToZeroNotice;
 
         //Input
         public Action<float> HorizonInput;

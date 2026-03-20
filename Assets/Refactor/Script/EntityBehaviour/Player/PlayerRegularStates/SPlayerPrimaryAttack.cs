@@ -13,6 +13,7 @@ namespace PlayerBebaviour
             base.Enter();
             player.InvokeAction(player.AttackRaw);
             player.AttackFinish += OnAttackFinish;
+            player.InvokeAction(player.SetGravityToZeroNotice, true);
         }
 
         public override void Exit()
@@ -20,6 +21,7 @@ namespace PlayerBebaviour
             base.Exit();
             playerStateMachine.BusyFor(player.InvokeFunc(player.CheckUnmovableDurationAfterAttack));
             player.AttackFinish -= OnAttackFinish;
+            player.InvokeAction(player.SetGravityToZeroNotice, false);
         }
 
         public override void Update()

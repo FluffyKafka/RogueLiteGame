@@ -22,9 +22,9 @@ namespace PlayerBebaviour
         {
             base.Update();
 
-            if (player.InvokeFunc(player.IsGroundedOrPlatForm))
+            if (player.InvokeFunc(player.IsGroundedOrPlatform_Strict) || player.InvokeFunc(player.IsGroundedOrPlatForm))
             {
-                playerStateMachine.ChangeState(playerStateMachine.idle);
+                playerStateMachine.ChangeState(playerStateMachine.move);
             }
             else if (player.InvokeFunc(player.IsTouchWall) && playerStateMachine.xInput == player.InvokeFunc(player.CheckFacingDir))
             {

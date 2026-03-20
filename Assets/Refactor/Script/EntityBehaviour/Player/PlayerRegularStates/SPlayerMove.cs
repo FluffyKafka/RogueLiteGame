@@ -1,4 +1,6 @@
 using EntityBehaviour;
+using System;
+using UnityEngine;
 
 namespace PlayerBebaviour
 {
@@ -24,7 +26,7 @@ namespace PlayerBebaviour
         {
             base.Update();
             player.InvokeAction(player.Move, playerStateMachine.xInput);
-            if (playerStateMachine.xInput == 0)
+            if (MathF.Abs(playerStateMachine.xInput) < 0.0001)
             {
                 playerStateMachine.ChangeState(playerStateMachine.idle);
             }

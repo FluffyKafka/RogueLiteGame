@@ -27,7 +27,7 @@ namespace PlayerBebaviour
             base.Update();
             player.WallSlide?.Invoke(playerStateMachine.yInput);
 
-            bool IsGroundedOrPlatForm = player.InvokeFunc(player.IsGroundedOrPlatForm);
+            bool IsGroundedOrPlatForm = player.InvokeFunc(player.IsGroundedOrPlatform_Strict);
             bool isTouchWall = player.InvokeFunc(player.IsTouchWall);
             int facingDir = player.InvokeFunc(player.CheckFacingDir);
 

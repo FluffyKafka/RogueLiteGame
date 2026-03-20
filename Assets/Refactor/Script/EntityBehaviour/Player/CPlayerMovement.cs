@@ -35,12 +35,16 @@ namespace PlayerBebaviour
         [Header("Player Movement Collision Check")]
         [SerializeField] protected float groundCheckWidth;
         [SerializeField] protected float strictGroundCheckDistance;
+        [SerializeField] protected Transform secondGroundCheckTransform;
+        [SerializeField] protected float secondGroundCheckDistance;
 
         #region Skill
         protected float dashSpeed;
         #endregion
 
-        MPlayerBeviour player;
+        protected MPlayerBeviour player;
+        protected float currentGravity;
+
         protected override void Awake()
         {
             base.Awake();
@@ -64,6 +68,7 @@ namespace PlayerBebaviour
             player.ToIdle += StandStill;
             player.StandStillNotice += StandStill;
             player.OnAimmingUpdate += AimmingUpdate;
+            player.SetGravityToZeroNotice += SetGravityToZero;
         }
 
         protected override void Update()
@@ -74,7 +79,7 @@ namespace PlayerBebaviour
             {
                 if (isJumpFinish)
                 {
-                    if (player.InvokeFunc(player.IsGroundedOrPlatform_Strict) || (canWallSlide && IsTouchWall()))
+                    if (player.InvokeFunc(player.IsGroundedOrPlatform_Strict) || player.InvokeFunc(player.IsGroundedOrPlatForm) || (canWallSlide && IsTouchWall()))
                     {
                         jumpCount = 0;
                     }
@@ -189,9 +194,7 @@ namespace PlayerBebaviour
 
         public override bool IsGroundedOrPlatForm()
         {
-            Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
-            Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
-            return Physics2D.OverlapArea(leftUp, rightDown, whatIsGround | whatIsPlatform);
+            return Physics2D.Raycast(secondGroundCheckTransform.position, Vector2.down, secondGroundCheckDistance, whatIsGround | whatIsPlatform);
         }
 
         //IsGroundedOrPlatform_Strict更为严格，确保角色的脚确实接触地面，
@@ -222,14 +225,24 @@ namespace PlayerBebaviour
         {
             SetVelocity(new Vector2(dashSpeed * facingDir, rg.velocity.y), true);
         }
+        protected void SetGravityToZero(bool _isToZero)
+        {
+            if(_isToZero)
+            {
+                currentGravity = rg.gravityScale;
+                rg.gravityScale = 0;
+            }
+            else
+            {
+                rg.gravityScale = currentGravity;
+            }
+        }
 
         protected override void OnDrawGizmos()
         {
             base.OnDrawGizmos();
             Gizmos.color = Color.red;
-            Vector2 leftUp = new Vector2(groundCheck.position.x - groundCheckWidth / 2, groundCheck.position.y + groundCheckDistance / 2);
-            Vector2 rightDown = new Vector2(groundCheck.position.x + groundCheckWidth / 2, groundCheck.position.y - groundCheckDistance / 2);
-            Gizmos.DrawWireCube(groundCheck.position, new Vector3(groundCheckWidth, groundCheckDistance));
+            Gizmos.DrawLine(secondGroundCheckTransform.position, secondGroundCheckTransform.position + new Vector3(0, -secondGroundCheckDistance, 0));
             Gizmos.DrawLine(groundCheck.position, groundCheck.position + new Vector3(0, -strictGroundCheckDistance, 0));
         }
     }
