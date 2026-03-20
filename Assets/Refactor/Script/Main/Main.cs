@@ -59,7 +59,7 @@ namespace Main
                 itemDataBase.GetComponent<IItemDataBase>()
                 );
 
-            ui.GetComponent<IInitUI>().Init(player.GetComponent<IUIPlayer>());
+            ui.GetComponent<IInitUI>().Init(player.GetComponent<IUIPlayer>(), audioManager.GetComponent<IUIAudio>());
 
             skillManager.GetComponent<IInitSkillManager>().Init(player.GetComponent<ISkillManagerPlayer>());
 

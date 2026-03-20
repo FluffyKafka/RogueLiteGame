@@ -11,12 +11,13 @@ namespace UISystem
 {
     public interface IInitUI
     {
-        public void Init(IUIPlayer _player);
+        public void Init(IUIPlayer _player, IUIAudio _audio);
     }
 
     internal class MUIManager : ComponentManagerBase, IPlayerUI, IInitUI
     {
         protected IUIPlayer player;
+        protected IUIAudio audioSystem;
 
         #region Action
         public Action<IEquipment> Equip;
@@ -101,9 +102,10 @@ namespace UISystem
         }
 
         #region Init
-        public void Init(IUIPlayer _player)
+        public void Init(IUIPlayer _player, IUIAudio _audio)
         {
             player = _player;
+            audioSystem = _audio;
         }
         #endregion
 
@@ -288,6 +290,53 @@ namespace UISystem
         {
             player.NPCEffectFail();
         }
+
+        #region Audio
+        public void PlayButtonClickSFX(bool _isPlay)
+        {
+            audioSystem.ButtonClick(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayCraftSFX(bool _isPlay)
+        {
+            audioSystem.Craft(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayEquipSFX(bool _isPlay)
+        {
+            audioSystem.Equip(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayBuySFX(bool _isPlay)
+        {
+            audioSystem.Buy(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayUpgradeSFX(bool _isPlay)
+        {
+            audioSystem.Upgrade(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayDiscardInventorySFX(bool _isPlay)
+        {
+            audioSystem.DiscardInventory(player.CheckTransform(), _isPlay);
+        }
+
+        public void PlayCommunicatingSFX(bool _isPlay)
+        {
+            audioSystem.Communicating(player.CheckTransform(), _isPlay);
+        }
+        #endregion
     }
 }
 
+public interface IUIAudio
+{
+    public void ButtonClick(Transform _sourceTransform, bool _play = true);
+    public void Craft(Transform _sourceTransform, bool _play = true);
+    public void Equip(Transform _sourceTransform, bool _play = true);
+    public void Buy(Transform _sourceTransform, bool _play = true);
+    public void Upgrade(Transform _sourceTransform, bool _play = true);
+    public void DiscardInventory(Transform _sourceTransform, bool _play = true);
+    public void Communicating(Transform _sourceTransform, bool _play = true);
+}

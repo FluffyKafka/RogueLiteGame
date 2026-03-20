@@ -26,7 +26,23 @@ namespace UISystem
                 toSkill.onClick.AddListener(() => ChangePageTo(EUIPageType.Skill));
                 toMap.onClick.AddListener(() => ChangePageTo(EUIPageType.Map));
                 toOption.onClick.AddListener(() => ChangePageTo(EUIPageType.Option));
+
+                toCharactor.onClick.AddListener(() => ui.PlayButtonClickSFX(true));
+                toCraft.onClick.AddListener(() => ui.PlayButtonClickSFX(true));
+                toSkill.onClick.AddListener(() => ui.PlayButtonClickSFX(true));
+                toMap.onClick.AddListener(() => ui.PlayButtonClickSFX(true));
+                toOption.onClick.AddListener(() => ui.PlayButtonClickSFX(true));
             }
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            toCharactor.onClick.RemoveAllListeners();
+            toCraft.onClick.RemoveAllListeners();
+            toSkill.onClick.RemoveAllListeners();
+            toMap.onClick.RemoveAllListeners();
+            toOption.onClick.RemoveAllListeners();
         }
 
         protected void ChangePageTo(EUIPageType _type)

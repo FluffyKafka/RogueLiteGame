@@ -33,6 +33,7 @@ namespace UISystem
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            ui.PlayButtonClickSFX(true);
             ShowItemDetail.Invoke(itemForSale);
         }
     }

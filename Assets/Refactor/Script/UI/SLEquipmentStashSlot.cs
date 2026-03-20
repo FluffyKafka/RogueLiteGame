@@ -44,6 +44,7 @@ namespace UISystem
             }
             if (_eventData.button == PointerEventData.InputButton.Left)
             {
+                ui.PlayEquipSFX(true);
                 ui.InvokeAction(ui.Equip, equipment);
             }
             else if (_eventData.button == PointerEventData.InputButton.Right)

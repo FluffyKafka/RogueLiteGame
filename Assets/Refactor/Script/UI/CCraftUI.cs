@@ -21,9 +21,13 @@ namespace UISystem
         {
             base.OnEnable();
             weaponListButton.onClick.AddListener(() => { ShowList(EEquipmentType.Weapon); });
+            weaponListButton.onClick.AddListener(() => { ui.PlayButtonClickSFX(true); });
             armorListButton.onClick.AddListener(() => { ShowList(EEquipmentType.Armor); });
+            armorListButton.onClick.AddListener(() => { ui.PlayButtonClickSFX(true); });
             amuletListButton.onClick.AddListener(() => { ShowList(EEquipmentType.Amulet); });
+            amuletListButton.onClick.AddListener(() => { ui.PlayButtonClickSFX(true); });
             flaskListButton.onClick.AddListener(() => { ShowList(EEquipmentType.Flask); });
+            flaskListButton.onClick.AddListener(() => { ui.PlayButtonClickSFX(true); });
         }
 
         protected override void OnDisable()

@@ -48,6 +48,7 @@ namespace UISystem
                 return;
             }
 
+            ui.PlayCommunicatingSFX(true);
             if(sentenceIndex + 1 < dialog.CheckDialog().Count)
             {
                 ++sentenceIndex;

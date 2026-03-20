@@ -63,6 +63,7 @@ namespace UISystem
             IReadOnlyList<IItemData> lackList = ui.InvokeFunc(ui.TryCraft, data);
             if (lackList == null)
             {
+                ui.PlayCraftSFX(true);
                 ui.InvokeAction(ui.ShowWarning, craftSuccessText);
             }
             else

@@ -56,6 +56,7 @@ namespace UISystem
         }
         protected void SkillUnlockFinish()
         {
+            ui.PlayUpgradeSFX(true);
             SetSkillLearningWindow(null);
             ui.NPCEffectFinish();
         }

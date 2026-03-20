@@ -186,6 +186,7 @@ namespace PlayerSystem
         public void ConsumeCoin(float _coin);
         public void AddItemRaw(IItemData _item);
         public void NPCEffectFail();
+        public Transform CheckTransform();
     }
 
     public interface IStatsPlayer : IStatEntity

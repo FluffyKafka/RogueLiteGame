@@ -43,6 +43,7 @@ namespace UISystem
             }
             if (_eventData.button == PointerEventData.InputButton.Right)
             {
+                ui.PlayDiscardInventorySFX(true);
                 ui.InvokeAction(ui.DropItem, item);
             }
         }

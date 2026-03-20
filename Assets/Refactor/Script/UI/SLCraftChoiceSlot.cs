@@ -22,6 +22,7 @@ namespace UISystem
         {
             ui.InvokeAction(ui.ShowCraftWindow, item as IEquipmentData);
             itemImage.color = pressColor;
+            ui.PlayButtonClickSFX(true);
         }
         public void OnPointerUp(PointerEventData _eventData)
         {

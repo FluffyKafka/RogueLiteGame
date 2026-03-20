@@ -73,6 +73,7 @@ namespace UISystem
         {
             if(ui.CanPurchase_coin(currentChosenItem.price))
             {
+                ui.PlayBuySFX(true);
                 ui.ConsumeCoin(currentChosenItem.price);
                 ui.AddItemRaw(currentChosenItem.item);
                 SetItemsForSale(null);
