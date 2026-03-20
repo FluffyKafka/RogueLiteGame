@@ -11,6 +11,7 @@ namespace AnimationAndFx
 
         protected Animator anim;
         protected string currentAnimName;
+        protected float defaultAnimSpeed;
 
         protected override void Awake()
         {
@@ -21,6 +22,9 @@ namespace AnimationAndFx
 
             npc.IdleNotice += Idle;
             npc.EffectNotice += Effect;
+            npc.GamePauseNotice += GamePause;
+
+            defaultAnimSpeed = anim.speed;
         }
 
         protected void Idle()
@@ -30,6 +34,17 @@ namespace AnimationAndFx
         protected void Effect()
         {
             ChangeTo(effectAnimName);
+        }
+        protected void GamePause(bool _isPause, float _slowRate)
+        {
+            if(_isPause)
+            {
+                anim.speed /= _slowRate;
+            }
+            else
+            {
+                anim.speed = defaultAnimSpeed;
+            }
         }
 
         private void ChangeTo(string _animName)

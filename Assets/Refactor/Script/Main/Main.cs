@@ -74,7 +74,7 @@ namespace Main
 
             npcFactory.GetComponent<IInitNPCFactory>().Init(ObjectFactory.GetComponent<INPCObjectFactory>());
 
-            gameManager.GetComponent<IInitGameManager>().AddComponentsToPause(inputManager.GetComponent<IGameManager>());
+            gameManager.GetComponent<IInitGameManager>().Init(inputManager.GetComponent<IGameManagerInput>(), npcFactory.GetComponent<IGameManagerNPCFactory>());
         }
     }
 }

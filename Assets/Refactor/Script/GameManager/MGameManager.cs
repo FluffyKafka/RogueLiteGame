@@ -1,29 +1,29 @@
+using InputManager;
+using NPCSystem;
 using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace GameManagerSystem
-{
-    public interface IGameManager
-    {
-        public void GamePause(bool _isPasue);
-    }
-    
+{   
     public interface IInitGameManager
     {
-        public void AddComponentsToPause(IGameManager _component);
+        public void Init(IGameManagerInput _input, IGameManagerNPCFactory _npcFactory);
     }
 
     internal class MGameManager : MonoBehaviour, IPlayerGameManager, IInitGameManager
     {
         [SerializeField] protected float pauseTimeSlowRate;
         protected bool isPause = false;
-        protected List<IGameManager> componentsToPause = new();
 
-        public void AddComponentsToPause(IGameManager _component)
+        protected IGameManagerInput input;
+        protected IGameManagerNPCFactory npcFactory;
+
+        public void Init(IGameManagerInput _input, IGameManagerNPCFactory _npcFactory)
         {
-            componentsToPause.Add(_component);
+            input = _input;
+            npcFactory = _npcFactory;
         }
 
         public void Pause(bool _isPause)
@@ -32,19 +32,12 @@ namespace GameManagerSystem
             if(_isPause)
             {
                 Time.timeScale *= pauseTimeSlowRate;
-                foreach(var component in componentsToPause)
-                {
-                    component.GamePause(true);
-                }
             }
             else
             {
                 Time.timeScale = 1;
-                foreach (var component in componentsToPause)
-                {
-                    component.GamePause(false);
-                }
             }
+            PauseGameNotice(_isPause);
         }
 
         public void PauseRaw(bool _isPause)
@@ -52,20 +45,19 @@ namespace GameManagerSystem
             isPause = _isPause;
             if (_isPause)
             {
-                Time.timeScale = 0;
-                foreach (var component in componentsToPause)
-                {
-                    component.GamePause(true);
-                }
+                Time.timeScale = 0;               
             }
             else
             {
                 Time.timeScale = 1;
-                foreach (var component in componentsToPause)
-                {
-                    component.GamePause(false);
-                }
             }
+            PauseGameNotice(_isPause);
+        }
+
+        protected void PauseGameNotice(bool _isPause)
+        {
+            input.GamePause(_isPause);
+            npcFactory.GamePause(_isPause, pauseTimeSlowRate);
         }
         
         public bool CheckIsPause()

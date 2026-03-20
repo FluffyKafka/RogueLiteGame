@@ -1,4 +1,5 @@
 using EnemySystem;
+using GameManagerSystem;
 using PlayerSystem;
 using System;
 using System.Collections;
@@ -13,7 +14,12 @@ namespace NPCSystem
         public void Init(INPCObjectFactory _objectFactory);
     }
 
-    internal class FNPCFactory : MonoBehaviour, IInitNPCFactory
+    public interface IGameManagerNPCFactory
+    {
+        public void GamePause(bool _isPasue, float _slowRate);
+    }
+
+    internal class FNPCFactory : MonoBehaviour, IInitNPCFactory, IGameManagerNPCFactory
     {
         [SerializeField] protected bool isTestMode;
 
@@ -31,6 +37,8 @@ namespace NPCSystem
         [Header("NPCPrefab")]
         [SerializeField] protected List<DNPCPrefabData> npcPrefabs;
 
+        protected List<GameObject> npcGeneratedList = new();
+
         protected virtual void Awake()
         {
             if (instance == null)
@@ -41,6 +49,14 @@ namespace NPCSystem
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        public void GamePause(bool _isPause, float _slowRate)
+        {
+            foreach(var npc in npcGeneratedList)
+            {
+                npc.GetComponent<ANPC>().GamePause(_isPause, _slowRate);
             }
         }
 
@@ -75,11 +91,14 @@ namespace NPCSystem
         {
             Assert.IsTrue(isTestMode, "此方法只能在测试时执行，运行时所有NPC都由工厂生产而不是直接摆放入场景");
             _npc.Init(objectFactory);
+            npcGeneratedList.Add(_npc.gameObject);
         }
 
         public GameObject GenerateNPCByTypeAt(ENPCType _type, Vector3 _position)
         {
-            return Instantiate(GetPrefabByType(_type), _position, Quaternion.identity);
+            GameObject npc = Instantiate(GetPrefabByType(_type), _position, Quaternion.identity);
+            npcGeneratedList.Add(npc);
+            return npc;
         }
     }
 }

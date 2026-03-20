@@ -10,6 +10,7 @@ namespace AnimationAndFx
     {
         public Action IdleNotice;
         public Action EffectNotice;
+        public Action<bool, float> GamePauseNotice;
 
         public void Idle()
         {
@@ -18,6 +19,10 @@ namespace AnimationAndFx
         public void Effect()
         {
             InvokeAction(EffectNotice);
+        }
+        public void GamePause(bool _isPause, float _slowRate)
+        {
+            InvokeAction(GamePauseNotice, _isPause, _slowRate);
         }
     }
 

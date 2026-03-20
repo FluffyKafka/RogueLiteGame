@@ -26,7 +26,7 @@ namespace NPCSystem
         protected INPCPlayer currentInteractPlayer;
         protected INPCObjectFactory objectFactory;
 
-        protected virtual void Awake()
+        protected virtual void Start()
         {
             if(objectFactory == null)
             {
@@ -126,12 +126,18 @@ namespace NPCSystem
         {
             InvokeAction(EffectFailNotice);
         }
+
+        public void GamePause(bool _isPause, float _slowRate)
+        {
+            GetComponentInChildren<INPCAnimationFx>()?.GamePause(_isPause, _slowRate);
+        }
     }
 
     public interface INPCAnimationFx
     {
         public void Idle();
         public void Effect();
+        public void GamePause(bool _isPasue, float _slowRate);
     }
 
     public interface INPCObjectFactory

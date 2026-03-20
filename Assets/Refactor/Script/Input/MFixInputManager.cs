@@ -13,7 +13,12 @@ namespace InputManager
         public void Init(IInputPlayer _player);
     }
 
-    internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput, IGameManager
+    public interface IGameManagerInput
+    {
+        public void GamePause(bool _isPause);
+    }
+
+    internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput, IGameManagerInput
     {
         protected IInputPlayer player;
 
@@ -27,9 +32,9 @@ namespace InputManager
 
         protected bool isPasueGame = false;
 
-        public void GamePause(bool _isPasue)
+        public void GamePause(bool _isPause)
         {
-            isPasueGame = _isPasue;
+            isPasueGame = _isPause;
         }
 
         public float CheckHorizonInput()
@@ -79,7 +84,15 @@ namespace InputManager
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件
         private void Update()
         {
-            if(isPasueGame)
+            foreach (var pair in uiPageInput)
+            {
+                if (Input.GetKeyDown(pair.key))
+                {
+                    player.UIPageSwitchInput(pair.uiPage);
+                }
+            }
+
+            if (isPasueGame)
             {
                 return;
             }
@@ -136,19 +149,6 @@ namespace InputManager
             if(Input.GetKeyDown(KeyCode.G))
             {
                 player.InteractToNPCInput();
-            }
-
-            foreach(var pair in uiPageInput)
-            {
-                if(Input.GetKeyDown(pair.key))
-                {
-                    player.UIPageSwitchInput(pair.uiPage);
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                player.EndNPCEffectInput();
             }
         }
     }

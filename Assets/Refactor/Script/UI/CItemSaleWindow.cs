@@ -13,6 +13,7 @@ namespace UISystem
         [SerializeField] protected CItemDetailUI itemDetailTooltip;
         [SerializeField] protected CEquipmentDetailUI equipmentDetailTooltip;
         [SerializeField] protected Button purchaseButton;
+        [SerializeField] protected Button leaveButton;
 
         protected DItemForSaleToUi currentChosenItem;
 
@@ -24,6 +25,7 @@ namespace UISystem
             {
                 ChooseItemNotice += ChooseItem;
                 purchaseButton.onClick.AddListener(TryPurchase);
+                leaveButton.onClick.AddListener(Leave);
                 for(int i = 0; i < _items.Count; ++i)
                 {
                     slots[i].SetItemForSale(_items[i], ChooseItemNotice);
@@ -36,6 +38,7 @@ namespace UISystem
             {
                 ChooseItemNotice -= ChooseItem;
                 purchaseButton.onClick.RemoveAllListeners();
+                leaveButton.onClick.RemoveAllListeners();
                 itemDetailTooltip.HideToolTip();
                 equipmentDetailTooltip.HideToolTip();
                 foreach (var slot in slots)
@@ -79,6 +82,11 @@ namespace UISystem
             {
                 ui.NPCEffectFail();
             }
+        }
+        protected void Leave()
+        {
+            SetItemsForSale(null);
+            ui.NPCEffectFinish();
         }
     }
 }

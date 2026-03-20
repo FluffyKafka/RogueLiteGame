@@ -89,7 +89,7 @@ namespace UISystem
 
         protected void Start()
         {
-            ChangePageTo(initPage);
+            ChangePageToByType(initPage);
         }
 
         protected void Update()
@@ -110,6 +110,11 @@ namespace UISystem
         #region Self
         protected void ChangePageToByType(EUIPageType _type)
         {
+            if(currentPageType == _type)
+            {
+                return;
+            }
+
             currentPageType = _type;
             foreach(var page in pages)
             {
