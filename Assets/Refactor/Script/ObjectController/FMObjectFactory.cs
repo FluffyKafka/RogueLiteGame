@@ -10,6 +10,12 @@ using UnityEngine;
 
 namespace ObjectController
 {
+    public interface IMapObjectFactroy
+    {
+        public void GeneratePrimaryRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position);
+        public void GenerateAdvanceRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position);
+    }
+
     internal class FMObjectFactory : ComponentManagerBase, IPlayerObjectFactory, IEnemyObjectFactory
     {
         public Action<IItem, Vector3> GenerateDropItemAtNotice;
@@ -24,9 +30,9 @@ namespace ObjectController
         public Func<DPlayerCloneData, Vector3, GameObject> GeneratePlayerCloneAtNotice;
         public Action<string, Vector3> GeneratePopUpTextNotice;
         public Action<float, Vector3> GenerateCoinNotice;
-        public Action<List<IItemData>, Vector3> GeneratePrimaryRewardBoxNotice;
-        public Action<List<IItemData>, Vector3> GenerateAdvanceRewardBoxNotice;
-        public Action<List<IItemData>, Vector3> GenerateMimicNotice;
+        public Action<List<IItemData>, float, Vector3> GeneratePrimaryRewardBoxNotice;
+        public Action<List<IItemData>, float, Vector3> GenerateAdvanceRewardBoxNotice;
+        public Action<List<IItemData>, float, Vector3> GenerateMimicNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -84,17 +90,17 @@ namespace ObjectController
             InvokeAction(GenerateCoinNotice, _coin, _position);
         }
 
-        public void GeneratePrimaryRewardBox(List<IItemData> _rewards, Vector3 _position)
+        public void GeneratePrimaryRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position)
         {
-            InvokeAction(GeneratePrimaryRewardBoxNotice, _rewards, _position);
+            InvokeAction(GeneratePrimaryRewardBoxNotice, _rewards, _coin, _position);
         }
-        public void GenerateAdvanceRewardBox(List<IItemData> _rewards, Vector3 _position)
+        public void GenerateAdvanceRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position)
         {
-            InvokeAction(GenerateAdvanceRewardBoxNotice, _rewards, _position);
+            InvokeAction(GenerateAdvanceRewardBoxNotice, _rewards, _coin, _position);
         }
-        public void GenerateMimic(List<IItemData> _rewards, Vector3 _position)
+        public void GenerateMimic(List<IItemData> _rewards, float _coin, Vector3 _position)
         {
-            InvokeAction(GenerateMimicNotice, _rewards, _position);
+            InvokeAction(GenerateMimicNotice, _rewards, _coin, _position);
         }
     }
 

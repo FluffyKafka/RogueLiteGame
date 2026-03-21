@@ -22,13 +22,13 @@ namespace ObjectController
             }
         }
 
-        protected void GenerateRewardBox(List<IItemData> _data, Vector3 _position)
+        protected void GenerateRewardBox(List<IItemData> _data, float _coin, Vector3 _position)
         {
             GameObject newObject = pool.GetObject();
             newObject.SetActive(true);
             newObject.transform.position = _position;
             ARewordBox newDrop = newObject.GetComponent<ARewordBox>();
-            newDrop.Setup(this, _data);
+            newDrop.Setup(this, _data, _coin);
         }
     }
 }

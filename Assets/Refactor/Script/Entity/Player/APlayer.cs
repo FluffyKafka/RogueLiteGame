@@ -206,6 +206,7 @@ namespace PlayerSystem
         public bool TryTakeItem(IItem _item);
         public void TakeCoin(float _coin);
         public void GenerateDropItemByDataAt(IItemData _data, Vector3 _position);
+        public void GenerateCoinAt(float _coin, Vector3 _position);
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -306,7 +307,12 @@ namespace PlayerSystem
         public void ShowItemForSaleToUi(List<DItemForSaleToUi> _items);
     }
 
-    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer
+    public interface IMapPlayer
+    {
+        public void SetPlayerAtBeginPosition(Vector3 _position);
+    }
+
+    internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer, IMapPlayer
     {
         protected IPlayerInput input;
         protected IPlayerInventory inventory;
@@ -782,6 +788,10 @@ namespace PlayerSystem
             IItem item = inventory.GenerateItemByData(_data);
             playerObjectFactory.GenerateDropItemObject(item, _position);
         }
+        public void GenerateCoinAt(float _coin, Vector3 _position)
+        {
+            playerObjectFactory.GenerateCoin(_coin, _position);
+        }
         #endregion
 
         #region Skill
@@ -953,6 +963,13 @@ namespace PlayerSystem
         }
         #endregion
 
+        #region Map
+        public void SetPlayerAtBeginPosition(Vector3 _position)
+        {
+            transform.position = _position;
+        }
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();
@@ -1040,6 +1057,7 @@ namespace PlayerSystem
         public GameObject GenerateBounceSword(DBounceSwordData _data, Vector3 _position);
         public void GeneratePlayerClone(DPlayerCloneData _data, Vector3 _position);
         public void GeneratePopUpText(string _data, Vector3 _position);
+        public void GenerateCoin(float _coin, Vector3 _position);
     }
 
     public interface IPlayerAnimation : IEntityAnimation

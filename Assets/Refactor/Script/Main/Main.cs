@@ -4,7 +4,9 @@ using GameManagerSystem;
 using InputManager;
 using InventorySystem;
 using Item;
+using MapGenerate;
 using NPCSystem;
+using ObjectController;
 using PlayerSystem;
 using SaveSystem;
 using SkillSystem;
@@ -25,12 +27,13 @@ namespace Main
         [SerializeField] protected GameObject inventory;
         [SerializeField] protected GameObject ui;
         [SerializeField] protected GameObject itemDataBase;
-        [SerializeField] protected GameObject ObjectFactory;
+        [SerializeField] protected GameObject objectFactory;
         [SerializeField] protected GameObject skillManager;
         [SerializeField] protected GameObject audioManager;
         [SerializeField] protected GameObject saveManager;
         [SerializeField] protected GameObject gameManager;
         [SerializeField] protected GameObject npcFactory;
+        [SerializeField] protected GameObject mapGenerater;
 
         private void Awake()
         {
@@ -40,7 +43,7 @@ namespace Main
                 inputManager.GetComponent<IPlayerInput>(), 
                 inventory.GetComponent<IPlayerInventory>(), 
                 ui.GetComponent<IPlayerUI>(), 
-                ObjectFactory.GetComponent<IPlayerObjectFactory>(), 
+                objectFactory.GetComponent<IPlayerObjectFactory>(), 
                 skillManager.GetComponent<IPlayerSkillManager>(),
                 audioManager.GetComponent<IPlayerAudio>(),
                 audioManager.GetComponent<IPlayerAudioManager>(),
@@ -49,7 +52,7 @@ namespace Main
 
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(
                 player.GetComponent<IEnemyPlayer>(), 
-                ObjectFactory.GetComponent<IEnemyObjectFactory>(),
+                objectFactory.GetComponent<IEnemyObjectFactory>(),
                 audioManager.GetComponents<IEnemyAduio>()
                 );
 
@@ -72,9 +75,17 @@ namespace Main
                 audioManager.GetComponent<ISaveAduio>()
                 );
 
-            npcFactory.GetComponent<IInitNPCFactory>().Init(ObjectFactory.GetComponent<INPCObjectFactory>());
+            npcFactory.GetComponent<IInitNPCFactory>().Init(objectFactory.GetComponent<INPCObjectFactory>());
 
             gameManager.GetComponent<IInitGameManager>().Init(inputManager.GetComponent<IGameManagerInput>(), npcFactory.GetComponent<IGameManagerNPCFactory>());
+
+            mapGenerater?.GetComponent<IInitMapGenerater>().Init(
+                player.GetComponent<IMapPlayer>(), 
+                inventory.GetComponent<IMapInventory>(),
+                enemyFactory.GetComponent<IMapEnemyFactory>(),
+                npcFactory.GetComponent<IMapNPCFactory>(),
+                objectFactory.GetComponent<IMapObjectFactroy>()
+                );
         }
     }
 }

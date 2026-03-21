@@ -19,6 +19,11 @@ namespace NPCSystem
         public void GamePause(bool _isPasue, float _slowRate);
     }
 
+    public interface IMapNPCFactory
+    {
+        public GameObject GenerateNPCByTypeAt(ENPCType _type, Vector3 _position);
+    }
+
     internal class FNPCFactory : MonoBehaviour, IInitNPCFactory, IGameManagerNPCFactory
     {
         [SerializeField] protected bool isTestMode;

@@ -9,7 +9,11 @@ namespace EnemySystem
     {
         public void Init(IEnemyPlayer _player, IEnemyObjectFactory _objectFactory, IEnemyAduio[] _enemyAudioManagers);
     }
-    internal class FEnemyFactory : MonoBehaviour, IInitEnemyFactory, IEnemyFactory
+    public interface IMapEnemyFactory
+    {
+        public GameObject GetEmemyGameObjectAt(EEnemyType _type, Vector3 _position);
+    }
+    internal class FEnemyFactory : MonoBehaviour, IInitEnemyFactory, IEnemyFactory, IMapEnemyFactory
     {
         protected static FEnemyFactory instance;
         protected static IEnemyPlayer player;

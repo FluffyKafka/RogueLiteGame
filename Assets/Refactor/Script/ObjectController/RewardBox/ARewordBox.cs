@@ -9,14 +9,17 @@ namespace ObjectController
     internal class ARewordBox : AObjectController
     {
         [SerializeField] protected List<ScriptableObject> specificRewards;
+        [SerializeField] protected float specificCoin;
         protected List<IItemData> rewards;
+        protected float coin;
         protected IObjectPlayer currentInteractPlayer;
         protected bool isOpen = false; 
 
-        public void Setup(FCRewardBoxFactory _factory, List<IItemData> _rewards)
+        public void Setup(FCRewardBoxFactory _factory, List<IItemData> _rewards, float _coin)
         {
             factory = _factory;
             rewards = _rewards;
+            coin = _coin;
             isOpen = false;
         }
 
@@ -52,6 +55,7 @@ namespace ObjectController
                 {
                     currentInteractPlayer.GenerateDropItemByDataAt(reward as IItemData, transform.position);
                 }
+                currentInteractPlayer.GenerateCoinAt(specificCoin, transform.position);
             }
             else
             {
@@ -59,6 +63,7 @@ namespace ObjectController
                 {
                     currentInteractPlayer.GenerateDropItemByDataAt(reward, transform.position);
                 }
+                currentInteractPlayer.GenerateCoinAt(coin, transform.position);
             }
         }
 
@@ -67,6 +72,7 @@ namespace ObjectController
             base.Clear();
             rewards = null;
             currentInteractPlayer = null;
+            coin = 0;
         }
     }
 }

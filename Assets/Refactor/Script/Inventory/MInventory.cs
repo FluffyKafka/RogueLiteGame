@@ -26,7 +26,11 @@ namespace InventorySystem
         public void Load(DInventoryData _data);
     }
 
-    internal class MInventory : ComponentManagerBase, IInitInventory, IPlayerInventory, ISaveInventory
+    public interface IMapInventory
+    {
+        public List<IItemData> GetItemDataCanBeReward();
+    }
+    internal class MInventory : ComponentManagerBase, IInitInventory, IPlayerInventory, ISaveInventory, IMapInventory
     {
         protected IInventoryPlayer player;
         protected IItemDataBase itemDataBase;
@@ -351,6 +355,11 @@ namespace InventorySystem
             {
                 return itemFactory.GenerateEquipment(_data);
             }
+        }
+
+        public List<IItemData> GetItemDataCanBeReward()
+        {
+            return itemDataBase.CheckAllItemsCanBeSale();
         }
     }
 }
