@@ -110,5 +110,13 @@ namespace StatsSystem
         {
             InvokeAction(SetCoinNotice, InvokeFunc(CheckCoinNotice) - _coin);
         }
+        public void AddSoul(float _soul)
+        {
+            InvokeAction(SetSoulNotice, InvokeFunc(CheckSoulNotice) + _soul);
+        }
+        public void AddCoin(float _coin)
+        {
+            InvokeAction(SetCoinNotice, InvokeFunc(CheckCoinNotice) + _coin);
+        }
     }
 }

@@ -10,7 +10,6 @@ namespace ObjectController
 {
     internal class FCDropItemFactory : FCObjectFactoryComponentBase
     {
-  
         protected override void Awake()
         {
             base.Awake();

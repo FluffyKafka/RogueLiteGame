@@ -37,6 +37,7 @@ namespace EnemyBehaviour
         public Action GenerateSubEnemyNotice;//通知内部组件
         public Func<EEnemyType, Vector3, GameObject> ToGenerateSubEnemy;//通知外部
         public Action<bool> ToBattle;
+        public Func<float> CheckDropSoulAmountNotice;
 
         #region Arrow
         public Action<DProjectileData, Vector3> GenerateArrowAt;
@@ -140,6 +141,16 @@ namespace EnemyBehaviour
         public void GenerateDropItemByDataAt(ScriptableObject _data, Vector3 _position)
         {
             enemySystem.GenerateDropItemByDataAt(_data, _position);
+        }
+
+        public float CheckDropSoulAmount()
+        {
+            return InvokeFunc(CheckDropSoulAmountNotice);
+        }
+
+        public void GenerateCoin(float _coin)
+        {
+            enemySystem.GenerateCoin(_coin);
         }
     }
 }

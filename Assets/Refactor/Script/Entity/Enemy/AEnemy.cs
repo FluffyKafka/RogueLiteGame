@@ -51,6 +51,7 @@ namespace EnemySystem
         public void ToSelfExplodeHolding();
 
         public void GenerateDropItemByDataAt(ScriptableObject _data, Vector3 _position);
+        public void GenerateCoin(float _coin);
     }
 
     public interface IAnimEnemy : IAnimEntity
@@ -256,6 +257,11 @@ namespace EnemySystem
         {
             player.GenerateDropItemAt(_data, _position);
         }
+
+        public void GenerateCoin(float _coin)
+        {
+            enemyObjectFactory.GenerateCoin(_coin, transform.position);
+        }
         #endregion
 
         #region Animation
@@ -302,6 +308,10 @@ namespace EnemySystem
                 enemyObjectFactory.GeneratePopUpText((physcis + magical).ToString(), transform.position);
             }
             InvokeAction(TakeDamage, damage);
+            if(isDead)
+            {
+                player.AddSoul(behaviour.CheckDropSoulAmount());
+            }
             return damage;
         }
         bool IPlayerEnemy.StunCheck()
@@ -348,6 +358,7 @@ namespace EnemySystem
         public void ObjectFinish();
         public void OnSelfExplodeDamageTrigger();
         public void OnSelfExplodeFinish();
+        public float CheckDropSoulAmount();
     }
 
     public interface IEnemyAnimation : IEntityAnimation
@@ -370,6 +381,7 @@ namespace EnemySystem
 
         public void GenerateSkullAmmo(DAmmoData _data, Vector3 _position);
         public void GeneratePopUpText(string _text, Vector3 _position);
+        public void GenerateCoin(float _coin, Vector3 _position);
     }
 
     public interface IEnemyFactory

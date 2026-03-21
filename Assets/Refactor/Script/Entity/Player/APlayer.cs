@@ -44,6 +44,8 @@ namespace PlayerSystem
         public Transform CheckTransform();
         public void SetPlayerToBattle(bool _isBattle);
         public void GenerateDropItemAt(ScriptableObject _itemData, Vector3 _postion);
+
+        public void AddSoul(float _soul);
     }
 
     public interface IAnimPlayer : IAnimEntity
@@ -201,6 +203,7 @@ namespace PlayerSystem
     public interface IObjectPlayer : IObjectEntity
     {
         public bool TryTakeItem(IItem _item);
+        public void TakeCoin(float _coin);
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -537,6 +540,11 @@ namespace PlayerSystem
             IItem item = inventory.GenerateItemByData(_itemData as IItemData);
             playerObjectFactory.GenerateDropItemObject(item, _position);
         }
+
+        public void AddSoul(float _soul)
+        {
+            playerStats.AddSoul(_soul);
+        }
         #endregion
 
         #region Inventory
@@ -752,6 +760,11 @@ namespace PlayerSystem
         public void ObjectFinish(Transform _object)
         {
             //‘› ±ø’÷√
+        }
+
+        public void TakeCoin(float _coin)
+        {
+            playerStats.AddCoin(_coin);
         }
         #endregion
 
@@ -1134,6 +1147,8 @@ namespace PlayerSystem
         public void ConsumeSoul(float _soul);
         public bool CanPurchase_coin(float _coin);
         public void ConsumeCoin(float _coin);
+        public void AddSoul(float _soul);
+        public void AddCoin(float _coin);
     }
 
     public enum ENPCType

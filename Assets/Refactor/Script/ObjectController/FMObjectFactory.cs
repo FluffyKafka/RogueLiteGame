@@ -22,6 +22,7 @@ namespace ObjectController
         public Func<DBounceSwordData, Vector3, GameObject> GenerateBounceSwordAtNotice;
         public Func<DPlayerCloneData, Vector3, GameObject> GeneratePlayerCloneAtNotice;
         public Action<string, Vector3> GeneratePopUpTextNotice;
+        public Action<float, Vector3> GenerateCoinNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -72,6 +73,11 @@ namespace ObjectController
         public void GeneratePopUpText(string _data, Vector3 _position)
         {
             InvokeAction(GeneratePopUpTextNotice, _data, _position);
+        }
+
+        public void GenerateCoin(float _coin, Vector3 _position)
+        {
+            InvokeAction(GenerateCoinNotice, _coin, _position);
         }
     }
 

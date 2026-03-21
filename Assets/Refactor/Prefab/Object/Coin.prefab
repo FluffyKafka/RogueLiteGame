@@ -108,10 +108,10 @@ GameObject:
   - component: {fileID: 4245622617092805088}
   - component: {fileID: 2314006418117897373}
   - component: {fileID: 4774637072347790459}
-  - component: {fileID: 7987579454904640831}
+  - component: {fileID: 3145389205054182071}
   - component: {fileID: 4073293064930354954}
   m_Layer: 9
-  m_Name: DropItem
+  m_Name: Coin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9922824, y: 1.0011764}
   m_EdgeRadius: 0
---- !u!114 &7987579454904640831
+--- !u!114 &3145389205054182071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5769596048613520503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a81c132f7b13e26459de3199daaca2ab, type: 3}
+  m_Script: {fileID: 11500000, guid: a363a384c20ee7243a74b17677aae58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isNoAnimation: 0
@@ -245,8 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5794573733067968013}
   - component: {fileID: 5285926519149885286}
-  - component: {fileID: 3247566592892391115}
-  - component: {fileID: 6609526141646099416}
+  - component: {fileID: 5452833900393276404}
   m_Layer: 9
   m_Name: Animation
   m_TagString: Untagged
@@ -289,7 +288,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -307,41 +306,38 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 120024529
-  m_SortingLayer: 6
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 98da8dce77c1e714c9f6d890889db169, type: 3}
+  m_SortingLayerID: -580120359
+  m_SortingLayer: 5
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1450384891, guid: 4b9b8741d30831f4ba99d328dd662d22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.25, y: 1.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3247566592892391115
-MonoBehaviour:
+--- !u!95 &5452833900393276404
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7271115223099715302}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770e7b97edb3daf40a26b7f315bcb2b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6609526141646099416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7271115223099715302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1f74a377478c1c48bc527e686123bec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8ddcaae7dbf745a4691205b2d01b7dc3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

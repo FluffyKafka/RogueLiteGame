@@ -15,6 +15,8 @@ namespace EnemyBehaviour
             [Range(0, 1)] public float rate;
         }
         [SerializeField] protected List<DDropItemRate> dropsRateList;
+        [SerializeField] protected Vector2 dropSoulRange;
+        [SerializeField] protected Vector2 dropCoinRange;
 
         protected MEnemyBehaviour enemy;
 
@@ -23,6 +25,7 @@ namespace EnemyBehaviour
             base.Awake();
             enemy = entity as MEnemyBehaviour;
             enemy.Die += DropItems;
+            enemy.CheckDropSoulAmountNotice += CheckDropSoulAmount;
         }
 
         protected void DropItems()
@@ -40,6 +43,13 @@ namespace EnemyBehaviour
             {
                 enemy.GenerateDropItemByDataAt(drop, transform.position);
             }
+
+            enemy.GenerateCoin(UnityEngine.Random.Range(dropCoinRange.x, dropCoinRange.y));
+        }
+
+        protected float CheckDropSoulAmount()
+        {
+            return UnityEngine.Random.Range(dropSoulRange.x, dropSoulRange.y);
         }
     }
 }
