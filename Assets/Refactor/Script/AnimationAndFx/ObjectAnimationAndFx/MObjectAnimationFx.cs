@@ -57,7 +57,7 @@ namespace AnimationAndFx
             InvokeAction(ToEffectByTypeNotice, _type);
         }
 
-        public void AnimDamageTrigger()
+        public virtual void AnimDamageTrigger()
         {
             controller.DamageTrigger();
         }

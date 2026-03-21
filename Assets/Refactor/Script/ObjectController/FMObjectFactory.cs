@@ -4,6 +4,7 @@ using Item;
 using ObjectGenerateData;
 using PlayerSystem;
 using System;
+using System.Collections.Generic;
 using Tool;
 using UnityEngine;
 
@@ -23,6 +24,9 @@ namespace ObjectController
         public Func<DPlayerCloneData, Vector3, GameObject> GeneratePlayerCloneAtNotice;
         public Action<string, Vector3> GeneratePopUpTextNotice;
         public Action<float, Vector3> GenerateCoinNotice;
+        public Action<List<IItemData>, Vector3> GeneratePrimaryRewardBoxNotice;
+        public Action<List<IItemData>, Vector3> GenerateAdvanceRewardBoxNotice;
+        public Action<List<IItemData>, Vector3> GenerateMimicNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -78,6 +82,19 @@ namespace ObjectController
         public void GenerateCoin(float _coin, Vector3 _position)
         {
             InvokeAction(GenerateCoinNotice, _coin, _position);
+        }
+
+        public void GeneratePrimaryRewardBox(List<IItemData> _rewards, Vector3 _position)
+        {
+            InvokeAction(GeneratePrimaryRewardBoxNotice, _rewards, _position);
+        }
+        public void GenerateAdvanceRewardBox(List<IItemData> _rewards, Vector3 _position)
+        {
+            InvokeAction(GenerateAdvanceRewardBoxNotice, _rewards, _position);
+        }
+        public void GenerateMimic(List<IItemData> _rewards, Vector3 _position)
+        {
+            InvokeAction(GenerateMimicNotice, _rewards, _position);
         }
     }
 

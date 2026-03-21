@@ -81,6 +81,11 @@ namespace InputManager
             return KeyCode.G;
         }
 
+        public KeyCode CheckObjectInteractInputKey()
+        {
+            return KeyCode.F;
+        }
+
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件
         private void Update()
         {
@@ -149,6 +154,11 @@ namespace InputManager
             if(Input.GetKeyDown(KeyCode.G))
             {
                 player.InteractToNPCInput();
+            }
+
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                player.ObjectInteractInput();
             }
         }
     }

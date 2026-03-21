@@ -55,6 +55,9 @@ namespace PlayerBebaviour
         public Action NPCEffectFinishNotice;
         public Action NPCEffectFailNotice;
 
+        //ObjectInteract
+        public Action InteractToObjectNotice;
+
         //UI
         public Action CommunicateFinishNotice;
         #endregion
@@ -222,6 +225,21 @@ namespace PlayerBebaviour
         public void GeneratePopUpText(string _text)
         {
             playerSystem.GeneratePopUpText(_text);
+        }
+
+        public KeyCode CheckObjectInteractInputKey()
+        {
+            return playerSystem.CheckObjectInteractInputKey();
+        }
+
+        public void InteractToObject(IPlayerInteractable _object)
+        {
+            playerSystem.InteractToObject(_object);
+        }
+
+        public void ObjectInteractInput()
+        {
+            InvokeAction(InteractToObjectNotice);
         }
     }
 }

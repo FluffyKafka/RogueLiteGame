@@ -23,8 +23,6 @@ namespace ObjectController
         [SerializeField] protected bool isNoAnimation = false; 
 
         #region Action
-        public Action<IObjectPlayer> PlayerEnter;
-        public Action<IObjectPlayer> PlayerInteract;
         public Action<IObjectPlayer> PlayerReflect;
         public Action<int> OriginProjectToward;
         public Action<int> SecondaryProjectToward;
@@ -78,14 +76,14 @@ namespace ObjectController
             factory.RecycleObject(this);
         }
 
-        public void Enter(IObjectPlayer _player)
+        public virtual void Enter(IObjectPlayer _player)
         {
-            InvokeAction(PlayerEnter, _player);
+            
         }
 
-        public void Interact(IObjectPlayer _player)
+        public virtual void Interact(IObjectPlayer _player)
         {
-            InvokeAction(PlayerInteract, _player);
+            
         }
 
         public void Reflect(IObjectPlayer _player)
@@ -103,7 +101,7 @@ namespace ObjectController
             InvokeAction(FadeFinish);
         }
 
-        public void DamageTrigger()
+        public virtual void DamageTrigger()
         {
             InvokeAction(DamageTriggerNotice);
         }
@@ -126,6 +124,11 @@ namespace ObjectController
         public virtual void TakeBack()
         {
             
+        }
+
+        public virtual bool CanInteract()
+        {
+            return true;
         }
     }
 

@@ -47,8 +47,6 @@ namespace PlayerBebaviour
                     player.GeneratePopUpText(npcInteractClickText + player.CheckNPCInteractInputKey() + npcInteractText);
                 }
             }
-            return;
-            
         }
 
         protected bool IsHitNPC()

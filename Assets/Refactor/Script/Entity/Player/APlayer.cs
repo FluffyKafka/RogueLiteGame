@@ -31,6 +31,7 @@ namespace PlayerSystem
         public void InteractToNPCInput();
         public void UIPageSwitchInput(EUIPageType _type);
         public void EndNPCEffectInput();
+        public void ObjectInteractInput();
     }
 
     public interface IEnemyPlayer
@@ -204,6 +205,7 @@ namespace PlayerSystem
     {
         public bool TryTakeItem(IItem _item);
         public void TakeCoin(float _coin);
+        public void GenerateDropItemByDataAt(IItemData _data, Vector3 _position);
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -231,6 +233,8 @@ namespace PlayerSystem
         public KeyCode CheckNPCInteractInputKey();
 
         public void GeneratePopUpText(string _text);
+        public KeyCode CheckObjectInteractInputKey();
+        public void InteractToObject(IPlayerInteractable _object);
     }
 
     public struct DProjectileAimmingData
@@ -322,29 +326,24 @@ namespace PlayerSystem
             playerAnim.Air();
             playerAduio.Jump(transform);
         }
-
         void IBehaviourPlayer.ToWallJump()
         {
             playerAnim.Air();
             playerAduio.Jump(transform);
         }
-
         void IBehaviourPlayer.ToAttack(int _count)
         {
             playerAnim.Attack(_count);
             playerAduio.Attack(_count, transform);
         }
-
         void IBehaviourPlayer.UpdateYVelocity(float _yVelocity)
         {
             playerAnim.UpdateYVelocity(_yVelocity);
         }
-
         void IBehaviourPlayer.ToIdle()
         {
             playerAnim.Idle();
         }
-
         void IBehaviourPlayer.ToMove()
         {
             playerAnim.Move();
@@ -354,17 +353,14 @@ namespace PlayerSystem
         {
             playerAduio.Ground(transform, false);
         }
-
         void IBehaviourPlayer.ToWallSlide()
         {
             playerAnim.WallSlide();
         }
-
         float IBehaviourPlayer.CheckHorizonInput()
         {
             return input.CheckHorizonInput();
         }
-
         float IBehaviourPlayer.CheckVerticalInput()
         {
             return input.CheckVerticalInput();
@@ -374,7 +370,6 @@ namespace PlayerSystem
         {
             return _enemy.GetComponent<IPlayerEnemy>() != null;
         }
-
         public bool IsEnemyAlive(GameObject _enemy)
         {
             return !_enemy.GetComponent<IPlayerEnemy>().IsDead();
@@ -438,6 +433,16 @@ namespace PlayerSystem
         {
             playerObjectFactory.GeneratePopUpText(_text, transform.position);
         }
+
+        public KeyCode CheckObjectInteractInputKey()
+        {
+            return input.CheckObjectInteractInputKey();
+        }
+
+        public void InteractToObject(IPlayerInteractable _object)
+        {
+            _object.Interact(this);
+        }
         #endregion
 
         #region Init
@@ -489,6 +494,11 @@ namespace PlayerSystem
         public void EndNPCEffectInput()
         {
             behaviour.NPCEffectFinish();
+        }
+
+        public void ObjectInteractInput()
+        {
+            behaviour.ObjectInteractInput();
         }
         #endregion
 
@@ -766,6 +776,12 @@ namespace PlayerSystem
         {
             playerStats.AddCoin(_coin);
         }
+
+        public void GenerateDropItemByDataAt(IItemData _data, Vector3 _position)
+        {
+            IItem item = inventory.GenerateItemByData(_data);
+            playerObjectFactory.GenerateDropItemObject(item, _position);
+        }
         #endregion
 
         #region Skill
@@ -998,6 +1014,8 @@ namespace PlayerSystem
         public void InteractFinish();
         public void NPCEffectFinish();
         public void NPCEffectFail();
+
+        public void ObjectInteractInput();
     }
 
     public interface IPlayerEnterable : IEntityObject
@@ -1006,6 +1024,7 @@ namespace PlayerSystem
     }
     public interface IPlayerInteractable : IEntityObject
     {
+        public bool CanInteract();
         public void Interact(IObjectPlayer _player);
     }
     public interface IPlayerReflectable : IEntityObject
@@ -1053,6 +1072,7 @@ namespace PlayerSystem
 
         public KeyCode CheckSkillInputSlotKey(int _index);
         public KeyCode CheckNPCInteractInputKey();
+        public KeyCode CheckObjectInteractInputKey();
     }
 
     public interface IPlayerEnemy
