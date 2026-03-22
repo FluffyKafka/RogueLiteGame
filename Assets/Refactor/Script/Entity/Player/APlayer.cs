@@ -17,7 +17,17 @@ namespace PlayerSystem
 {
     public interface IInitPlayer
     {
-        public void Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager, IPlayerGameManager _gameManager);
+        public void Init(
+            IPlayerInput _inputSource, 
+            IPlayerInventory _inventory, 
+            IPlayerUI _ui, 
+            IPlayerObjectFactory _factory,
+            IPlayerSkillManager _skillManager,
+            IPlayerAudio _audio,
+            IPlayerAudioManager _audioManager,
+            IPlayerGameManager _gameManager,
+            IPlayerSaveManager _saveManager
+            );
     }
 
     public interface IInputPlayer
@@ -207,6 +217,7 @@ namespace PlayerSystem
         public void TakeCoin(float _coin);
         public void GenerateDropItemByDataAt(IItemData _data, Vector3 _position);
         public void GenerateCoinAt(float _coin, Vector3 _position);
+        public void SaveGame();
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -325,6 +336,7 @@ namespace PlayerSystem
         protected IPlayerAudioManager audioManager;
         protected IPlayerGameManager gameManager;
         protected IPlayerStats playerStats;
+        protected IPlayerSaveManager saveManager;
 
         #region Behaviour
         void IBehaviourPlayer.ToJump()
@@ -452,7 +464,17 @@ namespace PlayerSystem
         #endregion
 
         #region Init
-        void IInitPlayer.Init(IPlayerInput _inputSource, IPlayerInventory _inventory, IPlayerUI _ui, IPlayerObjectFactory _factory, IPlayerSkillManager _skillManager, IPlayerAudio _audio, IPlayerAudioManager _audioManager, IPlayerGameManager _gameManager)
+        void IInitPlayer.Init(
+            IPlayerInput _inputSource, 
+            IPlayerInventory _inventory, 
+            IPlayerUI _ui, 
+            IPlayerObjectFactory _factory, 
+            IPlayerSkillManager _skillManager, 
+            IPlayerAudio _audio, 
+            IPlayerAudioManager _audioManager, 
+            IPlayerGameManager _gameManager, 
+            IPlayerSaveManager _saveManager
+            )
         {
             input = _inputSource;
             inventory = _inventory;
@@ -464,6 +486,7 @@ namespace PlayerSystem
             audioManager = _audioManager;
             gameManager = _gameManager;
             playerStats = GetComponentInChildren<IPlayerStats>();
+            saveManager = _saveManager;
         }
         #endregion
 
@@ -791,6 +814,11 @@ namespace PlayerSystem
         public void GenerateCoinAt(float _coin, Vector3 _position)
         {
             playerObjectFactory.GenerateCoin(_coin, _position);
+        }
+
+        public void SaveGame()
+        {
+            saveManager.SaveGame();
         }
         #endregion
 
@@ -1216,5 +1244,10 @@ namespace PlayerSystem
         public GameObject CheckEntityByIndex(int _index);
         public List<DSentence> CheckDialog();
         public void SetDialogIndex(int _index, GameObject _entity);
+    }
+
+    public interface IPlayerSaveManager
+    {
+        public void SaveGame();
     }
 }

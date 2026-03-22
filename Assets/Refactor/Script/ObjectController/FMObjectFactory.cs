@@ -33,6 +33,7 @@ namespace ObjectController
         public Action<List<IItemData>, float, Vector3> GeneratePrimaryRewardBoxNotice;
         public Action<List<IItemData>, float, Vector3> GenerateAdvanceRewardBoxNotice;
         public Action<List<IItemData>, float, Vector3> GenerateMimicNotice;
+        public Action<Vector3> GenerateSaveTorchNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -101,6 +102,11 @@ namespace ObjectController
         public void GenerateMimic(List<IItemData> _rewards, float _coin, Vector3 _position)
         {
             InvokeAction(GenerateMimicNotice, _rewards, _coin, _position);
+        }
+
+        public void GenerateSaveTorchAt(Vector3 _position)
+        {
+            InvokeAction(GenerateSaveTorchNotice, _position);
         }
     }
 

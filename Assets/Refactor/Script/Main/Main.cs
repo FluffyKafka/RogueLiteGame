@@ -33,7 +33,7 @@ namespace Main
         [SerializeField] protected GameObject saveManager;
         [SerializeField] protected GameObject gameManager;
         [SerializeField] protected GameObject npcFactory;
-        [SerializeField] protected GameObject mapGenerater;
+        //[SerializeField] protected GameObject mapGenerater;
 
         private void Awake()
         {
@@ -47,7 +47,8 @@ namespace Main
                 skillManager.GetComponent<IPlayerSkillManager>(),
                 audioManager.GetComponent<IPlayerAudio>(),
                 audioManager.GetComponent<IPlayerAudioManager>(),
-                gameManager.GetComponent<IPlayerGameManager>()
+                gameManager.GetComponent<IPlayerGameManager>(),
+                saveManager.GetComponent<IPlayerSaveManager>()
                 );
 
             enemyFactory.GetComponent<IInitEnemyFactory>().Init(
@@ -79,13 +80,13 @@ namespace Main
 
             gameManager.GetComponent<IInitGameManager>().Init(inputManager.GetComponent<IGameManagerInput>(), npcFactory.GetComponent<IGameManagerNPCFactory>());
 
-            mapGenerater?.GetComponent<IInitMapGenerater>().Init(
-                player.GetComponent<IMapPlayer>(), 
-                inventory.GetComponent<IMapInventory>(),
-                enemyFactory.GetComponent<IMapEnemyFactory>(),
-                npcFactory.GetComponent<IMapNPCFactory>(),
-                objectFactory.GetComponent<IMapObjectFactroy>()
-                );
+            //mapGenerater?.GetComponent<IInitMapGenerater>().Init(
+                //player.GetComponent<IMapPlayer>(), 
+                //inventory.GetComponent<IMapInventory>(),
+                //enemyFactory.GetComponent<IMapEnemyFactory>(),
+                //npcFactory.GetComponent<IMapNPCFactory>(),
+                //objectFactory.GetComponent<IMapObjectFactroy>()
+                //);
         }
     }
 }

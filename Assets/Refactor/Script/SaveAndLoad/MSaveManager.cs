@@ -1,5 +1,6 @@
 using AudioSystem;
 using InventorySystem;
+using PlayerSystem;
 using SkillSystem;
 using StatsSystem;
 using System;
@@ -15,7 +16,7 @@ namespace SaveSystem
     {
         public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio);
     }
-    internal class MSaveManager : MonoBehaviour, IInitSaveManager
+    internal class MSaveManager : MonoBehaviour, IInitSaveManager, IPlayerSaveManager
     {
         [SerializeField] protected string filename;
         [SerializeField] protected bool isEncrptData;
@@ -82,7 +83,7 @@ namespace SaveSystem
         }
 
         [ContextMenu("Save Game --Test")]
-        protected void SaveGame()
+        public void SaveGame()
         {
             stats.Save(ref statsData);
             inventory.Save(ref inventoryData);
