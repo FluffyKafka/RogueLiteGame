@@ -218,6 +218,7 @@ namespace PlayerSystem
         public void GenerateDropItemByDataAt(IItemData _data, Vector3 _position);
         public void GenerateCoinAt(float _coin, Vector3 _position);
         public void SaveGame();
+        public void SwitchSceneTo(string _sceneName);
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -820,6 +821,11 @@ namespace PlayerSystem
         {
             saveManager.SaveGame();
         }
+
+        public void SwitchSceneTo(string _sceneName)
+        {
+            gameManager.SwitchSceneTo(_sceneName);
+        }
         #endregion
 
         #region Skill
@@ -1071,6 +1077,7 @@ namespace PlayerSystem
     {
         public bool CanInteract();
         public void Interact(IObjectPlayer _player);
+        public string CheckInteractMessage();
     }
     public interface IPlayerReflectable : IEntityObject
     {
@@ -1205,6 +1212,8 @@ namespace PlayerSystem
         public void Pause(bool _isPause);
         public void PauseRaw(bool _isPause);
         public bool CheckIsPause();
+
+        public void SwitchSceneTo(string _sceneName);
     }
 
     public interface IPlayerStats: IEntityStats

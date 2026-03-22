@@ -130,6 +130,11 @@ namespace ObjectController
         {
             return true;
         }
+
+        public virtual string CheckInteractMessage()
+        {
+            return string.Empty;
+        }
     }
 
     public interface IObjectAnim

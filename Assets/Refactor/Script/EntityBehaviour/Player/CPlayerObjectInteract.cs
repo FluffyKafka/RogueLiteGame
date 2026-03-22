@@ -28,21 +28,29 @@ namespace PlayerBebaviour
             base.Update();
             if (isEnterObject)
             {
-                if (!IsHitObject())
+                if (TryGetHitObject() == null)
                 {
                     isEnterObject = false;
                 }
             }
             else
             {
-                if (IsHitObject())
+                IPlayerInteractable objectToInteract = TryGetHitObject();
+                if (objectToInteract != null)
                 {
                     isEnterObject = true;
-                    player.GeneratePopUpText(objectInteractClickText + player.CheckObjectInteractInputKey() + objectInteractText);
+                    if(objectToInteract.CheckInteractMessage() == string.Empty)
+                    {
+                        player.GeneratePopUpText(objectInteractClickText + player.CheckObjectInteractInputKey() + objectInteractText);
+                    }
+                    else
+                    {
+                        player.GeneratePopUpText(objectInteractClickText + player.CheckObjectInteractInputKey() + objectInteractText + "£º" + objectToInteract.CheckInteractMessage());
+                    }
                 }
             }
         }
-        protected bool IsHitObject()
+        protected IPlayerInteractable TryGetHitObject()
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, whatIsObject);
             foreach (var hit in hits)
@@ -50,10 +58,10 @@ namespace PlayerBebaviour
                 IPlayerInteractable currentInteractNPC = hit.GetComponent<IPlayerInteractable>();
                 if (currentInteractNPC != null && currentInteractNPC.CanInteract())
                 {
-                    return true;
+                    return currentInteractNPC;
                 }
             }
-            return false;
+            return null;
         }
 
         protected void Interact()
