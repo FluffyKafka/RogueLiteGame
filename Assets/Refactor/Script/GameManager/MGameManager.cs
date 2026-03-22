@@ -1,9 +1,11 @@
 using InputManager;
 using NPCSystem;
 using PlayerSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManagerSystem.ISaveGameManager;
 
 namespace GameManagerSystem
 {   
@@ -12,13 +14,29 @@ namespace GameManagerSystem
         public void Init(IGameManagerInput _input, IGameManagerNPCFactory _npcFactory);
     }
 
-    internal class MGameManager : MonoBehaviour, IPlayerGameManager, IInitGameManager
+    public interface ISaveGameManager
     {
-        [SerializeField] protected float pauseTimeSlowRate;
-        protected bool isPause = false;
+        public class DGameManagerSaveData
+        {
+            public string sceneName = string.Empty;
+        }
+        public void Save(ref DGameManagerSaveData _data);
+        public void Load(DGameManagerSaveData _data);
+    }
 
-        protected IGameManagerInput input;
-        protected IGameManagerNPCFactory npcFactory;
+    internal class MGameManager : ComponentManagerBase, IPlayerGameManager, IInitGameManager, ISaveGameManager
+    {
+        #region ActionAndFunc
+        public Action<bool> PauseNotice;
+        public Action<bool> PauseRawNotice;
+        public Func<bool> CheckIsPauseNotice;
+
+        public Action<string> SwitchSceneToNotice;
+        public Func<string> CheckCurrentSceneNameNotice;
+        #endregion
+
+        public IGameManagerInput input;
+        public IGameManagerNPCFactory npcFactory;
 
         public void Init(IGameManagerInput _input, IGameManagerNPCFactory _npcFactory)
         {
@@ -28,41 +46,42 @@ namespace GameManagerSystem
 
         public void Pause(bool _isPause)
         {
-            isPause = _isPause;
-            if(_isPause)
-            {
-                Time.timeScale *= pauseTimeSlowRate;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-            PauseGameNotice(_isPause);
+            InvokeAction(PauseNotice, _isPause);
         }
-
         public void PauseRaw(bool _isPause)
         {
-            isPause = _isPause;
-            if (_isPause)
-            {
-                Time.timeScale = 0;               
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-            PauseGameNotice(_isPause);
-        }
-
-        protected void PauseGameNotice(bool _isPause)
-        {
-            input.GamePause(_isPause);
-            npcFactory.GamePause(_isPause, pauseTimeSlowRate);
-        }
-        
+            InvokeAction(PauseRawNotice, _isPause);
+        }       
         public bool CheckIsPause()
         {
-            return isPause;
+            return InvokeFunc(CheckIsPauseNotice);
+        }
+
+        public void SwitchSceneTo(string _sceneName)
+        {
+            InvokeAction(SwitchSceneToNotice, _sceneName);
+        }
+
+        public void Save(ref DGameManagerSaveData _data)
+        {
+            _data.sceneName = InvokeFunc(CheckCurrentSceneNameNotice);
+        }
+        public void Load(DGameManagerSaveData _data)
+        {
+            if(_data.sceneName != string.Empty && _data.sceneName != InvokeFunc(CheckCurrentSceneNameNotice))
+            {
+                SwitchSceneTo(_data.sceneName);
+            }
+        }
+    }
+
+    internal class CGameManagerComponentBase: MonoBehaviour
+    {
+        protected MGameManager game;
+
+        protected virtual void Awake()
+        {
+            game = GetComponent<MGameManager>();
         }
     }
 }

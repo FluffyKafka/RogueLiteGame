@@ -73,7 +73,8 @@ namespace Main
                 player.GetComponentInChildren<ISaveStats>(),
                 inventory.GetComponent<ISaveInventory>(),
                 skillManager.GetComponent<ISaveSkill>(),
-                audioManager.GetComponent<ISaveAduio>()
+                audioManager.GetComponent<ISaveAduio>(),
+                gameManager.GetComponent<ISaveGameManager>()
                 );
 
             npcFactory.GetComponent<IInitNPCFactory>().Init(objectFactory.GetComponent<INPCObjectFactory>());

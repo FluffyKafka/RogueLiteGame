@@ -14,6 +14,7 @@ namespace ObjectController
     {
         public void GeneratePrimaryRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position);
         public void GenerateAdvanceRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position);
+        public void GenerateSaveTorch(Vector3 _position);
     }
 
     internal class FMObjectFactory : ComponentManagerBase, IPlayerObjectFactory, IEnemyObjectFactory

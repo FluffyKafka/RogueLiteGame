@@ -1,4 +1,5 @@
 using AudioSystem;
+using GameManagerSystem;
 using InventorySystem;
 using PlayerSystem;
 using SkillSystem;
@@ -14,7 +15,7 @@ namespace SaveSystem
 {
     public interface IInitSaveManager
     {
-        public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio);
+        public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio, ISaveGameManager _gameManager);
     }
     internal class MSaveManager : MonoBehaviour, IInitSaveManager, IPlayerSaveManager
     {
@@ -39,12 +40,16 @@ namespace SaveSystem
         protected ISaveAduio audioSystem;
         protected ISaveAduio.DAudioSaveData audioData = new();
 
-        public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio)
+        protected ISaveGameManager gameManager;
+        protected ISaveGameManager.DGameManagerSaveData gameManagerData = new();
+
+        public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio, ISaveGameManager _gameManager)
         {
             stats = _stats;
             inventory = _inventory;
             skill = _skill;
             audioSystem = _audio;
+            gameManager = _gameManager;
         }
 
         private void Start()
@@ -80,6 +85,7 @@ namespace SaveSystem
             inventory.Load(inventoryData);
             skill.Load(skillData);
             audioSystem.Load(audioData);
+            gameManager.Load(gameManagerData);
         }
 
         [ContextMenu("Save Game --Test")]
@@ -89,6 +95,7 @@ namespace SaveSystem
             inventory.Save(ref inventoryData);
             skill.Save(ref skillData);
             audioSystem.Save(ref audioData);
+            gameManager.Save(ref gameManagerData);
 
             GenerateGameData();
             fileDataHandler.Save(gameData);
@@ -109,6 +116,8 @@ namespace SaveSystem
             gameData.bgmVolume = audioData.bgmVolume;
             gameData.sfxVolume = audioData.sfxVolume;
             gameData.envVolume = audioData.envVolume;
+
+            gameData.currentSceneName = gameManagerData.sceneName;
         }
         protected void SeperateGameData()
         {
@@ -125,6 +134,8 @@ namespace SaveSystem
             audioData.bgmVolume = gameData.bgmVolume;
             audioData.sfxVolume = gameData.sfxVolume;
             audioData.envVolume = gameData.envVolume;
+
+            gameManagerData.sceneName = gameData.currentSceneName;
         }
 
         protected bool HaveSaveData()

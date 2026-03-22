@@ -253,6 +253,8 @@ namespace InventorySystem
         public void Save(ref ISaveInventory.DInventoryData _data)
         {
             _data.equipment.Clear();
+            _data.equipmentStash.Clear();
+            _data.itemStash.Clear();
 
             SaveEquipment(ref _data, EEquipmentType.Weapon);
             SaveEquipment(ref _data, EEquipmentType.Amulet);
