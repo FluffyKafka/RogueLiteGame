@@ -9,6 +9,13 @@ using UnityEngine;
 
 namespace MapGenerate
 {
+    internal enum ETileMapType
+    {
+        Ground,
+        BackGround,
+        Platform
+    }
+
     public interface IInitMapGenerater
     {
         public void Init(
