@@ -79,7 +79,7 @@ namespace MapGenerate
             Assert.IsTrue(tileRuleArray[_index].list.Count == 8);
             for (int i = 0; i < 8; ++i)
             {
-                if (tileRuleArray[_index].list[i].isMatch(neighborTiles[i], prototypeNeighbors[i]))
+                if (!tileRuleArray[_index].list[i].isMatch(neighborTiles[i], prototypeNeighbors[i]))
                 {
                     return false;
                 }

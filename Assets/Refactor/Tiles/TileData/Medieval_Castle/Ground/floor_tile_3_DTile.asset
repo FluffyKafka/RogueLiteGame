@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
-  m_Name: stairs_tile_3_DTile
+  m_Name: floor_tile_3_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 69efdbb13f990b6468875017afcbfa39, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: a84d84e10a0c6b5439e8359c9172c2ac, type: 2}
+  rule: {fileID: 11400000, guid: 64899fcb2bae1214893984bf89115ce3, type: 2}
   layer: 0
   tag: 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
 namespace MapGenerate
@@ -117,6 +119,13 @@ namespace MapGenerate
             {
                 // 获取原型邻居信息
                 bool[] prototypeNeighbors = GetPrototypeNeighbors(tilemap, pos);
+                string bs = "";
+                foreach(bool b in prototypeNeighbors)
+                {
+                    bs += b;
+                    bs += ",";
+                }
+                Debug.Log(bs);
 
                 // 获取实际已放置的邻居DTile
                 DTile[] neighborTiles = GetNeighborDTiles(tilemap, pos, placedTiles);
@@ -138,6 +147,7 @@ namespace MapGenerate
                     placedTiles[pos] = null;
                 }
             }
+            tilemap.RefreshAllTiles();
         }
 
         private DTile SelectTileForPosition(List<DTile> availableTiles, DTile[] neighborTiles, bool[] prototypeNeighbors)

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
-  m_Name: ceiling_3_DTile
+  m_Name: blank_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 1f0bf1e716f33674a93367300c167953, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: b1c38445b1c5a8b43986dd3a2b22268e, type: 2}
+  rule: {fileID: 11400000, guid: a6aad8e12a7a9fa4cb9c177d151b9004, type: 2}
   layer: 0
   tag: 
