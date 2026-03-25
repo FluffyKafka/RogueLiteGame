@@ -26,6 +26,7 @@ namespace MapGenerate
         [SerializeField] protected bool haveDownWall = true;
         [SerializeField] protected bool haveRightWall = true;
         [SerializeField] protected int boundWallThickness = 2;
+        [SerializeField] protected int leftRightHight = 4;
         [SerializeField] protected GameObject testPrototype;
         [SerializeField] protected Transform generateTransform;
 
@@ -103,7 +104,7 @@ namespace MapGenerate
             // 1. Çå³ý×ó±ßÇ½±Ú£¨Èç¹û×ó±ßÇ½±Ú²»´æÔÚ£©
             if (!haveLeftWall)
             {
-                for (int y = wallStartY + boundWallThickness; y < wallEndY - boundWallThickness; y++)
+                for (int y = wallStartY + leftRightHight; y < wallEndY - boundWallThickness; y++)
                 {
                     for (int thickness = 0; thickness < boundWallThickness; thickness++)
                     {
@@ -124,7 +125,7 @@ namespace MapGenerate
             // 2. Çå³ýÓÒ±ßÇ½±Ú£¨Èç¹ûÓÒ±ßÇ½±Ú²»´æÔÚ£©
             if (!haveRightWall)
             {
-                for (int y = wallStartY + boundWallThickness; y < wallEndY - boundWallThickness; y++)
+                for (int y = wallStartY + leftRightHight; y < wallEndY - boundWallThickness; y++)
                 {
                     for (int thickness = 0; thickness < boundWallThickness; thickness++)
                     {
