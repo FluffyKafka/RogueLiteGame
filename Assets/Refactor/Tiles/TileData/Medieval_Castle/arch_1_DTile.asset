@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
   m_Name: arch_1_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 5cb689b027b671f42b2651d9b1c26d90, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: e9d2314dbad41654d90faa1ccb56685c, type: 2}
   layer: 0
-  tag: 
+  tags: []
+  rules: []

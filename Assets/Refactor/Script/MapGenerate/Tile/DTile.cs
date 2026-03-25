@@ -10,9 +10,50 @@ namespace MapGenerate
     internal class DTile : ScriptableObject
     {
         public TileBase tileBase;
-        public DTileSetRuleBase rule;
         public ETileMapType layer;
-        public string tag = string.Empty;
+        [SerializeField] protected List<string> tags;
+        [SerializeField] protected List<DTileSetRuleBase> rules;
+
+        public bool CanPlace(DTile[] neighborTiles, bool[] prototypeNeighbors)
+        {
+            foreach(var rule in rules)
+            {
+                if (!rule.CanPlace(neighborTiles, prototypeNeighbors))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool IsTag(string _tag)
+        {
+            if(tags.Count == 0)
+            {
+                return true;
+            }
+
+            foreach(var tag in tags)
+            {
+                if(tag == _tag)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool CanNeighborPlace(DTile _neighbor, int _index)
+        {
+            foreach(var rule in rules)
+            {
+                if(!rule.CanNeighborPlace(_neighbor, _index))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
 

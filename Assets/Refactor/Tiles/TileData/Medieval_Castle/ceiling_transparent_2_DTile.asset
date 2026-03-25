@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
   m_Name: ceiling_transparent_2_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 770b3b6fe078aab48a448e2018ccc9f6, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: 634c62dc1987a89468b1f4842b9304e7, type: 2}
   layer: 0
-  tag: 
+  tags: []
+  rules: []

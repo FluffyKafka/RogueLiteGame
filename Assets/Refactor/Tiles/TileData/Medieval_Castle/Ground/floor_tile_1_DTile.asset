@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: floor_tile_1_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 6bab5305e78edf443ad7e9106ab9926e, type: 2}
-  rule: {fileID: 11400000, guid: 3c2c6503496a81e49b20d2d446cb0056, type: 2}
   layer: 0
-  tag: 
+  tags:
+  - NoCarpet
+  - Ground
+  - NoTransition
+  rules:
+  - {fileID: 11400000, guid: 9a353228ce6055949a63e013fd73533f, type: 2}
+  - {fileID: 11400000, guid: bc6714bb8af02f24290c4dfb90f3a355, type: 2}
+  - {fileID: 11400000, guid: b0a7ead178b02e44e8e99175b6e5099b, type: 2}

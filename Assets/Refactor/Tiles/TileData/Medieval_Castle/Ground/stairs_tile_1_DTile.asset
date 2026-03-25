@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: stairs_tile_1_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: dd7b38eaea14e3a419d15cf3e2591fd0, type: 2}
-  rule: {fileID: 11400000, guid: e6af6fb11142e5645838eb8dbd559241, type: 2}
   layer: 0
-  tag: 
+  tags:
+  - NoCarpet
+  - Ground
+  - NoTransition
+  rules:
+  - {fileID: 11400000, guid: bd62a5ac6dc2d264d9021c0bd774bad5, type: 2}
+  - {fileID: 11400000, guid: bc6714bb8af02f24290c4dfb90f3a355, type: 2}
+  - {fileID: 11400000, guid: b0a7ead178b02e44e8e99175b6e5099b, type: 2}

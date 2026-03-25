@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ceiling_1_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 7a81696dc96af5e43a11dca23fb34d96, type: 2}
-  rule: {fileID: 11400000, guid: 39872df9ab531a549ab861e6e8244f18, type: 2}
   layer: 0
-  tag: 
+  tags: []
+  rules:
+  - {fileID: 11400000, guid: f67e79270346777499a4376e12ed1d71, type: 2}

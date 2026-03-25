@@ -3472,6 +3472,7 @@ GameObject:
   - component: {fileID: 645700490}
   - component: {fileID: 645700489}
   - component: {fileID: 645700491}
+  - component: {fileID: 645700492}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -3544,10 +3545,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04c11964f79d44e4ca2be65583c815e8, type: 2}
   - {fileID: 11400000, guid: d442ff1350da19c4ea22448a021d7459, type: 2}
   - {fileID: 11400000, guid: 0481df41d373a694fbb33962cfeb43be, type: 2}
+  - {fileID: 11400000, guid: c608067a21eb6874fb70240d6c83ece7, type: 2}
+  - {fileID: 11400000, guid: 320b7887fa37a134ea569d002a8eb7d0, type: 2}
+  - {fileID: 11400000, guid: 875ad36292dd4654b982c0736bea8bc9, type: 2}
+  - {fileID: 11400000, guid: 999663f3ac729b04c9f4269680905c36, type: 2}
   - {fileID: 11400000, guid: cb002cddefc36de47aca2357b262d003, type: 2}
   - {fileID: 11400000, guid: 17455780ed3e70d4cbe8ef1d01e96fb8, type: 2}
   - {fileID: 11400000, guid: 1648bde354952884aa1c102092893613, type: 2}
   - {fileID: 11400000, guid: 559258427dbea264ca69fb569a09b8f4, type: 2}
+  - {fileID: 11400000, guid: e550bb3af5cb35543801506147b8a20e, type: 2}
+  - {fileID: 11400000, guid: 1a94dc9914064d14db1c0e22e66323e0, type: 2}
+  - {fileID: 11400000, guid: 97ce56e5924327245948e7615e28fe2a, type: 2}
+  - {fileID: 11400000, guid: 82613cd82e8ad6441b457650ec6c7437, type: 2}
+  - {fileID: 11400000, guid: 425d69c18d9cfe846ba2957162294c84, type: 2}
+  - {fileID: 11400000, guid: d9feab50b8a698f4792e352fe030171a, type: 2}
+  - {fileID: 11400000, guid: 14678346efff5c54387c767070497b5d, type: 2}
+  - {fileID: 11400000, guid: a5bd273ad3681574389c0295f6114c5e, type: 2}
+  - {fileID: 11400000, guid: 6f003fa2038b83c4eb19f0352af53de3, type: 2}
+  - {fileID: 11400000, guid: cd9375c0172589946a14aa67bc477843, type: 2}
   backgroundTiles:
   - {fileID: 11400000, guid: 8df104a2a29dfd74fa4a3c2b9fc5f6f7, type: 2}
   - {fileID: 11400000, guid: f3324d45260d17848a86f97de9f97b4d, type: 2}
@@ -3558,8 +3573,28 @@ MonoBehaviour:
   backgroundTilemapName: Background
   platformTilemapName: Platform
   isTest: 1
+  haveLeftWall: 0
+  haveUpWall: 0
+  haveDownWall: 0
+  haveRightWall: 1
+  boundWallThickness: 2
   testPrototype: {fileID: 2847921351174808645, guid: a4458d2f23c4b224898aad68aa8f00b7, type: 3}
   generateTransform: {fileID: 1008169314}
+--- !u!114 &645700492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645700487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8471acd4263914383683828f920aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rules: {fileID: 11400000, guid: 74e2254a9d28b1e448a7e3bd4534a207, type: 2}
+  tagRulePath: Assets/Refactor/Tiles/TileRule/TagRule
+  prototypeRulePath: Assets/Refactor/Tiles/TileRule/PrototypeRule
 --- !u!1 &649197609
 GameObject:
   m_ObjectHideFlags: 0

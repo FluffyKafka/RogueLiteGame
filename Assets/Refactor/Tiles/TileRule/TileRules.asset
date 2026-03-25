@@ -1,0 +1,232 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c209f151e628a7649bf00160662101b5, type: 3}
+  m_Name: TileRules
+  m_EditorClassIdentifier: 
+  prototypeRule:
+  - name: Down
+    tile_0: 1
+    tile_1: 1
+    tile_2: 1
+    tile_3: 1
+    tile_4: 1
+    tile_5: 0
+    tile_6: -1
+    tile_7: 0
+  - name: DownLeft
+    tile_0: -1
+    tile_1: 1
+    tile_2: 1
+    tile_3: -1
+    tile_4: 1
+    tile_5: -1
+    tile_6: -1
+    tile_7: -1
+  - name: DownRight
+    tile_0: 1
+    tile_1: 1
+    tile_2: -1
+    tile_3: 1
+    tile_4: -1
+    tile_5: -1
+    tile_6: -1
+    tile_7: -1
+  - name: Internal
+    tile_0: 1
+    tile_1: 1
+    tile_2: 1
+    tile_3: 1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: Left
+    tile_0: 0
+    tile_1: 1
+    tile_2: 1
+    tile_3: -1
+    tile_4: 1
+    tile_5: 0
+    tile_6: 1
+    tile_7: 1
+  - name: LeftStair
+    tile_0: -1
+    tile_1: -1
+    tile_2: 0
+    tile_3: -1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: LeftStairCorner
+    tile_0: -1
+    tile_1: 1
+    tile_2: 1
+    tile_3: 1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: Right
+    tile_0: 1
+    tile_1: 1
+    tile_2: 0
+    tile_3: 1
+    tile_4: -1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 0
+  - name: RightStair
+    tile_0: 0
+    tile_1: -1
+    tile_2: -1
+    tile_3: 1
+    tile_4: -1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: RightStairCorner
+    tile_0: 1
+    tile_1: 1
+    tile_2: -1
+    tile_3: 1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: Up
+    tile_0: 0
+    tile_1: -1
+    tile_2: 0
+    tile_3: 1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: 1
+  - name: UpLeft
+    tile_0: -1
+    tile_1: -1
+    tile_2: 0
+    tile_3: -1
+    tile_4: 1
+    tile_5: -1
+    tile_6: 1
+    tile_7: 1
+  - name: UpRight
+    tile_0: 0
+    tile_1: -1
+    tile_2: -1
+    tile_3: 1
+    tile_4: -1
+    tile_5: 1
+    tile_6: 1
+    tile_7: -1
+  - name: UpLeftCorner
+    tile_0: 1
+    tile_1: 1
+    tile_2: 1
+    tile_3: 1
+    tile_4: 1
+    tile_5: 1
+    tile_6: 1
+    tile_7: -1
+  - name: UpRightCorner
+    tile_0: 1
+    tile_1: 1
+    tile_2: 1
+    tile_3: 1
+    tile_4: 1
+    tile_5: -1
+    tile_6: 1
+    tile_7: 1
+  tagRule:
+  - name: Carpet
+    tag_0: Carpet
+    tag_1: 
+    tag_2: Carpet
+    tag_3: Carpet
+    tag_4: Carpet
+    tag_5: Carpet
+    tag_6: 
+    tag_7: Carpet
+  - name: YellowGround
+    tag_0: YellowGround
+    tag_1: 
+    tag_2: YellowGround
+    tag_3: YellowGround
+    tag_4: YellowGround
+    tag_5: YellowGround
+    tag_6: 
+    tag_7: YellowGround
+  - name: NoCarpet
+    tag_0: NoCarpet
+    tag_1: 
+    tag_2: NoCarpet
+    tag_3: NoCarpet
+    tag_4: NoCarpet
+    tag_5: NoCarpet
+    tag_6: 
+    tag_7: NoCarpet
+  - name: Ground
+    tag_0: Ground
+    tag_1: 
+    tag_2: Ground
+    tag_3: Ground
+    tag_4: Ground
+    tag_5: Ground
+    tag_6: 
+    tag_7: Ground
+  - name: CarpetToNo
+    tag_0: Carpet
+    tag_1: 
+    tag_2: NoCarpet
+    tag_3: Carpet
+    tag_4: NoCarpet
+    tag_5: Carpet
+    tag_6: 
+    tag_7: NoCarpet
+  - name: NoToCarpet
+    tag_0: NoCarpet
+    tag_1: 
+    tag_2: Carpet
+    tag_3: NoCarpet
+    tag_4: Carpet
+    tag_5: NoCarpet
+    tag_6: 
+    tag_7: Carpet
+  - name: GroundToYellow
+    tag_0: Ground
+    tag_1: 
+    tag_2: YellowGround
+    tag_3: Ground
+    tag_4: YellowGround
+    tag_5: Ground
+    tag_6: 
+    tag_7: YellowGround
+  - name: YellowToGround
+    tag_0: YellowGround
+    tag_1: 
+    tag_2: Ground
+    tag_3: YellowGround
+    tag_4: Ground
+    tag_5: YellowGround
+    tag_6: 
+    tag_7: Ground
+  - name: NoTransition
+    tag_0: NoTransition
+    tag_1: NoTransition
+    tag_2: NoTransition
+    tag_3: NoTransition
+    tag_4: NoTransition
+    tag_5: NoTransition
+    tag_6: NoTransition
+    tag_7: NoTransition

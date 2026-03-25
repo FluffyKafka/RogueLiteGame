@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
   m_Name: brick_side_right_1_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 52a37e0d7336b7f4094a9d6a53e8bdc0, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: c6fdc11f2b8c73948a46a85ce7beb178, type: 2}
   layer: 0
-  tag: 
+  tags: []
+  rules: []
