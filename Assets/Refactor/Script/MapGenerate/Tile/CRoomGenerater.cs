@@ -19,6 +19,9 @@ namespace MapGenerate
         [SerializeField] protected string backgroundTilemapName = "Background";
         [SerializeField] protected string platformTilemapName = "Platform";
 
+        [Header("Replace Tile")]
+        [SerializeField] protected TileBase backgroundReplaceTile;
+
         [Header("Test")]
         [SerializeField] protected bool isTest = false;
         [SerializeField] protected bool haveLeftWall = true;
@@ -322,6 +325,11 @@ namespace MapGenerate
                     {
                         // 如果是Ground层且有边框，跳过边框位置（不加入替换列表）
                         if (hasBorder && IsBorderPosition(x, y, bounds))
+                        {
+                            continue;
+                        }
+                        // 背景只替换指定tile
+                        if(tilemap.name == backgroundTilemapName && tilemap.GetTile(pos) != backgroundReplaceTile)
                         {
                             continue;
                         }
