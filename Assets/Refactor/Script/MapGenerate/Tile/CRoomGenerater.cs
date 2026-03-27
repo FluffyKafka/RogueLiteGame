@@ -54,6 +54,13 @@ namespace MapGenerate
             Tilemap backgroundTilemap = FindTilemapInChildren(actualRoom, backgroundTilemapName);
             Tilemap platformTilemap = FindTilemapInChildren(actualRoom, platformTilemapName);
 
+            IRoomGeneratorComponents[] generateComponents =
+                actualRoom.GetComponentsInChildren<IRoomGeneratorComponents>();
+            foreach(var cop in generateComponents)
+            {
+                cop.Generate();
+            }
+
             // 替换各层Tile
             if(groundTilemap != null)
             {
@@ -291,7 +298,6 @@ namespace MapGenerate
 
             groundTilemap.RefreshAllTiles();
         }
-
         private void ReplaceTilemapTiles(Tilemap tilemap, List<DTile> availableTiles, bool hasBorder = false)
         {
             if (availableTiles == null || availableTiles.Count == 0)
@@ -398,7 +404,6 @@ namespace MapGenerate
                 Debug.Log($"清除了 {clearedCount} 个Ground边框tile");
             }
         }
-
         private DTile SelectTileForPosition(List<DTile> availableTiles, DTile[] neighborTiles, bool[] prototypeNeighbors, Vector3Int position, Dictionary<Vector3Int, DTile> placedTiles)
         {
             // 过滤出所有符合规则的Tile
@@ -429,7 +434,6 @@ namespace MapGenerate
 
             return null;
         }
-
         private bool[] GetPrototypeNeighbors(Tilemap tilemap, Vector3Int center)
         {
             bool[] neighbors = new bool[8];
@@ -453,7 +457,6 @@ namespace MapGenerate
 
             return neighbors;
         }
-
         private DTile[] GetNeighborDTiles(Tilemap tilemap, Vector3Int center, Dictionary<Vector3Int, DTile> placedTiles)
         {
             DTile[] neighborTiles = new DTile[8];
@@ -494,7 +497,6 @@ namespace MapGenerate
 
             return neighborTiles;
         }
-
         private Tilemap FindTilemapInChildren(GameObject parent, string name)
         {
             Tilemap[] tilemaps = parent.GetComponentsInChildren<Tilemap>();
@@ -507,7 +509,6 @@ namespace MapGenerate
             }
             return null;
         }
-
         private bool CheckPlacedNeighborRulesForPosition(DTile candidateTile, Vector3Int center, Dictionary<Vector3Int, DTile> placedTiles)
         {
             Vector3Int[] offsets = new Vector3Int[]
@@ -548,5 +549,9 @@ namespace MapGenerate
             return true;
         }       
     }
-}
 
+    interface IRoomGeneratorComponents
+    {
+        public void Generate();
+    }
+}

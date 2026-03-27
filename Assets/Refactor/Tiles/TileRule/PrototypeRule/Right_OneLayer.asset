@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
-  m_Name: platform_1_DTile
+  m_Script: {fileID: 11500000, guid: d475fdfbfe73e0a429c788c3441d16cc, type: 3}
+  m_Name: Right_OneLayer
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: d6b0894bdf8a3db4dbb0d37b3608e2ec, type: 2}
-  rule: {fileID: 0}
-  layer: 0
-  tag: 
+  prototypeTiles: 00000000000000000000000001000000ffffffff000000000000000000000000

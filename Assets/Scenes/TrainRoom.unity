@@ -3568,7 +3568,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f3324d45260d17848a86f97de9f97b4d, type: 2}
   - {fileID: 11400000, guid: b259155ee47568241ae26684ab7624b0, type: 2}
   - {fileID: 11400000, guid: b48bf9d9f2654a542aee81d5c3c74470, type: 2}
-  platformTiles: []
+  platformTiles:
+  - {fileID: 11400000, guid: b2d8a87978bc624449961604b2205940, type: 2}
+  - {fileID: 11400000, guid: f83c85f84ad0ae54fab557091f0fcab4, type: 2}
+  - {fileID: 11400000, guid: 8d70e0a1538b7214aa0db472d302b0a0, type: 2}
+  - {fileID: 11400000, guid: caf8ddd0d3065b04ba7ae92f8aed112e, type: 2}
   groundTilemapName: Ground
   backgroundTilemapName: Background
   platformTilemapName: Platform
@@ -3578,6 +3582,7 @@ MonoBehaviour:
   haveDownWall: 0
   haveRightWall: 1
   boundWallThickness: 2
+  leftRightHight: 4
   testPrototype: {fileID: 2847921351174808645, guid: a4458d2f23c4b224898aad68aa8f00b7, type: 3}
   generateTransform: {fileID: 1008169314}
 --- !u!114 &645700492

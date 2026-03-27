@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
-  m_Name: platform_4_DTile
+  m_Name: platform_3_DTile
   m_EditorClassIdentifier: 
-  tileBase: {fileID: 11400000, guid: 490645454273ac84fa47c5334ce2efae, type: 2}
-  rule: {fileID: 0}
+  tileBase: {fileID: 11400000, guid: c8158abb6057cfd4aa2f94130476fa38, type: 2}
   layer: 0
-  tag: 
+  tags: []
+  rules:
+  - {fileID: 11400000, guid: 0b44c4f366fba3f48863c13f0e094120, type: 2}

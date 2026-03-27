@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b368633e0cca594d9e1972263d664ae, type: 3}
-  m_Name: floor_tile_wood_carpet_transition_1_DTile
+  m_Name: platform_1_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: d6b0894bdf8a3db4dbb0d37b3608e2ec, type: 2}
   layer: 0
   tags: []
-  rules: []
+  rules:
+  - {fileID: 11400000, guid: 378f1acde6f08074687c90650183d24c, type: 2}

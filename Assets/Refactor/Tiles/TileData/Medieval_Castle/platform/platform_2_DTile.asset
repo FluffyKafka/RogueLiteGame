@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: platform_2_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 2879a2a9b9dd92f4ebbae550c05805af, type: 2}
-  rule: {fileID: 0}
   layer: 0
-  tag: 
+  tags: []
+  rules:
+  - {fileID: 11400000, guid: 0b44c4f366fba3f48863c13f0e094120, type: 2}
