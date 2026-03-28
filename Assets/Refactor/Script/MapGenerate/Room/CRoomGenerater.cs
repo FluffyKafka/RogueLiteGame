@@ -10,6 +10,17 @@ using UnityEngine.Tilemaps;
 
 namespace MapGenerate
 {
+    internal struct DRoomInfo
+    {
+        public bool haveLeftWall;
+        public bool haveUpWall;
+        public bool haveDownWall;
+        public bool haveRightWall;
+        public GameObject roomPrototype;
+        public Vector3 generatePosition;
+        public float enemyDifficulty;
+    }
+
     internal class CRoomGenerater : MonoBehaviour
     {
         [Header("TileÌæ»»ÁÐ±í")]
@@ -32,8 +43,11 @@ namespace MapGenerate
         [SerializeField] protected GameObject decorationPrefab;
         [SerializeField] protected List<Sprite> decoSpriteList;
         [Header("Enemy")]
-        [SerializeField] protected float difficulty;
         [SerializeField] protected List<GameObject> enemys;
+
+        [Header("Room Info")]
+        [SerializeField] protected int boundWallThickness = 2;
+        [SerializeField] protected int leftRightHight = 4;
 
         [Header("Test")]
         [SerializeField] protected bool isTest = false;
@@ -41,10 +55,9 @@ namespace MapGenerate
         [SerializeField] protected bool haveUpWall = true;
         [SerializeField] protected bool haveDownWall = true;
         [SerializeField] protected bool haveRightWall = true;
-        [SerializeField] protected int boundWallThickness = 2;
-        [SerializeField] protected int leftRightHight = 4;
-        [SerializeField] protected GameObject testPrototype;
+        [SerializeField] protected GameObject roomPrototype;
         [SerializeField] protected Transform generateTransform;
+        [SerializeField] protected float enemyDifficulty;
 
         
 
@@ -52,11 +65,23 @@ namespace MapGenerate
         {
             if(isTest)
             {
-                GenerateRoom(testPrototype).transform.position = generateTransform.position;
+                GenerateRoom(roomPrototype).transform.position = generateTransform.position;
             }           
         }
 
-        public GameObject GenerateRoom(GameObject prototypeRoomPrefab)
+        public void GenerateRoomFromData(DRoomInfo _data)
+        {
+            haveLeftWall = _data.haveLeftWall;
+            haveUpWall = _data.haveUpWall;
+            haveDownWall = _data.haveDownWall;
+            haveRightWall = _data.haveRightWall;
+
+            enemyDifficulty = _data.enemyDifficulty;
+
+            GameObject room = GenerateRoom(_data.roomPrototype);
+            room.transform.position = _data.generatePosition;
+        }
+        protected GameObject GenerateRoom(GameObject prototypeRoomPrefab)
         {
             if (prototypeRoomPrefab == null)
             {
@@ -108,11 +133,12 @@ namespace MapGenerate
 
             List<Vector3> positions = FindValidWorldPositions(groundTilemap, entityHeight, entityRadius, generateTransform);
             GenerateDecorations(actualRoom, positions);
-            GenerateEnemy(difficulty, enemys, positions);
+            GenerateEnemy(enemyDifficulty, enemys, positions);
 
             return actualRoom;
         }
 
+        #region Room Entity Generate
         protected void GenerateEnemy(float _difficulty, List<GameObject> _enemys, List<Vector3> _positions)
         {
             List<Vector3> positionsTemp = new(_positions);
@@ -239,6 +265,7 @@ namespace MapGenerate
             }
             return true;
         }
+        #endregion
 
         #region Tile Replacement
         private void ClearWallsInGroundBasedOnConfig(Tilemap groundTilemap)
