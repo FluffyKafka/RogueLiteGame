@@ -66,9 +66,16 @@ namespace EnemySystem
 
     }
 
-    internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy
+    public interface IMapEnemy
+    {
+        public EEnemyType CheckType();
+        public float CheckDifficulty();
+    }
+
+    internal class AEnemy : AEntity, IAnimEnemy, IPlayerEnemy, IObjectEnemy, IBehaviourEnemy, IMapEnemy
     {
         [SerializeField] protected EEnemyType enemyType;
+        [SerializeField] protected float difficulty;
 
         protected IEnemyPlayer player;
         protected IEnemyAnimation enemyAnim;
@@ -349,6 +356,16 @@ namespace EnemySystem
         }
         #endregion
 
+        #region
+        public EEnemyType CheckType()
+        {
+            return enemyType;
+        }
+        public float CheckDifficulty()
+        {
+            return difficulty;
+        }
+        #endregion
     }
 
     public interface IEnemyBehaviour : IEntityBehaviour

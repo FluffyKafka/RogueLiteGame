@@ -1,6 +1,9 @@
+using EnemySystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
@@ -22,6 +25,16 @@ namespace MapGenerate
         [Header("Replace Tile")]
         [SerializeField] protected TileBase backgroundReplaceTile;
 
+        [Header("Entity Generation Info")]
+        [SerializeField] protected int entityHeight;
+        [SerializeField] protected int entityRadius;
+        [Header("Decoration")]
+        [SerializeField] protected GameObject decorationPrefab;
+        [SerializeField] protected List<Sprite> decoSpriteList;
+        [Header("Enemy")]
+        [SerializeField] protected float difficulty;
+        [SerializeField] protected List<GameObject> enemys;
+
         [Header("Test")]
         [SerializeField] protected bool isTest = false;
         [SerializeField] protected bool haveLeftWall = true;
@@ -32,6 +45,8 @@ namespace MapGenerate
         [SerializeField] protected int leftRightHight = 4;
         [SerializeField] protected GameObject testPrototype;
         [SerializeField] protected Transform generateTransform;
+
+        
 
         private void Start()
         {
@@ -74,7 +89,6 @@ namespace MapGenerate
             {
                 Debug.LogWarning("缺少Ground层");
             }
-
             if (backgroundTilemap != null)
             {
                 ReplaceTilemapTiles(backgroundTilemap, backgroundTiles);
@@ -83,7 +97,6 @@ namespace MapGenerate
             {
                 Debug.LogWarning("缺少Background层");
             }
-
             if(platformTilemap != null)
             {
                 ReplaceTilemapTiles(platformTilemap, platformTiles);
@@ -92,8 +105,142 @@ namespace MapGenerate
             {
                 Debug.LogWarning("缺少Platform层");
             }
+
+            List<Vector3> positions = FindValidWorldPositions(groundTilemap, entityHeight, entityRadius, generateTransform);
+            GenerateDecorations(actualRoom, positions);
+            GenerateEnemy(difficulty, enemys, positions);
+
             return actualRoom;
         }
+
+        protected void GenerateEnemy(float _difficulty, List<GameObject> _enemys, List<Vector3> _positions)
+        {
+            List<Vector3> positionsTemp = new(_positions);
+            MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
+
+            float diff = 0;
+            while(diff < _difficulty)
+            {
+                if (positionsTemp.Count == 0)
+                {
+                    Debug.LogWarning("位置不足无法继续生成敌人");
+                    return;
+                }
+
+                Vector3 position = positionsTemp[Random.Range(0, positionsTemp.Count)];
+                IMapEnemy enemy = enemys[Random.Range(0, enemys.Count)].GetComponent<IMapEnemy>();
+
+                manager.GenerateEnemyAt(enemy.CheckType(), position);
+                diff += enemy.CheckDifficulty();
+
+                positionsTemp.Remove(position);
+            }
+        }
+        protected void GenerateDecorations(GameObject _actualRoom, List<Vector3> _positions)
+        {
+            List<Vector3> positionsTemp = new(_positions);
+            int decorationCount = _actualRoom.GetComponentInChildren<CRoomInfo>().CheckDecorationCount();
+            for(int i = 0; i < decorationCount; ++i)
+            {
+                if(positionsTemp.Count == 0)
+                {
+                    Debug.LogWarning("位置不足无法继续生成装饰，已经生成：" + i + "个装饰");
+                    return;
+                }
+
+                Vector3 position = positionsTemp[Random.Range(0, positionsTemp.Count)];
+                GameObject decoGameObject = Instantiate(decorationPrefab, position, Quaternion.identity);
+                decoGameObject.GetComponent<SpriteRenderer>().sprite = 
+                    decoSpriteList[Random.Range(0, decoSpriteList.Count)];
+                positionsTemp.Remove(position);
+                positionsTemp.Remove(position + Vector3.left);
+                positionsTemp.Remove(position + Vector3.right);
+            }
+        }
+        public List<Vector3> FindValidWorldPositions(Tilemap tilemap, int _upVoidCount, int _checkRadius, Transform _generateTransform)
+        {
+            List<Vector3> validWorldPositions = new List<Vector3>();
+
+            // 获取Tilemap的边界
+            BoundsInt bounds = tilemap.cellBounds;
+
+            // 遍历所有格子
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y < bounds.yMax; y++)
+                {
+                    Vector3Int currentCellPos = new Vector3Int(x, y, 0);
+                    Vector3Int belowPos = new Vector3Int(x, y - 1, 0);
+
+                    // 条件1：下方格子有tile，且向上n格没有tile
+                    if (IsBelowHasTile(tilemap, belowPos) && IsUpwardEmpty(tilemap, currentCellPos, _upVoidCount))
+                    {
+                        // 条件2：左右m个格子都符合条件1
+                        if (CheckHorizontalRange(tilemap, currentCellPos, _upVoidCount, _checkRadius))
+                        {
+                            // 转换为世界坐标：x为格子中心，y为格子底部
+                            Vector3 worldPos = GetWorldPositionAtBottom(tilemap, currentCellPos);
+                            worldPos += _generateTransform.position;
+                            validWorldPositions.Add(worldPos);
+                        }
+                    }
+                }
+            }
+
+            return validWorldPositions;
+        }
+        private Vector3 GetWorldPositionAtBottom(Tilemap tilemap, Vector3Int cellPos)
+        {
+            // 获取格子中心的世界坐标
+            Vector3 cellCenterWorld = tilemap.GetCellCenterWorld(cellPos);
+
+            // 获取格子大小
+            Vector3 cellSize = tilemap.cellSize;
+
+            // 计算格子底部中心坐标（中心Y坐标减去一半的高度）
+            Vector3 bottomCenter = new Vector3(
+                cellCenterWorld.x,
+                cellCenterWorld.y - cellSize.y * 0.5f,
+                cellCenterWorld.z
+            );
+
+            return bottomCenter;
+        }
+        private bool IsBelowHasTile(Tilemap tilemap, Vector3Int belowPos)
+        {
+            return tilemap.HasTile(belowPos);
+        }
+        private bool IsUpwardEmpty(Tilemap tilemap, Vector3Int startPos, int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                Vector3Int checkPos = new Vector3Int(startPos.x, startPos.y + i, 0);
+                if (tilemap.HasTile(checkPos))
+                {
+                    return false; // 发现tile，不符合条件
+                }
+            }
+            return true; // 所有格子都为空
+        }
+        private bool CheckHorizontalRange(Tilemap tilemap, Vector3Int centerPos, int n, int m)
+        {
+            for (int offset = -m; offset <= m; offset++)
+            {
+                if (offset == 0) continue; // 跳过中心位置本身
+
+                Vector3Int checkPos = new Vector3Int(centerPos.x + offset, centerPos.y, 0);
+                Vector3Int belowPos = new Vector3Int(checkPos.x, checkPos.y - 1, 0);
+
+                // 检查该位置是否满足条件1
+                if (!IsBelowHasTile(tilemap, belowPos) || !IsUpwardEmpty(tilemap, checkPos, n))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        #region Tile Replacement
         private void ClearWallsInGroundBasedOnConfig(Tilemap groundTilemap)
         {
             // 获取边界
@@ -555,7 +702,8 @@ namespace MapGenerate
             }
 
             return true;
-        }       
+        }
+        #endregion
     }
 
     interface IRoomGeneratorComponents

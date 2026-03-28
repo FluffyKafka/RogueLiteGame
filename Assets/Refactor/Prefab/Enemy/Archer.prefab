@@ -15632,6 +15632,7 @@ MonoBehaviour:
   selfDestroyAfterDead: 10
   isDead: 0
   enemyType: 1
+  difficulty: 10
 --- !u!114 &5701941419085557193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15852,3 +15853,5 @@ MonoBehaviour:
     rate: 0.4
   - item: {fileID: 11400000, guid: 546b3e9571302b240b746758ae7097bc, type: 2}
     rate: 0.2
+  dropSoulRange: {x: 0, y: 0}
+  dropCoinRange: {x: 0, y: 0}

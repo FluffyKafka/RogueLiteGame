@@ -24,6 +24,8 @@ namespace EnemySystem
         [SerializeField] protected GameObject skeletonPrefab;
         [SerializeField] protected GameObject archerPrefab;
         [SerializeField] protected GameObject necromancerPrefab;
+        [SerializeField] protected GameObject bombmanPrefab;
+        [SerializeField] protected GameObject crazyWizardPrefab;
         [SerializeField] protected GameObject slimePrefab;
         [SerializeField] protected GameObject subSlimePrefab;
         [SerializeField] protected GameObject minSlimePrefab;
@@ -70,6 +72,8 @@ namespace EnemySystem
             TryInitPrefab(slimePrefab);
             TryInitPrefab(subSlimePrefab);
             TryInitPrefab(minSlimePrefab);
+            TryInitPrefab(bombmanPrefab);
+            TryInitPrefab(crazyWizardPrefab);
         }
         protected void TryInitPrefab(GameObject _prefab)
         {
@@ -94,6 +98,12 @@ namespace EnemySystem
                 case EEnemyType.Necromancer:
                     Assert.IsNotNull(necromancerPrefab, "Necromancer的Prefab未设置");
                     return Instantiate(necromancerPrefab, _worldPosition, Quaternion.identity);
+                case EEnemyType.BombMan:
+                    Assert.IsNotNull(bombmanPrefab, "Bombman的Prefab未设置");
+                    return Instantiate(bombmanPrefab, _worldPosition, Quaternion.identity);
+                case EEnemyType.CrazyWizard:
+                    Assert.IsNotNull(crazyWizardPrefab, "CrazyWizard的Prefab未设置");
+                    return Instantiate(crazyWizardPrefab, _worldPosition, Quaternion.identity);
                 case EEnemyType.Slime:
                     Assert.IsNotNull(slimePrefab, "Slime的Prefab未设置");
                     return Instantiate(slimePrefab, _worldPosition, Quaternion.identity);

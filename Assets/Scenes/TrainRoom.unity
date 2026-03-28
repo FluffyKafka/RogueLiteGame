@@ -3317,6 +3317,7 @@ MonoBehaviour:
   saveManager: {fileID: 1168430934}
   gameManager: {fileID: 181734601}
   npcFactory: {fileID: 1482533280}
+  mapGenerater: {fileID: 645700487}
 --- !u!4 &602854873
 Transform:
   m_ObjectHideFlags: 0
@@ -3576,6 +3577,49 @@ MonoBehaviour:
   groundTilemapName: Ground
   backgroundTilemapName: Background
   platformTilemapName: Platform
+  backgroundReplaceTile: {fileID: 11400000, guid: 16692a6f8c64ad84cb8d5129962805de, type: 2}
+  entityHeight: 2
+  entityRadius: 1
+  decorationPrefab: {fileID: 153967504809312598, guid: 7eba192808eb38544bde108dbef1c545, type: 3}
+  decoSpriteList:
+  - {fileID: 21300000, guid: b61ebe29b3b0db44bbbbfccc4dcc3be8, type: 3}
+  - {fileID: 21300000, guid: 9204943f0eacdb74baf3cba4d4bb8f4a, type: 3}
+  - {fileID: 21300000, guid: d9067e57fb155cb40a3d0f85e9f51544, type: 3}
+  - {fileID: 21300000, guid: 1e978af5c6e774446add94e8d0cf72bf, type: 3}
+  - {fileID: 21300000, guid: f33a2a1156e68494e98db1f223bfebdd, type: 3}
+  - {fileID: 21300000, guid: 6dafea31fe94dd149a8ce1a0ef196bab, type: 3}
+  - {fileID: 21300000, guid: 460556444a4e4a2498b0818c9a7dbb94, type: 3}
+  - {fileID: 21300000, guid: 550795fa2a3ca1145933d021eccf3a03, type: 3}
+  - {fileID: 21300000, guid: accff7572841ae643a6ec222d6856407, type: 3}
+  - {fileID: 21300000, guid: 75c47b8b553cd8f45927b73d1fdd0f78, type: 3}
+  - {fileID: 21300000, guid: aa92f6bbee238934181c8550e97b1beb, type: 3}
+  - {fileID: 21300000, guid: aa12eeb1e0526dc4181cbfd349eed568, type: 3}
+  - {fileID: 21300000, guid: 61529b5e56ddbe94e9ab642de5dd827a, type: 3}
+  - {fileID: 21300000, guid: 3a74581a34e06c44aab7a1b26f2ea5e3, type: 3}
+  - {fileID: 21300000, guid: 42c70be15deaaac4c87c36616632ed1c, type: 3}
+  - {fileID: 21300000, guid: 7c969826663c474488da130737a73252, type: 3}
+  - {fileID: 21300000, guid: a4858fd0287087249bbd13755b620710, type: 3}
+  - {fileID: 21300000, guid: 71630e1e5bc9f4647994ca1c2427fbbe, type: 3}
+  - {fileID: 21300000, guid: 1b99c1f5bba0c3f4ead81c79bd4ceb7c, type: 3}
+  - {fileID: 21300000, guid: c2f841aed970f344d83bd033b5cb5241, type: 3}
+  - {fileID: 21300000, guid: 5bd68b9bdb08e634f8f7181b4d6cf66b, type: 3}
+  - {fileID: 21300000, guid: 7e2006056b9d84c40bc26f41eb1fa2b6, type: 3}
+  - {fileID: 21300000, guid: edc0a89103942e64bbf0aa32a9c01bbb, type: 3}
+  - {fileID: 21300000, guid: 094e3e97fde0bfc45ab590d41d31b624, type: 3}
+  - {fileID: 21300000, guid: 83ebc7c4e54136e4eaeb59dbead2abdd, type: 3}
+  - {fileID: 21300000, guid: c81f76eb887755a438203c7072588478, type: 3}
+  - {fileID: 21300000, guid: 8a6009b5d4a40834a922d26377f3bc9b, type: 3}
+  - {fileID: 21300000, guid: d2da73ea7adc9654c8adc7a4512cf3a5, type: 3}
+  - {fileID: 21300000, guid: 8566d9190335a554cab835250b170b80, type: 3}
+  - {fileID: 21300000, guid: ba4c1f8304ae62f42ad0fdc9f69cf023, type: 3}
+  difficulty: 50
+  enemys:
+  - {fileID: 8213703897837320431, guid: f6032ed1c22a2c54184b6fd9cb514b1b, type: 3}
+  - {fileID: 4095804487083716859, guid: 7e54025b9e353da4e8de6d120cb76574, type: 3}
+  - {fileID: 8020982647346613071, guid: a273accfb2e862742b27288c90015c67, type: 3}
+  - {fileID: 2088322172915007269, guid: 5cba200d71c26bb4fa3372df6c4c389c, type: 3}
+  - {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
+  - {fileID: 795122198625308710, guid: 732521b1e40fd574f97e42d336d3a582, type: 3}
   isTest: 1
   haveLeftWall: 0
   haveUpWall: 0
@@ -19736,6 +19780,8 @@ MonoBehaviour:
   skeletonPrefab: {fileID: 8020982647346613071, guid: 4101e3e86761ea247965b6edb0682ca2, type: 3}
   archerPrefab: {fileID: 8213703897837320431, guid: f6032ed1c22a2c54184b6fd9cb514b1b, type: 3}
   necromancerPrefab: {fileID: 2088322172915007269, guid: 5cba200d71c26bb4fa3372df6c4c389c, type: 3}
+  bombmanPrefab: {fileID: 4095804487083716859, guid: 7e54025b9e353da4e8de6d120cb76574, type: 3}
+  crazyWizardPrefab: {fileID: 8020982647346613071, guid: a273accfb2e862742b27288c90015c67, type: 3}
   slimePrefab: {fileID: 795122198625308710, guid: 732521b1e40fd574f97e42d336d3a582, type: 3}
   subSlimePrefab: {fileID: 795122198625308710, guid: 76dbafa5fc8099246b60f795afd3bb15, type: 3}
   minSlimePrefab: {fileID: 795122198625308710, guid: 0804d784bb38e0146bf0ab4812c433bb, type: 3}

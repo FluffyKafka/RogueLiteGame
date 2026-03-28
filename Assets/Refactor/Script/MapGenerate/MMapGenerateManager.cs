@@ -45,6 +45,11 @@ namespace MapGenerate
             npcFactory = _npcFactory;
             objectFactory = _objectFactory;
         }
+
+        public void GenerateEnemyAt(EEnemyType type, Vector3 _position)
+        {
+            enemyFactory.GetEmemyGameObjectAt(type, _position);
+        }
     }
 }
 
