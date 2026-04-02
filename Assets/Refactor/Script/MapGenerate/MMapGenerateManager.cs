@@ -23,7 +23,7 @@ namespace MapGenerate
         public void Init(
             IMapPlayer _player, IMapInventory _inventory,
             IMapEnemyFactory _enemyFactory, IMapNPCFactory _npcFactory,
-            IMapObjectFactroy _objectFactory
+            IMapObjectFactroy _objectFactory, IMapInput _input
             );
     }
 
@@ -37,11 +37,12 @@ namespace MapGenerate
         protected IMapEnemyFactory enemyFactory;
         protected IMapNPCFactory npcFactory;
         protected IMapObjectFactroy objectFactory;
+        protected IMapInput input;
 
         public void Init(
             IMapPlayer _player, IMapInventory _inventory,
             IMapEnemyFactory _enemyFactory, IMapNPCFactory _npcFactory,
-            IMapObjectFactroy _objectFactory
+            IMapObjectFactroy _objectFactory, IMapInput _input
             )
         {
             player = _player;
@@ -49,6 +50,7 @@ namespace MapGenerate
             enemyFactory = _enemyFactory;
             npcFactory = _npcFactory;
             objectFactory = _objectFactory;
+            input = _input;
 
             if(isGenerate)
             {
@@ -99,6 +101,11 @@ namespace MapGenerate
                 info.enemyDifficulty = -1;
             }
             GetComponent<IRoomGenerator>().GenerateRoomFromData(info);
+        }
+
+        public bool IsAnyKeyInput()
+        {
+            return input.IsAnyKeyInput();
         }
     }
 
@@ -170,5 +177,10 @@ namespace MapGenerate
                     right = _isConnect; return;
             }
         }     
+    }
+
+    public interface IMapInput
+    {
+        public bool IsAnyKeyInput();
     }
 }

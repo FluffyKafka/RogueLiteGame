@@ -1,4 +1,5 @@
 using GameManagerSystem;
+using MapGenerate;
 using PlayerSystem;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace InputManager
         public void GamePause(bool _isPause);
     }
 
-    internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput, IGameManagerInput
+    internal class MFixInputManager : MonoBehaviour, IInitInputManager, IPlayerInput, IGameManagerInput, IMapInput
     {
         protected IInputPlayer player;
 
@@ -84,6 +85,24 @@ namespace InputManager
         public KeyCode CheckObjectInteractInputKey()
         {
             return KeyCode.F;
+        }
+
+        public bool IsAnyKeyInput()
+        {
+            return Input.anyKey;
+        }
+
+        public bool IsMapDragBeginInput()
+        {
+            return Input.GetMouseButtonDown(0);
+        }
+        public bool IsMapDragInput()
+        {
+            return Input.GetMouseButton(0);
+        }
+        public float CheckZoomInput()
+        {
+            return Input.GetAxis("Mouse ScrollWheel");
         }
 
         //注意到更新的顺序，若两个输入事件同时发生，则前一个事件将覆盖下一个事件

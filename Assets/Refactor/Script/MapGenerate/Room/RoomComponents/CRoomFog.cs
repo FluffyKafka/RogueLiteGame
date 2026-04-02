@@ -1,4 +1,5 @@
 using PlayerSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace MapGenerate
         [SerializeField] private string sortingLayerName = "UI";
         [SerializeField] private float fogDensityRate;
         [SerializeField] private Vector2Int beEliminatedShapeSize;
+        [SerializeField] private Vector2Int sizeExpend;
 
 
         private SpriteRenderer fogSpriteRender;//∑øº‰µƒ√‘ŒÌÕº∆¨
@@ -20,9 +22,12 @@ namespace MapGenerate
         private Vector2Int fogDensity;
         private Vector2Int[] shapeLocalPosition;
         private Vector2 worldSize;
+        private Func<bool> IsAnyKeyInput;
 
         public void Generate(CRoomGenerater _generator)
         {
+            IsAnyKeyInput += _generator.IsAnyKeyInput;
+
             roomBox = GetComponent<BoxCollider2D>();
             BoxCollider2D[] colliders = GetComponentsInParent<BoxCollider2D>();
             Vector2 size = roomBox.size;
@@ -31,6 +36,7 @@ namespace MapGenerate
                 size.x = Mathf.Max(size.x, collider.size.x);
                 size.y = Mathf.Max(size.y, collider.size.y);
             }
+            size += sizeExpend;
             roomBox.size = size;
             roomBox.isTrigger = true;
 
@@ -65,7 +71,7 @@ namespace MapGenerate
 
         private void OnTriggerStay2D(Collider2D _collision)
         {
-            if (Input.anyKey && _collision.GetComponent<IMapPlayer>() != null)
+            if (IsAnyKeyInput() && _collision.GetComponent<IMapPlayer>() != null)
             {
                 EliminateFog(_collision.transform.position);
             }

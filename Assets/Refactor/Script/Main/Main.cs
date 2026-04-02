@@ -86,7 +86,8 @@ namespace Main
                 inventory.GetComponent<IMapInventory>(),
                 enemyFactory.GetComponent<IMapEnemyFactory>(),
                 npcFactory.GetComponent<IMapNPCFactory>(),
-                objectFactory.GetComponent<IMapObjectFactroy>()
+                objectFactory.GetComponent<IMapObjectFactroy>(),
+                inputManager.GetComponent<IMapInput>()
                 );
         }
     }

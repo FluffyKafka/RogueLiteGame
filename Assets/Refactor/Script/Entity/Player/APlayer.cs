@@ -201,6 +201,11 @@ namespace PlayerSystem
         public void AddItemRaw(IItemData _item);
         public void NPCEffectFail();
         public Transform CheckTransform();
+
+        public bool IsMapDragBeginInput();
+        public bool IsMapDragInput();
+        public float CheckZoomInput();
+        public Vector3 CheckMousePosition();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -779,6 +784,19 @@ namespace PlayerSystem
         {
             behaviour.NPCEffectFail();
         }
+
+        public bool IsMapDragBeginInput()
+        {
+            return input.IsMapDragBeginInput();
+        }
+        public bool IsMapDragInput()
+        {
+            return input.IsMapDragInput();
+        }
+        public float CheckZoomInput()
+        {
+            return input.CheckZoomInput();
+        }
         #endregion
 
         #region ObjectController
@@ -1126,6 +1144,10 @@ namespace PlayerSystem
         public KeyCode CheckSkillInputSlotKey(int _index);
         public KeyCode CheckNPCInteractInputKey();
         public KeyCode CheckObjectInteractInputKey();
+
+        public bool IsMapDragBeginInput();
+        public bool IsMapDragInput();
+        public float CheckZoomInput();
     }
 
     public interface IPlayerEnemy

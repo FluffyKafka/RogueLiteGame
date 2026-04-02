@@ -837,6 +837,11 @@ namespace MapGenerate
             return true;
         }
         #endregion
+
+        public bool IsAnyKeyInput()
+        {
+            return GetComponent<MMapGenerateManager>().IsAnyKeyInput();
+        }
     }
 
     interface IRoomGeneratorComponents

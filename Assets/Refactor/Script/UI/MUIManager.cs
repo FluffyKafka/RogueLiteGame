@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UIData;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace UISystem
 {
@@ -137,11 +138,6 @@ namespace UISystem
         }
         #endregion
 
-        public void CraftFailNotice_LackMaterial(IReadOnlyList<IItem> _lack)
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void EquipmentChangeNotice(EEquipmentType _type, IEquipment _equip)
         {
             InvokeAction(EquipmentChange, _type, _equip);
@@ -159,7 +155,7 @@ namespace UISystem
 
         public void StashFullNotice(IItem _itemToFull)
         {
-            throw new System.NotImplementedException();
+            throw new System.NotImplementedException();//////////////////////////////////////////////////////////////////////////////////
         }
 
         public void StatsChangeNotice()
@@ -327,6 +323,29 @@ namespace UISystem
             audioSystem.Communicating(player.CheckTransform(), _isPlay);
         }
         #endregion
+
+        public bool IsMapDragBeginInput()
+        {
+            return player.IsMapDragBeginInput();
+        }
+        public bool IsMapDragInput()
+        {
+            return player.IsMapDragInput();
+        }
+        public float CheckZoomInput()
+        {
+            return player.CheckZoomInput();
+        }
+        public Vector3 CheckMousePosition()
+        {
+            return player.CheckMousePosition();
+        }
+
+        public Transform CheckPlayerTransform()
+        {
+            return player.CheckTransform();
+        }
+        
     }
 }
 
