@@ -74,7 +74,7 @@ namespace ObjectController
 
             //LayerMask的value为掩码（3 => 1000 => 8）
             //1 << _collision.gameObject.layer将1左移3位（0001 -> 1000）最后或运算
-            if (isGroundTrigger && (whatIsGround.value & (1 << _collision.gameObject.layer)) != 0)
+            if (isGroundTrigger && ((whatIsGround.value & (1 << _collision.gameObject.layer)) != 0))
             {
                 controller.InvokeAction(controller.HitGroundNotice, _collision.transform);
                 Debug.Log("HitGround");

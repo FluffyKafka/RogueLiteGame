@@ -9950,7 +9950,7 @@ Transform:
   m_GameObject: {fileID: 4232710814098859380}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -1.16, z: -0.7810046}
+  m_LocalPosition: {x: 0.882, y: -0.924, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10087,7 +10087,7 @@ Transform:
   m_GameObject: {fileID: 5156264586147683410}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.717, y: -0.134, z: -0.7810046}
+  m_LocalPosition: {x: 0.877, y: -1.022, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15337,7 +15337,7 @@ MonoBehaviour:
   isInitFacingLeft: 0
   groundCheckDistance: 1
   groundCheck: {fileID: 360178717252980873}
-  wallCheckDistance: 0.5
+  wallCheckDistance: 0.32
   wallCheck: {fileID: 693770208478268593}
   whatIsGround:
     serializedVersion: 2
@@ -15417,8 +15417,8 @@ MonoBehaviour:
     rate: 0.4
   - item: {fileID: 11400000, guid: 42aa26d8e7a012b428694284c241983c, type: 2}
     rate: 0.1
-  dropSoulRange: {x: 0, y: 0}
-  dropCoinRange: {x: 0, y: 0}
+  dropSoulRange: {x: 10, y: 50}
+  dropCoinRange: {x: 100, y: 200}
 --- !u!1 &8042559632614643839
 GameObject:
   m_ObjectHideFlags: 0

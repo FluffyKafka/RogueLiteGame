@@ -27,6 +27,8 @@ namespace ObjectController
             target = _data.targetType;
             anim.ShowTrail(true);
 
+            InvokeAction(Project, _data.velocity);
+
             FadeFinish += SelfRecycle;
             PlayerReflect += BeReflect;
             HitPlayer += DamageToPlayer;

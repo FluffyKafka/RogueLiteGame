@@ -36,7 +36,7 @@ namespace EnemyBehaviour
             yield return new WaitForSeconds(_after);
             if (enemy.InvokeFunc(enemy.IsTouchWall) || !enemy.InvokeFunc(enemy.IsGroundedOrPlatForm))
             {
-                enemy.InvokeAction(enemy.Flip);
+                enemy.InvokeAction(enemy.MoveForward, -1);
             }
             enemyStateMachine.ChangeState(enemyStateMachine.move);
         }

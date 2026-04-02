@@ -10,17 +10,22 @@ namespace EnemyBehaviour
         {
         }
 
+        protected bool isAmmoFinish = false; 
+
         public override void Enter()
         {
             base.Enter();
             enemy.AttackFinish += OnAttackFinish;
+            enemy.ObjectFinishNotice += OnAmmoFinish;
             enemy.InvokeAction(enemy.ToBattle, true);
+            isAmmoFinish = false;
         }
 
         public override void Exit()
         {
             base.Exit();
             enemy.AttackFinish -= OnAttackFinish;
+            enemy.ObjectFinishNotice -= OnAmmoFinish;
             enemy.InvokeAction(enemy.ToBattle, false);
         }
 
@@ -33,7 +38,18 @@ namespace EnemyBehaviour
 
         protected void OnAttackFinish()
         {
-            enemyStateMachine.ChangeState(enemyStateMachine.controll);
+            if(!isAmmoFinish)
+            {
+                enemyStateMachine.ChangeState(enemyStateMachine.controll);
+            }     
+            else
+            {
+                enemyStateMachine.ChangeState(enemyStateMachine.battleIdle);
+            }
+        }
+        protected void OnAmmoFinish()
+        {
+            isAmmoFinish = true;
         }
     }
 }

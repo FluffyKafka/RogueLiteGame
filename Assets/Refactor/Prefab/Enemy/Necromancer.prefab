@@ -88,7 +88,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -132,8 +132,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.047449112, y: -0.4825623}
-  m_Size: {x: 2.261488, y: 3.1696248}
+  m_Offset: {x: -0.047449112, y: -0.59007657}
+  m_Size: {x: 2.261488, y: 3.3846533}
   m_Direction: 0
 --- !u!114 &639792914173548768
 MonoBehaviour:
@@ -182,7 +182,7 @@ MonoBehaviour:
   facingDir: 1
   defaultGravity: 0
   isInitFacingLeft: 0
-  groundCheckDistance: 3.16
+  groundCheckDistance: 0.48
   groundCheck: {fileID: 2595882536397516850}
   wallCheckDistance: 0.24
   wallCheck: {fileID: 6195283616038369202}
@@ -228,11 +228,11 @@ MonoBehaviour:
     m_Bits: 64
   playerDetectRadius: 10
   toAttackRadius: 8
-  minAttackCooldown: 1
-  maxAttackCooldown: 2
+  minAttackCooldown: 2
+  maxAttackCooldown: 3
   battleDuration: 6
   battleIdleRadius: 6
-  stunDuration: 0
+  stunDuration: 1
   ammoGenerateTransform: {fileID: 2484983962667720097}
   bulletType: 0
 --- !u!114 &652139523549249035
@@ -15576,7 +15576,7 @@ Transform:
   m_GameObject: {fileID: 7555894756147575321}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.74, y: -1.31, z: 0}
+  m_LocalPosition: {x: 1.096, y: -2.192, z: 0}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15802,7 +15802,7 @@ Transform:
   m_GameObject: {fileID: 8899277276139508115}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.15, y: -0.28, z: -0.7810046}
+  m_LocalPosition: {x: 1.124, y: -2.175, z: -0.7810046}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
