@@ -50,7 +50,7 @@ MonoBehaviour:
   sortingLayerName: UI
   fogDensityRate: 16
   beEliminatedShapeSize: {x: 4, y: 6}
-  sizeExpend: {x: 2, y: 2}
+  sizeExpend: {x: 10, y: 10}
 --- !u!61 &7703324846936485002
 BoxCollider2D:
   m_ObjectHideFlags: 0
