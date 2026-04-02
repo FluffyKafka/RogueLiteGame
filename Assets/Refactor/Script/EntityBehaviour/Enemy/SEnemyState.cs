@@ -17,7 +17,7 @@ namespace EnemyBehaviour
         public override void Enter()
         {
             base.Enter();
-            Debug.Log(GetType().Name);
+            //Debug.Log(GetType().Name);
         }
 
         public override void Exit()

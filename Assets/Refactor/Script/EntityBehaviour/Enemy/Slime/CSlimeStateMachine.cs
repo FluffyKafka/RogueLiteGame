@@ -47,7 +47,7 @@ namespace EnemyBehaviour
 
         public override void ChangeState(SEntityState _newState)
         {
-            StateChangeDebugMessage(_newState);
+            //StateChangeDebugMessage(_newState);
             base.ChangeState(_newState);
         }
     }
