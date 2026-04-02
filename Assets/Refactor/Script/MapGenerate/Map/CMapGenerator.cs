@@ -6,7 +6,7 @@ using UnityEngine.Assertions;
 
 namespace MapGenerate
 {
-    internal class CMapGenerator : MonoBehaviour
+    internal class CMapGenerator : MonoBehaviour, IMapGenerator
     {
         [Header("地图参数")]
         [SerializeField] private int width = 20;
@@ -29,6 +29,7 @@ namespace MapGenerate
         [SerializeField] protected float inheritAdjustWeight;
 
         [Header("可视化设置")]
+        [SerializeField] private bool showTestMap = true;
         [SerializeField] private bool showDebugInfo = true;
         [SerializeField] private float cellSize = 1f;
         [SerializeField] private GameObject roomPrefab;           // 房间预制体（可选）
@@ -42,17 +43,12 @@ namespace MapGenerate
         [SerializeField] private bool useRandomSeed = true;
 
         // 地图数据
-        private RoomData[,] mapData;
-        private List<RoomData> eventRooms = new List<RoomData>();
+        private DMapRoomVisiable[,] mapData;
+        private List<DMapRoomVisiable> eventRooms = new List<DMapRoomVisiable>();
         private List<LineRenderer> connectionLines = new List<LineRenderer>();
 
         // 随机数生成器
         private System.Random random;
-
-        void Start()
-        {
-            GenerateMap();
-        }
 
         [ContextMenu("重新生成地图")]
         public void GenerateMap()
@@ -86,6 +82,9 @@ namespace MapGenerate
 
             // 可视化地图
             VisualizeMap();
+
+            // 生成实际地图
+            GenerateAllRooms();
         }
 
         [ContextMenu("清空地图")]
@@ -139,11 +138,11 @@ namespace MapGenerate
 
         void InitializeMap()
         {
-            mapData = new RoomData[width, height];
+            mapData = new DMapRoomVisiable[width, height];
 
             // 设置入口和出口
-            mapData[0, entryPos] = new RoomData(0, entryPos, ERoomType.Entry);
-            mapData[width - 1, exitPos] = new RoomData(width - 1, exitPos, ERoomType.Exit);
+            mapData[0, entryPos] = new DMapRoomVisiable(0, entryPos, ERoomType.Entry);
+            mapData[width - 1, exitPos] = new DMapRoomVisiable(width - 1, exitPos, ERoomType.Exit);
         }
 
         protected void SetRoomConnection(Vector2Int _roomPosition, EDirection _dir)
@@ -195,7 +194,7 @@ namespace MapGenerate
                     Vector2Int yRange = CheckMainPathYRangeAt(x);
                     int y = Random.Range(yRange.x, yRange.y + 1);
 
-                    mapData[x, y] = new RoomData(x, y, ERoomType.Event);
+                    mapData[x, y] = new DMapRoomVisiable(x, y, ERoomType.Event);
 
                     eventRooms.Add(mapData[x, y]);
                 }
@@ -233,20 +232,20 @@ namespace MapGenerate
             eventRooms = eventRooms.OrderBy(r => r.x).ToList();
 
             // 起点：入口
-            RoomData start = mapData[0, entryPos];
-            RoomData currentStart = start;
+            DMapRoomVisiable start = mapData[0, entryPos];
+            DMapRoomVisiable currentStart = start;
 
             // 依次连接入口 -> 事件房1 -> 事件房2 -> ...
-            foreach (RoomData targetRoom in eventRooms)
+            foreach (DMapRoomVisiable targetRoom in eventRooms)
             {
                 GeneratePathBetween(currentStart, targetRoom);
                 currentStart = targetRoom;
             }
 
-            RoomData exitRoom = mapData[width - 1, exitPos];
+            DMapRoomVisiable exitRoom = mapData[width - 1, exitPos];
             GeneratePathBetween(currentStart, exitRoom);
         }
-        void GeneratePathBetween(RoomData start, RoomData target)
+        void GeneratePathBetween(DMapRoomVisiable start, DMapRoomVisiable target)
         {
             int maxTestTime = width * height;
 
@@ -285,7 +284,7 @@ namespace MapGenerate
 
                 if (current.x != target.x || current.y != target.y)
                 {
-                    mapData[current.x, current.y] = new RoomData(current.x, current.y, ERoomType.Passage);
+                    mapData[current.x, current.y] = new DMapRoomVisiable(current.x, current.y, ERoomType.Passage);
                 }
                 SetRoomConnection(current, dir);
             }
@@ -442,7 +441,7 @@ namespace MapGenerate
                     {
                         Vector2Int cell = branchPath[i];
                         Vector2Int last = branchPath[i - 1];
-                        mapData[cell.x, cell.y] = new RoomData(cell.x, cell.y, ERoomType.Passage);
+                        mapData[cell.x, cell.y] = new DMapRoomVisiable(cell.x, cell.y, ERoomType.Passage);
 
                         EDirection dir;
                         if (last.x < cell.x)
@@ -465,6 +464,7 @@ namespace MapGenerate
                     }
                     Vector2Int endCell = branchPath[branchPath.Count - 1];
                     mapData[endCell.x, endCell.y].type = ERoomType.Event;
+                    mapData[endCell.x, endCell.y].isBranchEnd = true;
 
                     generatedCount++;
 
@@ -601,8 +601,11 @@ namespace MapGenerate
         }
         #endregion
 
+        #region 可视化
+
         void VisualizeMap()
         {
+            if (!showTestMap) return;
             if (mapData == null) return;
 
             // 如果提供了预制体，则生成3D对象
@@ -612,7 +615,7 @@ namespace MapGenerate
                 {
                     for (int x = 0; x < width; x++)
                     {
-                        RoomData room = mapData[x, y];
+                        DMapRoomVisiable room = mapData[x, y];
 
                         if (room != null)
                         {
@@ -663,7 +666,7 @@ namespace MapGenerate
             {
                 for (int y = 0; y < height; y++)
                 {
-                    RoomData room = mapData[x, y];
+                    DMapRoomVisiable room = mapData[x, y];
                     if (room == null) continue;
 
                     Vector3 startPos = new Vector3(x * cellSize, y * cellSize, -0.1f);
@@ -691,7 +694,7 @@ namespace MapGenerate
                     {
                         endPos = new Vector3((x + 1) * cellSize, y * cellSize, -0.1f);
                         CreateConnectionLine(startPos, (endPos + startPos) / 2);
-                    }           
+                    }
                 }
             }
         }
@@ -714,19 +717,36 @@ namespace MapGenerate
 
             connectionLines.Add(lineRenderer);
         }
+        #endregion
+
+        protected void GenerateAllRooms()
+        {
+            if (showTestMap) return;
+
+            MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
+            int passageRoomCount = 0;
+            foreach (var cell in mapData)
+            {
+                if(cell != null && cell.type == ERoomType.Passage)
+                {
+                    ++passageRoomCount;
+                }
+            }
+            foreach (var cell in mapData)
+            {
+                if(cell != null)
+                {
+                    manager.GenerateRoomFromData(cell, passageRoomCount);
+                }          
+            }
+        }
     }
 
     internal class RoomVisual : MonoBehaviour
     {
-        private RoomData roomData;
+        private DMapRoomVisiable roomData;
         private TextMeshPro textMesh;
         private Renderer objectRenderer;
-
-        // 用于显示连接方向的小箭头或标记
-        [SerializeField] private GameObject upArrow;
-        [SerializeField] private GameObject downArrow;
-        [SerializeField] private GameObject leftArrow;
-        [SerializeField] private GameObject rightArrow;
 
         void Awake()
         {
@@ -743,56 +763,9 @@ namespace MapGenerate
                 textMesh.fontSize = 0.3f;
                 textMesh.alignment = TextAlignmentOptions.Center;
             }
-
-            // 创建方向指示器
-            CreateDirectionIndicators();
         }
 
-        void CreateDirectionIndicators()
-        {
-            // 创建向上的箭头指示器
-            upArrow = CreateArrowIndicator(Vector3.up * 0.4f, Quaternion.identity, "UpArrow");
-            downArrow = CreateArrowIndicator(Vector3.down * 0.4f, Quaternion.Euler(0, 0, 180), "DownArrow");
-            leftArrow = CreateArrowIndicator(Vector3.left * 0.5f, Quaternion.Euler(0, 0, 90), "LeftArrow");
-            rightArrow = CreateArrowIndicator(Vector3.right * 0.5f, Quaternion.Euler(0, 0, -90), "RightArrow");
-
-            // 默认隐藏所有箭头
-            SetArrowsActive(false);
-        }
-
-        GameObject CreateArrowIndicator(Vector3 localPosition, Quaternion rotation, string name)
-        {
-            GameObject arrowObj = new GameObject(name);
-            arrowObj.transform.SetParent(transform);
-            arrowObj.transform.localPosition = localPosition;
-            arrowObj.transform.localRotation = rotation;
-
-            // 创建简单的箭头网格（三角形）
-            MeshFilter meshFilter = arrowObj.AddComponent<MeshFilter>();
-            MeshRenderer meshRenderer = arrowObj.AddComponent<MeshRenderer>();
-
-            // 创建三角形网格
-            Mesh mesh = new Mesh();
-            Vector3[] vertices = new Vector3[]
-            {
-                new Vector3(0, 0.1f, 0),
-                new Vector3(-0.05f, 0, 0),
-                new Vector3(0.05f, 0, 0)
-            };
-
-            int[] triangles = new int[] { 0, 1, 2 };
-            mesh.vertices = vertices;
-            mesh.triangles = triangles;
-            mesh.RecalculateNormals();
-
-            meshFilter.mesh = mesh;
-            meshRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            meshRenderer.material.color = Color.yellow;
-
-            return arrowObj;
-        }
-
-        public void SetRoomData(RoomData data)
+        public void SetRoomData(DMapRoomVisiable data)
         {
             roomData = data;
             UpdateVisual();
@@ -810,27 +783,6 @@ namespace MapGenerate
                 textMesh.text = roomData.GetTypeName();
             }
 
-            // 根据连接方向显示箭头
-            UpdateDirectionArrows();
-        }
-
-        void UpdateDirectionArrows()
-        {
-            if (roomData == null) return;
-
-            // 显示有连接的方向的箭头
-            if (upArrow != null) upArrow.SetActive(roomData.up);
-            if (downArrow != null) downArrow.SetActive(roomData.down);
-            if (leftArrow != null) leftArrow.SetActive(roomData.left);
-            if (rightArrow != null) rightArrow.SetActive(roomData.right);
-        }
-
-        void SetArrowsActive(bool active)
-        {
-            if (upArrow != null) upArrow.SetActive(active);
-            if (downArrow != null) downArrow.SetActive(active);
-            if (leftArrow != null) leftArrow.SetActive(active);
-            if (rightArrow != null) rightArrow.SetActive(active);
         }
 
         void OnMouseEnter()
@@ -858,41 +810,17 @@ namespace MapGenerate
         }
     }
 
-    [System.Serializable]
-    internal class RoomData
+    internal class DMapRoomVisiable: DMapRoomInfo
     {
-        public int x, y;
-        public bool up, down, left, right;
-        public bool isBranchEntry = false;
-        public ERoomType type;
-        public RoomData(int _x, int _y, ERoomType _type)
+        public DMapRoomVisiable(int _x, int _y, ERoomType _type) : base(_x, _y, _type)
         {
-            x = _x;
-            y = _y;
-            type = _type;
-            up = down = left = right = false;
-        }
-
-        public void SetDirection(EDirection _dir, bool _isConnect)
-        {
-            switch (_dir)
-            {
-                case EDirection.Up:
-                    up = _isConnect; return;
-                case EDirection.Down:
-                    down = _isConnect; return;
-                case EDirection.Left:
-                    left = _isConnect; return;
-                case EDirection.Right:
-                    right = _isConnect; return;
-            }
         }
 
         public Color GetColor()
         {
             switch (type)
             {
-                case ERoomType.Passage: 
+                case ERoomType.Passage:
                     return isBranchEntry ? Color.black : Color.gray; // 普通房间
                 case ERoomType.Event: return Color.red;      // 事件房
                 case ERoomType.Entry: return Color.green;    // 入口
@@ -912,21 +840,5 @@ namespace MapGenerate
                 default: return "未知";
             }
         }
-    }
-
-    internal enum ERoomType
-    {
-        Event,
-        Passage,
-        Entry,
-        Exit
-    }
-
-    internal enum EDirection
-    {
-        Up,
-        Down,
-        Left,
-        Right
     }
 }

@@ -1,7 +1,11 @@
 using EnemySystem;
+using Item;
+using PlayerSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEditor.Tilemaps;
 using UnityEngine;
@@ -10,19 +14,38 @@ using UnityEngine.Tilemaps;
 
 namespace MapGenerate
 {
-    internal struct DRoomInfo
+    internal enum EEventType
     {
-        public bool haveLeftWall;
-        public bool haveUpWall;
-        public bool haveDownWall;
-        public bool haveRightWall;
-        public GameObject roomPrototype;
-        public Vector3 generatePosition;
-        public float enemyDifficulty;
+        Witch,
+        Trader,
+        BlackSmith,
+        RewardBox,
+        AdvancedRewardBox
     }
 
-    internal class CRoomGenerater : MonoBehaviour
+    internal class CRoomGenerater : MonoBehaviour, IRoomGenerator
     {
+        [Header("PassageRoomPrototypes")]
+        [SerializeField] protected List<GameObject> horizonRooms;
+        [SerializeField] protected List<GameObject> crossRooms;
+
+        [Serializable]
+        protected class DEventRate
+        {
+            public EEventType type;
+            public float weight;
+            public float weightDefault;
+            public bool isSingle = false;
+        }
+        [Header("Events")]
+        [SerializeField] protected List<DEventRate> events;
+        [SerializeField] protected Vector2 rewardItemCount;
+        [SerializeField] protected Vector2 rewardCoinCount;
+        [SerializeField] protected List<ScriptableObject> rewardItems;
+        [SerializeField] protected Vector2 advancedRewardCoinCount;
+        [SerializeField] protected Vector2 advancedRewardsCount;
+        [SerializeField] protected List<ScriptableObject> advancedRewardItems;
+
         [Header("Tile替换列表")]
         [SerializeField] protected List<DTile> groundTiles = new List<DTile>();
         [SerializeField] protected List<DTile> backgroundTiles = new List<DTile>();
@@ -48,6 +71,7 @@ namespace MapGenerate
         [Header("Room Info")]
         [SerializeField] protected int boundWallThickness = 2;
         [SerializeField] protected int leftRightHight = 4;
+        [SerializeField] protected Vector2 roomSize;
 
         [Header("Test")]
         [SerializeField] protected bool isTest = false;
@@ -58,6 +82,7 @@ namespace MapGenerate
         [SerializeField] protected GameObject roomPrototype;
         [SerializeField] protected Transform generateTransform;
         [SerializeField] protected float enemyDifficulty;
+        [SerializeField] protected ERoomType type;
 
         
 
@@ -69,7 +94,7 @@ namespace MapGenerate
             }           
         }
 
-        public void GenerateRoomFromData(DRoomInfo _data)
+        public void GenerateRoomFromData(DRoomGenerateInfo _data)
         {
             haveLeftWall = _data.haveLeftWall;
             haveUpWall = _data.haveUpWall;
@@ -78,9 +103,52 @@ namespace MapGenerate
 
             enemyDifficulty = _data.enemyDifficulty;
 
-            GameObject room = GenerateRoom(_data.roomPrototype);
-            room.transform.position = _data.generatePosition;
+            type = _data.roomType;
+
+            roomPrototype = SelectRoomPrototype(_data);
+      
+            generateTransform.position = _data.roomIndex * roomSize;
+            GameObject room = GenerateRoom(roomPrototype);
+            room.transform.position = _data.roomIndex * roomSize;
         }
+
+        #region Room Data Calculate
+        internal enum ERoomDirection
+        {
+            Horizon,  // 水平方向房间（上下有墙）
+            Cross     // 十字/拐角/三岔路口房间
+        }
+        protected GameObject SelectRoomPrototype(DRoomGenerateInfo roomInfo)
+        {
+            List<GameObject> selectedList = DetermineDirectionType(roomInfo);
+
+            // 从列表中随机选择一个 GameObject
+            if (selectedList != null && selectedList.Count > 0)
+            {
+                return selectedList[UnityEngine.Random.Range(0, selectedList.Count)];
+            }
+
+            Debug.LogWarning($"No room prototype found for type: {roomInfo.roomType}");
+            return null;
+        }
+        private List<GameObject> DetermineDirectionType(DRoomGenerateInfo roomInfo)
+        {
+            bool hasUpDownWalls = roomInfo.haveUpWall && roomInfo.haveDownWall;
+            bool hasLeftRightWalls = roomInfo.haveLeftWall && roomInfo.haveRightWall;
+
+            // 同时有上下墙 → Horizon（水平方向房间）
+            if (hasUpDownWalls)
+            {
+                return horizonRooms;
+            }
+            // 其他情况（拐角、三岔路口、十字路口）→ Cross
+            else
+            {
+                return crossRooms;
+            }
+        }
+        #endregion
+
         protected GameObject GenerateRoom(GameObject prototypeRoomPrefab)
         {
             if (prototypeRoomPrefab == null)
@@ -101,7 +169,7 @@ namespace MapGenerate
                 actualRoom.GetComponentsInChildren<IRoomGeneratorComponents>();
             foreach(var cop in generateComponents)
             {
-                cop.Generate();
+                cop.Generate(this);
             }
 
             // 替换各层Tile
@@ -133,7 +201,14 @@ namespace MapGenerate
 
             List<Vector3> positions = FindValidWorldPositions(groundTilemap, entityHeight, entityRadius, generateTransform);
             GenerateDecorations(actualRoom, positions);
-            GenerateEnemy(enemyDifficulty, enemys, positions);
+            if(type == ERoomType.Passage)
+            {
+                GenerateEnemy(enemyDifficulty, enemys, positions);
+            }
+            if(type == ERoomType.Event)
+            {
+                GenerateEvent(positions);
+            }
 
             return actualRoom;
         }
@@ -153,8 +228,8 @@ namespace MapGenerate
                     return;
                 }
 
-                Vector3 position = positionsTemp[Random.Range(0, positionsTemp.Count)];
-                IMapEnemy enemy = enemys[Random.Range(0, enemys.Count)].GetComponent<IMapEnemy>();
+                Vector3 position = positionsTemp[UnityEngine.Random.Range(0, positionsTemp.Count)];
+                IMapEnemy enemy = enemys[UnityEngine.Random.Range(0, enemys.Count)].GetComponent<IMapEnemy>();
 
                 manager.GenerateEnemyAt(enemy.CheckType(), position);
                 diff += enemy.CheckDifficulty();
@@ -162,6 +237,7 @@ namespace MapGenerate
                 positionsTemp.Remove(position);
             }
         }
+
         protected void GenerateDecorations(GameObject _actualRoom, List<Vector3> _positions)
         {
             List<Vector3> positionsTemp = new(_positions);
@@ -174,26 +250,147 @@ namespace MapGenerate
                     return;
                 }
 
-                Vector3 position = positionsTemp[Random.Range(0, positionsTemp.Count)];
+                Vector3 position = positionsTemp[UnityEngine.Random.Range(0, positionsTemp.Count)];
                 GameObject decoGameObject = Instantiate(decorationPrefab, position, Quaternion.identity);
                 decoGameObject.GetComponent<SpriteRenderer>().sprite = 
-                    decoSpriteList[Random.Range(0, decoSpriteList.Count)];
+                    decoSpriteList[UnityEngine.Random.Range(0, decoSpriteList.Count)];
                 positionsTemp.Remove(position);
                 positionsTemp.Remove(position + Vector3.left);
                 positionsTemp.Remove(position + Vector3.right);
             }
         }
+
+        protected void GenerateEvent(List<Vector3> _positions)
+        {
+            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count - 1)];
+            MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
+
+            EEventType eventType = SelectEventByWeight();
+            switch(eventType)
+            {
+                case EEventType.Witch:
+                    manager.GenerateNPCAt(ENPCType.Witch, position);
+                    break;
+                case EEventType.Trader:
+                    manager.GenerateNPCAt(ENPCType.Trader, position);
+                    break;
+                case EEventType.BlackSmith:
+                    manager.GenerateNPCAt(ENPCType.BlackSmith, position);
+                    break;
+                case EEventType.RewardBox:
+                    manager.GenerateRewardBoxAt(GetRandomRewardItems(false), GetRandomCoin(false), position, false);
+                    break;
+                case EEventType.AdvancedRewardBox:
+                    manager.GenerateRewardBoxAt(GetRandomRewardItems(true), GetRandomCoin(true), position, true);
+                    break;
+            }
+
+            foreach (var eventRate in events)
+            {
+                if (eventRate.type == eventType && eventRate.isSingle)
+                {
+                    eventRate.weightDefault = eventRate.weight;
+                    eventRate.weight = 0;
+                }
+            }
+        }
+        protected List<IItemData> GetRandomRewardItems(bool _isAdvanced)
+        {
+            int count;
+            List<ScriptableObject> sourceList;
+            if (!_isAdvanced)
+            {
+                count = UnityEngine.Random.Range((int)rewardItemCount.x, (int)rewardItemCount.y + 1);
+                count = Mathf.Min(count, rewardItems.Count);
+                sourceList = rewardItems;
+            }
+            else
+            {
+                count = UnityEngine.Random.Range((int)advancedRewardsCount.x, (int)advancedRewardsCount.y + 1);
+                count = Mathf.Min(count, advancedRewardItems.Count);
+                sourceList = advancedRewardItems;
+            }
+
+            // Fisher-Yates 洗牌算法打乱列表（只在副本上操作）
+            for (int i = 0; i < sourceList.Count; i++)
+            {
+                int randomIndex = UnityEngine.Random.Range(i, sourceList.Count);
+                (sourceList[i], sourceList[randomIndex]) = (sourceList[randomIndex], sourceList[i]);
+            }
+
+            // 取前 count 个并转换为 IItemData
+            List<IItemData> result = new List<IItemData>();
+            for (int i = 0; i < count; i++)
+            {
+                if (sourceList[i] is IItemData itemData)
+                {
+                    result.Add(itemData);
+                }
+            }
+
+            return result;
+        }
+        protected float GetRandomCoin(bool _isAdvanced)
+        {
+            if(!_isAdvanced)
+            {
+                return UnityEngine.Random.Range(rewardCoinCount.x, rewardCoinCount.y);
+            }
+            else
+            {
+                return UnityEngine.Random.Range(advancedRewardCoinCount.x, advancedRewardCoinCount.y);
+            }
+        }
+        protected EEventType SelectEventByWeight()
+        {
+            if (events == null || events.Count == 0)
+            {
+                Debug.LogWarning("Events list is empty or null");
+                return default(EEventType);
+            }
+
+            // 计算总权重
+            float totalWeight = 0f;
+            foreach (var eventRate in events)
+            {
+                totalWeight += eventRate.weight;
+            }
+
+            if (totalWeight <= 0f)
+            {
+                Debug.LogWarning("Total weight is zero or negative");
+                return default(EEventType);
+            }
+
+            // 随机选择
+            float randomValue = UnityEngine.Random.Range(0f, totalWeight);
+            float currentWeight = 0f;
+
+            foreach (var eventRate in events)
+            {
+                currentWeight += eventRate.weight;
+                if (randomValue <= currentWeight)
+                {
+                    return eventRate.type;
+                }
+            }
+
+            // 理论上不会到这里，但为了防止万一，返回第一个
+            return events[0].type;
+        }
+
         public List<Vector3> FindValidWorldPositions(Tilemap tilemap, int _upVoidCount, int _checkRadius, Transform _generateTransform)
         {
             List<Vector3> validWorldPositions = new List<Vector3>();
 
+            tilemap.CompressBounds();
             // 获取Tilemap的边界
             BoundsInt bounds = tilemap.cellBounds;
 
             // 遍历所有格子
             for (int x = bounds.xMin; x < bounds.xMax; x++)
             {
-                for (int y = bounds.yMin; y < bounds.yMax; y++)
+                for (int y = bounds.yMin + boundWallThickness; y < bounds.yMax; y++)
                 {
                     Vector3Int currentCellPos = new Vector3Int(x, y, 0);
                     Vector3Int belowPos = new Vector3Int(x, y - 1, 0);
@@ -369,97 +566,6 @@ namespace MapGenerate
                 }
             }
 
-            // 5. 处理拐角区域（墙壁相交处）
-            // 注意：拐角区域只清除墙壁厚度范围内的区域，不触碰边界
-
-            // 左上角区域（左墙和上墙的交汇处）
-            if (!haveLeftWall && !haveUpWall)
-            {
-                for (int xOffset = 0; xOffset < boundWallThickness; xOffset++)
-                {
-                    for (int yOffset = 0; yOffset < boundWallThickness; yOffset++)
-                    {
-                        int x = wallStartX + xOffset;
-                        int y = wallEndY - 1 - yOffset;
-                        // 确保在墙壁范围内
-                        if (x < wallEndX && y >= wallStartY)
-                        {
-                            Vector3Int pos = new Vector3Int(x, y, 0);
-                            if (groundTilemap.HasTile(pos))
-                            {
-                                positionsToClear.Add(pos);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 右上角区域（右墙和上墙的交汇处）
-            if (!haveRightWall && !haveUpWall)
-            {
-                for (int xOffset = 0; xOffset < boundWallThickness; xOffset++)
-                {
-                    for (int yOffset = 0; yOffset < boundWallThickness; yOffset++)
-                    {
-                        int x = wallEndX - 1 - xOffset;
-                        int y = wallEndY - 1 - yOffset;
-                        // 确保在墙壁范围内
-                        if (x >= wallStartX && y >= wallStartY)
-                        {
-                            Vector3Int pos = new Vector3Int(x, y, 0);
-                            if (groundTilemap.HasTile(pos))
-                            {
-                                positionsToClear.Add(pos);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 左下角区域（左墙和下墙的交汇处）
-            if (!haveLeftWall && !haveDownWall)
-            {
-                for (int xOffset = 0; xOffset < boundWallThickness; xOffset++)
-                {
-                    for (int yOffset = 0; yOffset < boundWallThickness; yOffset++)
-                    {
-                        int x = wallStartX + xOffset;
-                        int y = wallStartY + yOffset;
-                        // 确保在墙壁范围内
-                        if (x < wallEndX && y < wallEndY)
-                        {
-                            Vector3Int pos = new Vector3Int(x, y, 0);
-                            if (groundTilemap.HasTile(pos))
-                            {
-                                positionsToClear.Add(pos);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 右下角区域（右墙和下墙的交汇处）
-            if (!haveRightWall && !haveDownWall)
-            {
-                for (int xOffset = 0; xOffset < boundWallThickness; xOffset++)
-                {
-                    for (int yOffset = 0; yOffset < boundWallThickness; yOffset++)
-                    {
-                        int x = wallEndX - 1 - xOffset;
-                        int y = wallStartY + yOffset;
-                        // 确保在墙壁范围内
-                        if (x >= wallStartX && y < wallEndY)
-                        {
-                            Vector3Int pos = new Vector3Int(x, y, 0);
-                            if (groundTilemap.HasTile(pos))
-                            {
-                                positionsToClear.Add(pos);
-                            }
-                        }
-                    }
-                }
-            }
-
             // 执行清除
             foreach (Vector3Int pos in positionsToClear)
             {
@@ -611,7 +717,7 @@ namespace MapGenerate
             // 从符合规则的Tile中随机选择一个
             if (validTiles.Count > 0)
             {
-                return validTiles[Random.Range(0, validTiles.Count)];
+                return validTiles[UnityEngine.Random.Range(0, validTiles.Count)];
             }
 
             return null;
@@ -735,6 +841,6 @@ namespace MapGenerate
 
     interface IRoomGeneratorComponents
     {
-        public void Generate();
+        public void Generate(CRoomGenerater _generator);
     }
 }

@@ -24,7 +24,7 @@ namespace NPCSystem
         public GameObject GenerateNPCByTypeAt(ENPCType _type, Vector3 _position);
     }
 
-    internal class FNPCFactory : MonoBehaviour, IInitNPCFactory, IGameManagerNPCFactory
+    internal class FNPCFactory : MonoBehaviour, IInitNPCFactory, IGameManagerNPCFactory, IMapNPCFactory
     {
         [SerializeField] protected bool isTestMode;
 

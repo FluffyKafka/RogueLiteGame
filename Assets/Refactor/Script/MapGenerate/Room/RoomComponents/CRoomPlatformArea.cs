@@ -31,7 +31,7 @@ namespace MapGenerate
         private int height;                // 区域高度（tile数）
         private bool moveUp;               // true: 向上移动, false: 向下移动
 
-        public void Generate()
+        public void Generate(CRoomGenerater _generator)
         {
             GeneratePathPlatforms();
         }
