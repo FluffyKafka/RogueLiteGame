@@ -8,6 +8,8 @@ namespace ObjectController
 {
     internal class ACoin : AObjectController
     {
+        [SerializeField] protected float pickUpDelay = 0.1f;
+
         protected float coinAmount;
         
         public void SetUp(FCCoinFactory _factory, float _coinAmount)
@@ -30,6 +32,12 @@ namespace ObjectController
         protected void PlayerPickUp(IObjectPlayer _player)
         {
             InvokeAction(SecondaryProjectToward, 0);
+            StartCoroutine(PickUpAfter(_player));
+        }
+
+        protected IEnumerator PickUpAfter(IObjectPlayer _player)
+        {
+            yield return new WaitForSeconds(pickUpDelay);
             _player.TakeCoin(coinAmount);
             SelfRecycle();
         }

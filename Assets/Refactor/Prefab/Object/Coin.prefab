@@ -96,7 +96,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   targetType: 0
-  CanMultipleTrigger: 0
+  CanMultipleTrigger: 1
 --- !u!1 &5769596048613520503
 GameObject:
   m_ObjectHideFlags: 0

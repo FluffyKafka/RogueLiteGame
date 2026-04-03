@@ -96,7 +96,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   targetType: 0
-  CanMultipleTrigger: 0
+  CanMultipleTrigger: 1
 --- !u!1 &5769596048613520503
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isNoAnimation: 0
+  pickUpDelay: 0.1
 --- !u!114 &4073293064930354954
 MonoBehaviour:
   m_ObjectHideFlags: 0

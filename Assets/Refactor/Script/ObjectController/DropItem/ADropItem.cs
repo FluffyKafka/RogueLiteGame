@@ -1,11 +1,15 @@
 using Item;
 using PlayerSystem;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace ObjectController
 {
     internal class ADropItem : AObjectController
-    {   
+    {
+        [SerializeField] protected float pickUpDelay = 0.4f;
+
         protected IItem item;
 
         public void Setup(FCDropItemFactory _factory, IItem _item)
@@ -31,7 +35,12 @@ namespace ObjectController
         protected void PlayerPickUp(IObjectPlayer _player)
         {
             InvokeAction(SecondaryProjectToward, 0);
-            if(_player.TryTakeItem(item))
+            StartCoroutine(PickUpAfter(_player));
+        }
+        protected IEnumerator PickUpAfter(IObjectPlayer _player)
+        {
+            yield return new WaitForSeconds(pickUpDelay);
+            if (_player.TryTakeItem(item))
             {
                 SelfRecycle();
             }
