@@ -15,6 +15,7 @@ namespace MapGenerate
         [SerializeField] private int exitPos = 5;   // 出口Y坐标
         [SerializeField] private int mainPathWidth = 3;           // 主路径宽度
         [SerializeField] private int eventRoomCount = 10;          // 事件房数量
+        
 
         [Header("支线路径参数")]
         [SerializeField] private int branchPathCount = 3;          // 支线路径数量

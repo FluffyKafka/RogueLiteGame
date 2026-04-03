@@ -3164,6 +3164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGenerate: 1
   difficulty: 100
+  nextSceneName: ToBeContinue
 --- !u!114 &645700491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3328,6 +3329,7 @@ MonoBehaviour:
   backgroundReplaceTile: {fileID: 11400000, guid: 16692a6f8c64ad84cb8d5129962805de, type: 2}
   entityHeight: 4
   entityRadius: 1
+  entryDoorPrefab: {fileID: 153967504809312598, guid: c4b88465d255e664db4c9e35d0e1533c, type: 3}
   decorationPrefab: {fileID: 153967504809312598, guid: 7eba192808eb38544bde108dbef1c545, type: 3}
   decoSpriteList:
   - {fileID: 21300000, guid: b61ebe29b3b0db44bbbbfccc4dcc3be8, type: 3}

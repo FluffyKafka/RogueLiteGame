@@ -63,6 +63,7 @@ namespace MapGenerate
         [SerializeField] protected int entityHeight;
         [SerializeField] protected int entityRadius;
         [Header("Decoration")]
+        [SerializeField] protected GameObject entryDoorPrefab;
         [SerializeField] protected GameObject decorationPrefab;
         [SerializeField] protected List<Sprite> decoSpriteList;
         [Header("Enemy")]
@@ -85,6 +86,7 @@ namespace MapGenerate
         [SerializeField] protected ERoomType type;
         [SerializeField] protected bool isBranchEntry;
         [SerializeField] protected bool isBranchEnd;
+        protected Vector3 beginPosition;
         
 
         private void Start()
@@ -204,12 +206,19 @@ namespace MapGenerate
             }
 
             List<Vector3> positions = FindValidWorldPositions(groundTilemap, entityHeight, entityRadius, generateTransform);
-            GenerateDecorations(actualRoom, positions);
             if(type == ERoomType.Passage)
             {
                 GenerateEnemy(enemyDifficulty, enemys, positions);
             }
-            if(type == ERoomType.Event)
+            if (type == ERoomType.Entry)
+            {
+                GenerateEntryDoor(positions);
+            }
+            if(type == ERoomType.Exit)
+            {
+                GenerateExit(positions);
+            }
+            if (type == ERoomType.Event)
             {
                 GenerateEvent(positions);
             }
@@ -218,6 +227,7 @@ namespace MapGenerate
                 GenerateDeliverPoints(positions);
             }
 
+            GenerateDecorations(actualRoom, positions);
             return actualRoom;
         }
 
@@ -286,6 +296,8 @@ namespace MapGenerate
             }
             Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
             _positions.Remove(position);
+            _positions.Remove(position + Vector3.left);
+            _positions.Remove(position + Vector3.right);
             MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
 
             EEventType eventType = SelectEventByWeight();
@@ -411,8 +423,40 @@ namespace MapGenerate
             }
             Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
             _positions.Remove(position);
-            Debug.Log("GenerateDeliverPoints");
             GetComponent<MMapGenerateManager>().GenerateDeliverPointAt(position);
+        }
+
+        protected void GenerateEntryDoor(List<Vector3> _positions)
+        {
+            if (_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+                return;
+            }
+            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
+            _positions.Remove(position);
+            _positions.Remove(position + Vector3.left);
+            _positions.Remove(position + 2 * Vector3.left);
+            _positions.Remove(position + Vector3.right);
+            _positions.Remove(position + 2 * Vector3.right);
+            Instantiate(entryDoorPrefab, position, Quaternion.identity);
+            beginPosition = position;
+        }
+
+        protected void GenerateExit(List<Vector3> _positions)
+        {
+            if (_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+                return;
+            }
+            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
+            _positions.Remove(position);
+            _positions.Remove(position + Vector3.left);
+            _positions.Remove(position + 2 * Vector3.left);
+            _positions.Remove(position + Vector3.right);
+            _positions.Remove(position + 2 * Vector3.right);
+            GetComponent<MMapGenerateManager>().GenerateSceneSwitchEntry(position);
         }
 
         public List<Vector3> FindValidWorldPositions(Tilemap tilemap, int _upVoidCount, int _checkRadius, Transform _generateTransform)
@@ -877,6 +921,11 @@ namespace MapGenerate
         public bool IsAnyKeyInput()
         {
             return GetComponent<MMapGenerateManager>().IsAnyKeyInput();
+        }
+
+        public Vector3 CheckEntryRoomBeginPosition()
+        {
+            return beginPosition;
         }
     }
 

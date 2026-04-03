@@ -7,7 +7,6 @@ using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static MapGenerate.IRoomGenerator;
 
 namespace MapGenerate
 {
@@ -31,6 +30,7 @@ namespace MapGenerate
     {
         [SerializeField] protected bool isGenerate;
         [SerializeField] protected float difficulty;
+        [SerializeField] protected string nextSceneName;
 
         protected IMapPlayer player;
         protected IMapInventory inventory;
@@ -38,6 +38,8 @@ namespace MapGenerate
         protected IMapNPCFactory npcFactory;
         protected IMapObjectFactroy objectFactory;
         protected IMapInput input;
+
+        protected Vector3 beginPosition;
 
         public void Init(
             IMapPlayer _player, IMapInventory _inventory,
@@ -58,6 +60,7 @@ namespace MapGenerate
             if (isGenerate)
             {
                 GetComponent<IMapGenerator>().GenerateMap();
+                player.SetPlayerAtBeginPosition(GetComponent<IRoomGenerator>().CheckEntryRoomBeginPosition());
             }
         }
 
@@ -103,13 +106,23 @@ namespace MapGenerate
             {
                 info.enemyDifficulty = -1;
             }
+
             GetComponent<IRoomGenerator>().GenerateRoomFromData(info);
+            if (_data.type == ERoomType.Entry)
+            {
+                GetComponent<IRoomGenerator>().CheckEntryRoomBeginPosition();
+            }
         }
 
         public void GenerateDeliverPointAt(Vector3 _position)
         {
             Debug.Log("GenerateDeliverPoints");
             objectFactory.GenerateDeliverPointAt(_position);
+        }
+
+        public void GenerateSceneSwitchEntry(Vector3 _position)
+        {
+            objectFactory.GenerateSceneSwitchEntry(nextSceneName, _position);
         }
 
         public bool IsAnyKeyInput()
@@ -121,6 +134,7 @@ namespace MapGenerate
     internal interface IRoomGenerator
     {
         public void GenerateRoomFromData(DRoomGenerateInfo _data);
+        public Vector3 CheckEntryRoomBeginPosition();
     }
 
     internal interface IMapGenerator
