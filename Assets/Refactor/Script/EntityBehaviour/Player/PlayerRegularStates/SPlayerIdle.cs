@@ -13,7 +13,7 @@ namespace PlayerBebaviour
             base.Enter();
             player.HorizonInput += Move;
             player.InvokeAction(player.ToIdle);
-            player.InvokeAction(player.StandStillNotice);
+            player.InvokeAction(player.StandPutNotice);
             player.InvokeAction(player.SetGravityToZeroNotice, true);
         }
 
@@ -27,7 +27,7 @@ namespace PlayerBebaviour
         public override void Update()
         {
             base.Update();
-            player.InvokeAction(player.StandStillNotice);
+            player.InvokeAction(player.StandPutNotice);
         }
 
         protected void Move(float _speed)

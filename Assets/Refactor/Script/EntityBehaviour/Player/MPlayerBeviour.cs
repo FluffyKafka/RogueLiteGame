@@ -23,6 +23,7 @@ namespace PlayerBebaviour
         public Action ToExitMove;
         public Action ToWallSlide;
         public Action StandStillNotice;
+        public Action StandPutNotice;
         public Action<bool> SetGravityToZeroNotice;
 
         //Input

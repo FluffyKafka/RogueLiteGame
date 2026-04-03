@@ -65,10 +65,10 @@ namespace PlayerBebaviour
             player.RecoverEntitySpeed += RecoverSpeed;
             player.OnDashBegin += SetDashSpeed;
             player.OnDashMovementUpdate += DashVelocityUpdate;
-            player.ToIdle += StandStill;
             player.StandStillNotice += StandStill;
             player.OnAimmingUpdate += AimmingUpdate;
             player.SetGravityToZeroNotice += SetGravityToZero;
+            player.StandPutNotice += StandPut;
         }
 
         protected override void Update()
@@ -110,6 +110,11 @@ namespace PlayerBebaviour
         protected void StandStill()
         {
             SetVelocity(Vector2.zero, false);
+        }
+
+        protected void StandPut()
+        {
+            SetVelocity(new Vector2(0, rg.velocity.y), false);
         }
 
         protected void Move(float _dir)
