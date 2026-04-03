@@ -290,37 +290,37 @@ namespace UISystem
         #region Audio
         public void PlayButtonClickSFX(bool _isPlay)
         {
-            audioSystem.ButtonClick(player.CheckTransform(), _isPlay);
+            audioSystem.ButtonClick(player.GetTransform(), _isPlay);
         }
 
         public void PlayCraftSFX(bool _isPlay)
         {
-            audioSystem.Craft(player.CheckTransform(), _isPlay);
+            audioSystem.Craft(player.GetTransform(), _isPlay);
         }
 
         public void PlayEquipSFX(bool _isPlay)
         {
-            audioSystem.Equip(player.CheckTransform(), _isPlay);
+            audioSystem.Equip(player.GetTransform(), _isPlay);
         }
 
         public void PlayBuySFX(bool _isPlay)
         {
-            audioSystem.Buy(player.CheckTransform(), _isPlay);
+            audioSystem.Buy(player.GetTransform(), _isPlay);
         }
 
         public void PlayUpgradeSFX(bool _isPlay)
         {
-            audioSystem.Upgrade(player.CheckTransform(), _isPlay);
+            audioSystem.Upgrade(player.GetTransform(), _isPlay);
         }
 
         public void PlayDiscardInventorySFX(bool _isPlay)
         {
-            audioSystem.DiscardInventory(player.CheckTransform(), _isPlay);
+            audioSystem.DiscardInventory(player.GetTransform(), _isPlay);
         }
 
         public void PlayCommunicatingSFX(bool _isPlay)
         {
-            audioSystem.Communicating(player.CheckTransform(), _isPlay);
+            audioSystem.Communicating(player.GetTransform(), _isPlay);
         }
         #endregion
 
@@ -336,14 +336,14 @@ namespace UISystem
         {
             return player.CheckZoomInput();
         }
-        public Vector3 CheckMousePosition()
+        public Vector3 CheckMousePosition(bool _isRaw = false)
         {
-            return player.CheckMousePosition();
+            return player.CheckMousePosition(_isRaw);
         }
 
         public Transform CheckPlayerTransform()
         {
-            return player.CheckTransform();
+            return player.GetTransform();
         }
         
     }

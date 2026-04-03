@@ -56,7 +56,7 @@ namespace AudioSystem
 
         public Transform CheckPlayerTransform()
         {
-            return player.CheckTransform();
+            return player.GetTransform();
         }
 
         public bool CheckIsPlayerInBattle()

@@ -9,7 +9,7 @@ namespace PlayerBebaviour
     internal class CPlayerObjectInteract : CEntityComponentBase
     {
         [SerializeField] protected float interactRadius;
-        [SerializeField] protected LayerMask whatIsObject;
+        [SerializeField] protected List<LayerMask> whatIsObjectList;
         [SerializeField] protected string objectInteractClickText = "点击";
         [SerializeField] protected string objectInteractText = "进行交互";
 
@@ -52,6 +52,11 @@ namespace PlayerBebaviour
         }
         protected IPlayerInteractable TryGetHitObject()
         {
+            LayerMask whatIsObject = whatIsObjectList[0];
+            for(int i = 1; i < whatIsObjectList.Count; ++i)
+            {
+                whatIsObject |= whatIsObjectList[i];
+            }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, whatIsObject);
             foreach (var hit in hits)
             {
@@ -66,6 +71,11 @@ namespace PlayerBebaviour
 
         protected void Interact()
         {
+            LayerMask whatIsObject = whatIsObjectList[0];
+            for (int i = 1; i < whatIsObjectList.Count; ++i)
+            {
+                whatIsObject |= whatIsObjectList[i];
+            }
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactRadius, whatIsObject);
             foreach (var hit in hits)
             {

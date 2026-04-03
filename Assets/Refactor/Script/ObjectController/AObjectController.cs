@@ -44,6 +44,7 @@ namespace ObjectController
         public Action<WReadOnlyDamageData, EEntityType> EffectAreaDamageTo;
         public Action DamageFinishNotice;
         public Action<float> SetStayTriggerCooldownNotice;
+        public Action<IObjectPlayer> PlayerExitNotice;
         #endregion
         #region Func
         public Func<float, Transform> TryGetRandomEnemyInRadiusNotice;
@@ -147,6 +148,7 @@ namespace ObjectController
         public void ToEffect();
         public void ShowHitFx();
         public void ToEffect(int _type);
+        public void SetSpeed(float _speed);
     }
 
     public enum EObjectAudioType

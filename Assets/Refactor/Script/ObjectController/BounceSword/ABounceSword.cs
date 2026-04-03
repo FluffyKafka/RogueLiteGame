@@ -46,11 +46,11 @@ namespace ObjectController
         protected void DamageToEnemy(IObjectEnemy _enemy)
         {
             _enemy.TakeObjectDamage(damage);
-            HitEffect(_enemy.CheckTransform());
+            HitEffect(_enemy.GetTransform());
 
             if(bounceCount <= 0)
             {
-                InvokeAction(StuckInto, _enemy.CheckTransform());
+                InvokeAction(StuckInto, _enemy.GetTransform());
                 anim.ToEffect();
                 InvokeAction(SetLookAtMovement, false);
                 return;
@@ -59,7 +59,7 @@ namespace ObjectController
             Transform nextEnemy = InvokeFunc(TryGetRandomEnemyInRadiusNotice, bounceRadius);
             if(nextEnemy == null)
             {
-                InvokeAction(StuckInto, _enemy.CheckTransform());
+                InvokeAction(StuckInto, _enemy.GetTransform());
                 anim.ToEffect();
                 InvokeAction(SetLookAtMovement, false);
             }            

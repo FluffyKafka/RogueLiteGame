@@ -18,6 +18,7 @@ namespace GameManagerSystem
             game.PauseNotice += Pause;
             game.PauseRawNotice += PauseRaw;
             game.CheckIsPauseNotice += CheckIsPause;
+            game.CheckPauseAnimSlowRateNotice += CheckPasueAnimSlowRate;
         }
 
         public void Pause(bool _isPause)
@@ -57,6 +58,11 @@ namespace GameManagerSystem
         public bool CheckIsPause()
         {
             return isPause;
+        }
+
+        protected float CheckPasueAnimSlowRate()
+        {
+            return pauseTimeSlowRate;
         }
     }
 }

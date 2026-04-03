@@ -83,7 +83,8 @@ namespace MapGenerate
         [SerializeField] protected Transform generateTransform;
         [SerializeField] protected float enemyDifficulty;
         [SerializeField] protected ERoomType type;
-
+        [SerializeField] protected bool isBranchEntry;
+        [SerializeField] protected bool isBranchEnd;
         
 
         private void Start()
@@ -100,6 +101,9 @@ namespace MapGenerate
             haveUpWall = _data.haveUpWall;
             haveDownWall = _data.haveDownWall;
             haveRightWall = _data.haveRightWall;
+
+            isBranchEntry = _data.isBranchEntry;
+            isBranchEnd = _data.isBranchEnd;
 
             enemyDifficulty = _data.enemyDifficulty;
 
@@ -209,6 +213,10 @@ namespace MapGenerate
             {
                 GenerateEvent(positions);
             }
+            if(isBranchEntry || isBranchEnd || type == ERoomType.Event || type == ERoomType.Entry || type == ERoomType.Exit)
+            {
+                GenerateDeliverPoints(positions);
+            }
 
             return actualRoom;
         }
@@ -216,6 +224,11 @@ namespace MapGenerate
         #region Room Entity Generate
         protected void GenerateEnemy(float _difficulty, List<GameObject> _enemys, List<Vector3> _positions)
         {
+            if (_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+                return;
+            }
             List<Vector3> positionsTemp = new(_positions);
             MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
 
@@ -240,6 +253,10 @@ namespace MapGenerate
 
         protected void GenerateDecorations(GameObject _actualRoom, List<Vector3> _positions)
         {
+            if (_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+            }
             List<Vector3> positionsTemp = new(_positions);
             int decorationCount = _actualRoom.GetComponentInChildren<CRoomInfo>().CheckDecorationCount();
             for(int i = 0; i < decorationCount; ++i)
@@ -262,7 +279,13 @@ namespace MapGenerate
 
         protected void GenerateEvent(List<Vector3> _positions)
         {
-            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count - 1)];
+            if (_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+                return;
+            }
+            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
+            _positions.Remove(position);
             MMapGenerateManager manager = GetComponent<MMapGenerateManager>();
 
             EEventType eventType = SelectEventByWeight();
@@ -377,6 +400,19 @@ namespace MapGenerate
 
             // 理论上不会到这里，但为了防止万一，返回第一个
             return events[0].type;
+        }
+
+        protected void GenerateDeliverPoints(List<Vector3> _positions)
+        {           
+            if(_positions.Count == 0)
+            {
+                Debug.LogWarning("房间无可用位置");
+                return;
+            }
+            Vector3 position = _positions[UnityEngine.Random.Range(0, _positions.Count)];
+            _positions.Remove(position);
+            Debug.Log("GenerateDeliverPoints");
+            GetComponent<MMapGenerateManager>().GenerateDeliverPointAt(position);
         }
 
         public List<Vector3> FindValidWorldPositions(Tilemap tilemap, int _upVoidCount, int _checkRadius, Transform _generateTransform)

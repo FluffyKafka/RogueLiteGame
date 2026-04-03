@@ -53,9 +53,14 @@ namespace InputManager
             player = _player;
         }
 
-        public Vector3 CheckMousePosition()
+        public Vector3 CheckMousePosition(bool _isRaw)
         {
             Vector3 mousePos = Input.mousePosition;
+            if(_isRaw)
+            {
+                return mousePos;
+            }
+
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             return worldPos;
         }

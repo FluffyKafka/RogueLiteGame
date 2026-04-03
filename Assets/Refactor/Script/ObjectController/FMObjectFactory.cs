@@ -16,6 +16,7 @@ namespace ObjectController
         public void GenerateAdvanceRewardBox(List<IItemData> _rewards, float _coin, Vector3 _position);
         public void GenerateSaveTorch(Vector3 _position);
         public void GenerateSceneSwitchEntry(string _nextSceneName, Vector3 _position);
+        public void GenerateDeliverPointAt(Vector3 _position);
     }
 
     internal class FMObjectFactory : ComponentManagerBase, IPlayerObjectFactory, IEnemyObjectFactory, IMapObjectFactroy
@@ -37,6 +38,7 @@ namespace ObjectController
         public Action<List<IItemData>, float, Vector3> GenerateMimicNotice;
         public Action<Vector3> GenerateSaveTorchNotice;
         public Action<string, Vector3> GenerateSceneSwitchEntryNotice;
+        public Action<Vector3> GenerateDeliverPointNotice;
 
         public void GenerateAfterImage(DAfterImageData _data)
         {
@@ -114,6 +116,11 @@ namespace ObjectController
         public void GenerateSceneSwitchEntry(string _nextSceneName, Vector3 _position)
         {
             InvokeAction(GenerateSceneSwitchEntryNotice, _nextSceneName, _position);
+        }
+
+        public void GenerateDeliverPointAt(Vector3 _position)
+        {
+            InvokeAction(GenerateDeliverPointNotice, _position);
         }
     }
 

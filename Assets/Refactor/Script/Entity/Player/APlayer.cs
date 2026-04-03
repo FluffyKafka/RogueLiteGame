@@ -78,7 +78,7 @@ namespace PlayerSystem
         public void EquipmentStashChangeNotice(IReadOnlyList<IEquipment> _stash);
         public void MaterialStashChangeNotice(IReadOnlyList<IItem> _stash);
 
-        public Transform CheckTransform();
+        public Transform GetTransform();
     }
 
     public struct DSkillEntityUIData
@@ -200,12 +200,12 @@ namespace PlayerSystem
         public void ConsumeCoin(float _coin);
         public void AddItemRaw(IItemData _item);
         public void NPCEffectFail();
-        public Transform CheckTransform();
+        public Transform GetTransform();
 
         public bool IsMapDragBeginInput();
         public bool IsMapDragInput();
         public float CheckZoomInput();
-        public Vector3 CheckMousePosition();
+        public Vector3 CheckMousePosition(bool _isRaw);
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -224,6 +224,10 @@ namespace PlayerSystem
         public void GenerateCoinAt(float _coin, Vector3 _position);
         public void SaveGame();
         public void SwitchSceneTo(string _sceneName);
+        public void ShowMapUIPage();
+
+        public bool IsGamePause();
+        public float CheckPauseSlowRate();
     }
 
     public interface IBehaviourPlayer : IBehaviourEntity
@@ -274,7 +278,7 @@ namespace PlayerSystem
 
         public bool CanEffectBehaviourSkill();
 
-        public Vector3 CheckMousePosition();
+        public Vector3 CheckMousePosition(bool _isRaw);
         public Transform CheckPlayerTransform();
         public int CheckPlayerFacingDir();
 
@@ -306,7 +310,7 @@ namespace PlayerSystem
 
     public interface IAudioPlayer
     {
-        public Transform CheckTransform();
+        public Transform GetTransform();
         public bool CheckIsPlayerInBattle();
         public void UpdateAduioVolumeByTypeToUi(EAudioType _type, float _volume);
     }
@@ -810,7 +814,7 @@ namespace PlayerSystem
             InvokeAction(TakeDamage, damage);
             return damage;
         }
-        public Transform CheckTransform()
+        public Transform GetTransform()
         {
             return transform;
         }
@@ -844,6 +848,20 @@ namespace PlayerSystem
         {
             gameManager.SwitchSceneTo(_sceneName);
         }
+
+        public void ShowMapUIPage()
+        {
+            ui.UIPageSwitchTo(EUIPageType.Map);
+        }
+
+        public float CheckPauseSlowRate()
+        {
+            return gameManager.CheckPauseAnimSlowRate();
+        }
+        public bool IsGamePause()
+        {
+            return gameManager.CheckIsPause();
+        }
         #endregion
 
         #region Skill
@@ -870,9 +888,9 @@ namespace PlayerSystem
             return behaviour.CanEffectBehaviourSkill();
         }
 
-        public Vector3 CheckMousePosition()
+        public Vector3 CheckMousePosition(bool _isRaw)
         {
-            return input.CheckMousePosition();
+            return input.CheckMousePosition(_isRaw);
         }
 
         public Transform CheckPlayerTransform()
@@ -1139,7 +1157,7 @@ namespace PlayerSystem
         public float CheckHorizonInput();
         public float CheckVerticalInput();
 
-        public Vector3 CheckMousePosition();
+        public Vector3 CheckMousePosition(bool _isRaw);
 
         public KeyCode CheckSkillInputSlotKey(int _index);
         public KeyCode CheckNPCInteractInputKey();
@@ -1236,6 +1254,8 @@ namespace PlayerSystem
         public bool CheckIsPause();
 
         public void SwitchSceneTo(string _sceneName);
+
+        public float CheckPauseAnimSlowRate();
     }
 
     public interface IPlayerStats: IEntityStats

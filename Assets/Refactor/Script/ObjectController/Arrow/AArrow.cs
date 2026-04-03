@@ -57,13 +57,13 @@ namespace ObjectController
         protected void DamageToPlayer(IObjectPlayer _player)
         {
             _player.TakeObjectDamage(new WReadOnlyDamageData(damage));
-            HitEffect(_player.CheckTransform());
+            HitEffect(_player.GetTransform());
         }
 
         protected void DamageToEnemy(IObjectEnemy _enemy)
         {
             _enemy.TakeObjectDamage(new WReadOnlyDamageData(damage));
-            HitEffect(_enemy.CheckTransform());
+            HitEffect(_enemy.GetTransform());
         }
         protected void HitEffect(Transform _target)
         {

@@ -82,6 +82,21 @@ namespace ObjectController
             }
         }
 
+        protected void OnTriggerExit2D(Collider2D _collision)
+        {
+            if (!canTrigger)
+            {
+                return;
+            }
+
+            if (targetType == EEntityType.Player && _collision.GetComponent<IObjectPlayer>() != null)
+            {
+                controller.InvokeAction(controller.PlayerExitNotice, _collision.GetComponent<IObjectPlayer>());
+                Debug.Log("PlayerExit");
+                canTrigger = CanMultipleTrigger;
+            }
+        }
+
         protected void Clear()
         {
             canTrigger = true;

@@ -30,6 +30,7 @@ namespace GameManagerSystem
         public Action<bool> PauseNotice;
         public Action<bool> PauseRawNotice;
         public Func<bool> CheckIsPauseNotice;
+        public Func<float> CheckPauseAnimSlowRateNotice;
 
         public Action<string> SwitchSceneToNotice;
         public Func<string> CheckCurrentSceneNameNotice;
@@ -55,6 +56,10 @@ namespace GameManagerSystem
         public bool CheckIsPause()
         {
             return InvokeFunc(CheckIsPauseNotice);
+        }
+        public float CheckPauseAnimSlowRate()
+        {
+            return InvokeFunc(CheckPauseAnimSlowRateNotice);
         }
 
         public void SwitchSceneTo(string _sceneName)

@@ -345,7 +345,7 @@ namespace EnemySystem
             InvokeAction(TakeDamage, damage);
             return damage;
         }
-        public Transform CheckTransform()
+        public Transform GetTransform()
         {
             return transform;
         }

@@ -56,7 +56,7 @@ namespace ObjectController
                 damage.physical *= reflectPhysicalDamageMultiplier;
                 target = EEntityType.Enemy;
                 InvokeAction(SwitchTargetTo, EEntityType.Enemy);
-                InvokeAction(SetMoveToTargetNotice, origin.CheckTransform(), reflectMoveSpeed);
+                InvokeAction(SetMoveToTargetNotice, origin.GetTransform(), reflectMoveSpeed);
             }
         }
 

@@ -24,6 +24,7 @@ namespace AnimationAndFx
             anim.ToEffectNotice += ToEffect;
             anim.ToEffectByTypeNotice += ToEffectByType;
             anim.ClearNotice += Clear;
+            anim.SetSpeedNotice += SetSpeed;
         }
 
         protected void ToEffect()
@@ -49,6 +50,11 @@ namespace AnimationAndFx
             animator.SetBool(currentAnimName, false);
             currentAnimName = idleAnimName;
             animator.SetBool(idleAnimName, true);
+        }
+
+        protected void SetSpeed(float _speed)
+        {
+            animator.speed = _speed;
         }
     }
 }

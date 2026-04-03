@@ -118,7 +118,6 @@ namespace MapGenerate
             originDistanceRatio.Set(Mathf.Abs(originDistanceRatio.x), Mathf.Abs(originDistanceRatio.y));
             //距离比例乘以密度,玩家在texture中的点即可计算出来
             Vector2Int fogCenter = new Vector2Int(Mathf.RoundToInt(originDistanceRatio.x * fogDensity.x), Mathf.RoundToInt(originDistanceRatio.y * fogDensity.y));
-            Debug.Log(fogCenter.x +", " + fogCenter.y);
             for (int i = 0; i < shapeLocalPosition.Length; i++)
             {
                 int x = shapeLocalPosition[i].x + fogCenter.x;

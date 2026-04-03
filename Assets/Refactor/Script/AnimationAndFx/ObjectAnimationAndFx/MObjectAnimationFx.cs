@@ -20,6 +20,7 @@ namespace AnimationAndFx
         public Action ToEffectNotice;
         public Action<int> ToEffectByTypeNotice;
         public Action ShowHitFxNotice;
+        public Action<float> SetSpeedNotice;
         #endregion
 
         protected void Awake()
@@ -69,6 +70,11 @@ namespace AnimationAndFx
         public void ShowHitFx()
         {
             InvokeAction(ShowHitFxNotice);
+        }
+
+        public void SetSpeed(float _speed)
+        {
+            InvokeAction(SetSpeedNotice, _speed);
         }
     }
 

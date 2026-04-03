@@ -71,9 +71,9 @@ namespace SkillSystem
             InvokeAction(SkillInputBeginNotice, _input);
         }
 
-        public Vector3 CheckMousePosition()
+        public Vector3 CheckMousePosition(bool _isRaw = false)
         {
-            return player.CheckMousePosition();
+            return player.CheckMousePosition(_isRaw);
         }
 
         public Transform CheckPlayerTransform()

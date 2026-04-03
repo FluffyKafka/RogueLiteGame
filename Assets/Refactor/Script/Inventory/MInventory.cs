@@ -325,7 +325,7 @@ namespace InventorySystem
 
         public Transform CheckPlayerTransform()
         {
-            return player.CheckTransform();
+            return player.GetTransform();
         }
 
         public List<IItemData> CheckAllItemsCanBeSale()

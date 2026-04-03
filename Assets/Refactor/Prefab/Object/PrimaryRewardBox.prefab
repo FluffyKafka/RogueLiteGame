@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9196757173238190031}
   - component: {fileID: 2748482023209501059}
   - component: {fileID: 1057515922973055280}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6725405404481626677}
   - component: {fileID: -6627486302066592478}
   - component: {fileID: 4194977680600267527}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: PrimaryRewardBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,3 +257,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNoAnimation: 0
   specificRewards: []
+  specificCoin: 0

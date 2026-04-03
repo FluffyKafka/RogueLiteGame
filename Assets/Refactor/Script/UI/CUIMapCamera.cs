@@ -32,6 +32,13 @@ namespace UISystem
             HandleZoom();
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            LookAtPlayer();
+        }
+
+
         private void HandleDrag()
         {
             if (ui.IsMapDragBeginInput())

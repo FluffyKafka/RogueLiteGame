@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab32e6ab718aa342ac3d53105bc86d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fogColor: {r: 0.27450982, g: 0.30980393, b: 0.33333334, a: 1}
+  fogColor: {r: 0.27450982, g: 0.30980393, b: 0.33333334, a: 0}
   fogLayerId: 17
   sortingLayerName: UI
   fogDensityRate: 16

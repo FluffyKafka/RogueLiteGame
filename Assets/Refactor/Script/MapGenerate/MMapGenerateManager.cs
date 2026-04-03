@@ -50,12 +50,15 @@ namespace MapGenerate
             enemyFactory = _enemyFactory;
             npcFactory = _npcFactory;
             objectFactory = _objectFactory;
-            input = _input;
+            input = _input;  
+        }
 
-            if(isGenerate)
+        private void Start()
+        {
+            if (isGenerate)
             {
                 GetComponent<IMapGenerator>().GenerateMap();
-            }      
+            }
         }
 
         public void GenerateEnemyAt(EEnemyType type, Vector3 _position)
@@ -101,6 +104,12 @@ namespace MapGenerate
                 info.enemyDifficulty = -1;
             }
             GetComponent<IRoomGenerator>().GenerateRoomFromData(info);
+        }
+
+        public void GenerateDeliverPointAt(Vector3 _position)
+        {
+            Debug.Log("GenerateDeliverPoints");
+            objectFactory.GenerateDeliverPointAt(_position);
         }
 
         public bool IsAnyKeyInput()

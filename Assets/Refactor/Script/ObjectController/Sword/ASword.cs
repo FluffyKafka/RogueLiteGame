@@ -38,7 +38,7 @@ namespace ObjectController
         protected void DamageToEnemy(IObjectEnemy _enemy)
         {
             _enemy.TakeObjectDamage(damage);
-            HitEffect(_enemy.CheckTransform());
+            HitEffect(_enemy.GetTransform());
         }
 
         protected void HitGround(Transform _ground)

@@ -18,7 +18,7 @@ namespace EntitySystem
     public interface IObjectEntity
     {
         public WReadOnlyDamageData TakeObjectDamage(WReadOnlyDamageData _damage);
-        public Transform CheckTransform();
+        public Transform GetTransform();
         public void ObjectFinish(Transform _object);
     }
 
