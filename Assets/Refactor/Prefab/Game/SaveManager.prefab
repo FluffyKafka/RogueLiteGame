@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6542352223277483314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6702055723532992075}
+  - component: {fileID: 7499302376514621282}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6702055723532992075
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542352223277483314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100.20757, y: 119.13778, z: 2.4592168}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7499302376514621282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6542352223277483314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 827dbbd0d8659284e96744b06a63a3b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filename: Data.lcy
+  isEncrptData: 0
+  code: 
+  defaultGameData:
+    HP: 100
+    soul: 0
+    coin: 0
+    isNewGame: 1
+    itemStash: []
+    equipmentStash:
+      keys: []
+      values: []
+    equipment:
+      keys: []
+      values: []
+    skillTree:
+      keys: []
+      values: 
+    isPlayerRemainingExist: 0
+    playerRemainingSceneName: 
+    playerLeftCurrency: 0
+    isPlayerHealthBarActive: 0
+    bgmVolume: 0.3688
+    sfxVolume: 0.3688
+    envVolume: 0.3688
+    currentSceneName: 
+  gameData:
+    HP: -1
+    soul: 0
+    coin: 0
+    isNewGame: 1
+    itemStash: []
+    equipmentStash:
+      keys: []
+      values: []
+    equipment:
+      keys: []
+      values: []
+    skillTree:
+      keys: []
+      values: 
+    isPlayerRemainingExist: 0
+    playerRemainingSceneName: 
+    playerLeftCurrency: 0
+    isPlayerHealthBarActive: 0
+    bgmVolume: 0.3688
+    sfxVolume: 0.3688
+    envVolume: 0.3688
+    currentSceneName: 

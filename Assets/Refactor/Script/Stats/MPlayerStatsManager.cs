@@ -89,6 +89,11 @@ namespace StatsSystem
         }
         protected override void UpdateCurrentHealth(float _current)
         {
+            if(player == null)
+            {
+                player = GetComponentInParent<IStatsPlayer>();
+            }
+            
             player.CurrentHealthChange(_current);
             base.UpdateCurrentHealth(_current);
         }

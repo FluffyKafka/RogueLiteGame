@@ -4,6 +4,7 @@ using PlayerSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UISystem;
 using UnityEngine;
 using static GameManagerSystem.ISaveGameManager;
 
@@ -24,7 +25,7 @@ namespace GameManagerSystem
         public void Load(DGameManagerSaveData _data);
     }
 
-    internal class MGameManager : ComponentManagerBase, IPlayerGameManager, IInitGameManager, ISaveGameManager
+    internal class MGameManager : ComponentManagerBase, IPlayerGameManager, IInitGameManager, ISaveGameManager, IMenuGameManager
     {
         #region ActionAndFunc
         public Action<bool> PauseNotice;

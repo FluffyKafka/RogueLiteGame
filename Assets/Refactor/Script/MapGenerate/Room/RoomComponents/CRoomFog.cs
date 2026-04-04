@@ -22,12 +22,11 @@ namespace MapGenerate
         private Vector2Int fogDensity;
         private Vector2Int[] shapeLocalPosition;
         private Vector2 worldSize;
-        private Func<bool> IsAnyKeyInput;
+        protected bool isGenerate = false;
 
         public void Generate(CRoomGenerater _generator)
         {
-            IsAnyKeyInput += _generator.IsAnyKeyInput;
-
+            isGenerate = true;
             roomBox = GetComponent<BoxCollider2D>();
             BoxCollider2D[] colliders = GetComponentsInParent<BoxCollider2D>();
             Vector2 size = roomBox.size;
@@ -69,12 +68,20 @@ namespace MapGenerate
             InitializeTheFog();
         }
 
+        private void Start()
+        {
+            if(!isGenerate)
+            {
+                Generate(null);
+            }
+        }
+
         private void OnTriggerStay2D(Collider2D _collision)
         {
-            if (IsAnyKeyInput() && _collision.GetComponent<IMapPlayer>() != null)
+            if (_collision.GetComponent<IMapPlayer>() != null && _collision.GetComponent<IMapPlayer>().IsAnyKeyInput())
             {
                 EliminateFog(_collision.transform.position);
-            }
+            }       
         }
 
         private void InitializeTheShape()

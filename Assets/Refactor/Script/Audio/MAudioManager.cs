@@ -48,19 +48,33 @@ namespace AudioSystem
         [SerializeField] protected List<DAudioData> audioData;
 
         protected IAudioPlayer player;
-        
+
+        private void Awake()
+        {
+            
+        }
+
         public void Init(IAudioPlayer _player)
         {
             player = _player;
+
         }
 
         public Transform CheckPlayerTransform()
         {
+            if(player == null)
+            {
+                return transform;
+            }
             return player.GetTransform();
         }
 
         public bool CheckIsPlayerInBattle()
         {
+            if(player == null)
+            {
+                return false;
+            }
             return player.CheckIsPlayerInBattle();
         }
 

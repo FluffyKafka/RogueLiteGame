@@ -331,6 +331,7 @@ namespace PlayerSystem
     public interface IMapPlayer
     {
         public void SetPlayerAtBeginPosition(Vector3 _position);
+        public bool IsAnyKeyInput();
     }
 
     internal class APlayer : AEntity, IInitPlayer, IInputPlayer, IAnimPlayer, IEnemyPlayer, IInventoryPlayer, IUIPlayer, IStatsPlayer, IObjectPlayer, IBehaviourPlayer, ISkillManagerPlayer, IAudioPlayer, IUIDialogEntity, INPCPlayer, IMapPlayer
@@ -1038,6 +1039,10 @@ namespace PlayerSystem
         {
             transform.position = _position;
         }
+        public bool IsAnyKeyInput()
+        {
+            return input.IsAnyKeyInput();
+        }
         #endregion
 
         protected override void Awake()
@@ -1166,6 +1171,7 @@ namespace PlayerSystem
         public bool IsMapDragBeginInput();
         public bool IsMapDragInput();
         public float CheckZoomInput();
+        public bool IsAnyKeyInput();
     }
 
     public interface IPlayerEnemy

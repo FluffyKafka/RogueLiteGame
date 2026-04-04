@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AudioSystem
 {
-    internal class CUISFX : CSoundManagerBase, IUIAudio
+    internal class CUISFX : CSoundManagerBase, IUIAudio, IMenuAudio
     {
         [Header("Sounds")]
         [SerializeField] private AudioSource buttonClick_SS;

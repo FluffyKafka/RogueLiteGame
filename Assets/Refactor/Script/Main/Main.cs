@@ -18,7 +18,7 @@ using UnityEngine;
 
 namespace Main
 {
-    public class Main : MonoBehaviour
+    internal class Main : MonoBehaviour
     {
         [SerializeField] protected GameObject player;
         [SerializeField] protected GameObject inputManager;
@@ -69,17 +69,17 @@ namespace Main
 
             audioManager.GetComponent<IInitAudio>().Init(player.GetComponent<IAudioPlayer>());
 
+            npcFactory.GetComponent<IInitNPCFactory>().Init(objectFactory.GetComponent<INPCObjectFactory>());
+
+            gameManager.GetComponent<IInitGameManager>().Init(inputManager.GetComponent<IGameManagerInput>(), npcFactory.GetComponent<IGameManagerNPCFactory>());
+
             saveManager.GetComponent<IInitSaveManager>().Init(
                 player.GetComponentInChildren<ISaveStats>(),
                 inventory.GetComponent<ISaveInventory>(),
                 skillManager.GetComponent<ISaveSkill>(),
                 audioManager.GetComponent<ISaveAduio>(),
                 gameManager.GetComponent<ISaveGameManager>()
-                );
-
-            npcFactory.GetComponent<IInitNPCFactory>().Init(objectFactory.GetComponent<INPCObjectFactory>());
-
-            gameManager.GetComponent<IInitGameManager>().Init(inputManager.GetComponent<IGameManagerInput>(), npcFactory.GetComponent<IGameManagerNPCFactory>());
+            );
 
             mapGenerater.GetComponent<IInitMapGenerater>().Init(
                 player.GetComponent<IMapPlayer>(),

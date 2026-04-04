@@ -10,7 +10,7 @@ namespace ObjectController
     {
         [SerializeField] protected string interactMessage = "Ç°Íù";
 
-        protected string nextSceneName = string.Empty;
+        [SerializeField] protected string nextSceneName = string.Empty;
 
         public void SetUp(FCSceneSwitchEntryFactory _factory, string _nextSceneName)
         {

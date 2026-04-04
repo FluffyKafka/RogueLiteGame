@@ -6,27 +6,30 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/Scenes/DemoScene/MainMenu.unity
     guid: 049ec7412ccd93f429933d16b8565326
   - enabled: 1
-    path: Assets/Scenes/PreGameRoomScene.unity
+    path: Assets/Scenes/DemoScene/PreGameRoomScene.unity
     guid: a59c1c494cb12014195fe0066172c1bd
   - enabled: 1
+    path: Assets/Scenes/DemoScene/TrainRoom.unity
+    guid: cce193fd36b5d24428aad6565b263b55
+  - enabled: 1
+    path: Assets/Scenes/DemoScene/ToBeContinue.unity
+    guid: 5ad6284c7b9c2c6458b92af754bc8f4b
+  - enabled: 0
     path: Assets/Scenes/OutSideTheCastleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OutSideTheCastle_EndRoom.unity
     guid: 6b2582e2a38c31c42a95df141c1df451
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InTheCastle.unity
     guid: 68b416facc989a64a88ad7e9bfb09195
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/InTheCastle_EndRoom.unity
     guid: cd4e9b113e6088442930bb013e73cb5f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BridgeOfCityMoat.unity
     guid: 1a0f5d8bd2fe5634fb6a68d461fe3d4a
-  - enabled: 1
-    path: Assets/Scenes/ToBeContinue.unity
-    guid: 5ad6284c7b9c2c6458b92af754bc8f4b
   m_configObjects: {}

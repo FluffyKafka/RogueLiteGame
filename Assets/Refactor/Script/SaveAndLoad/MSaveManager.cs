@@ -8,8 +8,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UISystem;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.SceneManagement;
 
 namespace SaveSystem
 {
@@ -17,7 +19,7 @@ namespace SaveSystem
     {
         public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio, ISaveGameManager _gameManager);
     }
-    internal class MSaveManager : MonoBehaviour, IInitSaveManager, IPlayerSaveManager
+    internal class MSaveManager : MonoBehaviour, IInitSaveManager, IPlayerSaveManager, IMenuSaveManager
     {
         [SerializeField] protected string filename;
         [SerializeField] protected bool isEncrptData;
@@ -43,6 +45,8 @@ namespace SaveSystem
         protected ISaveGameManager gameManager;
         protected ISaveGameManager.DGameManagerSaveData gameManagerData = new();
 
+        protected bool canLoad = false;
+
         public void Init(ISaveStats _stats, ISaveInventory _inventory, ISaveSkill _skill, ISaveAduio _audio, ISaveGameManager _gameManager)
         {
             stats = _stats;
@@ -50,13 +54,19 @@ namespace SaveSystem
             skill = _skill;
             audioSystem = _audio;
             gameManager = _gameManager;
+            if (fileDataHandler == null)
+            {
+                fileDataHandler = new TFileDataHandler(Application.persistentDataPath, filename, isEncrptData, code);
+            }           
+
         }
 
         private void Start()
         {
-            fileDataHandler = new TFileDataHandler(Application.persistentDataPath, filename, isEncrptData, code);
-
-            LoadGame();
+            if(canLoad)
+            {
+                LoadGame();
+            }          
         }
 
         [ContextMenu("Delete Save File")]
@@ -66,14 +76,22 @@ namespace SaveSystem
             fileDataHandler.Delete();
         }
 
-        protected void NewGame()
+        public void NewGame()
         {
-            gameData = new DGameData();
+            gameData = defaultGameData;
+            if (fileDataHandler == null)
+            {
+                fileDataHandler = new TFileDataHandler(Application.persistentDataPath, filename, isEncrptData, code);
+            }
             fileDataHandler.Save(gameData);
         }
 
         protected void LoadGame()
         {
+            if(fileDataHandler == null)
+            {
+                fileDataHandler = new TFileDataHandler(Application.persistentDataPath, filename, isEncrptData, code);
+            }
             gameData = fileDataHandler.Load();
             if(gameData == null)
             {
@@ -138,13 +156,27 @@ namespace SaveSystem
             gameManagerData.sceneName = gameData.currentSceneName;
         }
 
-        protected bool HaveSaveData()
+        public bool HasOldGame()
         {
+            if (fileDataHandler == null)
+            {
+                fileDataHandler = new TFileDataHandler(Application.persistentDataPath, filename, isEncrptData, code);
+            }
             if (fileDataHandler.Load() != null)
             {
                 return true;
             }
             return false;
+        }
+
+        public string CheckContinueSceneName()
+        {
+            gameData = fileDataHandler.Load();
+            if (gameData == null)
+            {
+                gameData = defaultGameData;
+            }
+            return gameData.currentSceneName;
         }
     }                    
 
