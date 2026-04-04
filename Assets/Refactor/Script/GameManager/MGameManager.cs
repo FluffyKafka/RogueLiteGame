@@ -35,6 +35,7 @@ namespace GameManagerSystem
 
         public Action<string> SwitchSceneToNotice;
         public Func<string> CheckCurrentSceneNameNotice;
+        public Func<float> CheckSceneLoadRateNotice;
         #endregion
 
         public IGameManagerInput input;
@@ -66,6 +67,10 @@ namespace GameManagerSystem
         public void SwitchSceneTo(string _sceneName)
         {
             InvokeAction(SwitchSceneToNotice, _sceneName);
+        }
+        public float CheckSceneLoadRate()
+        {
+            return InvokeFunc(CheckSceneLoadRateNotice);
         }
 
         public void Save(ref DGameManagerSaveData _data)

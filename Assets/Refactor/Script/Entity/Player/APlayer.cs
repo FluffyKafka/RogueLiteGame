@@ -206,6 +206,8 @@ namespace PlayerSystem
         public bool IsMapDragInput();
         public float CheckZoomInput();
         public Vector3 CheckMousePosition(bool _isRaw);
+
+        public float CheckSceneLoadRate();
     }
 
     public interface IStatsPlayer : IStatEntity
@@ -802,6 +804,11 @@ namespace PlayerSystem
         {
             return input.CheckZoomInput();
         }
+
+        public float CheckSceneLoadRate()
+        {
+            return gameManager.CheckSceneLoadRate();
+        }
         #endregion
 
         #region ObjectController
@@ -1262,6 +1269,8 @@ namespace PlayerSystem
         public void SwitchSceneTo(string _sceneName);
 
         public float CheckPauseAnimSlowRate();
+
+        public float CheckSceneLoadRate();
     }
 
     public interface IPlayerStats: IEntityStats

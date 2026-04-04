@@ -100,6 +100,8 @@ namespace UISystem
             {
                 PauseGame(true);
             }
+
+
         }
 
         #region Init
@@ -346,6 +348,10 @@ namespace UISystem
             return player.GetTransform();
         }
         
+        public float CheckSceneLoadRate()
+        {
+            return player.CheckSceneLoadRate();
+        }
     }
 }
 
