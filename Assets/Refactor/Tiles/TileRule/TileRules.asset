@@ -23,21 +23,21 @@ MonoBehaviour:
     tile_6: -1
     tile_7: 0
   - name: DownLeft
-    tile_0: -1
+    tile_0: 0
     tile_1: 1
     tile_2: 1
     tile_3: -1
     tile_4: 1
     tile_5: -1
     tile_6: -1
-    tile_7: -1
+    tile_7: 0
   - name: DownRight
     tile_0: 1
     tile_1: 1
-    tile_2: -1
+    tile_2: 0
     tile_3: 1
     tile_4: -1
-    tile_5: -1
+    tile_5: 0
     tile_6: -1
     tile_7: -1
   - name: Internal

@@ -19,6 +19,6 @@ MonoBehaviour:
   - Ground
   - NoTransition
   rules:
-  - {fileID: 11400000, guid: 05af8db545b10d0439cf309affaa848a, type: 2}
+  - {fileID: 11400000, guid: 9a61fc3ef1ffd77498601f247da8befb, type: 2}
   - {fileID: 11400000, guid: bc6714bb8af02f24290c4dfb90f3a355, type: 2}
   - {fileID: 11400000, guid: b0a7ead178b02e44e8e99175b6e5099b, type: 2}

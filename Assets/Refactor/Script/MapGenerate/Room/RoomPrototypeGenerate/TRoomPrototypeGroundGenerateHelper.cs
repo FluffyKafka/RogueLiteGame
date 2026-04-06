@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 namespace MapGenerate
 {
@@ -14,11 +15,21 @@ namespace MapGenerate
         [Header("生成参数")]
         [SerializeField] private float initialFillProbability = 0.45f;
         [SerializeField] private int randomSeed = 42;
+        [SerializeField] private int maxIterTime = 100;
+
+        [Header("规则配置")]
+        [SerializeField] private string ruleFolderPath = "Assets/Rules"; // 规则文件夹路径
+        [SerializeField] private bool enableRuleValidation = true; // 是否启用规则验证
+        [SerializeField] private bool clearInvalidTilesOnStart = false; // 开始时是否清除无效tile
 
         // 存储当前地图状态
         private bool[,] groundMap;
         private Vector2Int mapSize;
         private Vector2Int mapOffset;
+        private bool isInitialized = false;
+
+        // 规则相关
+        [SerializeField] private List<DTileSetRuleBase> loadedRules;
 
         private void Awake()
         {
@@ -27,80 +38,238 @@ namespace MapGenerate
 
             if (boundsCollider == null)
                 boundsCollider = GetComponent<BoxCollider2D>();
+
+            // 加载规则
+            LoadRulesFromFolder();
         }
 
+        private void Start()
+        {
+            if (clearInvalidTilesOnStart)
+            {
+                ClearInvalidTilesByRules();
+            }
+        }
+
+        // 从指定文件夹加载所有规则
+        [ContextMenu("加载规则")]
+        public void LoadRulesFromFolder()
+        {
+            loadedRules.Clear();
+
+#if UNITY_EDITOR
+            // 确保文件夹路径存在
+            if (!System.IO.Directory.Exists(ruleFolderPath))
+            {
+                Debug.LogWarning($"规则文件夹不存在: {ruleFolderPath}");
+                return;
+            }
+
+            // 获取文件夹中所有的DTileSetRuleBase资产
+            string[] guids = UnityEditor.AssetDatabase.FindAssets("t:DTileSetRuleBase", new[] { ruleFolderPath });
+
+            foreach (string guid in guids)
+            {
+                string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
+                DTileSetRuleBase rule = UnityEditor.AssetDatabase.LoadAssetAtPath<DTileSetRuleBase>(assetPath);
+                if (rule != null && !loadedRules.Contains(rule))
+                {
+                    loadedRules.Add(rule);
+                    Debug.Log($"加载规则: {rule.name} from {assetPath}");
+                }
+            }
+
+            Debug.Log($"总共加载了 {loadedRules.Count} 条规则");
+#else
+            Debug.LogWarning("规则加载仅在编辑器中可用");
+#endif
+        }
+
+        [ContextMenu("执行地形修正")]
+        public void GenerateMap()
+        {
+            int test = maxIterTime;
+            int change = 1;
+            while(change != 0)
+            {
+                change = 0;
+                change += ClearInvalidTilesByRules();
+                change += ExecuteFillIteration();
+                --test;
+                if(test < 0)
+                {
+                    Debug.LogError("未能在指定迭代次数内修正地形");
+                }
+            }
+        }
+
+        [ContextMenu("清除无效Tile（按规则）")]
+        public int ClearInvalidTilesByRules()
+        {
+            LoadCurrentMapState();
+            if (!enableRuleValidation)
+            {
+                Debug.Log("规则验证未启用");
+                return 0;
+            }
+
+            if (loadedRules.Count == 0)
+            {
+                Debug.LogWarning("没有加载任何规则，请先调用LoadRulesFromFolder()或在Inspector中设置规则文件夹路径");
+                return 0;
+            }
+
+            if (!isInitialized || groundMap == null)
+            {
+                LoadCurrentMapState();
+                if (groundMap == null)
+                {
+                    Debug.LogError("无法加载地图状态");
+                    return 0;
+                }
+            }
+
+            int count = 0;
+            int validSum = 0;
+            bool[,] newMap = (bool[,])groundMap.Clone();
+
+            for (int x = 0; x < mapSize.x; x++)
+            {
+                for (int y = 0; y < mapSize.y; y++)
+                {
+                    if (!groundMap[x, y]) continue;
+
+                    // 获取当前位置的邻居信息
+                    bool[] prototypeNeighbors = GetPrototypeNeighbors(x, y);
+
+                    // 检查所有规则，如果任何规则返回false，则清除此tile
+                    bool isValid = false;                   
+                    foreach (var rule in loadedRules)
+                    {
+                        try
+                        {
+                            if (rule.CanPlace_Prototype(prototypeNeighbors))
+                            {
+                                isValid = true;                                
+                                break;
+                            }
+                        }
+                        catch (System.Exception e)
+                        {
+                            Debug.LogError($"规则 {rule.name} 执行出错: {e.Message}");
+                            isValid = false;
+                            break;
+                        }
+                    }
+
+                    ++count;
+                    newMap[x, y] = false;
+                    if (isValid)
+                    {
+                        ++validSum;
+                        newMap[x, y] = true;
+                    }
+                }
+            }
+            groundMap = newMap;
+            RenderMap();
+            return count - validSum;
+        }
+
+        // 获取指定位置的原型邻居信息（用于CanPlace_Prototype）
+        // 邻居顺序根据你的实际规则定义调整
+        // 获取指定位置的原型邻居信息（用于CanPlace_Prototype）
+        // 邻居顺序: 从左到右，从上到下
+        // 索引布局（3x3网格，中心为当前位置）：
+        // 0 1 2
+        // 3 4 5
+        // 6 7 8
+        // 其中索引4是当前位置，但我们只返回周围8个邻居
+        private bool[] GetPrototypeNeighbors(int x, int y)
+        {
+            bool[] neighbors = new bool[8];
+
+            // 左上 (索引0) - 第1行第1列
+            neighbors[0] = (x - 1 >= 0 && y + 1 < mapSize.y) && groundMap[x - 1, y + 1];
+            // 上 (索引1) - 第1行第2列
+            neighbors[1] = (y + 1 < mapSize.y) && groundMap[x, y + 1];
+            // 右上 (索引2) - 第1行第3列
+            neighbors[2] = (x + 1 < mapSize.x && y + 1 < mapSize.y) && groundMap[x + 1, y + 1];
+
+            // 左 (索引3) - 第2行第1列
+            neighbors[3] = (x - 1 >= 0) && groundMap[x - 1, y];
+            // 右 (索引4) - 第2行第3列
+            neighbors[4] = (x + 1 < mapSize.x) && groundMap[x + 1, y];
+
+            // 左下 (索引5) - 第3行第1列
+            neighbors[5] = (x - 1 >= 0 && y - 1 >= 0) && groundMap[x - 1, y - 1];
+            // 下 (索引6) - 第3行第2列
+            neighbors[6] = (y - 1 >= 0) && groundMap[x, y - 1];
+            // 右下 (索引7) - 第3行第3列
+            neighbors[7] = (x + 1 < mapSize.x && y - 1 >= 0) && groundMap[x + 1, y - 1];
+
+            return neighbors;
+        }
+
+        // 原有的方法保持不变...
         private void CalculateMapBounds()
         {
             if (boundsCollider == null || map == null) return;
 
-            // 获取BoxCollider2D的边界
             Bounds bounds = boundsCollider.bounds;
-
-            // 将世界坐标转换为Tilemap的单元格坐标
             Vector3Int minCell = map.WorldToCell(bounds.min);
             Vector3Int maxCell = map.WorldToCell(bounds.max);
 
-            // 计算地图尺寸
             mapSize = new Vector2Int(maxCell.x - minCell.x + 1, maxCell.y - minCell.y + 1);
             mapOffset = new Vector2Int(minCell.x, minCell.y);
 
             Debug.Log($"地图范围: {mapSize.x} x {mapSize.y}, 偏移: ({mapOffset.x}, {mapOffset.y})");
         }
 
-        [ContextMenu("初始化")]
-        public void Initialize()
+        private void LoadCurrentMapState()
         {
-            if (map == null || boundsCollider == null)
-            {
-                Debug.LogError("请确保Tilemap和BoxCollider2D组件都已赋值！");
-                return;
-            }
+            if (map == null || boundsCollider == null) return;
 
-            // 计算地图边界
             CalculateMapBounds();
-
-            // 初始化地图数组
             groundMap = new bool[mapSize.x, mapSize.y];
 
-            // 设置随机种子
-            Random.InitState(randomSeed);
-
-            // 随机填充（考虑边界，避免边缘检测时越界）
-            for (int x = 1; x < mapSize.x - 1; x++)
+            for (int x = 0; x < mapSize.x; x++)
             {
-                for (int y = 1; y < mapSize.y - 1; y++)
+                for (int y = 0; y < mapSize.y; y++)
                 {
-                    groundMap[x, y] = Random.value < initialFillProbability;
+                    Vector3Int tilePosition = new Vector3Int(x + mapOffset.x, y + mapOffset.y, 0);
+                    groundMap[x, y] = map.GetTile(tilePosition) != null;
                 }
             }
 
-            // 渲染地图
-            RenderMap();
-
-            Debug.Log($"初始化完成，填充率: {CalculateFillRate():P2}");
+            isInitialized = true;
+            Debug.Log($"已加载当前地图状态，当前填充率: {CalculateFillRate():P2}");
         }
 
         [ContextMenu("执行填补迭代")]
-        public void ExecuteFillIteration()
+        public int ExecuteFillIteration()
         {
-            if (groundMap == null)
+            LoadCurrentMapState();
+            if (!isInitialized || groundMap == null)
             {
-                Debug.LogError("请先初始化地图！");
-                return;
+                Debug.Log("未初始化，正在从当前Tilemap加载状态...");
+                LoadCurrentMapState();
+                if (groundMap == null)
+                {
+                    Debug.LogError("无法加载地图状态，请确保BoxCollider2D和Tilemap配置正确！");
+                    return 0;
+                }
             }
 
             int filledCount = 0;
             bool[,] newMap = (bool[,])groundMap.Clone();
 
-            // 遍历每个位置
             for (int x = 1; x < mapSize.x - 1; x++)
             {
                 for (int y = 1; y < mapSize.y - 1; y++)
                 {
-                    // 跳过已经是tile的位置
                     if (groundMap[x, y]) continue;
 
-                    // 检查是否符合填补规则：两个tile中间有一个空位置
                     if (ShouldFill(x, y))
                     {
                         newMap[x, y] = true;
@@ -111,70 +280,46 @@ namespace MapGenerate
 
             groundMap = newMap;
             RenderMap();
-
             Debug.Log($"填补迭代完成，新增 {filledCount} 个tile，当前填充率: {CalculateFillRate():P2}");
+            return filledCount;
         }
 
-        [ContextMenu("执行消除迭代")]
-        public void ExecuteEliminateIteration()
+        [ContextMenu("清空框内全部tile")]
+        public void ClearAllTilesInBounds()
         {
-            if (groundMap == null)
+            if (map == null || boundsCollider == null)
             {
-                Debug.LogError("请先初始化地图！");
+                Debug.LogError("请确保Tilemap和BoxCollider2D组件都已赋值！");
                 return;
             }
 
-            int eliminatedCount = 0;
-            bool[,] newMap = (bool[,])groundMap.Clone();
+            CalculateMapBounds();
 
-            // 遍历每个位置
-            for (int x = 1; x < mapSize.x - 1; x++)
+            if (groundMap != null)
             {
-                for (int y = 1; y < mapSize.y - 1; y++)
-                {
-                    // 只检查有tile的位置
-                    if (!groundMap[x, y]) continue;
+                groundMap = null;
+                isInitialized = false;
+            }
 
-                    // 检查是否符合消除规则：两个空位置中间的tile
-                    if (ShouldEliminate(x, y))
+            int clearedCount = 0;
+            for (int x = 0; x < mapSize.x; x++)
+            {
+                for (int y = 0; y < mapSize.y; y++)
+                {
+                    Vector3Int tilePosition = new Vector3Int(x + mapOffset.x, y + mapOffset.y, 0);
+                    if (map.GetTile(tilePosition) != null)
                     {
-                        newMap[x, y] = false;
-                        eliminatedCount++;
+                        map.SetTile(tilePosition, null);
+                        clearedCount++;
                     }
                 }
             }
 
-            groundMap = newMap;
-            RenderMap();
-
-            Debug.Log($"消除迭代完成，消除 {eliminatedCount} 个tile，当前填充率: {CalculateFillRate():P2}");
+            Debug.Log($"已清空框定区域内的 {clearedCount} 个tile");
         }
 
-        [ContextMenu("清空全部tile")]
-        public void ClearAllTiles()
-        {
-            if (map == null) return;
-
-            for (int x = 0; x < mapSize.x - 1; x++)
-            {
-                for (int y = 0; y < mapSize.y - 1; y++)
-                {
-                    Vector3Int tilePosition = new Vector3Int(x + mapOffset.x, y + mapOffset.y, 0);
-                    map.SetTile(tilePosition, null);
-                }
-            }
-            if (groundMap != null)
-            {
-                System.Array.Clear(groundMap, 0, groundMap.Length);
-            }
-
-            Debug.Log("已清空全部tile");
-        }
-
-        // 检查是否应该填补位置 (x, y)
         private bool ShouldFill(int x, int y)
         {
-            // 检查水平方向：左边和右边都有tile
             if (x > 0 && x < mapSize.x - 1 && y > 0 && y < mapSize.y - 1)
             {
                 if (groundMap[x - 1, y] && groundMap[x + 1, y])
@@ -182,36 +327,20 @@ namespace MapGenerate
                 if (groundMap[x, y - 1] && groundMap[x, y + 1])
                     return true;
             }
-
             return false;
         }
 
-        // 检查是否应该消除位置 (x, y)
-        private bool ShouldEliminate(int x, int y)
-        {
-            // 检查水平方向：左右都是空
-            if (x > 0 && x < mapSize.x - 1 && y > 0 && y < mapSize.y - 1)
-            {
-                if ((!groundMap[x - 1, y] && !groundMap[x + 1, y]) || (!groundMap[x, y - 1] && !groundMap[x, y + 1]))
-                    return true;
-            }
-
-            return false;
-        }
-
-        // 渲染地图到Tilemap
         private void RenderMap()
         {
             if (map == null || tile == null) return;
 
-            for (int x = 0; x < mapSize.x - 1; x++)
+            for (int x = 0; x < mapSize.x; x++)
             {
-                for (int y = 0; y < mapSize.y - 1; y++)
+                for (int y = 0; y < mapSize.y; y++)
                 {
-                    Vector3Int tilePosition = new Vector3Int(x + mapOffset.x, y + mapOffset.y, 0);                
+                    Vector3Int tilePosition = new Vector3Int(x + mapOffset.x, y + mapOffset.y, 0);
                     if (groundMap[x, y])
                     {
-                        // 计算世界坐标位置              
                         map.SetTile(tilePosition, tile);
                     }
                     else
@@ -222,7 +351,6 @@ namespace MapGenerate
             }
         }
 
-        // 计算当前填充率（用于调试）
         private float CalculateFillRate()
         {
             if (groundMap == null) return 0;
@@ -239,11 +367,9 @@ namespace MapGenerate
             return (float)filledCount / (mapSize.x * mapSize.y);
         }
 
-        // 公共方法：获取地图尺寸和偏移
         public Vector2Int GetMapSize() => mapSize;
         public Vector2Int GetMapOffset() => mapOffset;
 
-        // 公共方法：更新BoxCollider2D边界（如果运行时修改了Collider大小）
         [ContextMenu("更新边界")]
         public void UpdateBounds()
         {
@@ -258,7 +384,6 @@ namespace MapGenerate
         }
 
 #if UNITY_EDITOR
-        // 编辑器辅助功能：可视化BoxCollider2D边界
         private void OnDrawGizmosSelected()
         {
             if (boundsCollider != null)

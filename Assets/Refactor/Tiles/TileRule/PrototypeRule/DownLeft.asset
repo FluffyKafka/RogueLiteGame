@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d475fdfbfe73e0a429c788c3441d16cc, type: 3}
   m_Name: DownLeft
   m_EditorClassIdentifier: 
-  prototypeTiles: ffffffff0100000001000000ffffffff01000000ffffffffffffffffffffffff
+  prototypeTiles: 000000000100000001000000ffffffff01000000ffffffffffffffff00000000

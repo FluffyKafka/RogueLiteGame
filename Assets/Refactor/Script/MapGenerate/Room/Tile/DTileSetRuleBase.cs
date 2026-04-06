@@ -12,6 +12,7 @@ namespace MapGenerate
     {
         public abstract bool CanPlace(DTile[] neighborTiles, bool[] prototypeNeighbors);
         public abstract bool CanNeighborPlace(DTile _neighbor, int _index);
+        public abstract bool CanPlace_Prototype(bool[] prototypeNeighbors);
     }
 }
 

@@ -51,6 +51,11 @@ namespace MapGenerate
 
             this.name = excelData.name;
         }
+
+        public override bool CanPlace_Prototype(bool[] prototypeNeighbors)
+        {
+            return true;
+        }
     }
 }
 

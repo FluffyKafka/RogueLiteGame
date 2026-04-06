@@ -42,8 +42,8 @@ namespace MapGenerate
         [SerializeField] protected Vector2 rewardItemCount;
         [SerializeField] protected Vector2 rewardCoinCount;
         [SerializeField] protected List<ScriptableObject> rewardItems;
-        [SerializeField] protected Vector2 advancedRewardCoinCount;
         [SerializeField] protected Vector2 advancedRewardsCount;
+        [SerializeField] protected Vector2 advancedRewardCoinCount;
         [SerializeField] protected List<ScriptableObject> advancedRewardItems;
 
         [Header("TileÌæ»»ÁÐ±í")]

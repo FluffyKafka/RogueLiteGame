@@ -217,9 +217,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subEnemyGenerateData:
   - location: {fileID: 2533753545192504715}
-    type: 4
+    type: 6
   - location: {fileID: 7543973510070026952}
-    type: 4
+    type: 6
 --- !u!114 &8165348273550066667
 MonoBehaviour:
   m_ObjectHideFlags: 0

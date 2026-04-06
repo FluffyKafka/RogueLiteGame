@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: brick_1_DTile
   m_EditorClassIdentifier: 
   tileBase: {fileID: 11400000, guid: 16692a6f8c64ad84cb8d5129962805de, type: 2}
-  rule: {fileID: 11400000, guid: 8cbe5253e6003d34a95d73728116a2ed, type: 2}
   layer: 1
-  tag: 
+  tags: []
+  rules: []

@@ -96,6 +96,10 @@ namespace ObjectController
 
         public void Choose(bool _isChosen)
         {
+            if (interactPlayer == null)
+            {
+                return;
+            }
             isChosen = _isChosen;
             if(_isChosen)
             {
@@ -114,6 +118,10 @@ namespace ObjectController
 
         public void Deliver()
         {
+            if(interactPlayer == null)
+            {
+                return;
+            }
             anim.ToEffect(3);
             interactPlayer.GetTransform().position = transform.position;
         }

@@ -15,21 +15,7 @@ namespace MapGenerate
 
         public override bool CanPlace(DTile[] neighborTiles, bool[] prototypeNeighbors)
         {
-            for(int i = 0; i < 8; ++i)
-            {
-                if(prototypeTiles[i] != 0)
-                {
-                    if (prototypeTiles[i] < 0 && prototypeNeighbors[i])
-                    {
-                        return false;
-                    }
-                    if (prototypeTiles[i] > 0 && !prototypeNeighbors[i])
-                    {
-                        return false;
-                    }
-                }             
-            }
-            return true;
+            return CanPlace_Prototype(prototypeNeighbors);
         }
 
         public void SetUp(DTileSetPrototypeRuleFromExcel excelData)
@@ -53,6 +39,25 @@ namespace MapGenerate
         };
 
             this.name = excelData.name;
+        }
+
+        public override bool CanPlace_Prototype(bool[] prototypeNeighbors)
+        {
+            for (int i = 0; i < 8; ++i)
+            {
+                if (prototypeTiles[i] != 0)
+                {
+                    if (prototypeTiles[i] < 0 && prototypeNeighbors[i])
+                    {
+                        return false;
+                    }
+                    if (prototypeTiles[i] > 0 && !prototypeNeighbors[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
